@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.commonCode">
+	
+	<resultMap id="commonCode" type="CommonCodeVO">
+		<result property ="detail_index"			column="DETAIL_INDEX"	/>
+		<result property ="master_id"				column="MASTER_ID"	/>
+		<result property ="master_description"		column="MASTER_DESCRIPTION"	/>
+		<result property ="parent_id"				column="PARENT_ID"	/>
+		<result property ="detail_id"				column="DETAIL_ID"	/>
+		<result property ="name"					column="NAME"	/>
+		<result property ="detail_description"		column="DETAIL_DESCRIPTION"	/>
+		<result property ="use_yn"					column="USE_YN"	/>
+		
+		<result property ="science_id"				column="science_id"	/>
+		<result property ="large"					column="large"	/>
+		<result property ="middle"					column="middle"	/>
+		<result property ="small"					column="small"	/>
+	</resultMap>
+	
+	
+	<!-- PJS 생성  -->
+	<!-- 2020-03-21 -->
+	<select id="selectListAll" parameterType="CommonCodeVO" resultMap="commonCode">
+		SELECT
+			M.MASTER_ID
+			,	M.MASTER_DESCRIPTION
+			,	D.DETAIL_ID
+			,	D.DETAIL_DESCRIPTION 
+			,	D.NAME
+			,	D.PARENT_ID
+			,	D.USE_YN
+		FROM
+			COMMON_CODE_DETAIL D
+		JOIN
+			COMMOM_CODE_MASTER M
+		ON 
+			D.MASTER_ID = M.MASTER_ID
+	</select>
+	
+	
+	<select id="selectListAllDisplayYN" parameterType="CommonCodeVO" resultMap="commonCode">
+		SELECT
+			M.MASTER_ID
+			,	M.MASTER_DESCRIPTION
+			,	D.DETAIL_ID
+			,	D.DETAIL_DESCRIPTION 
+			,	D.NAME
+			,	D.PARENT_ID
+			,	D.USE_YN
+		FROM
+			COMMON_CODE_DETAIL D
+		JOIN
+			COMMOM_CODE_MASTER M
+		ON 
+			D.MASTER_ID = M.MASTER_ID
+		WHERE D.USE_YN = 'Y' AND D.DISPLAY_YN = 'Y'
+	</select>
+	
+	
+	<select id="selectNationalScienceCategory" resultMap="commonCode">
+		SELECT
+			SCIENCE_ID
+			,	LARGE
+			,	MIDDLE
+			,	SMALL
+		FROM
+			NATIONAL_SCIENCE_CATEGORY
+	</select>
+	
+	
+	
+	<update id="updateUseYN" parameterType="CommonCodeVO">
+		UPDATE COMMON_CODE_DETAIL SET   
+			USE_YN = #{use_yn}
+		WHERE 
+			1=1
+			<choose>
+				<when test = "master_id == 'M000002'">
+					AND ( MASTER_ID = "M000002" OR MASTER_ID = "M000003" OR MASTER_ID = "M000004" )
+					AND DETAIL_ID LIKE CONCAT('%',#{detail_id},'%')
+				</when>
+				<when test = "master_id == 'M000003'">
+					AND ( MASTER_ID = "M000003" OR MASTER_ID = "M000004" )
+					AND DETAIL_ID LIKE CONCAT('%',#{detail_id},'%')
+				</when>
+				<otherwise>
+					AND MASTER_ID = #{master_id} AND DETAIL_ID = #{detail_id}
+				</otherwise>
+			</choose>
+	</update>
+	
+	
+	<insert id="insertInfo" parameterType="CommonCodeVO">
+		INSERT INTO COMMON_CODE_DETAIL ( 
+			MASTER_ID
+			,	PARENT_ID
+			,	DETAIL_ID
+			,	NAME
+		) 
+		VALUES (
+			#{master_id} 
+			,	#{parent_id}
+			,	#{detail_id}
+			,	#{name}
+		);
+	</insert>
+	
+	
+	<select id="selectDetailIdDescOne" parameterType="CommonCodeVO" resultMap="commonCode">
+		SELECT
+			DETAIL_ID
+		FROM
+			COMMON_CODE_DETAIL
+		WHERE 
+			MASTER_ID = #{master_id}
+			<if test='parent_id != null and parent_id != "" '>
+				AND PARENT_ID = #{parent_id}
+			</if>
+		ORDER BY DETAIL_ID DESC
+		LIMIT 1
+	</select>
+	
+	
+	
+</mapper>

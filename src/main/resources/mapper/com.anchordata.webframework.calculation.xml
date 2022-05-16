@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.calculation">
+
+
+	<resultMap id="calculation" type="CalculationVO">
+		<result property ="calculation_id"						column="CALCULATION_ID"	/>
+		<result property ="reception_id"						column="RECEPTION_ID"	/>
+		<result property ="agreement_id"						column="AGREEMENT_ID"	/>
+		<result property ="calculation_status"					column="CALCULATION_STATUS"	/>
+		<result property ="document_file_id"					column="DOCUMENT_FILE_ID"	/>
+		<result property ="document_file_name"					column="DOCUMENT_FILE_NAME"	/>
+		<result property ="report_file_id"						column="REPORT_FILE_ID"	/>
+		<result property ="report_file_name"					column="REPORT_FILE_NAME"	/>
+		<result property ="support_fund"						column="SUPPORT_FUND"	/>
+		<result property ="cash"								column="CASH"	/>
+		<result property ="hyeonmul"							column="HYEONMUL"	/>
+		<result property ="total_cost"							column="TOTAL_COST"	/>
+		<result property ="reception_reg_number"				column="RECEPTION_REG_NUMBER"	/>
+		<result property ="agreement_reg_number"				column="AGREEMENT_REG_NUMBER"	/>
+		<result property ="research_date"						column="RESEARCH_DATE"	/>
+		<result property ="research_funds"						column="RESEARCH_FUNDS"	/>
+		
+		<result property ="announcement_type"					column="ANNOUNCEMENT_TYPE"	/>
+		<result property ="announcement_business_name"			column="ANNOUNCEMENT_BUSINESS_NAME"	/>
+		<result property ="announcement_title"					column="ANNOUNCEMENT_TITLE"	/>
+		<result property ="tech_info_name"						column="TECH_INFO_NAME"	/>
+		<result property ="institution_name"					column="INSTITUTION_NAME"	/>
+		<result property ="researcher_name"						column="RESEARCHER_NAME"	/>
+		<result property ="use_yn"								column="USE_YN"	/>
+		<result property ="reg_date"							column="REG_DATE"	/>
+		<result property ="total_count"							column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	
+	<resultMap id="calculationFundDeatail" type="CalculationFundDetailVO">
+		<result property ="fund_id"									column="FUND_ID"	/>
+		<result property ="calculation_id"							column="CALCULATION_ID"	/>
+		<result property ="item_name"								column="ITEM_NAME"	/>
+		<result property ="item_plan"								column="ITEM_PLAN"	/>
+		<result property ="item_excution"							column="ITEM_EXCUTION"	/>
+		<result property ="item_balance"							column="ITEM_BALANCE"	/>
+		<result property ="item_total"								column="ITEM_TOTAL"	/>
+	</resultMap>
+	
+	
+	<!-- 정산 등록 --> 
+	<insert id="insertInfo" parameterType="CalculationVO">
+	/* com.anchordata.webframework.calculation.insertInfo */
+		INSERT INTO CALCULATION ( 
+			RECEPTION_ID
+			,	AGREEMENT_ID
+			,	CALCULATION_STATUS
+		) 
+		VALUES ( 
+			#{reception_id}
+			,	#{agreement_id} 
+			,	#{calculation_status}
+		)
+	</insert>
+	
+	<!-- 정산 업데이트 --> 
+	<update id="updateInfo" parameterType="CalculationVO">
+		/* com.anchordata.webframework.calculation.updateInfo */
+		UPDATE CALCULATION SET   
+			CALCULATION_ID = #{calculation_id}
+			<if test='calculation_status != null and calculation_status != "" '>
+			,	CALCULATION_STATUS = #{calculation_status}
+			</if>
+			<if test='document_file_id != null and document_file_id != "" '>
+			,	DOCUMENT_FILE_ID = #{document_file_id}
+			</if>
+			<if test='report_file_id != null and report_file_id != "" '>
+			,	REPORT_FILE_ID = #{report_file_id}
+			</if>
+			<if test='support_fund != null and support_fund != "" '>
+			,	SUPPORT_FUND = #{support_fund}
+			</if>
+			<if test='cash != null and cash != "" '>
+			,	CASH = #{cash}
+			</if>
+			<if test='hyeonmul != null and hyeonmul != "" '>
+			,	HYEONMUL = #{hyeonmul}
+			</if>
+			<if test='total_cost != null and total_cost != "" '>
+			,	TOTAL_COST = #{total_cost}
+			</if>
+		WHERE 
+			CALCULATION_ID = #{calculation_id}
+	</update>
+	
+	<!-- 정산 리스트 검색 -->
+	<select id="selectSearchPagingList" parameterType="DataMap" resultMap="calculation">
+		<include refid="common.pagingPre"/>
+		/* com.anchordata.webframework.calculation.selectSearchPagingList */
+		SELECT
+			A.CALCULATION_ID
+			, 	A.RECEPTION_ID
+			, 	A.AGREEMENT_ID
+			, 	A.CALCULATION_STATUS
+			,	A.DOCUMENT_FILE_ID
+			,	A.REPORT_FILE_ID
+			, 	B.AGREEMENT_REG_NUMBER
+			,	C.RECEPTION_REG_NUMBER
+			,	(SELECT D.BUSINESS_NAME FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT D.TITLE FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	C.TECH_INFO_NAME
+			,	C.INSTITUTION_NAME
+			,	C.RESEARCHER_NAME
+			,	B.RESEARCH_DATE
+			,	B.RESEARCH_FUNDS
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+		FROM
+			CALCULATION A
+			LEFT JOIN AGREEMENT B ON B.AGREEMENT_ID = A.AGREEMENT_ID
+			LEFT JOIN RECEPTION C ON C.RECEPTION_ID = A.RECEPTION_ID
+			LEFT JOIN EXECUTION D ON D.AGREEMENT_ID = A.AGREEMENT_ID
+		WHERE
+			A.USE_YN = 'Y'
+			
+			<if test='member_id != null and member_id != "" '>
+				AND C.MEMBER_ID = #{member_id}
+			</if>
+			<if test='calculation_status != null and calculation_status != "" '>
+				AND A.CALCULATION_STATUS = #{calculation_status}
+			</if>
+			<if test='execution_status != null and execution_status != "" '>
+				AND D.EXECUTION_STATUS = #{execution_status}
+			</if>
+			<if test='research_date != null and research_date != "" '>
+				AND B.RESEARCH_DATE = #{research_date}
+			</if>
+			<if test='announcement_title != null and announcement_title != "" '>
+				AND (SELECT AA.TITLE FROM ANNOUNCEMENT AA WHERE AA.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) LIKE CONCAT('%',#{announcement_title},'%') 
+			</if>
+			<if test='tech_info_name != null and tech_info_name != "" '>
+				AND C.TECH_INFO_NAME LIKE CONCAT('%',#{tech_info_name},'%')
+			</if>
+			<if test='institution_name != null and institution_name != "" '>
+				AND C.INSTITUTION_NAME LIKE CONCAT('%',#{institution_name},'%')
+			</if>
+			<if test='agreement_reg_number != null and agreement_reg_number != "" '>
+				AND B.AGREEMENT_REG_NUMBER LIKE CONCAT('%',#{agreement_reg_number},'%')
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+				AND ( C.ANNOUNCEMENT_TYPE = "D0000001" OR C.ANNOUNCEMENT_TYPE = "D0000002" )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+				AND C.ANNOUNCEMENT_TYPE = #{announcement_type}
+			</if>
+			<if test='search_text != null and search_text != "" '>
+				AND ( 
+				      C.TECH_INFO_NAME LIKE CONCAT('%',#{search_text},'%')
+				       OR C.INSTITUTION_NAME LIKE CONCAT('%',#{search_text},'%')
+				    )
+			</if>
+			
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<!-- 정산 상세 검색 -->
+	<select id="selectDetail" parameterType="CalculationVO"  resultMap="calculation">
+		/* com.anchordata.webframework.calculation.selectDetail */
+		SELECT
+				A.CALCULATION_ID
+				, 	A.RECEPTION_ID
+				, 	A.AGREEMENT_ID
+				, 	A.CALCULATION_STATUS
+				,	A.DOCUMENT_FILE_ID
+				,	IFNULL((SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.DOCUMENT_FILE_ID), "") AS DOCUMENT_FILE_NAME
+				,	A.REPORT_FILE_ID
+				,	IFNULL((SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.REPORT_FILE_ID), "") AS REPORT_FILE_NAME
+				, 	B.AGREEMENT_REG_NUMBER
+				,	C.RECEPTION_REG_NUMBER
+				,	(SELECT D.BUSINESS_NAME FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+				,	(SELECT D.TITLE FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+				,	C.TECH_INFO_NAME
+				,	C.INSTITUTION_NAME
+				,	C.RESEARCHER_NAME
+				,	B.RESEARCH_DATE
+				,	B.RESEARCH_FUNDS
+				, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+				,	A.SUPPORT_FUND
+				,	A.CASH
+				,	A.HYEONMUL
+				,	A.TOTAL_COST
+		FROM
+				CALCULATION A
+				LEFT JOIN AGREEMENT B ON B.AGREEMENT_ID = A.AGREEMENT_ID
+				LEFT JOIN RECEPTION C ON C.RECEPTION_ID = A.RECEPTION_ID
+				LEFT JOIN EXECUTION D ON D.AGREEMENT_ID = A.AGREEMENT_ID
+		WHERE 
+				A.CALCULATION_ID = #{calculation_id}
+				<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+					AND ( C.ANNOUNCEMENT_TYPE = "D0000001" OR C.ANNOUNCEMENT_TYPE = "D0000002" )
+				</if>
+				<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+					AND C.ANNOUNCEMENT_TYPE = #{announcement_type}
+				</if>
+	</select>
+	
+	<!-- 정산 연계된 금액 상세 등록 -->
+	<insert id="insertFundDetailInfo" parameterType="CalculationVO">
+		/* com.anchordata.webframework.calcurlation.insertFundDetailInfo */
+		INSERT INTO CALCULATION_FUND_DETAIL ( 
+			CALCULATION_ID
+			,	ITEM_NAME
+			,	ITEM_PLAN
+			,	ITEM_EXCUTION
+			,	ITEM_BALANCE	
+			,	ITEM_TOTAL
+		) 
+		VALUES 
+			<foreach collection="fund_detail_list" item="item" separator=" , " >
+	        	(	
+	        		#{calculation_id}
+	        		,	'${item.item_name}'
+	        		,	'${item.item_plan}'
+	        		,	'${item.item_excution}'
+	        		,	'${item.item_balance}'
+	        		,	'${item.item_total}'
+        		 )
+			</foreach>
+	</insert>
+	
+	<!-- 정산에 연관된 연구비 검색 -->	
+	<select id="selectFundDetailInfo" parameterType="CalculationVO"  resultMap="calculationFundDeatail">
+		/* com.anchordata.webframework.calcurlation.selectFundDetail */
+		SELECT
+			FUND_ID
+			, 	CALCULATION_ID
+			,	ITEM_NAME
+			,	ITEM_PLAN
+			,	ITEM_EXCUTION
+			,	ITEM_BALANCE	
+			,	ITEM_TOTAL
+		FROM
+			CALCULATION_FUND_DETAIL 
+		WHERE 
+			CALCULATION_ID = #{calculation_id}
+	</select>
+	
+	<!-- 정산에 연관된 연구비 삭제 -->	
+	<delete id="deleteFundDetailInfo" parameterType="CalculationVO">
+		/* com.anchordata.webframework.calcurlation.deleteFundDetailInfo */
+		DELETE FROM CALCULATION_FUND_DETAIL   
+		WHERE 
+			CALCULATION_ID = #{calculation_id}
+	</delete>
+	
+	<select id="searchExcelDownload" parameterType="DataMap"  resultMap="calculation">
+		SELECT
+			A.CALCULATION_ID
+				, 	A.RECEPTION_ID
+				, 	A.AGREEMENT_ID
+				, 	A.CALCULATION_STATUS
+				,	A.DOCUMENT_FILE_ID
+				,	A.REPORT_FILE_ID
+				, 	B.AGREEMENT_REG_NUMBER
+				,	C.RECEPTION_REG_NUMBER
+				,	(SELECT D.BUSINESS_NAME FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+				,	(SELECT D.TITLE FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+				,	C.TECH_INFO_NAME
+				,	C.INSTITUTION_NAME
+				,	C.RESEARCHER_NAME
+				,	B.RESEARCH_DATE
+				,	B.RESEARCH_FUNDS
+				, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+		FROM
+			CALCULATION A
+			LEFT JOIN AGREEMENT B ON B.AGREEMENT_ID = A.AGREEMENT_ID
+			LEFT JOIN RECEPTION C ON C.RECEPTION_ID = A.RECEPTION_ID
+			LEFT JOIN EXECUTION D ON D.AGREEMENT_ID = A.AGREEMENT_ID
+		WHERE
+			A.USE_YN = 'Y'
+			<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+				AND ( C.ANNOUNCEMENT_TYPE = "D0000001" OR C.ANNOUNCEMENT_TYPE = "D0000002" )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+				AND C.ANNOUNCEMENT_TYPE = #{announcement_type}
+			</if>
+	</select>
+	
+	
+</mapper>

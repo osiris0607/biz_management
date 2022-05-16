@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.agreement">
+
+	<resultMap id="agreement" type="AgreementVO">
+		<result property ="agreement_id"							column="AGREEMENT_ID"	/>
+		<result property ="reception_id"							column="RECEPTION_ID"	/>
+		<result property ="evaluation_id"							column="EVALUATION_ID"	/>
+		<result property ="agreement_reg_number"					column="AGREEMENT_REG_NUMBER"	/>
+		<result property ="reception_reg_number"					column="RECEPTION_REG_NUMBER"	/>
+		<result property ="agreement_status"						column="AGREEMENT_STATUS"	/>
+		<result property ="agreement_status_name"					column="AGREEMENT_STATUS_NAME"	/>
+		<result property ="remark"									column="REMARK"	/>
+		<result property ="research_date"							column="RESEARCH_DATE"	/>
+		<result property ="research_funds"							column="RESEARCH_FUNDS"	/>
+		<result property ="announcement_business_name"				column="ANNOUNCEMENT_BUSINESS_NAME"	/>
+		<result property ="announcement_title"						column="ANNOUNCEMENT_TITLE"	/>
+		<result property ="tech_info_name"							column="TECH_INFO_NAME"	/>
+		<result property ="institution_name"						column="INSTITUTION_NAME"	/>
+		<result property ="researcher_name"							column="RESEARCHER_NAME"	/>
+		<result property ="member_id"								column="MEMBER_ID"	/>
+		<result property ="reg_date"								column="REG_DATE"	/>
+		<result property ="position"								column="POSITION"	/>
+		<result property ="total_count"								column="TOTAL_COUNT"	/>
+		<result property ="fund_support_amount1"					column="FUND_SUPPORT_AMOUNT1"	/>
+		<result property ="fund_support_amount2"					column="FUND_SUPPORT_AMOUNT2"	/>
+		<result property ="fund_support_amount3"					column="FUND_SUPPORT_AMOUNT3"	/>
+		<result property ="fund_support_amount4"					column="FUND_SUPPORT_AMOUNT4"	/>
+		<result property ="fund_cash1"								column="FUND_CASH1"	/>
+		<result property ="fund_cash2"								column="FUND_CASH2"	/>
+		<result property ="fund_cash3"								column="FUND_CASH3"	/>
+		<result property ="fund_cash4"								column="FUND_CASH4"	/>
+		<result property ="fund_hyeonmul1"							column="FUND_HYEONMUL1"	/>
+		<result property ="fund_hyeonmul2"							column="FUND_HYEONMUL2"	/>
+		<result property ="fund_hyeonmul3"							column="FUND_HYEONMUL3"	/>
+		<result property ="fund_hyeonmul4"							column="FUND_HYEONMUL4"	/>
+		<result property ="fund_total_cost1"						column="FUND_TOTAL_COST1"	/>
+		<result property ="fund_total_cost2"						column="FUND_TOTAL_COST2"	/>
+		<result property ="fund_total_cost3"						column="FUND_TOTAL_COST3"	/>
+		<result property ="fund_total_cost4"						column="FUND_TOTAL_COST4"	/>
+		<result property ="fund_total_cost3"						column="FUND_TOTAL_COST3"	/>
+		<result property ="upload_plan_file_id"						column="UPLOAD_PLAN_FILE_ID"	/>
+		<result property ="upload_plan_file_name"					column="UPLOAD_PLAN_FILE_NAME"	/>
+		<result property ="upload_agreement_file_id"				column="UPLOAD_AGREEMENT_FILE_ID"	/>
+		<result property ="upload_agreement_file_name"				column="UPLOAD_AGREEMENT_FILE_NAME"	/>
+	</resultMap>
+	
+	
+	<resultMap id="agreementResearcher" type="AgreementResearcherVO">
+		<result property ="researcher_id"							column="RESEARCHER_ID"	/>
+		<result property ="agreement_id"							column="AGREEMENT_ID"	/>
+		<result property ="researcher_gubun"						column="RESEARCHER_GUBUN"	/>
+		<result property ="institution_gubun"						column="INSTITUTION_GUBUN"	/>
+		<result property ="institution_name"						column="INSTITUTION_NAME"	/>
+		<result property ="institution_department"					column="INSTITUTION_DEPARTMENT"	/>
+		<result property ="institution_position"					column="INSTITUTION_POSITION"	/>
+		<result property ="name"									column="NAME"	/>
+		<result property ="birth"									column="BIRTH"	/>
+		<result property ="hand_phone"								column="HAND_PHONE"	/>
+		<result property ="email"									column="EMAIL"	/>
+		<result property ="participation_rate"						column="PARTICIPATION_RATE"	/>
+		<result property ="participation_from_date"					column="PARTICIPATION_FROM_DATE"	/>
+		<result property ="participation_tod_date"					column="PARTICIPATION_TOD_DATE"	/>
+		<result property ="role"									column="ROLE"	/>
+	</resultMap>
+	
+	
+	<resultMap id="agreementFundDeatail" type="AgreementFundDetailVO">
+		<result property ="fund_id"									column="FUND_ID"	/>
+		<result property ="agreement_id"							column="AGREEMENT_ID"	/>
+		<result property ="type"									column="TYPE"	/>
+		<result property ="ab_total"								column="AB_TOTAL"	/>
+		<result property ="ab_total_p"								column="AB_TOTAL_P"	/>
+		<result property ="a"										column="A"	/>
+		<result property ="a_p"										column="A_P"	/>
+		<result property ="b"										column="B"	/>
+		<result property ="b_p"										column="B_P"	/>
+		<result property ="cdef_total"								column="CDEF_TOTAL"	/>
+		<result property ="cdef_total_p"							column="CDEF_TOTAL_P"	/>
+		<result property ="c"										column="C"	/>
+		<result property ="c_p"										column="C_P"	/>
+		<result property ="d"										column="D"	/>
+		<result property ="d_p"										column="D_P"	/>
+		<result property ="e"										column="E"	/>
+		<result property ="e_p"										column="E_P"	/>
+		<result property ="f"										column="F"	/>
+		<result property ="f_p"										column="F_P"	/>
+		<result property ="g"										column="G"	/>
+		<result property ="g_p"										column="G_P"	/>
+		<result property ="total"									column="TOTAL"	/>
+		<result property ="total_p"									column="TOTAL_P"	/>
+	</resultMap>
+	
+	
+
+	<!-- 협약 등록 --> 
+	<insert id="insertInfo" parameterType="AgreementVO">
+	/* com.anchordata.webframework.agreement.insertInfo */
+		INSERT INTO AGREEMENT ( 
+			RECEPTION_ID
+			,	EVALUATION_ID
+			,	AGREEMENT_STATUS
+		) 
+		VALUES ( 
+			#{reception_id}
+			,	#{evaluation_id} 
+			,	#{agreement_status}
+		)
+	</insert>
+	
+	<!-- 협약 리스트 검색 -->
+	<select id="selectSearchPagingList" parameterType="DataMap" resultMap="agreement">
+		<include refid="common.pagingPre"/>
+		SELECT
+			A.AGREEMENT_ID
+			, 	A.RECEPTION_ID
+			, 	A.EVALUATION_ID
+			, 	A.AGREEMENT_REG_NUMBER
+			, 	A.AGREEMENT_STATUS
+			,	A.RESEARCH_DATE
+			,	A.RESEARCH_FUNDS
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000021' AND C.DETAIL_ID = A.AGREEMENT_STATUS), "") AS AGREEMENT_STATUS_NAME
+			,	A.REMARK
+			,	B.RECEPTION_REG_NUMBER
+			,	(SELECT C.BUSINESS_NAME FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	B.TECH_INFO_NAME
+			,	B.INSTITUTION_NAME
+			,	B.RESEARCHER_NAME
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+		FROM
+			AGREEMENT A
+			LEFT JOIN RECEPTION B ON A.RECEPTION_ID = B.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			
+			<if test='research_date != null and research_date != "" '>
+				AND A.RESEARCH_DATE = #{research_date}
+			</if>
+			
+			<if test='agreement_status != null and agreement_status != "" '>
+				AND A.AGREEMENT_STATUS = #{agreement_status}
+			</if>
+			
+			<if test='search_text != null and search_text != "" '>
+				AND ( 
+				      B.TECH_INFO_NAME LIKE CONCAT('%',#{search_text},'%')
+				       OR B.INSTITUTION_NAME LIKE CONCAT('%',#{search_text},'%')
+				    )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+				AND ( B.ANNOUNCEMENT_TYPE = "D0000001" OR B.ANNOUNCEMENT_TYPE = "D0000002" )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+				AND B.ANNOUNCEMENT_TYPE = #{announcement_type}
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="selectDetail" parameterType="AgreementVO"  resultMap="agreement">
+		/* com.anchordata.webframework.agreement.selectDetail */
+		SELECT
+			A.AGREEMENT_ID
+			, 	A.RECEPTION_ID
+			, 	A.EVALUATION_ID
+			, 	A.AGREEMENT_REG_NUMBER
+			, 	A.AGREEMENT_STATUS
+			,	A.RESEARCH_DATE
+			,	A.RESEARCH_FUNDS
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000021' AND C.DETAIL_ID = A.AGREEMENT_STATUS), "") AS AGREEMENT_STATUS_NAME
+			,	A.REMARK
+			,	B.RECEPTION_REG_NUMBER
+			,	(SELECT C.BUSINESS_NAME FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	B.TECH_INFO_NAME
+			,	B.INSTITUTION_NAME
+			,	B.RESEARCHER_NAME
+			,	B.MEMBER_ID
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+			,	A.FUND_SUPPORT_AMOUNT1
+			,	A.FUND_SUPPORT_AMOUNT2
+			,	A.FUND_SUPPORT_AMOUNT3
+			,	A.FUND_SUPPORT_AMOUNT4
+			,	A.FUND_CASH1
+			,	A.FUND_CASH2
+			,	A.FUND_CASH3
+			,	A.FUND_CASH4
+			,	A.FUND_HYEONMUL1
+			,	A.FUND_HYEONMUL2
+			,	A.FUND_HYEONMUL3
+			,	A.FUND_HYEONMUL4
+			,	A.FUND_TOTAL_COST1
+			,	A.FUND_TOTAL_COST2
+			,	A.FUND_TOTAL_COST3
+			,	A.FUND_TOTAL_COST4
+			,	A.UPLOAD_PLAN_FILE_ID
+			,	IFNULL((SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.UPLOAD_PLAN_FILE_ID), "") AS UPLOAD_PLAN_FILE_NAME
+			,	A.UPLOAD_AGREEMENT_FILE_ID
+			,	IFNULL((SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.UPLOAD_AGREEMENT_FILE_ID), "") AS UPLOAD_AGREEMENT_FILE_NAME
+		FROM
+			AGREEMENT A
+			LEFT JOIN RECEPTION B ON A.RECEPTION_ID = B.RECEPTION_ID
+		WHERE 
+			A.AGREEMENT_ID = #{agreement_id}
+	</select>	
+	
+	
+	<update id="updateInfo" parameterType="AgreementVO">
+		/* com.anchordata.webframework.agreement.updateInfo */
+		UPDATE AGREEMENT SET   
+			UPDATE_DATE = NOW()
+			<if test='agreement_status != null and agreement_status != "" '>
+			,	AGREEMENT_STATUS = #{agreement_status}
+			</if>
+			<if test='agreement_reg_number != null and agreement_reg_number != "" '>
+			,	AGREEMENT_REG_NUMBER = #{agreement_reg_number}
+			</if>
+			<if test='research_date != null and research_date != "" '>
+			,	RESEARCH_DATE = #{research_date}
+			</if>
+			<if test='research_funds != null and research_funds != "" '>
+			,	RESEARCH_FUNDS = #{research_date}
+			</if>
+			<if test='remark != null and remark != "" '>
+			,	REMARK = #{remark}
+			</if>
+			<if test='fund_support_amount1 != null and fund_support_amount1 != "" '>
+			,	FUND_SUPPORT_AMOUNT1 = #{fund_support_amount1}
+			</if>
+			<if test='fund_support_amount2 != null and fund_support_amount2 != "" '>
+			,	FUND_SUPPORT_AMOUNT2 = #{fund_support_amount2}
+			</if>
+			<if test='fund_support_amount3 != null and fund_support_amount3 != "" '>
+			,	FUND_SUPPORT_AMOUNT3 = #{fund_support_amount3}
+			</if>
+			<if test='fund_support_amount4 != null and fund_support_amount4 != "" '>
+			,	FUND_SUPPORT_AMOUNT4 = #{fund_support_amount4}
+			</if>
+			<if test='fund_cash1 != null and fund_cash1 != "" '>
+			,	FUND_CASH1 = #{fund_cash1}
+			</if>
+			<if test='fund_cash2 != null and fund_cash2 != "" '>
+			,	FUND_CASH2 = #{fund_cash2}
+			</if>
+			<if test='fund_cash3 != null and fund_cash3 != "" '>
+			,	FUND_CASH3 = #{fund_cash3}
+			</if>
+			<if test='fund_cash4 != null and fund_cash4 != "" '>
+			,	FUND_CASH4 = #{fund_cash4}
+			</if>
+			<if test='fund_hyeonmul1 != null and fund_hyeonmul1 != "" '>
+			,	FUND_HYEONMUL1 = #{fund_hyeonmul1}
+			</if>
+			<if test='fund_hyeonmul2 != null and fund_hyeonmul2 != "" '>
+			,	FUND_HYEONMUL2 = #{fund_hyeonmul2}
+			</if>
+			<if test='fund_hyeonmul3 != null and fund_hyeonmul3 != "" '>
+			,	FUND_HYEONMUL3 = #{fund_hyeonmul3}
+			</if>
+			<if test='fund_hyeonmul4 != null and fund_hyeonmul4 != "" '>
+			,	FUND_HYEONMUL4 = #{fund_hyeonmul4}
+			</if>
+			<if test='fund_total_cost1 != null and fund_total_cost1 != "" '>
+			,	FUND_TOTAL_COST1 = #{fund_total_cost1}
+			</if>
+			<if test='fund_total_cost2 != null and fund_total_cost2 != "" '>
+			,	FUND_TOTAL_COST2 = #{fund_total_cost2}
+			</if>
+			<if test='fund_total_cost3 != null and fund_total_cost3 != "" '>
+			,	FUND_TOTAL_COST3 = #{fund_total_cost3}
+			</if>
+			<if test='fund_total_cost4 != null and fund_total_cost4 != "" '>
+			,	FUND_TOTAL_COST4 = #{fund_total_cost4}
+			</if>
+			<if test='upload_plan_file_id != null and upload_plan_file_id != "" '>
+			,	UPLOAD_PLAN_FILE_ID = #{upload_plan_file_id}
+			</if>
+			<if test='upload_agreement_file_id != null and upload_agreement_file_id != "" '>
+			,	UPLOAD_AGREEMENT_FILE_ID = #{upload_agreement_file_id}
+			</if>
+		WHERE 
+			AGREEMENT_ID = #{agreement_id}
+	</update>
+	
+	
+	<delete id="deleteResearcherInfo" parameterType="AgreementVO">
+		/* com.anchordata.webframework.agreement.deleteResearcherInfo */
+		DELETE FROM AGREEMENT_RESEARCHER   
+		WHERE 
+			AGREEMENT_ID = #{agreement_id}
+	</delete>
+	
+	
+	<delete id="deleteFundDetailInfo" parameterType="AgreementVO">
+		/* com.anchordata.webframework.agreement.deleteFundDetailInfo */
+		DELETE FROM AGREEMENT_FUND_DETAIL   
+		WHERE 
+			AGREEMENT_ID = #{agreement_id}
+	</delete>
+	
+	
+	<insert id="insertRelativeFileInfo" parameterType="AgreementVO">
+		/* com.anchordata.webframework.agreement.insertRelativeFileInfo */
+		INSERT INTO AGREEMENT_FILE ( 
+			AGREEMENT_ID
+			,	FILE_ID
+		) 
+		VALUES ( 
+			#{agreement_id}
+			,	#{file_id}
+		)
+	</insert>
+	
+	
+	<delete id="deleteFileWithIds" parameterType="AgreementVO">
+		DELETE FROM AGREEMENT_FILE			
+		WHERE 
+			FILE_ID IN
+			<foreach collection="delete_file_list" item="file_id" separator="," open="(" close=")" >
+				#{file_id}
+			</foreach>
+	</delete>
+	
+	
+	
+	<insert id="insertResearcherInfo" parameterType="AgreementVO">
+		INSERT INTO AGREEMENT_RESEARCHER ( 
+			AGREEMENT_ID
+			,	RESEARCHER_GUBUN
+			,	INSTITUTION_GUBUN
+			,	INSTITUTION_NAME
+			,	INSTITUTION_DEPARTMENT
+			,	INSTITUTION_POSITION
+			,	NAME
+			,	BIRTH
+			,	HAND_PHONE
+			,	EMAIL
+			,	PARTICIPATION_RATE
+			,	PARTICIPATION_FROM_DATE
+			,	PARTICIPATION_TOD_DATE
+			,	ROLE
+		) 
+		VALUES 
+			<foreach collection="agreement_researcher_list" item="item" separator=" , " >
+	        	(	
+	        		#{agreement_id}
+	        		,	'${item.researcher_gubun}'
+	        		,	'${item.institution_gubun}'
+	        		,	'${item.institution_name}'
+	        		,	'${item.institution_department}'
+	        		,	'${item.institution_position}'
+	        		,	'${item.name}'
+	        		,	'${item.birth}'	
+	        		,	'${item.hand_phone}'
+	        		,	'${item.email}'
+	        		,	'${item.participation_rate}'
+	        		,	'${item.participation_from_date}'
+	        		,	'${item.participation_tod_date}'
+	        		,	'${item.role}'
+        		 )
+			</foreach>
+	</insert>
+	
+	<insert id="insertFundDetailInfo" parameterType="AgreementVO">
+		INSERT INTO AGREEMENT_FUND_DETAIL ( 
+			AGREEMENT_ID
+			,	TYPE
+			,	AB_TOTAL
+			,	AB_TOTAL_P
+			,	A
+			,	A_P
+			,	B
+			,	B_P
+			,	CDEF_TOTAL
+			,	CDEF_TOTAL_P
+			,	C
+			,	C_P
+			,	D
+			,	D_P
+			,	E
+			,	E_P
+			,	F
+			,	F_P
+			,	G
+			,	G_P
+			,	TOTAL
+			,	TOTAL_P
+		) 
+		VALUES 
+			<foreach collection="agreement_fund_detail_list" item="item" separator=" , " >
+	        	(	
+	        		#{agreement_id}
+	        		,	'${item.type}'
+	        		,	'${item.ab_total}'
+	        		,	'${item.ab_total_p}'
+	        		,	'${item.a}'
+	        		,	'${item.a_p}'
+	        		,	'${item.b}'
+	        		,	'${item.b_p}'
+	        		,	'${item.cdef_total}'
+	        		,	'${item.cdef_total_p}'
+	        		,	'${item.c}'	
+	        		,	'${item.c_p}'
+	        		,	'${item.d}'
+	        		,	'${item.d_p}'
+	        		,	'${item.e}'
+	        		,	'${item.e_p}'
+	        		,	'${item.f}'
+	        		,	'${item.f_p}'
+	        		,	'${item.g}'
+	        		,	'${item.g_p}'
+	        		,	'${item.total}'
+	        		,	'${item.total_p}'
+        		 )
+			</foreach>
+	</insert>
+	
+	<!-- 협약에 연관된 연구원 검색 -->	
+	<select id="selectResearcher" parameterType="AgreementVO"  resultMap="agreementResearcher">
+		/* com.anchordata.webframework.agreement.selectResearcher */
+		SELECT
+			RESEARCHER_ID
+			, 	AGREEMENT_ID
+			, 	RESEARCHER_GUBUN
+			, 	INSTITUTION_GUBUN
+			, 	INSTITUTION_NAME
+			,	INSTITUTION_DEPARTMENT
+			,	INSTITUTION_POSITION
+			,	NAME
+			,	BIRTH
+			,	HAND_PHONE
+			,	EMAIL
+			,	PARTICIPATION_RATE
+			,	PARTICIPATION_FROM_DATE
+			,	PARTICIPATION_TOD_DATE
+			, 	ROLE
+		FROM
+			AGREEMENT_RESEARCHER 
+		WHERE 
+			AGREEMENT_ID = #{agreement_id}
+	</select>
+	
+	<!-- 협약에 연관된 연구비 검색 -->	
+	<select id="selectFundDetail" parameterType="AgreementVO"  resultMap="agreementFundDeatail">
+		/* com.anchordata.webframework.agreement.selectFundDetail */
+		SELECT
+			FUND_ID
+			, 	AGREEMENT_ID
+			, 	TYPE
+			, 	AB_TOTAL
+			, 	AB_TOTAL_P
+			,	A
+			,	A_P
+			,	B
+			,	B_P
+			,	CDEF_TOTAL
+			,	CDEF_TOTAL_P
+			,	C
+			,	C_P
+			,	D
+			, 	D_P
+			,	E
+			, 	E_P
+			,	F
+			, 	F_P
+			,	G
+			, 	G_P
+			,	TOTAL
+			, 	TOTAL_P
+		FROM
+			AGREEMENT_FUND_DETAIL 
+		WHERE 
+			AGREEMENT_ID = #{agreement_id}
+	</select>
+	
+	<!-- 협약에 연관된 파일 검색 -->	
+	<select id="selectFileInfo" parameterType="AgreementVO" resultType="int">
+		SELECT
+			FILE_ID
+		FROM
+			AGREEMENT_FILE
+		WHERE
+			AGREEMENT_ID = #{agreement_id}
+	</select>
+	
+	
+	<select id="searchExcelDownload" parameterType="DataMap"  resultMap="agreement">
+		SELECT
+			A.AGREEMENT_ID
+			, 	A.RECEPTION_ID
+			, 	A.EVALUATION_ID
+			, 	A.AGREEMENT_REG_NUMBER
+			, 	A.AGREEMENT_STATUS
+			,	A.RESEARCH_DATE
+			,	A.RESEARCH_FUNDS
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000021' AND C.DETAIL_ID = A.AGREEMENT_STATUS), "") AS AGREEMENT_STATUS_NAME
+			,	A.REMARK
+			,	B.RECEPTION_REG_NUMBER
+			,	(SELECT C.BUSINESS_NAME FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	B.TECH_INFO_NAME
+			,	B.INSTITUTION_NAME
+			,	B.RESEARCHER_NAME
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+		FROM
+			AGREEMENT A
+			LEFT JOIN RECEPTION B ON A.RECEPTION_ID = B.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+				AND ( B.ANNOUNCEMENT_TYPE = "D0000001" OR B.ANNOUNCEMENT_TYPE = "D0000002" )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+				AND B.ANNOUNCEMENT_TYPE = #{announcement_type}
+			</if>
+	</select>
+	
+</mapper>

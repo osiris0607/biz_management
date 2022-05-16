@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/lib/jquery-ui.min.css" />
+		<!--sign-->
+		<link rel="stylesheet" type="text/css" href="../css/lib/jquery.signaturepad.css" />	
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>			
+		<script src="../js/lib/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<a href="#nav">메인메뉴 바로가기</a>
+				<a href="#content">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+			<!--팝업-->
+			<!--로그아웃 팝업-->
+			<div class="logout_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="logout_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">로그 아웃</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">로그아웃</span> 하시겠습니까?</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="blue_btn mr5" onclick="location.href='./login.html'">예</button>
+							<button type="button" class="gray_btn lastClose layerClose">아니요</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//로그아웃 팝업-->
+			
+
+			<!-- header -->
+			<div id="header">
+				<header>			
+					<!-- hsection -->
+					<div class="hsection">
+						<div class="clearfix">
+							<ul class="fl member_class clearfix">
+								<li class="active"><a href="./" title="연구자">연구자</a></li>
+								<!--<li><a href="./member_signup_agreement.html" title="평가위원 등록">평가위원 등록</a></li>-->
+								<li><a href="./estimation_list.html" title="평가위원">평가위원</a></li>
+								<!--<li><a href="#">전문가</a></li>-->
+							</ul>
+							<ul class="fr top_area">
+								<li>
+									<!--a href="./login.html" title="기업 로그인" class="clearfix">
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="기업 로그인" /><span class="fl">기업 로그인</span>
+									</a-->
+								</li>
+								<li class="login_area">						
+									<a href="" title="로그아웃" class="openLayer logout_pop_open">
+										<img src="../images/icon/icon_logout.png" class="fl top_img" alt="로그아웃"><span class="fl">로그아웃</span>
+									</a>
+									<!--로그인-->
+									<!--<a href="./login.html" title="로그인" class="clearfix">-->
+										<!--최초 로그인팝업-->
+										<!--a href="./login.html" title="로그인" class="clearfix login_first_popup_open"-->
+										<!--<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="로그인" /><span class="fl">로그인</span>
+									</a>-->									
+								</li>
+								<li>
+									<a href="./mypage_company.html" title="마이페이지" class="clearfix">
+										<img src="../images/icon/icon_mypage.png" class="fl top_img" alt="마이페이지" /><span class="fl">마이페이지</span>
+									</a>
+								</li>
+								<!--<li>
+									<a href="./member_signup.html" title="회원가입" class="clearfix">
+										<img src="../images/icon/icon_member_sign.png" class="fl top_img" alt="회원가입" /><span class="fl">회원가입</span>
+									</a>
+								</li>-->
+								<!--li>
+									<a href="" title="전체메뉴" class="clearfix">
+										<img src="../images/icon/icon_menu.png" class="fl top_img" alt="전체메뉴" /><span class="fl">전체메뉴</span>
+									</a>
+								</li-->
+							</ul>
+						</div>
+					</div>
+					<!--// hsection -->
+					
+					<!-- nav -->
+					<div id="nav">
+						<div class="gnb clearfix">
+							<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="fl logo">
+								<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템" /></h1>
+							</a>
+							<nav>
+								<ul class="menu fl">
+									<li><a href="./announcement.html" title="공고"><span>공고</span></a></li>
+									<li><a href="./reception.html" title="접수"><span>접수</span></a></li>
+									<li><a href="./agreement.html" title="협약"><span>협약</span></a></li>
+									<li><a href="./execute.html" title="수행"><span>수행</span></a></li>
+									<li><a href="./estimation.html" title="평가"><span>평가</span></a></li>
+									<li><a href="./compute.html" title="정산"><span>정산</span></a></li>
+									<li><a href="./information.html" title="알림·정보"><span>알림·정보</span></a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--// nav -->
+				</header>
+			</div>
+			<!--// header -->		
+			<!-- container -->
+			<div id="container" class="mb50">
+				<h2 class="hidden">서브 컨텐츠 화면</h2>	
+				
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area">
+							<h3>평가</h3>
+							<div class="route hidden">
+								<ul class="clearfix">
+									<li><i class="fas fa-home">홈</i></li>
+									<li>평가</li>
+									<li>평가</li>
+								</ul>
+							</div>
+							<div class="content_area">
+								<h4>평가 과제 목록</h4>
+								<!--search_area-->
+								<div class="search_area">
+									<dl class="search_box">
+										<dt class="hidden">검색대상</dt>
+										<dd class="box agreement_selectbox">
+											<label for="select_agreement" class="hidden">검색구분</label>
+											<select id="select_agreement" class="selectbox1 fl ace-select w8" name="select_agreement" onchange="agreement_categoryChange(this)">	
+												<option value="select_agreement_all">전체</option>
+												<option value="select_agreement_select">선정평가</option>
+												<option value="select_agreement_middle">중간평가</option>
+												<option value="select_agreement_final">최종평가</option>
+											</select>
+											<label for="agreement_category2" class="hidden">2depth</label>
+											<select id="agreement_category2" class="selectbox1 fl ace-select w8" name="agreement_category2">						
+												<option>전체</option>
+											</select>
+											<label for="select_reception_class3" class="hidden">3depth</label>
+											<select id="select_reception_class3" class="selectbox1 fl ace-select w5">
+												<option value="년도 선택">년도 선택</option>
+												<option value="2021">2021</option>
+												<option value="2020">2020</option>
+											</select>
+											<div class="input_search_box fl w49">
+												<label for="agreement_search_input_txt2" class="hidden">검색어 입력</label>
+												<input id="agreement_search_input_txt2" class="in_w75 fl ml10" name="input_txt" type="text" placeholder="키워드를 입력하여 평가과제를 검색하실 수 있습니다." />
+												<div class="fr clearfix">
+													<button type="button" class="search_txt_del fl" title="검색어 삭제"><img src="../images/icon/search_txt_del.png" alt="검색어 삭제 버튼" /></button>	
+													<button type="submit" class="serch_btn blue_btn fl mr20" title="검색">검색</button>	
+												</div>	
+											</div>
+										</dd>
+									</dl>							
+								</div>
+								<!--//search_area-->
+
+								<!--table_count_area-->
+								<div class="table_count_area">
+									<div class="count_area">
+										[총 <span class="fw500 font_blue">100</span>건]
+									</div>
+								</div>
+								<!--//table_count_area-->
+								
+								<!--리스트시작-->							
+								<div class="table_area">
+									<p class="ta_c">조건에 맞는 내용이 없습니다.</p>
+									<table class="list fixed agreement_table">										
+										<caption>평가 과제 목록</caption>
+										<colgroup>
+											<col style="width: 5%;">
+											<col style="width: 6%;">
+											<col style="width: 6%;">
+											<col style="width: 7%;">
+											<col style="width: 7%;">
+											<col style="width: 9%;">
+											<col style="width: 8%;">
+											<col style="width: 10%;">
+											<col style="width: 10%;">
+											<col style="width: 8%;">
+											<col style="width: 7%;">
+											<col style="width: 8%;">
+											<col style="width: 9%;">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col" class="first">번호</th>
+												<th scope="col">평가구분</th>
+												<th scope="col">평가유형</th>
+												<th scope="col">접수번호</th>
+												<th scope="col">과제번호</th>
+												<th scope="col">평가번호</th>
+												<th scope="col">사업명</th>
+												<th scope="col">공고명</th>
+												<th scope="col">기술명</th>
+												<th scope="col">기관명<br />(개인명)</th>
+												<th scope="col">담당간사명</th>
+												<th scope="col">평가일자</th>
+												<th scope="col" class="last">평가결과</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="first">1</td>
+												<td><span>선정평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_blue">적합</a></td>			
+											</tr>
+											<tr>
+												<td class="first">2</td>
+												<td><span>중간평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_red">부적합</a></td>			
+											</tr>
+											<tr>
+												<td class="first">3</td>
+												<td><span>중간평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_black">평가중</a></td>			
+											</tr>
+											<tr>
+												<td class="first">4</td>
+												<td><span>선정평가</span></td>
+												<td><span>발표평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>-</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_red">부적합</a></td>			
+											</tr>
+											<tr>
+												<td class="first">5</td>
+												<td><span>중간평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술제안</span></td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_black">평가대기</a></td>			
+											</tr>
+											<tr>
+												<td class="first">6</td>
+												<td><span>최종평가</span></td>
+												<td><span>발표평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>-</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c">-</div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_blue">적합</a></td>			
+											</tr>
+											<tr>
+												<td class="first">7</td>
+												<td><span>선정평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_blue">적합</a></td>			
+											</tr>
+											<tr>
+												<td class="first">8</td>
+												<td><span>선정평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_red">부적합</a></td>			
+											</tr>
+											<tr>
+												<td class="first">9</td>
+												<td><span>선정평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_blue">적합</a></td>			
+											</tr>
+											<tr>
+												<td class="first">10</td>
+												<td><span>선정평가</span></td>
+												<td><span>서면평가</span></td>
+												<td><span>A2021001</span></td>
+												<td><span>B1234567</span></td>
+												<td><span>Ma121072301</span></td>
+												<td><span>기술매칭</span>(기술컨설팅)</td>
+												<td class="announcement_name"><span>공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명공고명</span></td>
+												<td class="announcement_name"><span>기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명기술명</span></td>
+												<td><span>㈜이노싱크</span></td>
+												<td><span>홍길동</span></td>
+												<td class="ls"><div class="day ta_c"><span>2021</span><span>-</span><span>09</span><span>-</span><span >17</span></div></td>
+												<td class="last"><a href="./estimation_view.html" class="font_red">부적합</a></td>			
+											</tr>
+										</tbody>
+									</table>
+									<!--div class="data_null ta_c">조회된 내용이 없습니다.</div-->
+									<div class="paging_area">
+										<a href="" class="stimg" title="맨처음 페이지로 이동"><img src="../images/icon/btn_paging_first.png" alt="맨처음 페이지로 이동"></a>
+										<a href="" class="stimg" title="전 페이지로 이동"><img src="../images/icon/btn_paging_prev.png" alt="전 페이지로 이동"></a>
+										<strong>1</strong>
+										<a href="">2</a>
+										<a href="">3</a>
+										<a href="j">4</a>
+										<a href="">5</a>
+										<a href="">6</a>
+										<a href="">7</a>
+										<a href="">8</a>
+										<a href="">9</a>
+										<a href="">10</a>
+										<a href="" class="stimg" title="다음 페이지로 이동"><img src="../images/icon/btn_paging_next.png" alt="다음 페이지로 이동"></a>
+										<a href="" class="stimg" title="맨마지막 페이지로 이동"><img src="../images/icon/btn_paging_last.png" alt="맨마지막 페이지로 이동"></a>
+									</div>
+								</div>							
+								<!--//리스트end-->
+
+
+								
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->	
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.document.fwdCarrierSopMgt">
+    <!-- 항공사 SOP 정보 마스터 조회 -->
+    <!-- 2018.07.24 [CSR ID:3690898] GSI상 항공사 매뉴얼 추가요청 -->
+    <insert id="createAirCarrSop" parameterType="dataItem">
+        <![CDATA[
+            /* fwd.document.fwdCarrierSopMgt.createAirCarrSop */
+            INSERT INTO TB_AIR_CARR_SOP
+              (
+               NOTI_SEQ
+              ,WH_DESC
+              ,AIRLN_ACRN_CD
+              ,VOLM_EXCPT_YN
+              ,CS_RMK
+              ,MBL_PRNT_RMK
+              ,HBL_PRNT_RMK
+              ,DEL_YN
+              ,REG_DT
+              ,RSTR_ID
+              ,UPD_DT
+              ,UPDR_ID
+              )
+            VALUES
+              (
+              (SELECT IFNULL(MAX(NOTI_SEQ),0) + 1 FROM TB_AIR_CARR_SOP as sop)
+              ,#{whDesc}
+              ,#{airlnAcrnCd}
+              ,#{volmExcptYn}
+              ,#{csRmk}
+              ,#{mblPrntRmk}
+              ,#{hblPrntRmk}
+              ,'N'
+              ,SYSDATE()
+              ,#{userId}
+              ,SYSDATE()
+              ,#{userId}
+              )
+         ]]>             
+    </insert>
+    <!-- 항공사 SOP 정보 마스터 조회 -->
+    <!-- 2018.07.24 [CSR ID:3690898] GSI상 항공사 매뉴얼 추가요청 -->
+    <update id="updateAirCarrSop" parameterType="dataItem">
+        <![CDATA[
+            /* fwd.document.fwdCarrierSopMgt.updateAirCarrSop */
+            UPDATE TB_AIR_CARR_SOP
+            SET    WH_DESC       = #{whDesc}
+                  ,AIRLN_ACRN_CD = #{airlnAcrnCd}
+                  ,VOLM_EXCPT_YN = #{volmExcptYn}
+                  ,CS_RMK        = #{csRmk}
+                  ,MBL_PRNT_RMK  = #{mblPrntRmk}
+                  ,HBL_PRNT_RMK  = #{hblPrntRmk}
+                  ,UPD_DT        = SYSDATE()
+                  ,UPDR_ID       = #{userId}
+            WHERE  NOTI_SEQ = #{notiSeq}
+         ]]>             
+    </update>
+    <!-- 항공사 SOP 정보 마스터 조회 -->
+    <!-- 2018.07.24 [CSR ID:3690898] GSI상 항공사 매뉴얼 추가요청 -->
+    <update id="deleteAirCarrSop" parameterType="dataItem">
+        <![CDATA[
+            /* fwd.document.fwdCarrierSopMgt.deleteAirCarrSop */
+            UPDATE TB_AIR_CARR_SOP
+            SET DEL_YN = 'Y'
+              ,UPD_DT = SYSDATE()
+              ,UPDR_ID = #{userId}
+            WHERE  NOTI_SEQ = #{notiSeq}
+         ]]>             
+    </update>
+</mapper>

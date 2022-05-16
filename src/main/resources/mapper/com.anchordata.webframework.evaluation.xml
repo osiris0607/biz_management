@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.evaluation">
+
+	<resultMap id="evaluation" type="EvaluationVO">
+		<result property ="evaluation_id"							column="EVALUATION_ID"	/>
+		<result property ="reception_id"							column="RECEPTION_ID"	/>
+		<result property ="evaluation_reg_number"					column="EVALUATION_REG_NUMBER"	/>
+		<result property ="reception_reg_number"					column="RECEPTION_REG_NUMBER"	/>
+		<result property ="agreement_reg_number"					column="AGREEMENT_REG_NUMBER"	/>
+		<result property ="announcement_business_name"				column="ANNOUNCEMENT_BUSINESS_NAME"	/>
+		<result property ="announcement_title"						column="ANNOUNCEMENT_TITLE"	/>
+		<result property ="tech_info_name"							column="TECH_INFO_NAME"	/>
+		<result property ="institution_name"						column="INSTITUTION_NAME"	/>
+		<result property ="steward_department"						column="STEWARD_DEPARTMENT"	/>
+		<result property ="steward"									column="STEWARD"	/>
+		<result property ="classification"							column="CLASSIFICATION"	/>
+		<result property ="classification_name"						column="CLASSIFICATION_NAME"	/>
+		<result property ="type"									column="TYPE"	/>
+		<result property ="type_name"								column="TYPE_NAME"	/>
+		<result property ="evaluation_date"							column="EVALUATION_DATE"	/>
+		<result property ="result"									column="RESULT"	/>
+		<result property ="result_name"								column="result_name"	/>
+		<result property ="status"									column="STATUS"	/>
+		<result property ="status_name"								column="STATUS_NAME"	/>
+		<result property ="send_email_yn"							column="SEND_EMAIL_YN"	/>
+		<result property ="send_sms_yn"								column="SEND_SMS_YN"	/>
+		<result property ="commissioner_yn"							column="COMMISSIONER_YN"	/>
+		<result property ="item_complete_yn"						column="ITEM_COMPLETE_YN"	/>
+		<result property ="submit_yn"								column="SUBMIT_YN"	/>
+		<result property ="guide_file_id"							column="GUIDE_FILE_ID"	/>
+		<result property ="guide_file_name"							column="GUIDE_FILE_NAME"	/>
+		<result property ="result_file_id"							column="RESULT_FILE_ID"	/>
+		<result property ="result_file_name"						column="RESULT_FILE_NAME"	/>
+		<result property ="complete_file_id"						column="COMPLETE_FILE_ID"	/>
+		<result property ="complete_file_name"						column="COMPLETE_FILE_NAME"	/>
+		<result property ="member_name"								column="MEMBER_NAME"	/>
+		<result property ="chairman_yn"								column="CHAIRMAN_YN"	/>
+		<result property ="manager_point"							column="MANAGER_POINT"	/>
+		<result property ="announcement_type_name"					column="ANNOUNCEMENT_TYPE_NAME"	/>
+		
+		<result property ="use_yn"									column="use_yn"	/>
+		<result property ="reg_date"								column="reg_date"	/>
+		<result property ="total_count"								column="total_count"	/>
+	</resultMap>
+	
+	<resultMap id="evaluationCommissioner" type="EvaluationCommissionerVO">
+		<result property ="relation_id"								column="RELATION_ID"	/>
+		<result property ="evaluation_id"							column="EVALUATION_ID"	/>
+		<result property ="evaluation_reg_number"					column="EVALUATION_REG_NUMBER"	/>
+		<result property ="member_id"								column="MEMBER_ID"	/>
+		<result property ="choice_yn"								column="CHOICE_YN"	/>
+		<result property ="mail_reply_yn"							column="MAIL_REPLY_YN"	/>
+		<result property ="mail_send_date"							column="MAIL_SEND_DATE"	/>
+		<result property ="institution_type_name"					column="INSTITUTION_TYPE_NAME"	/>
+		<result property ="national_skill_large"					column="NATIONAL_SKILL_LARGE"	/>
+		<result property ="rnd_class"								column="RND_CLASS"	/>
+		<result property ="member_name"								column="MEMBER_NAME"	/>
+		<result property ="institution_name"						column="INSTITUTION_NAME"	/>
+		<result property ="mobile_phone"							column="MOBILE_PHONE"	/>
+		<result property ="email"									column="EMAIL"	/>
+		<result property ="chairman_yn"								column="CHAIRMAN_YN"	/>
+		<result property ="security_declaration_yn"					column="SECURITY_DECLARATION_YN"	/>
+		<result property ="security_declaration_date"				column="SECURITY_DECLARATION_DATE"	/>
+		<result property ="payment_declaration_yn"					column="PAYMENT_DECLARATION_YN"	/>
+		<result property ="evaluation_report_yn"					column="EVALUATION_REPORT_YN"	/>
+		<result property ="announcement_title"						column="ANNOUNCEMENT_TITLE"	/>
+		<result property ="announcement_type_name"					column="ANNOUNCEMENT_TYPE_NAME"	/>
+		<result property ="total_point"								column="TOTAL_POINT"	/>
+		<result property ="steward_department"						column="STEWARD_DEPARTMENT"	/>
+		<result property ="steward"									column="STEWARD"	/>
+		<result property ="type_name"								column="TYPE_NAME"	/>
+		<result property ="evaluation_date"							column="EVALUATION_DATE"	/>
+		<result property ="security_declaration_sign"				column="SECURITY_DECLARATION_SIGN"	/>
+		<result property ="payment_declaration_sign"				column="PAYMENT_DECLARATION_SIGN"	/>
+		<result property ="evaluation_report_declaration_sign"		column="EVALUATION_REPORT_DECLARATION_SIGN"	/>
+		<result property ="chairman_sign"							column="CHAIRMAN_SIGN"	/>
+		<result property ="chairman_result"							column="CHAIRMAN_RESULT"	/>
+		<result property ="chairman_comment"						column="CHAIRMAN_COMMENT"	/>
+		<result property ="chairman_submit_yn"						column="CHAIRMAN_SUBMIT_YN"	/>
+	</resultMap>
+	
+	<resultMap id="evaluationItem" type="EvaluationItemVO">
+		<result property ="item_templete_id"						column="ITEM_TEMPLETE_ID"	/>
+		<result property ="item_type"								column="ITEM_TYPE"	/>
+		<result property ="item_type_seq"							column="ITEM_TYPE_SEQ"	/>
+		<result property ="form_item_id"							column="FORM_ITEM_ID"	/>
+		<result property ="form_title"								column="FORM_TITLE"	/>
+		<result property ="form_item_name"							column="FORM_ITEM_NAME"	/>
+		<result property ="form_item_seq"							column="FORM_ITEM_SEQ"	/>
+		<result property ="form_item_detail_name"					column="FORM_ITEM_DETAIL_NAME"	/>
+		<result property ="form_item_result"						column="FORM_ITEM_RESULT"	/>
+		<result property ="use_yn"									column="USE_YN"	/>
+		<result property ="reg_date"								column="REG_DATE"	/>
+	</resultMap>
+	
+	<update id="insertInfo" parameterType="EvaluationVO">
+		INSERT INTO EVALUATION ( 
+			RECEPTION_ID
+			, CLASSIFICATION
+		) 
+		VALUES (
+			#{reception_id}
+			, #{classification}
+		)
+		ON DUPLICATE KEY UPDATE 
+	          EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+	          , TYPE = #{type}
+	          , STATUS = #{status}
+	          , RESULT = #{result}
+	</update>
+	
+	
+	<update id="updateItemCompleteYN" parameterType="EvaluationVO">
+		<foreach collection="evaluation_id_list" item="item" separator=";">
+			UPDATE EVALUATION SET   
+					ITEM_COMPLETE_YN = 'Y'
+				WHERE 
+					EVALUATION_ID = #{item}
+		</foreach>
+	</update>
+	
+	
+	<select id="selectDetail" parameterType="EvaluationVO"  resultMap="evaluation">
+		SELECT
+			A.EVALUATION_ID
+			,	A.RECEPTION_ID
+			,	B.RECEPTION_REG_NUMBER
+			,	A.AGREEMENT_REG_NUMBER
+			,	A.EVALUATION_REG_NUMBER
+			,	(SELECT C.BUSINESS_NAME FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	(SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000005' AND C.DETAIL_ID =B.ANNOUNCEMENT_TYPE ) AS ANNOUNCEMENT_TYPE_NAME
+			,	B.TECH_INFO_NAME
+			,	B.INSTITUTION_NAME
+			,	A.STEWARD_DEPARTMENT
+			,	A.STEWARD
+			,	A.CLASSIFICATION
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000016' AND C.DETAIL_ID = A.CLASSIFICATION), "") AS CLASSIFICATION_NAME
+			,	A.TYPE
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000017' AND C.DETAIL_ID = A.TYPE), "") AS TYPE_NAME
+			,	IFNULL(DATE_FORMAT(A.EVALUATION_DATE,'%Y-%m-%d'), "") AS EVALUATION_DATE
+			,	A.RESULT
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000019' AND C.DETAIL_ID = A.RESULT), "") AS RESULT_NAME
+			,	A.STATUS
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000018' AND C.DETAIL_ID = A.STATUS), "") AS STATUS_NAME
+			,	A.SEND_EMAIL_YN
+			,	A.SEND_SMS_YN
+			,	A.COMMISSIONER_YN
+			,	A.ITEM_COMPLETE_YN
+			,	A.SUBMIT_YN
+			,	A.GUIDE_FILE_ID
+			,	(SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.GUIDE_FILE_ID ) AS GUIDE_FILE_NAME
+			,	A.RESULT_FILE_ID
+			,	(SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.RESULT_FILE_ID ) AS RESULT_FILE_NAME
+			,	A.COMPLETE_FILE_ID
+			,	(SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.COMPLETE_FILE_ID ) AS COMPLETE_FILE_NAME
+			,	(SELECT NAME FROM MEMBER C WHERE C.MEMBER_ID = B.MEMBER_ID) AS MEMBER_NAME
+			,	A.MANAGER_POINT
+			,	A.RESULT
+		FROM
+			EVALUATION A
+		LEFT JOIN
+			RECEPTION B
+			ON A.RECEPTION_ID = B.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			AND A.EVALUATION_ID = #{evaluation_id}
+	</select>
+
+	<select id="selectSearchPagingList" parameterType="DataMap"  resultMap="evaluation">
+		<include refid="common.pagingPre"/>
+		SELECT
+			A.EVALUATION_ID
+			,	A.RECEPTION_ID
+			,	B.RECEPTION_REG_NUMBER
+			,	A.AGREEMENT_REG_NUMBER
+			,	A.EVALUATION_REG_NUMBER
+			,	(SELECT C.BUSINESS_NAME FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	B.TECH_INFO_NAME
+			,	B.INSTITUTION_NAME
+			,	A.STEWARD_DEPARTMENT
+			,	A.STEWARD
+			,	A.CLASSIFICATION
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000016' AND C.DETAIL_ID = A.CLASSIFICATION), "") AS CLASSIFICATION_NAME
+			,	A.TYPE
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000017' AND C.DETAIL_ID = A.TYPE), "") AS TYPE_NAME
+			,	IFNULL(DATE_FORMAT(A.EVALUATION_DATE,'%Y-%m-%d'), "") AS EVALUATION_DATE
+			,	A.RESULT
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000019' AND C.DETAIL_ID = A.RESULT), "") AS RESULT_NAME
+			,	A.STATUS
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000018' AND C.DETAIL_ID = A.STATUS), "") AS STATUS_NAME
+			,	A.SEND_EMAIL_YN
+			,	A.SEND_SMS_YN
+			,	A.COMMISSIONER_YN
+			,	A.ITEM_COMPLETE_YN
+			,	A.SUBMIT_YN
+			,	A.CHAIRMAN_YN
+			,	A.GUIDE_FILE_ID
+		FROM
+			EVALUATION A
+		LEFT JOIN
+			RECEPTION B
+			ON A.RECEPTION_ID = B.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			<if test='member_id != null and member_id != ""'>
+				AND B.MEMBER_ID = #{member_id}
+			</if>
+			<if test='announcement_type != null and announcement_type != "" '>
+				<choose>
+				    <when test='announcement_type == "D0000005" '>
+				    	AND (B.ANNOUNCEMENT_TYPE = 'D0000001' OR B.ANNOUNCEMENT_TYPE = 'D0000002')
+				    </when>
+				    <otherwise>
+				      	AND B.ANNOUNCEMENT_TYPE = #{announcement_type}
+				    </otherwise>
+			  	</choose>
+			</if>
+			<if test='classification_list != null '>
+				AND A.CLASSIFICATION IN
+				<foreach collection="classification_list" item="item" separator="," open="(" close=")" >
+					#{item}
+				</foreach>
+			</if>
+			<if test='type_list != null '>
+				AND A.TYPE IN
+				<foreach collection="type_list" item="item" separator="," open="(" close=")" >
+					#{item}
+				</foreach>
+			</if>
+			<if test='status_list != null '>
+				AND A.STATUS IN
+				<foreach collection="status_list" item="item" separator="," open="(" close=")" >
+					#{item}
+				</foreach>
+			</if>
+			<if test='result_list != null '>
+				AND A.RESULT IN
+				<foreach collection="result_list" item="item" separator="," open="(" close=")" >
+					#{item}
+				</foreach>
+			</if>	
+			
+			<if test='evaluation_from != null and evaluation_from != "" and evaluation_to != null and evaluation_to != "" '>
+	      		AND A.EVALUATION_DATE <![CDATA[ >= ]]>  #{evaluation_from} AND  A.EVALUATION_DATE <![CDATA[ <= ]]> #{evaluation_to} 
+			</if>
+			
+			
+			<if test='search_text != null and search_text != ""'>
+	      		AND (SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) LIKE CONCAT('%',#{search_text},'%')
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<update id="updateEvaluationNumber" parameterType="EvaluationVO">
+		<foreach collection="craete_evaluation_number_list" item="item" separator=";">
+			UPDATE EVALUATION SET   
+				EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+			WHERE 
+				EVALUATION_ID = #{item}
+		</foreach>
+	</update>
+	
+	<update id="updateClearEvaluationNumber" parameterType="EvaluationVO">
+			UPDATE EVALUATION SET   
+				EVALUATION_REG_NUMBER = ""
+				,	TYPE = ""
+				,	SEND_EMAIL_YN = "N"
+				,	SEND_SMS_YN = "N"
+				,	COMMISSIONER_YN = "N"
+				,	ITEM_COMPLETE_YN = "N"
+				,	CHAIRMAN_YN = "N"
+				,	SUBMIT_YN = "N"
+				,	SEND_EMAIL_DATE = NULL
+				,	EVALUATION_DATE = NULL
+				,	STATUS = #{status}
+			WHERE 
+				EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+	</update>
+	
+	
+	<update id="updateEvaluationInfo" parameterType="EvaluationVO">
+		<foreach collection="update_evaluation_number_list" item="item" separator=";">
+			UPDATE EVALUATION SET   
+				CLASSIFICATION = #{classification}
+				,	TYPE = #{type}
+				,	EVALUATION_DATE = #{evaluation_date}
+				,	STATUS = #{status}
+			WHERE 
+				EVALUATION_ID = #{item}
+		</foreach>
+	</update>
+	
+	<update id="updateMailInfo" parameterType="EvaluationVO">
+			UPDATE EVALUATION SET   
+				SEND_EMAIL_YN = 'Y'
+				,	SEND_EMAIL_DATE = NOW()
+				<if test='commissioner_yn != null and commissioner_yn != ""'>
+				,	COMMISSIONER_YN = #{commissioner_yn}
+				</if>
+			WHERE 
+				EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+	</update>
+	
+	<insert id="insertEvaluationCommissionerRelationInfo" parameterType="EvaluationVO">
+		INSERT INTO EVALUATION_COMMISSIONER ( 
+			EVALUATION_ID
+			,	EVALUATION_REG_NUMBER
+			,	MEMBER_ID
+		) 
+		VALUES 
+			<foreach collection="commissioner_list" item="item" separator=" , " >
+	        	(	
+	        		#{evaluation_id}
+	        		,	#{evaluation_reg_number}
+	        		,	'${item}'
+        		 )
+			</foreach>
+			
+		ON DUPLICATE KEY UPDATE 
+           MAIL_SEND_DATE = NOW()
+	</insert>
+	
+	<delete id="deleteEvaluationCommissionerRelationInfo" parameterType="EvaluationVO">
+		DELETE FROM EVALUATION_COMMISSIONER			
+		WHERE 
+			EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+	</delete>
+	
+	<update id="updateStatus" parameterType="EvaluationVO">
+		UPDATE EVALUATION SET   
+			STATUS = #{status}
+		WHERE 
+			EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+	</update>
+	
+	<select id="selectStatusInfo" parameterType="EvaluationVO"  resultMap="evaluation">
+		SELECT
+			A.STATUS
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000018' AND C.DETAIL_ID = A.STATUS), "") AS STATUS_NAME
+			,	A.SEND_EMAIL_YN
+			,	A.SEND_SMS_YN
+			,	A.COMMISSIONER_YN
+			,	A.ITEM_COMPLETE_YN
+			,	A.SUBMIT_YN
+		FROM
+			EVALUATION A
+		LEFT JOIN
+			RECEPTION B
+			ON A.RECEPTION_ID = B.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			AND EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+		LIMIT 1
+	</select>
+	
+	<update id="updateDetailInfo" parameterType="EvaluationVO">
+		UPDATE EVALUATION SET   
+			MANAGER_POINT = #{manager_point}
+			<if test='guide_file_id != null and guide_file_id != ""'>
+				,	GUIDE_FILE_ID = #{guide_file_id}
+			</if>
+			<if test='result_file_id != null and result_file_id != ""'>
+				,	RESULT_FILE_ID = #{result_file_id}
+			</if>
+			<if test='complete_file_id != null and complete_file_id != ""'>
+				,	COMPLETE_FILE_ID = #{complete_file_id}
+			</if>
+			<if test='result != null and result != ""'>
+				,	RESULT = #{result}
+			</if>
+			<if test='submit_yn != null and submit_yn != ""'>
+				,	SUBMIT_YN = #{submit_yn}
+			</if>
+			<if test='status != null and status != ""'>
+				,	STATUS = #{status}
+			</if>
+		WHERE 
+			1 = 1
+			<if test='evaluation_id != null and evaluation_id != ""'>
+				AND EVALUATION_ID = #{evaluation_id}
+			</if>
+	</update>
+	
+	<select id="searchRelatedEvaluationPagingList" parameterType="DataMap" resultMap="evaluationCommissioner">
+		<include refid="common.pagingPre"/>
+		SELECT
+			A.RELATION_ID
+			, 	A.EVALUATION_ID
+			, 	A.EVALUATION_REG_NUMBER
+			, 	A.MEMBER_ID
+			, 	A.CHOICE_YN
+			, 	A.MAIL_REPLY_YN	
+			,	IFNULL(DATE_FORMAT(A.MAIL_SEND_DATE,'%Y-%m-%d'), "") AS MAIL_SEND_DATE
+			,	A.CHAIRMAN_YN
+			,	A.SECURITY_DECLARATION_YN
+			,	A.PAYMENT_DECLARATION_YN
+			,	A.EVALUATION_REPORT_YN
+			,	(SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000005' AND C.DETAIL_ID =(SELECT ANNOUNCEMENT_TYPE FROM RECEPTION WHERE RECEPTION_ID = B.RECEPTION_ID)  ) AS ANNOUNCEMENT_TYPE_NAME
+			,	(SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = (SELECT ANNOUNCEMENT_ID FROM RECEPTION WHERE RECEPTION_ID = B.RECEPTION_ID)  ) AS ANNOUNCEMENT_TITLE
+			,	B.STEWARD_DEPARTMENT
+			,	B.STEWARD
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000017' AND C.DETAIL_ID = B.TYPE), "") AS TYPE_NAME
+			,	IFNULL(DATE_FORMAT(B.EVALUATION_DATE,'%Y-%m-%d'), "") AS EVALUATION_DATE
+		FROM
+			EVALUATION_COMMISSIONER A
+		LEFT JOIN
+			EVALUATION B
+			ON A.EVALUATION_ID = B.EVALUATION_ID
+		WHERE
+			1=1
+			<if test='member_id != null and member_id != ""'>
+				AND A.MEMBER_ID = #{member_id}
+			</if>
+			<if test='choice_yn != null and choice_yn != ""'>
+				AND A.CHOICE_YN = #{choice_yn}
+			</if>
+			<if test='status != null and status != ""'>
+				AND B.STATUS = #{status}
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<update id="updateEvaluationChairmanYN" parameterType="EvaluationCommissionerVO">
+		UPDATE EVALUATION SET   
+			CHAIRMAN_YN = #{chairman_yn}
+		WHERE 
+			1 = 1
+			<if test='evaluation_id != null and evaluation_id != ""'>
+				AND EVALUATION_ID = #{evaluation_id}
+			</if>
+	</update>
+	
+<!--/////////////////////////////////////////////////////////////////////////////////////////
+	//////////////				evaluation_commissioner table 처리			/////////////////	
+	///////////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="searchRelatedIDPagingList" parameterType="DataMap" resultMap="evaluationCommissioner">
+		<include refid="common.pagingPre"/>
+		SELECT
+			A.RELATION_ID
+			, 	A.EVALUATION_ID
+			, 	A.EVALUATION_REG_NUMBER
+			, 	A.MEMBER_ID
+			, 	A.CHOICE_YN
+			, 	A.MAIL_REPLY_YN	
+			,	IFNULL(DATE_FORMAT(A.MAIL_SEND_DATE,'%Y-%m-%d'), "") AS MAIL_SEND_DATE
+			,	A.CHAIRMAN_YN
+			,	A.CHAIRMAN_RESULT
+			,	A.CHAIRMAN_COMMENT
+			,	A.SECURITY_DECLARATION_YN
+			,	A.PAYMENT_DECLARATION_YN
+			,	A.EVALUATION_REPORT_YN
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000004' AND D.DETAIL_ID = B.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+			,	(SELECT D.NATIONAL_SKILL_LARGE FROM COMMISSIONER D WHERE D.MEMBER_ID = A.MEMBER_ID) AS NATIONAL_SKILL_LARGE
+			,	(SELECT D.RND_CLASS FROM COMMISSIONER D WHERE D.MEMBER_ID = A.MEMBER_ID) AS RND_CLASS
+			,	IFNULL((SELECT NAME FROM INSTITUTION D WHERE D.REG_NO = B.INSTITUTION_ID), "") AS INSTITUTION_NAME
+			,	B.MOBILE_PHONE
+			,	B.NAME AS MEMBER_NAME
+			,	B.EMAIL
+			,	A.CHAIRMAN_SIGN
+		FROM
+			EVALUATION_COMMISSIONER A
+		LEFT JOIN
+			MEMBER B
+			ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE
+			1=1
+			<if test='evaluation_reg_number != null and evaluation_reg_number != ""'>
+				AND A.EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+			</if>
+			<if test='evaluation_id != null and evaluation_id != ""'>
+				AND A.EVALUATION_ID = #{evaluation_id}
+			</if>
+			<if test='choice_yn != null and choice_yn != ""'>
+				AND A.CHOICE_YN = #{choice_yn}
+			</if>
+		GROUP BY 
+			A.MEMBER_ID
+		<include refid="common.pagingPost"/>
+	</select>
+
+
+	<select id="searchRelatedCommissionerList" parameterType="EvaluationCommissionerVO" resultMap="evaluationCommissioner">
+		SELECT
+			A.RELATION_ID
+			, 	A.EVALUATION_ID
+			, 	A.EVALUATION_REG_NUMBER
+			, 	A.MEMBER_ID
+			, 	A.CHOICE_YN
+			, 	A.MAIL_REPLY_YN	
+			,	IFNULL(DATE_FORMAT(A.MAIL_SEND_DATE,'%Y-%m-%d'), "") AS MAIL_SEND_DATE
+			,	A.CHAIRMAN_YN
+			,	A.CHAIRMAN_RESULT
+			,	A.CHAIRMAN_COMMENT
+			,	A.SECURITY_DECLARATION_YN
+			,	A.PAYMENT_DECLARATION_YN
+			,	A.EVALUATION_REPORT_YN
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000004' AND D.DETAIL_ID = B.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+			,	(SELECT D.NATIONAL_SKILL_LARGE FROM COMMISSIONER D WHERE D.MEMBER_ID = A.MEMBER_ID) AS NATIONAL_SKILL_LARGE
+			,	(SELECT D.RND_CLASS FROM COMMISSIONER D WHERE D.MEMBER_ID = A.MEMBER_ID) AS RND_CLASS
+			,	IFNULL((SELECT NAME FROM INSTITUTION D WHERE D.REG_NO = B.INSTITUTION_ID), "") AS INSTITUTION_NAME
+			,	B.MOBILE_PHONE
+			,	B.NAME AS MEMBER_NAME
+			,	B.EMAIL
+			,	A.EVALUATION_REPORT_DECLARATION_SIGN
+		FROM
+			EVALUATION_COMMISSIONER A
+		LEFT JOIN
+			MEMBER B
+			ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE
+			1=1
+			<if test='evaluation_reg_number != null and evaluation_reg_number != ""'>
+				AND A.EVALUATION_REG_NUMBER = #{evaluation_reg_number}
+			</if>
+			<if test='evaluation_id != null and evaluation_id != ""'>
+				AND A.EVALUATION_ID = #{evaluation_id}
+			</if>
+			<if test='choice_yn != null and choice_yn != ""'>
+				AND A.CHOICE_YN = #{choice_yn}
+			</if>
+	</select>	
+	
+	
+	
+	<update id="updateEvaluationCommissionerRelationInfo" parameterType="EvaluationCommissionerVO">
+		<foreach collection="commissioner_relation_list" item="item" separator=";">
+			UPDATE EVALUATION_COMMISSIONER SET   
+				CHOICE_YN = #{choice_yn}
+			WHERE 
+				MEMBER_ID = #{item}
+		</foreach>
+	</update>
+	
+	
+	<update id="updateEvaluationCommissionerInfo" parameterType="EvaluationCommissionerVO">
+		UPDATE EVALUATION_COMMISSIONER SET
+			UPDATE_DATE = NOW()
+			<if test='security_declaration_yn != null and security_declaration_yn != ""'>
+				, SECURITY_DECLARATION_YN = #{security_declaration_yn}
+			</if>
+			<if test='security_declaration_date != null and security_declaration_date != ""'>
+				, SECURITY_DECLARATION_DATE = #{security_declaration_date}
+			</if>
+			<if test='security_declaration_sign != null and security_declaration_sign != ""'>
+				, SECURITY_DECLARATION_SIGN = #{security_declaration_sign}
+			</if>
+			<if test='payment_declaration_yn != null and payment_declaration_yn != ""'>
+				, PAYMENT_DECLARATION_YN = #{payment_declaration_yn}
+			</if>
+			<if test='payment_declaration_sign != null and payment_declaration_sign != ""'>
+				, PAYMENT_DECLARATION_SIGN = #{payment_declaration_sign}
+			</if>
+			<if test='evaluation_report_yn != null and evaluation_report_yn != ""'>
+				, EVALUATION_REPORT_YN = #{evaluation_report_yn}
+			</if>
+			<if test='evaluation_report_declaration_sign != null and evaluation_report_declaration_sign != ""'>
+				, EVALUATION_REPORT_DECLARATION_SIGN = #{evaluation_report_declaration_sign}
+			</if>
+			<if test='chairman_yn != null and chairman_yn != ""'>
+				, CHAIRMAN_YN = #{chairman_yn}
+			</if>
+			<if test='total_point != null and total_point != ""'>
+				, TOTAL_POINT = #{total_point}
+			</if>
+			<if test='chairman_sign != null and chairman_sign != ""'>
+				, CHAIRMAN_SIGN = #{chairman_sign}
+			</if>
+			<if test='chairman_comment != null and chairman_comment != ""'>
+				, CHAIRMAN_COMMENT = #{chairman_comment}
+			</if>
+			<if test='chairman_submit_yn != null and chairman_submit_yn != ""'>
+				, CHAIRMAN_SUBMIT_YN = #{chairman_submit_yn}
+			</if>
+			<if test='chairman_result != null and chairman_result != ""'>
+				, CHAIRMAN_RESULT = #{chairman_result}
+			</if>
+		WHERE 
+			1 = 1
+			<if test='member_id != null and member_id != ""'>
+				AND MEMBER_ID = #{member_id}
+			</if>
+			<if test='evaluation_id != null and evaluation_id != ""'>
+				AND EVALUATION_ID = #{evaluation_id}
+			</if>
+	</update>
+	
+	
+	<select id="selectEvaluationCommissionerDetail" parameterType="EvaluationCommissionerVO"  resultMap="evaluationCommissioner">
+		SELECT
+			A.RELATION_ID
+			,	A.EVALUATION_ID
+			,	A.EVALUATION_REG_NUMBER
+			,	A.MEMBER_ID
+			,	A.CHOICE_YN
+			,	A.MAIL_REPLY_YN
+			,	A.MAIL_SEND_DATE
+			,	A.CHAIRMAN_YN
+			,	A.SECURITY_DECLARATION_YN
+			,	A.SECURITY_DECLARATION_DATE
+			,	A.SECURITY_DECLARATION_SIGN
+			,	A.PAYMENT_DECLARATION_YN
+			,	A.PAYMENT_DECLARATION_SIGN
+			,	A.EVALUATION_REPORT_YN
+			,	A.EVALUATION_REPORT_DECLARATION_SIGN
+			,	A.TOTAL_POINT
+			,	A.UPDATE_DATE
+			,	A.CHAIRMAN_SUBMIT_YN
+			,	A.CHAIRMAN_RESULT
+			,	A.CHAIRMAN_COMMENT
+			,	A.CHAIRMAN_SIGN
+		FROM
+			EVALUATION_COMMISSIONER A
+		WHERE
+			A.USE_YN = 'Y'
+			AND MEMBER_ID = #{member_id}
+			AND EVALUATION_ID = #{evaluation_id}
+		LIMIT 1
+	</select>
+	
+	
+	<update id="insertItem" parameterType="EvaluationItemVO">
+		INSERT INTO EVALUATION_ITEM_TEMPLETE ( 
+				ITEM_TYPE
+				,	FORM_TITLE
+				,	FORM_ITEM_ID
+				,	FORM_ITEM_NAME
+				,	FORM_ITEM_SEQ
+				,	FORM_ITEM_DETAIL_NAME
+				,	FORM_ITEM_RESULT
+			) 
+			VALUES 
+			<foreach collection="item_form_info_list" item="item" separator=" , ">
+				<foreach collection="item.item_form_detail_info_list" item="item2" separator=" , " >
+		        	(	
+		        		#{item_type}
+		        		,	#{form_title}
+		        		,	'${item.form_item_id}'
+		        		,	'${item.form_item_name}'
+		        		,	'${item2.form_item_seq}'
+		        		,	'${item2.form_item_detail_name}'
+		        		,	'${item2.form_item_result}'
+	        		 )
+       		 	</foreach>
+			</foreach>
+	</update>
+	
+	
+	<update id="insertReleatedItem" parameterType="EvaluationItemVO">
+		INSERT INTO EVALUATION_ITEM ( 
+				EVALUATION_ID
+				,	ITEM_TYPE
+				,	FORM_TITLE
+				,	FORM_ITEM_ID
+				,	FORM_ITEM_NAME
+				,	FORM_ITEM_SEQ
+				,	FORM_ITEM_DETAIL_NAME
+				,	FORM_ITEM_RESULT
+			) 
+			VALUES 
+			<foreach collection="evaluation_id_list" item="id" separator=" , ">
+				<foreach collection="item_form_info_list" item="item" separator=" , ">
+					<foreach collection="item.item_form_detail_info_list" item="item2" separator=" , " >
+			        	(	
+			        		'${id}'
+			        		,	#{item_type}
+			        		,	#{form_title}
+			        		,	'${item.form_item_id}'
+			        		,	'${item.form_item_name}'
+			        		,	'${item2.form_item_seq}'
+			        		,	'${item2.form_item_detail_name}'
+			        		,	'${item2.form_item_result}'
+		        		 )
+	       		 	</foreach>
+				</foreach>
+			</foreach>
+	</update>
+	
+	<delete id="deleteItem" parameterType="EvaluationItemVO">
+		DELETE FROM EVALUATION_ITEM_TEMPLETE			
+		WHERE 
+			ITEM_TYPE = #{item_type}
+	</delete>
+	
+	<delete id="deleteReleatedItem" parameterType="EvaluationItemVO">
+		DELETE FROM EVALUATION_ITEM			
+		WHERE 
+			EVALUATION_ID IN
+			<foreach collection="evaluation_id_list" item="item" separator="," open="(" close=")" >
+				#{item}
+			</foreach>
+	</delete>
+	
+	<select id="selectReleatedItemList" parameterType="EvaluationItemVO"  resultType="map">
+		SELECT
+			ITEM_ID
+				,	ITEM_TYPE
+				,	FORM_TITLE
+				,	FORM_ITEM_ID
+				,	FORM_ITEM_NAME
+				,	FORM_ITEM_SEQ
+				,	FORM_ITEM_DETAIL_NAME
+				,	FORM_ITEM_RESULT
+		FROM
+			EVALUATION_ITEM A
+		WHERE
+			A.USE_YN = 'Y'
+			AND EVALUATION_ID = #{evaluation_id}
+			ORDER BY ITEM_TYPE, FORM_ITEM_NAME, FORM_ITEM_SEQ
+	</select>
+	
+	<select id="selectUnreleatedItemList" parameterType="EvaluationItemVO"  resultType="map">
+		SELECT
+			ITEM_TEMPLETE_ID
+				,	ITEM_TYPE
+				,	FORM_TITLE
+				,	FORM_ITEM_ID
+				,	FORM_ITEM_NAME
+				,	FORM_ITEM_SEQ
+				,	FORM_ITEM_DETAIL_NAME
+				,	FORM_ITEM_RESULT
+		FROM
+			EVALUATION_ITEM_TEMPLETE A
+		WHERE
+			A.USE_YN = 'Y'
+			AND ITEM_TYPE NOT IN ( SELECT ITEM_TYPE FROM EVALUATION_ITEM WHERE EVALUATION_ID = #{evaluation_id} )
+			ORDER BY ITEM_TYPE, FORM_ITEM_NAME, FORM_ITEM_SEQ
+	</select>
+	
+	
+	<select id="searchExcelDownload" parameterType="DataMap"  resultMap="evaluation">
+		SELECT
+			A.EVALUATION_ID
+			,	A.RECEPTION_ID
+			,	B.RECEPTION_REG_NUMBER
+			,	A.AGREEMENT_REG_NUMBER
+			,	A.EVALUATION_REG_NUMBER
+			,	(SELECT C.BUSINESS_NAME FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT C.TITLE FROM ANNOUNCEMENT C WHERE C.ANNOUNCEMENT_ID = B.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	B.TECH_INFO_NAME
+			,	B.INSTITUTION_NAME
+			,	A.STEWARD_DEPARTMENT
+			,	A.STEWARD
+			,	A.CLASSIFICATION
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000016' AND C.DETAIL_ID = A.CLASSIFICATION), "") AS CLASSIFICATION_NAME
+			,	A.TYPE
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000017' AND C.DETAIL_ID = A.TYPE), "") AS TYPE_NAME
+			,	IFNULL(DATE_FORMAT(A.EVALUATION_DATE,'%Y-%m-%d'), "") AS EVALUATION_DATE
+			,	A.RESULT
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000019' AND C.DETAIL_ID = A.RESULT), "") AS RESULT_NAME
+			,	A.STATUS
+			,	IFNULL((SELECT C.NAME FROM COMMON_CODE_DETAIL C WHERE C.MASTER_ID = 'M0000018' AND C.DETAIL_ID = A.STATUS), "") AS STATUS_NAME
+			,	A.SEND_EMAIL_YN
+			,	A.SEND_SMS_YN
+			,	A.COMMISSIONER_YN
+			,	A.ITEM_COMPLETE_YN
+			,	A.SUBMIT_YN
+			,	A.CHAIRMAN_YN
+			,	A.GUIDE_FILE_ID
+		FROM
+			EVALUATION A
+		LEFT JOIN
+			RECEPTION B
+			ON A.RECEPTION_ID = B.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			<if test='announcement_type != null and announcement_type != "" '>
+				<choose>
+				    <when test='announcement_type == "D0000005" '>
+				    	AND (B.ANNOUNCEMENT_TYPE = 'D0000001' OR B.ANNOUNCEMENT_TYPE = 'D0000002')
+				    </when>
+				    <otherwise>
+				      	AND B.ANNOUNCEMENT_TYPE = #{announcement_type}
+				    </otherwise>
+			  	</choose>
+			</if>
+	</select>
+	
+	
+	
+	
+</mapper>

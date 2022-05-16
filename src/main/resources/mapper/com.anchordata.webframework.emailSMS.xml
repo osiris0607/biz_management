@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.emailSMS">
+
+	<resultMap id="emailSMS" type="emailSMSVO">
+		<result property ="mail_sms_id"				column="MAIL_SMS_ID"	/>
+		<result property ="title"					column="TITLE"	/>
+		<result property ="comment"					column="COMMENT"	/>
+		<result property ="link"					column="LINK"	/>
+		<result property ="sender"					column="SENDER"	/>
+		<result property ="type"					column="TYPE"	/>
+	</resultMap>
+	
+	
+	<insert id="insertInfo" parameterType="emailSMSVO">
+		INSERT INTO MAIL_SMS_COMMENT ( 
+			TITLE
+			,	COMMENT
+			,	LINK
+			,	SENDER
+			,	TYPE
+		) 
+		VALUES (
+			#{title} 
+			,	#{comment}
+			,	#{link}
+			,	#{sender}
+			,	#{type}
+		)
+	</insert>
+	
+	<!-- ORDER BY / GROUP BY 를 하기 위한 쿼리 -->
+	<select id="selectDetail" parameterType="emailSMSVO"  resultMap="emailSMS">
+		SELECT MAIL_SMS.*
+		FROM (
+					SELECT
+						MAIL_SMS_ID
+						,	TITLE
+						,	COMMENT
+						,	LINK
+						,	SENDER
+						,	TYPE
+						,	REG_DATE
+						,	USE_YN
+					FROM MAIL_SMS_COMMENT A
+					ORDER BY REG_DATE DESC
+					LIMIT 18446744073709551615
+				) AS MAIL_SMS
+				GROUP BY MAIL_SMS.TYPE
+	</select>
+	
+	
+	
+	
+	<!-- <update id="insertinstitutionInfo" parameterType="InstitutionVO">
+		INSERT INTO INSTITUTION ( 
+			TYPE
+			,	REG_NO
+			,	NAME
+			,	ADDRESS
+			,	ADDRESS_DETAIL
+			,	PHONE
+			,	REPRESENTATIVE_NAME
+			,	INDUSTRY_TYPE
+			,	BUSINESS_TYPE
+			,	FOUNDATION_DATE
+			,	FOUNDATION_TYPE
+			,	COMPANY_CLASS
+			,	COMPANY_TYPE
+			,	LAB_EXIST_YN
+			,	EMPLOYEE_NO
+			,	TOTAL_SALES
+			,	CAPITAL_1
+			,	CAPITAL_2
+			,	CAPITAL_3
+		) 
+		VALUES (
+			#{type} 
+			,	#{reg_no} 
+			,	#{name}
+			,	#{address}
+			,	#{address_detail}
+			,	#{phone}
+			,	#{representative_name}
+			,	#{industry_type}
+			,	#{business_type}
+			,	#{foundation_date}
+			,	#{foundation_type}
+			,	#{company_class}
+			,	#{company_type}
+			,	#{lab_exist_yn}
+			,	#{employee_no}
+			,	#{total_sales}
+			,	#{capital_1}
+			,	#{capital_2}
+			,	#{capital_3}
+		)
+		ON DUPLICATE KEY UPDATE 
+	          TYPE = #{type}
+	          , NAME = #{name}
+	          , ADDRESS = #{address}
+	          , ADDRESS_DETAIL = #{address_detail}
+	          , PHONE = #{phone}
+	          , REPRESENTATIVE_NAME = #{representative_name}
+	          , INDUSTRY_TYPE = #{industry_type}
+	          , BUSINESS_TYPE = #{business_type}
+	          , FOUNDATION_DATE = #{foundation_date}
+	          , FOUNDATION_TYPE = #{foundation_type}
+	          , COMPANY_CLASS = #{company_class}
+	          , COMPANY_TYPE = #{company_type}
+	          , LAB_EXIST_YN = #{lab_exist_yn}
+	          , EMPLOYEE_NO = #{employee_no}
+	          , TOTAL_SALES = #{total_sales}
+	          , capital_1 = #{capital_1}
+	          , CAPITAL_2 = #{capital_2}
+	          , CAPITAL_3 = #{capital_3}
+	</update>
+	
+	
+	<select id="selectDetailInstitution" parameterType="InstitutionVO"  resultMap="institution">
+		SELECT
+			TYPE
+			,	REG_NO
+			,	NAME
+			,	ADDRESS
+			,	ADDRESS_DETAIL
+			,	PHONE
+			,	REPRESENTATIVE_NAME
+			,	INDUSTRY_TYPE
+			,	BUSINESS_TYPE
+			,	FOUNDATION_DATE
+			,	FOUNDATION_TYPE
+			,	COMPANY_CLASS
+			,	COMPANY_TYPE
+			,	LAB_EXIST_YN
+			,	EMPLOYEE_NO
+			,	TOTAL_SALES
+			,	CAPITAL_1
+			,	CAPITAL_2
+			,	CAPITAL_3
+		FROM INSTITUTION A
+		WHERE 
+			REG_NO = (SELECT INSTITUTION_ID FROM MEMBER WHERE MEMBER_ID = #{member_id})
+	</select>
+
+
+	<select id="selectRegNo" parameterType="InstitutionVO"  resultMap="institution">
+		SELECT
+			TYPE
+			,	REG_NO
+			,	NAME
+			,	ADDRESS
+			,	ADDRESS_DETAIL
+			,	PHONE
+			,	REPRESENTATIVE_NAME
+			,	INDUSTRY_TYPE
+			,	BUSINESS_TYPE
+			,	FOUNDATION_DATE
+			,	FOUNDATION_TYPE
+			,	COMPANY_CLASS
+			,	COMPANY_TYPE
+			,	LAB_EXIST_YN
+			,	EMPLOYEE_NO
+			,	TOTAL_SALES
+			,	CAPITAL_1
+			,	CAPITAL_2
+			,	CAPITAL_3
+		FROM INSTITUTION A
+		WHERE 
+			REG_NO = #{reg_no}
+	</select>
+
+
+	<insert id="insertRepresentativeInfo" parameterType="InstitutionVO">
+		INSERT INTO INSTITUTION_REPRESENTATIVE ( 
+			REG_NO
+			,	NAME
+			,	MOBILE_PHONE
+			,	EMAIL
+		) 
+		VALUES (
+			#{reg_no} 
+			,	#{name}
+			,	#{mobile_phone}
+			,	#{email}
+		)
+	</insert>
+	
+	
+	<select id="selectRepresentativeAlllList" parameterType="InstitutionVO"  resultMap="institution">
+		SELECT
+			REPRESENTATIVE_ID
+			,	REG_NO
+			,	NAME
+			,	MOBILE_PHONE
+			,	EMAIL
+		FROM INSTITUTION_REPRESENTATIVE
+		WHERE 
+			REG_NO = #{reg_no}
+	</select>
+	
+	
+	<delete id="deleteRepresentative" parameterType="AnnouncementVO">
+		DELETE FROM INSTITUTION_REPRESENTATIVE			
+		WHERE 
+			REPRESENTATIVE_ID IN
+					<foreach collection="delete_representative_id_list" item="id" separator="," open="(" close=")" >
+						#{id}
+					</foreach>
+			
+	</delete> -->
+	
+	
+	
+	
+</mapper>

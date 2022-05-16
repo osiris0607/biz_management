@@ -1,0 +1,233 @@
+# Embedded Tomcat Configuration 
+server:
+  port: 80
+  servlet:
+    context-path: /
+    session:
+      timeout: 60m
+    jsp:
+      init-parameters:
+         development: true
+         
+  connection-timeout: 50000
+  tomcat:  
+    uri-encoding: UTF-8
+    accesslog:
+      enabled: true
+      pattern: "%h %l %u %t '%r' %s %b %D"
+      rotate: true
+      prefix: access
+      suffix: .log
+      file-date-format: .yyyy-MM-dd
+      directory: ./media/log
+
+login:
+  admin: 
+    success:
+      url: "/home"
+    default:
+      url: "/user/rdt/adminLogin"    
+
+    
+anchorData:
+  media:
+    tiles: /WEB-INF/tiles/tiles.xml 
+    upload-path: /nasa12345/files/
+  verifyEmail : http://media.net/verifyEmail
+  SGIS:
+    public_key: 424e8922e78b4782975f
+    service_id: 722d0be2bc834cf3b7ac
+  chain:
+    enabled: false
+    strategy:
+      fixed:
+        auto: true            # Version strategy Number 생성 여부. true 이면 자동 생성
+        version: "v00001"
+    
+resources:
+  location:
+    video : D:/RPA/
+#    video : /usr/local/barun-webserver/academy/resource/video/
+  uri:
+    video : /user/lecture/resource/video/
+    
+scheduler:
+  is:
+    running: false    
+    
+access:
+  denied:
+    url: "/login"    
+    
+    
+sit:
+  bizsiren:
+    account_id: "SAOQ001"
+    service_name: "010003"
+    request_number: "123409875"
+    cert_gubun: "H"
+    user_ret_url: "31http://localhost:8080/user/api/signup/cert/bizsiren/retUrl"
+    expert_ret_url: "31http://localhost:8080/user/api/expert/cert/bizsiren/retUrl"    
+    
+#Spring Default Configuration
+spring:
+  profiles:
+    active: dev # 기본 환경 선택
+    #active: local_test       
+  
+  resources:
+    chain:
+      strategy:
+        fixed:
+          version: 
+    cache:
+      cachecontrol:
+        max-age: 36000   
+
+    
+  application:
+    name: com.anchordata.webframework
+      
+  messages:
+    cache-duration: -1 
+    basename: classpath:/config/message.properties
+    encoding: UTF-8
+   
+  servlet:
+    multipart:
+      max-request-size: 1000MB
+      max-file-size: 1000MB
+      
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp 
+
+  cache:
+    ehcache:
+      config: classpath:/config.ehcache.xml
+    
+  devtools:
+    livereload:
+      enabled: true    
+
+
+  google:
+    client:
+      clientId: 744744614208-obapm74n0kn9ug54len0a838am3ct75l.apps.googleusercontent.com
+      clientSecret: KYaQUpkFq_u-jNNBZ1Ju_1KE
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope: email, profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+    recaptcha:
+      siteKey: 6LdGVgEVAAAAAJz8oWKmIs5kHyp5qwCRQo5-XYEA
+      secretKey: 6LdGVgEVAAAAAKgzxwUdumjFDsvk2jASX1ieBp3X
+    
+    
+--- # dev 환경
+spring:
+  profiles: dev
+  
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:mysql://103.55.191.104:3306/sit_biz_management?serverTimezone=UTC&characterEncoding=UTF-8&allowMultiQueries=true
+    username: anchor
+    password: Anchoruser0914@
+    hikari:
+      max-lifetime: 1200000
+      maximum-pool-size: 12
+      minimum-idle: 5 
+      idle-timeout: 30000  
+      connection-test-query: SELECT 1  
+  
+server:
+  port: 8888
+
+tomcat:
+  ajp:
+    protocol: "AJP/1.3"
+    port: 14111
+    enabled: true 
+    
+etc:
+  login:
+    kakao_redirection_url: http://localhost:11001/login/kakao
+
+
+# 운영 환경
+---
+spring:
+  profiles: prod
+  
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:mysql://45.115.152.68:3306/sit_biz_management?serverTimezone=UTC&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: tjrldusdb2022!@
+    hikari:
+      max-lifetime: 1200000
+      maximum-pool-size: 12
+      minimum-idle: 5 
+      idle-timeout: 30000  
+      connection-test-query: SELECT 1 
+  
+server:
+  port: 8088
+  
+tomcat:
+  ajp:
+    protocol: "AJP/1.3"
+    port: 14111
+    enabled: true  
+    
+etc:
+  login:
+    kakao_redirection_url: http://youthstart.or.kr/login/kakao
+
+sit:
+  bizsiren:
+    service_name: "012001"
+    user_ret_url: "31http://rnd.seoul-tech.com/user/api/signup/cert/bizsiren/retUrl"
+    expert_ret_url: "31http://expert.seoul-tech.com/user/api/expert/cert/bizsiren/retUrl"  
+  
+  
+# 운영 테스트 환경
+---
+spring:
+  profiles: local_test
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:mysql://45.115.152.68:3306/sit_biz_management?serverTimezone=UTC&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: tjrldusdb2022!@
+    hikari:
+      max-lifetime: 1200000
+      maximum-pool-size: 12
+      minimum-idle: 5 
+      idle-timeout: 30000  
+      connection-test-query: SELECT 1 
+  
+server:
+  port: 8080
+  
+tomcat:
+  ajp:
+    protocol: "AJP/1.3"
+    port: 14111
+    enabled: true  
+  
+etc:
+  login:
+    kakao_redirection_url: http://youthstart.or.kr/login/kakao
+  
+sit:
+  bizsiren:
+    service_name: "010003"
+    user_ret_url: "31http://103.55.191.104:8080/user/api/signup/cert/bizsiren/retUrl"
+    expert_ret_url: "31http://103.55.191.104:8080/user/api/expert/cert/bizsiren/retUrl"    
+  
+  
+  

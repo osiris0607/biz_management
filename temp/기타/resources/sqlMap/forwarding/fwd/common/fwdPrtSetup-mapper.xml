@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.common.fwdPrtSetup">
+
+    <select id="selectPrtCorpSetp" parameterType="dataItem" resultType="dataItem">
+        /* fwd.common.fwdPrtSetup.selectPrtCorpSetp */
+        SELECT (SELECT B.SETP_CONT
+                  FROM TB_FWD_SETP_CLAS A
+            INNER JOIN TB_FWD_SETP_DTL B ON B.SETP_CLAS_CD = A.SETP_CLAS_CD
+                   AND B.USE_YN = 'Y' 
+                 WHERE A.USE_YN = 'Y'
+                   AND B.CORP_CD = X.CORP_CD                   
+                   AND A.SETP_CLAS_CD = 'F001' LIMIT 1) CORP_NM /*법인명  */
+               ,CONCAT(X.IMG_BASE_PATH,
+                      (SELECT B.SETP_CONT
+                         FROM TB_FWD_SETP_CLAS A
+                            , TB_FWD_SETP_DTL B
+                        WHERE A.SETP_CLAS_CD = B.SETP_CLAS_CD
+                          AND A.USE_YN = 'Y'
+                          AND B.USE_YN = 'Y'
+                          AND B.CORP_CD = X.CORP_CD
+                          AND A.SETP_CLAS_CD = 'F002' LIMIT 1)) CORP_LOGO_IMG    /* 법인로고경로  */
+               ,(SELECT B.SETP_CONT
+                   FROM TB_FWD_SETP_CLAS A
+                      , TB_FWD_SETP_DTL B
+                  WHERE A.SETP_CLAS_CD = B.SETP_CLAS_CD
+                    AND A.USE_YN = 'Y'
+                    AND B.USE_YN = 'Y'
+                    AND B.CORP_CD = X.CORP_CD
+                    AND A.SETP_CLAS_CD = 'F004' LIMIT 1) CORP_ADDR       /* 법인주소  */
+               ,CONCAT(X.IMG_BASE_PATH,
+                      (SELECT B.SETP_CONT
+                         FROM TB_FWD_SETP_CLAS A
+                            , TB_FWD_SETP_DTL B
+                        WHERE A.SETP_CLAS_CD = B.SETP_CLAS_CD
+                          AND A.USE_YN = 'Y'
+                          AND B.USE_YN = 'Y'
+                          AND B.CORP_CD = X.CORP_CD
+                          AND A.SETP_CLAS_CD = 'F005' LIMIT 1)) CORPNM_LOGO      /* 법인명로고경로  */
+               ,CONCAT(X.IMG_BASE_PATH,
+                      (SELECT B.SETP_CONT
+                         FROM TB_FWD_SETP_CLAS A
+                            , TB_FWD_SETP_DTL B
+                        WHERE A.SETP_CLAS_CD = B.SETP_CLAS_CD
+                          AND A.USE_YN = 'Y'
+                          AND B.USE_YN = 'Y'
+                          AND B.CORP_CD = X.CORP_CD
+                          AND B.ACCTG_DEPT_CD = X.ACCTG_DEPT_CD
+                          AND A.SETP_CLAS_CD = 'F003' LIMIT 1)) AS DEPT_SIGN_IMG     /* 부서인장  */
+               , (SELECT CORP_ACRN_NM5
+                   FROM TB_COM_CORP
+                  WHERE CORP_CD = X.CORP_CD) AS CORP_ACRN_NM
+               ,(SELECT B.SETP_CONT
+                   FROM TB_FWD_SETP_CLAS A
+                      , TB_FWD_SETP_DTL B
+                  WHERE A.SETP_CLAS_CD = B.SETP_CLAS_CD
+                    AND A.USE_YN = 'Y'
+                    AND B.USE_YN = 'Y'
+                    AND B.CORP_CD = X.CORP_CD
+                    AND A.SETP_CLAS_CD = 'F008' LIMIT 1) AS CORP_LABEL_NM    /* 법인 라벨명  */
+                ,CONCAT(X.IMG_BASE_PATH,
+                       (SELECT B.SETP_CONT
+                          FROM TB_FWD_SETP_CLAS A
+                             , TB_FWD_SETP_DTL B
+                         WHERE A.SETP_CLAS_CD = B.SETP_CLAS_CD
+                           AND A.USE_YN = 'Y'
+                           AND B.USE_YN = 'Y'
+                           AND B.CORP_CD = X.CORP_CD
+                           AND A.SETP_CLAS_CD = 'F031' LIMIT 1)) AS CORPNM_INCOME_LOGO       /* 2020.05.21 김정숙 [CSR ID:4196437]  ORIGINAL BL 수입인지  일본법인  */
+           FROM (SELECT #{corpCd} AS CORP_CD 
+                      , #{imgBasePath} AS IMG_BASE_PATH
+                      , #{acctgDeptCd} AS ACCTG_DEPT_CD) X    
+    </select>
+        
+    
+</mapper>

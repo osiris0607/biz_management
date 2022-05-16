@@ -1,0 +1,4351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.document.fwdBlReg">
+    <insert id="insertBlBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlBasisInfo - HBL기본정보저장(등록) */
+    INSERT INTO TB_FWD_BL (
+           BL_ID
+         , BL_NO
+         , SHPP_CD
+         , SHPP_NM
+         , NEGO_ONBR_YMD
+         , ETA_YMD
+         , FDEST_ETA_YMD
+         , ARR_YMD
+         , ONBR_YMD
+         , BL_PRT_YMD
+         , CARR_NM
+         , CNEE_CD
+         , CNEE_NM
+         , FLT_VSL_NM
+         , VOYAGE
+         , ROUT_SPR_CD
+         , BL_KIND_CD
+         , BL_SWITCH_YN
+         , BL_OWN_SPR_CD
+         , NTPR_CD
+         , NTPR_NM
+         , EXP_TS_TYPE_CD
+         , IMP_TS_TYPE_CD
+         , TRN_TYPE_CD
+         , LADG_TYPE_CD
+         , CARGO_TYPE_CD
+         , LDNG_COND_CD
+         , DSCR_COND_CD
+         , FRGTTERM_CD
+         , INCOT_CD
+         , SELL_GWT
+         , SELL_LB_GWT
+         , SELL_CBM
+         , SELL_CFT
+         , SELL_CWT
+         , PKG_QTY
+         , PKG_UNIT_CD
+         , SELL_NWT
+         , RPRS_ITEM_CD
+         , RPRS_ITEM_NM
+         , INVC_CUR_CD
+         , INVC_AMT
+         , CONSOL_SPR_CD
+         , POR_CD
+         , POR_NM
+         , BKNG_NO
+         , SHIPLN_BKNG_NO
+         , HUB_BILG_YN
+         , IMP_BL_SPLIT_ADJ_YN
+         , POL_CD
+         , POL_NM
+         , POD_CD
+         , POD_NM
+         , PDEL_CD
+         , PDEL_NM
+         , FDEST_CD
+         , FDEST_NM
+         , RMK
+         , DEL_YN
+         , REG_DT
+         , RSTR_ID
+         , UPD_DT
+         , UPDR_ID
+         , DECL_BL_NO
+         , TT_LC_TYPE_CD
+         , INSD_PKG_QTY
+         , NCV_YN
+         , EXCT_SPR_CD
+         , BL_SPR_CD
+         , RPRS_REF_NO
+         , ETC_EXPS_COND_CD
+         , T1_HLG_SPR_CD
+         , SELL_LB_CWT
+         , MBL_RMK
+         , CUR_CD
+         , SMT_NO
+         , EO_NO
+         , BL_STAT_CD
+         , EXPS_BIZ_TYPE_CD
+         , EXPS_CARGO_SPR_CD
+         , SR_NO
+         , MBL_ID
+         , MBL_NO
+         , ETD_YMD
+         , CONSOL_BL_ID
+         , CONSOL_CLOS_YN
+         , WGT_CLOS_YN
+         , ONBR_CLOS_YN
+         , ORIGN_PRNT_YN
+         , ARR_CLOS_YN
+         , FNL_CLOS_YN
+         , ORIGN_BL_ID
+         , CARR_GRP_CD
+         , PORT_DOOR_SPR_CD
+         , REF_NO_SPR_CD
+         , INSD_PKG_UNIT_CD
+         , EXPS_SELL_ZONE_CD
+         , SELL_SVC_GDS_CD
+         , SELL_VOL_WGT
+         , SELL_WGT_UNIT_CD
+         , EXPS_BUY_ZONE_CD
+         , BUY_SVC_GDS_CD
+         , BUY_GWT
+         , BUY_LB_GWT
+         , BUY_NWT
+         , BUY_VOL_WGT
+         , BUY_WGT_UNIT_CD
+         , BUY_CBM
+         , BUY_CFT
+         , BUY_CWT
+         , BUY_LB_CWT
+         , EXCHGRT_APLY_YMD
+         , APLY_EXCHGRT
+         , INSU_JOIN_YN
+         , INF_CUR_CD
+         , INF_AMT
+         , CLAIM_YN
+         , ADJ_YN
+         , BL_CRT_TYPE_CD
+         , EXP_CC_RQST_YN
+         , IMP_CC_RQST_YN
+         , HLDS_BL_YN
+         , FLT_TYPE_CD
+         , MSTR_WRK_GRP_CD
+         , SELL_RTON
+         , BUY_RTON
+         , CALLSIGN
+         , SPLIT_BL_YN
+         , NON_PTNR_YN
+         , EXP_WRK_YMD
+         , EXPS_CONSOL_BUY_BL_ID
+         , CONSOL_DSBL_HBL_YN
+         , SPLIT_RESN_CD
+         , FHD_YN
+         , CTRT_TYPE_CD
+         , NON_EXCT_BL_YN
+         , SELL_LB_VOL_WGT
+         , BUY_LB_VOL_WGT
+         , REG_YMD
+         , SELL_MR_TON_WGT
+         , BUY_MR_TON_WGT
+         , LOCL_PTNR_YN
+         , TRNS_ID
+         , COMB_BL_YN
+           )
+    VALUES (
+           #{blId}
+         , TRIM(UPPER(#{blNo}))
+         , #{shppCd}
+         , #{shppNm}
+         , #{negoOnbrYmd}
+         , #{etaYmd}
+         , #{fdestEtaYmd}
+         , #{arrYmd}
+         , #{onbrYmd}
+         , #{blPrtYmd}
+         , #{lineNm}
+         , #{cneeCd}
+         , #{cneeNm}
+         , TRIM(#{fltVslNm})
+         , TRIM(#{voyage})
+         , IFNULL(#{routSprCd}, 'N')
+         , IFNULL(#{blKindCd}, 'N')
+         , IFNULL(#{blSwitchYn},'N')
+         , #{blOwnSprCd}
+         , #{ntprCd}
+         , #{ntprNm}
+         , #{expTsTypeCd}
+         , #{impTsTypeCd}
+         , #{trnTypeCd}
+         , #{ladgTypeCd}
+         , #{cargoTypeCd}
+         , #{ldngCondCd}
+         , #{dscrCondCd}
+         , #{frgttermCd}
+         , #{incotCd}
+         , #{sellGwt}
+         , #{sellLbGwt}
+         , #{sellCbm}
+         , #{sellCft}
+         , #{sellCwt}
+         , #{pkgQty}
+         , #{pkgUnitCd}
+         , #{sellNwt}
+         , #{rprsItemCd}
+         , #{rprsItemNm}
+         , #{invcCurCd}
+         , #{invcAmt}
+         , #{consolSprCd}
+         , #{porCd}
+         , #{porNm}
+         , #{bkngNo}
+         , #{shiplnBkngNo}
+         , IFNULL(#{hubBilgYn},'N')
+         , IFNULL(#{impBlSplitAdjYn},'N')
+         , #{polCd}
+         , #{polNm}
+         , #{podCd}
+         , #{podNm}
+         , #{pdelCd}
+         , #{pdelNm}
+         , #{fdestCd}
+         , #{fdestNm}
+         , #{rmk}
+         , 'N'
+         , NOW()
+         , #{session.userId}
+         , NOW()
+         , #{session.userId}
+         , #{declBlNo}
+         , #{ttLcTypeCd}
+         , #{insdPkgQty}
+         , IFNULL(#{ncvYn},'N')
+         , #{exctSprCd}
+         , #{blSprCd}
+         , #{rprsRefNo}
+         , #{etcExpsCondCd}
+         , #{t1HlgSprCd}
+         , #{sellLbCwt}
+         , #{mblRmk}
+         , #{curCd}
+         , #{smtNo}
+         , #{eoNo}
+         , #{blStatCd}
+         , #{expsBizTypeCd}
+         , #{expsCargoSprCd}
+         , #{srNo}
+         , #{mblId}
+         , #{mblNo}
+         , #{etdYmd}
+         , #{consolBlId}
+         , IFNULL(#{consolClosYn}, 'N')
+         , IFNULL(#{wgtClosYn}, 'N')
+         , IFNULL(#{onbrClosYn}, 'N')
+         , IFNULL(#{orignPrntYn},'N')
+         , IFNULL(#{arrClosYn}, 'N')
+         , IFNULL(#{fnlClosYn}, 'N')
+         , #{orignBlId}
+         , #{carrGrpCd}
+         , #{portDoorSprCd}
+         , #{refNoSprCd}
+         , #{insdPkgUnitCd}
+         , #{expsSellZoneCd}
+         , #{sellSvcGdsCd}
+         , #{sellVolWgt}
+         , #{sellWgtUnitCd}
+         , #{expsBuyZoneCd}
+         , #{buySvcGdsCd}
+         , #{buyGwt}
+         , #{buyLbGwt}
+         , #{buyNwt}
+         , #{buyVolWgt}
+         , #{buyWgtUnitCd}
+         , #{buyCbm}
+         , #{buyCft}
+         , #{buyCwt}
+         , #{buyLbCwt}
+         , #{exchgrtAplyYmd}
+         , #{aplyExchgrt}
+         , IFNULL(#{insuJoinYn},'N')
+         , #{infCurCd}
+         , #{infAmt}
+         , IFNULL(#{claimYn}, 'N')
+         , IFNULL(#{adjYn}, 'N')
+         , #{blCrtTypeCd}
+         , IFNULL(#{expCcRqstYn}, 'N')
+         , IFNULL(#{impCcRqstYn}, 'N')
+         , IFNULL(#{hldsBlYn}, 'N')
+         , #{fltTypeCd}
+         , #{mstrWrkGrpCd}
+         , #{sellRton}
+         , #{buyRton}
+         , #{callsign}
+         , IFNULL(#{splitBlYn}, 'N')
+         , IFNULL(#{nonPtnrYn},'N')
+         , #{expWrkYmd}
+         , #{expsConsolBuyBlId}
+         , IFNULL(#{consolDsblHblYn}, 'N')
+         , #{splitResnCd}
+         , IFNULL(#{fhdYn},'N')
+         , #{ctrtTypeCd}
+         , IFNULL(#{nonExctBlYn}, 'N')
+         , #{sellLbVolWgt}
+         , #{buyLbVolWgt}
+         , DATE_FORMAT(NOW(), '%Y%m%d')
+         , #{sellMrTonWgt}
+         , #{buyMrTonWgt}
+         , IF((SELECT COUNT(1)
+              FROM TB_SMT_INTG_TASK_DEPT TASK
+              WHERE EO_NO = #{eoNo}
+              AND EXCT_BIZPTNR_CD IN ('X100', 'X200')
+              AND DEL_YN = 'N') > 0, 'Y', 'N') /* LOCLPTNR_YN */
+         , #{trnsId}
+         , IFNULL(#{combBlYn}, 'N')
+           )
+    </insert>
+
+
+    <update id="updateBlBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.updateBlBasisInfo - HBL기본정보저장(수정) */
+    UPDATE TB_FWD_BL
+       SET UPD_DT = NOW()
+         , UPDR_ID = #{session.userId}
+         , LOCL_PTNR_YN = IF((SELECT COUNT(1)
+                             FROM TB_SMT_INTG_TASK_DEPT TASK
+                             WHERE EO_NO = #{eoNo}
+                             AND EXCT_BIZPTNR_CD IN ('X100', 'X200')
+                             AND DEL_YN = 'N') > 0, 'Y', 'N') /* LOCLPTNR_YN */
+         , TRNS_ID = #{trnsId}
+    <if test='updateType != null and !updateType.equals("")'>
+      <choose>
+      <when test='updateType.equals("OnbrClosYn")'>
+         /* OnbrClosYn */
+         , ONBR_CLOS_YN = #{onbrClosYn}
+         , WGT_CLOS_YN = CASE WHEN (SELECT IF(AA.BL_CNT=0, 'N', 'Y')
+                                      FROM (SELECT COUNT(*) AS BL_CNT
+		                                      FROM TB_FWD_BL_CST_EXPND X
+		                                      JOIN TB_FWD_BL A
+		                                        ON A.BL_ID = #{blId}
+		                                       AND X.BL_ID = A.BL_ID
+		                                     WHERE X.DEL_YN = 'N'
+		                                       AND X.POSTOFFICE_YN = 'Y') AA
+                                    ) = 'Y'
+                                 THEN #{onbrClosYn}
+                              ELSE WGT_CLOS_YN
+                         END
+         , ARR_CLOS_YN = CASE WHEN (SELECT IF(AA.BL_CNT=0, 'N', 'Y')
+                                      FROM (SELECT COUNT(*) AS BL_CNT
+		                                      FROM TB_SMT_ORD X
+		                                      JOIN TB_FWD_BL A
+		                                        ON A.BL_ID = #{blId}
+		                                       AND X.SMT_NO = A.SMT_NO
+		                                     WHERE X.ORD_SPR_CD = '50'
+		                                       AND X.DEL_YN = 'N') AA
+                                    ) = 'Y'
+                                 THEN #{onbrClosYn} /* Settlement Type건  온보드시 Arrival 을 동일하게 */
+                              ELSE ARR_CLOS_YN
+                         END
+      </when>
+      <when test='updateType.equals("BlProgStatSync")'>
+         , BL_STAT_CD = #{statCd}
+         , BL_STAT_YN = #{closYn}
+      </when>
+
+      <when test='updateType.equals("SwitchBlClos")'>
+         /* SwitchBlClos */
+         , ONBR_YMD = #{onbrYmd}
+         , ARR_YMD = #{arrYmd}
+         , ONBR_CLOS_YN = #{onbrClosYn}
+         , ARR_CLOS_YN = #{arrClosYn}
+         , WGT_CLOS_YN = #{wgtClosYn}
+         , FDEST_ETA_YMD = #{fdestEtaYmd}
+         , ETA_YMD = #{etaYmd}
+         , BL_STAT_CD = #{statCd}
+         , BL_STAT_YN = #{closYn}
+        <if test="_parameter.containsKey('orignPrntYn')">
+         , ORIGN_PRNT_YN = #{orignPrntYn}
+        </if>
+      </when>
+      <when test='updateType.equals("ArrClosYn")'>
+         /* ArrClosYn */
+         , ARR_CLOS_YN = #{arrClosYn}
+         , ONBR_CLOS_YN = (SELECT IF(AA.BL_CNT=0, ONBR_CLOS_YN, #{arrClosYn})
+                             FROM (SELECT COUNT(*) AS BL_CNT
+                                        , A.EXCT_SPR_CD
+		                             FROM TB_SMT_INTG_TASK_DEPT X
+		                             JOIN TB_FWD_BL A
+		                               ON A.BL_ID = #{blId}
+		                              AND X.EO_NO = A.EO_NO
+		                              AND X.CST_BL_ID = A.BL_ID
+		                            WHERE X.LOCL_PTNR_YN = 'Y'
+		                              AND X.EXCT_BIZPTNR_CD = 'X100'
+		                              AND X.TASK_SPR_CD = 'EXP') AA )
+      </when>
+      <when test='updateType.equals("WhClosYn")'>
+         /* WhClosYn */
+         , WH_CLOS_YN = #{whClosYn}
+      </when>
+      <when test='updateType.equals("WgtClosYn")'>
+         /* WgtClosYn */
+         , WGT_CLOS_YN = #{wgtClosYn}
+      </when>
+      <when test='updateType.equals("BlSaaCwtSync")'>
+         /* BlSaaCwtSync */
+         , SELL_CWT = #{sellCwt}
+         , BUY_CWT = #{buyCwt}
+         , SELL_GWT = #{sellCwt}
+         , BUY_GWT = #{buyCwt}
+      </when>
+      <when test='updateType.equals("ptnrBlPrtYmdUpdate")'>
+        , PTNR_BL_PRT_YMD = CASE WHEN PTNR_BL_PRT_YMD IS NOT NULL THEN PTNR_BL_PRT_YMD
+                                  ELSE DATE_FORMAT(NOW(), '%Y%m%d')
+                             END
+      </when>
+      <when test='updateType.equalsIgnoreCase("DECONSOL")'>
+         /* deconsol */
+         , MBL_ID = NULL
+         , MBL_NO = NULL
+      </when>
+      <when test='updateType.equalsIgnoreCase("AirConsol")'>
+         /* AirConsol */
+         , PKG_QTY = (SELECT PKG_QTY
+                        FROM (SELECT IFNULL(SUM(PKG_QTY),0) AS PKG_QTY
+		                        FROM TB_FWD_BL
+		                       WHERE MBL_ID = #{blId}
+		                         AND BL_SPR_CD = 'H'
+		                         AND IFNULL(DEL_YN,'N') = 'N' ) A )
+         , BUY_GWT = (SELECT BUY_GWT
+                        FROM (SELECT IFNULL(SUM(SELL_GWT),0) AS BUY_GWT
+		                        FROM TB_FWD_BL
+		                       WHERE MBL_ID = #{blId}
+		                         AND BL_SPR_CD = 'H'
+		                         AND IFNULL(DEL_YN,'N') = 'N' ) B )
+      </when>
+      <otherwise>
+          <if test="_parameter.containsKey('blSprCd')">
+               , BL_SPR_CD = #{blSprCd}
+          </if>
+          <if test="_parameter.containsKey('blNo')">
+               , BL_NO = TRIM(UPPER(#{blNo}))
+          </if>
+          <if test="_parameter.containsKey('shppCd')">
+               , SHPP_CD = #{shppCd}
+          </if>
+          <if test="_parameter.containsKey('shppNm')">
+               , SHPP_NM = #{shppNm}
+          </if>
+          <if test="_parameter.containsKey('negoOnbrYmd')">
+               , NEGO_ONBR_YMD = #{negoOnbrYmd}
+          </if>
+          <if test="_parameter.containsKey('etaYmd')">
+               , ETA_YMD = #{etaYmd}
+          </if>
+          <if test="_parameter.containsKey('fdestEtaYmd')">
+               , FDEST_ETA_YMD = #{fdestEtaYmd}
+          </if>
+          <if test="_parameter.containsKey('arrYmd')">
+               , ARR_YMD = #{arrYmd}
+          </if>
+          <if test="_parameter.containsKey('onbrYmd')">
+               , ONBR_YMD = #{onbrYmd}
+          </if>
+          <if test="_parameter.containsKey('blPrtYmd')">
+               , BL_PRT_YMD = #{blPrtYmd}
+          </if>
+          <if test="_parameter.containsKey('lineNm')">
+               , CARR_NM = #{lineNm}
+          </if>
+          <if test="_parameter.containsKey('cneeCd')">
+               , CNEE_CD = #{cneeCd}
+          </if>
+          <if test="_parameter.containsKey('cneeNm')">
+               , CNEE_NM = #{cneeNm}
+         </if>
+         <if test="_parameter.containsKey('fltVslNm')">
+               , FLT_VSL_NM = #{fltVslNm}
+         </if>
+         <if test="_parameter.containsKey('voyage')">
+               , VOYAGE = #{voyage}
+         </if>
+         <if test="_parameter.containsKey('routSprCd')">
+               , ROUT_SPR_CD = #{routSprCd}
+         </if>
+         <if test="_parameter.containsKey('blKindCd')">
+               , BL_KIND_CD = #{blKindCd}
+         </if>
+         <if test="_parameter.containsKey('blOwnSprCd')">
+               , BL_OWN_SPR_CD = #{blOwnSprCd}
+         </if>
+         <if test="_parameter.containsKey('blSwitchYn')">
+               , BL_SWITCH_YN = #{blSwitchYn}
+         </if>
+         <if test="_parameter.containsKey('ntprCd')">
+               , NTPR_CD = #{ntprCd}
+         </if>
+         <if test="_parameter.containsKey('ntprNm')">
+               , NTPR_NM = #{ntprNm}
+         </if>
+         <if test="_parameter.containsKey('expTsTypeCd')">
+               , EXP_TS_TYPE_CD = #{expTsTypeCd}
+         </if>
+         <if test="_parameter.containsKey('impTsTypeCd')">
+               , IMP_TS_TYPE_CD = #{impTsTypeCd}
+         </if>
+         <if test="_parameter.containsKey('trnTypeCd')">
+               , TRN_TYPE_CD = #{trnTypeCd}
+         </if>
+         <if test="_parameter.containsKey('ladgTypeCd')">
+               , LADG_TYPE_CD = #{ladgTypeCd}
+         </if>
+         <if test="_parameter.containsKey('cargoTypeCd')">
+               , CARGO_TYPE_CD = #{cargoTypeCd}
+         </if>
+         <if test="_parameter.containsKey('ldngCondCd')">
+               , LDNG_COND_CD = #{ldngCondCd}
+         </if>
+         <if test="_parameter.containsKey('dscrCondCd')">
+               , DSCR_COND_CD = #{dscrCondCd}
+         </if>
+         <if test="_parameter.containsKey('frgttermCd')">
+               , FRGTTERM_CD = #{frgttermCd}
+         </if>
+         <if test="_parameter.containsKey('incotCd')">
+               , INCOT_CD = #{incotCd}
+         </if>
+         <if test="_parameter.containsKey('sellMrTonWgt')">
+               , SELL_MR_TON_WGT = #{sellMrTonWgt}
+         </if>
+         <if test="_parameter.containsKey('buyMrTonWgt')">
+               , BUY_MR_TON_WGT = #{buyMrTonWgt}
+         </if>
+         <if test="_parameter.containsKey('sellGwt')">
+               , SELL_GWT = #{sellGwt}
+         </if>
+         <if test="_parameter.containsKey('sellLbGwt')">
+               , SELL_LB_GWT = #{sellLbGwt}
+         </if>
+         <if test="_parameter.containsKey('sellCbm')">
+               , SELL_CBM = #{sellCbm}
+         </if>
+         <if test="_parameter.containsKey('sellCft')">
+               , SELL_CFT = #{sellCft}
+         </if>
+         <if test="_parameter.containsKey('sellCwt')">
+               , SELL_CWT = #{sellCwt}
+         </if>
+         <if test="_parameter.containsKey('pkgQty')">
+               , PKG_QTY = #{pkgQty}
+         </if>
+          <if test="_parameter.containsKey('pkgUnitCd')">
+               , PKG_UNIT_CD = #{pkgUnitCd}
+         </if>
+         <if test="_parameter.containsKey('sellNwt')">
+               , SELL_NWT = #{sellNwt}
+         </if>
+         <if test="_parameter.containsKey('rprsItemCd')">
+               , RPRS_ITEM_CD = #{rprsItemCd}
+         </if>
+          <if test="_parameter.containsKey('rprsItemNm')">
+               , RPRS_ITEM_NM = #{rprsItemNm}
+         </if>
+         <if test="_parameter.containsKey('invcCurCd')">
+               , INVC_CUR_CD = #{invcCurCd}
+         </if>
+         <if test="_parameter.containsKey('invcAmt')">
+               , INVC_AMT = #{invcAmt}
+         </if>
+          <if test="_parameter.containsKey('consolSprCd')">
+               , CONSOL_SPR_CD = #{consolSprCd}
+         </if>
+         <if test="_parameter.containsKey('porCd')">
+               , POR_CD = #{porCd}
+         </if>
+         <if test="_parameter.containsKey('porNm')">
+               , POR_NM = #{porNm}
+         </if>
+          <if test="_parameter.containsKey('bkngNo')">
+               , BKNG_NO = #{bkngNo}
+         </if>
+         <if test="_parameter.containsKey('shiplnBkngNo')">
+               , SHIPLN_BKNG_NO = #{shiplnBkngNo}
+         </if>
+         <if test="_parameter.containsKey('hubBilgYn')">
+               , HUB_BILG_YN = #{hubBilgYn}
+         </if>
+          <if test="_parameter.containsKey('impBlSplitAdjYn')">
+               , IMP_BL_SPLIT_ADJ_YN =  #{impBlSplitAdjYn}
+         </if>
+         <if test="_parameter.containsKey('polCd')">
+               , POL_CD = #{polCd}
+         </if>
+         <if test="_parameter.containsKey('polNm')">
+               , POL_NM = #{polNm}
+         </if>
+         <if test="_parameter.containsKey('podCd')">
+               , POD_CD = #{podCd}
+         </if>
+          <if test="_parameter.containsKey('podNm')">
+               , POD_NM = #{podNm}
+         </if>
+         <if test="_parameter.containsKey('pdelCd')">
+               , PDEL_CD = #{pdelCd}
+         </if>
+         <if test="_parameter.containsKey('pdelNm')">
+              , PDEL_NM = #{pdelNm}
+         </if>
+          <if test="_parameter.containsKey('fdestCd')">
+               , FDEST_CD = #{fdestCd}
+         </if>
+         <if test="_parameter.containsKey('fdestNm')">
+               , FDEST_NM = #{fdestNm}
+         </if>
+         <if test="_parameter.containsKey('rmk')">
+               , RMK = #{rmk}
+         </if>
+         <if test="_parameter.containsKey('declBlNo')">
+               , DECL_BL_NO = #{declBlNo}
+         </if>
+         <if test="_parameter.containsKey('ttLcTypeCd')">
+               , TT_LC_TYPE_CD = #{ttLcTypeCd}
+         </if>
+         <if test="_parameter.containsKey('insdPkgQty')">
+               , INSD_PKG_QTY = #{insdPkgQty}
+         </if>
+         <if test="_parameter.containsKey('hldsBlYn')">
+               , HLDS_BL_YN = #{hldsBlYn}
+         </if>
+         <if test="_parameter.containsKey('ncvYn')">
+               , NCV_YN = #{ncvYn}
+         </if>
+         <if test="_parameter.containsKey('exctSprCd')">
+               , EXCT_SPR_CD = #{exctSprCd}
+         </if>
+         <if test="_parameter.containsKey('rprsRefNo')">
+               , RPRS_REF_NO = #{rprsRefNo}
+         </if>
+         <if test="_parameter.containsKey('etcExpsCondCd')">
+               , ETC_EXPS_COND_CD = #{etcExpsCondCd}
+         </if>
+         <if test="_parameter.containsKey('t1HlgSprCd')">
+               , T1_HLG_SPR_CD = #{t1HlgSprCd}
+         </if>
+         <if test="_parameter.containsKey('sellLbCwt')">
+               , SELL_LB_CWT = #{sellLbCwt}
+         </if>
+         <if test="_parameter.containsKey('mblRmk')">
+               , MBL_RMK = #{mblRmk}
+         </if>
+         <if test="_parameter.containsKey('curCd')">
+               , CUR_CD = #{curCd}
+         </if>
+         <if test="_parameter.containsKey('blStatCd')">
+               , BL_STAT_CD = #{blStatCd}
+         </if>
+         <if test="_parameter.containsKey('expsBizTypeCd')">
+               , EXPS_BIZ_TYPE_CD = #{expsBizTypeCd}
+         </if>
+         <if test="_parameter.containsKey('expsCargoSprCd')">
+               , EXPS_CARGO_SPR_CD = #{expsCargoSprCd}
+         </if>
+         <if test="_parameter.containsKey('srNo')">
+               , SR_NO = #{srNo}
+         </if>
+         <if test="_parameter.containsKey('mblId')">
+               , MBL_ID = #{mblId}
+         </if>
+         <if test="_parameter.containsKey('mblNo')">
+               , MBL_NO = TRIM(UPPER(#{mblNo}))
+         </if>
+         <if test="_parameter.containsKey('etdYmd')">
+               , ETD_YMD = #{etdYmd}
+         </if>
+         <if test="_parameter.containsKey('consolBlId')">
+               , CONSOL_BL_ID = #{consolBlId}
+         </if>
+         <if test="_parameter.containsKey('consolClosYn')">
+               , CONSOL_CLOS_YN = #{consolClosYn}
+         </if>
+         <if test="_parameter.containsKey('onbrClosYn')">
+               , ONBR_CLOS_YN = #{onbrClosYn}
+         </if>
+         <if test="_parameter.containsKey('orignPrntYn')">
+               , ORIGN_PRNT_YN = #{orignPrntYn}
+         </if>
+         <if test="_parameter.containsKey('arrClosYn')">
+               , ARR_CLOS_YN = #{arrClosYn}
+         </if>
+         <if test="_parameter.containsKey('orignBlId')">
+               , ORIGN_BL_ID = #{orignBlId}
+         </if>
+         <if test="_parameter.containsKey('carrGrpCd')">
+               , CARR_GRP_CD = #{carrGrpCd}
+         </if>
+         <if test="_parameter.containsKey('portDoorSprCd')">
+               , PORT_DOOR_SPR_CD = #{portDoorSprCd}
+         </if>
+         <if test="_parameter.containsKey('refNoSprCd')">
+               , REF_NO_SPR_CD = #{refNoSprCd}
+         </if>
+         <if test="_parameter.containsKey('insdPkgUnitCd')">
+               , INSD_PKG_UNIT_CD = #{insdPkgUnitCd}
+         </if>
+         <if test="_parameter.containsKey('expsSellZoneCd')">
+               , EXPS_SELL_ZONE_CD = #{expsSellZoneCd}
+         </if>
+         <if test="_parameter.containsKey('sellSvcGdsCd')">
+               , SELL_SVC_GDS_CD = #{sellSvcGdsCd}
+         </if>
+         <if test="_parameter.containsKey('sellVolWgt')">
+               , SELL_VOL_WGT = #{sellVolWgt}
+         </if>
+         <if test="_parameter.containsKey('sellWgtUnitCd')">
+               , SELL_WGT_UNIT_CD = #{sellWgtUnitCd}
+         </if>
+         <if test="_parameter.containsKey('expsBuyZoneCd')">
+               , EXPS_BUY_ZONE_CD = #{expsBuyZoneCd}
+         </if>
+         <if test="_parameter.containsKey('buySvcGdsCd')">
+               , BUY_SVC_GDS_CD = #{buySvcGdsCd}
+         </if>
+         <if test="_parameter.containsKey('buyGwt')">
+               , BUY_GWT = #{buyGwt}
+         </if>
+         <if test="_parameter.containsKey('buyLbGwt')">
+               , BUY_LB_GWT = #{buyLbGwt}
+         </if>
+         <if test="_parameter.containsKey('buyNwt')">
+               , BUY_NWT = #{buyNwt}
+         </if>
+         <if test="_parameter.containsKey('buyVolWgt')">
+               , BUY_VOL_WGT = #{buyVolWgt}
+         </if>
+         <if test="_parameter.containsKey('buyWgtUnitCd')">
+               , BUY_WGT_UNIT_CD = #{buyWgtUnitCd}
+         </if>
+         <if test="_parameter.containsKey('buyCbm')">
+               , BUY_CBM = #{buyCbm}
+         </if>
+         <if test="_parameter.containsKey('buyCft')">
+               , BUY_CFT = #{buyCft}
+         </if>
+         <if test="_parameter.containsKey('buyCwt')">
+               , BUY_CWT = #{buyCwt}
+         </if>
+         <if test="_parameter.containsKey('buyCft')">
+               , BUY_CFT = #{buyCft}
+         </if>
+         <if test="_parameter.containsKey('buyLbCwt')">
+               , BUY_LB_CWT = #{buyLbCwt}
+         </if>
+         <if test="_parameter.containsKey('exchgrtAplyYmd')">
+               , EXCHGRT_APLY_YMD = #{exchgrtAplyYmd}
+         </if>
+         <if test="_parameter.containsKey('aplyExchgrt')">
+               , APLY_EXCHGRT = #{aplyExchgrt}
+         </if>
+         <if test="_parameter.containsKey('insuJoinYn')">
+               , INSU_JOIN_YN = #{insuJoinYn}
+         </if>
+         <if test="_parameter.containsKey('infCurCd')">
+               , INF_CUR_CD = #{infCurCd}
+         </if>
+         <if test="_parameter.containsKey('infAmt')">
+               , INF_AMT = #{infAmt}
+         </if>
+         <if test="_parameter.containsKey('claimYn')">
+               , CLAIM_YN = #{claimYn}
+         </if>
+         <if test="_parameter.containsKey('adjYn')">
+               , ADJ_YN = #{adjYn}
+         </if>
+         <if test="_parameter.containsKey('blCrtTypeCd')">
+               , BL_CRT_TYPE_CD = #{blCrtTypeCd}
+         </if>
+         <if test="_parameter.containsKey('expCcRqstYn')">
+               , EXP_CC_RQST_YN = #{expCcRqstYn}
+         </if>
+         <if test="_parameter.containsKey('impCcRqstYn')">
+               , IMP_CC_RQST_YN = #{impCcRqstYn}
+         </if>
+         <if test="_parameter.containsKey('fltTypeCd')">
+               , FLT_TYPE_CD = #{fltTypeCd}
+         </if>
+         <if test="_parameter.containsKey('mstrWrkGrpCd')">
+               , MSTR_WRK_GRP_CD = #{mstrWrkGrpCd}
+         </if>
+         <if test="_parameter.containsKey('uldWrkYn')">
+               , ULD_WRK_YN = #{uldWrkYn}
+         </if>
+         <if test="_parameter.containsKey('sellRton')">
+               , SELL_RTON = #{sellRton}
+         </if>
+         <if test="_parameter.containsKey('buyRton')">
+               , BUY_RTON = #{buyRton}
+         </if>
+         <if test="_parameter.containsKey('callsign')">
+               , CALLSIGN = #{callsign}
+         </if>
+         <if test="_parameter.containsKey('splitBlYn')">
+               , SPLIT_BL_YN = #{splitBlYn}
+         </if>
+         <if test="_parameter.containsKey('nonPtnrYn')">
+               , NON_PTNR_YN = #{nonPtnrYn}
+         </if>
+         <if test="_parameter.containsKey('expWrkYmd')">
+               , EXP_WRK_YMD = #{expWrkYmd}
+         </if>
+         <if test="_parameter.containsKey('expsConsolSellBlId')">
+               , EXPS_CONSOL_SELL_BL_ID = #{expsConsolSellBlId}
+         </if>
+         <if test="_parameter.containsKey('consolDsblHblYn')">
+               , CONSOL_DSBL_HBL_YN = #{consolDsblHblYn}
+         </if>
+         <if test="_parameter.containsKey('splitResnCd')">
+               , SPLIT_RESN_CD = #{splitResnCd}
+         </if>
+         <if test="_parameter.containsKey('fhdYn')">
+               , FHD_YN = #{fhdYn}
+         </if>
+         <if test="_parameter.containsKey('ctrtTypeCd')">
+               , CTRT_TYPE_CD = #{ctrtTypeCd}
+         </if>
+         <if test="_parameter.containsKey('nonExctBlYn')">
+               , NON_EXCT_BL_YN = IFNULL(#{nonExctBlYn},'N')
+         </if>
+         <if test="_parameter.containsKey('sellLbVolWgt')">
+               , SELL_LB_VOL_WGT = #{sellLbVolWgt}
+         </if>
+         <if test="_parameter.containsKey('buyLbVolWgt')">
+               , BUY_LB_VOL_WGT = #{buyLbVolWgt}
+         </if>
+         <if test="_parameter.containsKey('whClosYn')">
+               , WH_CLOS_YN = #{whClosYn}
+         </if>
+         <if test="_parameter.containsKey('combBlYn')">
+               , COMB_BL_YN = IFNULL(#{combBlYn}, 'N')
+         </if>
+         <if test="_parameter.containsKey('loclPtnrYn')">
+               , LOCL_PTNR_YN = IFNULL(#{loclPtnrYn}, 'N')
+         </if>
+         <if test="_parameter.containsKey('fieldClosYn')">
+               , FIELD_CLOS_YN = IFNULL(#{fieldClosYn}, 'N')
+         </if>
+
+
+      </otherwise>
+      </choose>
+    </if>
+     WHERE BL_ID = #{blId}
+     <if test='updateType != null and !updateType.equals("")'>
+      <choose>
+       <when test='updateType.equalsIgnoreCase("AirConsol")'>
+       /* AirConsol */
+       AND BL_SPR_CD = 'M'
+       AND IFNULL(DEL_YN,'N') = 'N'
+       </when>
+      </choose>
+     </if>
+    </update>
+
+    <update id="deleteBlBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.deleteBlBasisInfo - HBL기본정보저장(삭제) */
+    UPDATE TB_FWD_BL
+       SET DEL_YN = 'Y'
+         , UPD_DT = NOW()
+         , UPDR_ID = #{session.userId}
+         , TRNS_ID = #{trsnId}
+     WHERE BL_ID = #{blId}
+    </update>
+
+
+    <insert id="insertBlExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlExpndBasisInfo - HBL확장정보 저장(등록) */
+    INSERT INTO TB_FWD_BL_EXPND (
+           BL_ID
+         , PRE_FLT_VSL_NM
+         , PRE_VOYAGE
+         , NTPR_CD2
+         , NTPR_NM2
+         , SR_TO_SPR_CD
+         , CUTOFF_YMD
+         , CUTOFF_HM
+         , MNFST_MGNT_NO
+         , EXP_MRN
+         , EXP_MSN
+         , EXP_HSN
+         , SPLIT_MNFST_YN
+         , INEX_TRN_SPR_CD
+         , IMP_CC_TRN_TYPE_CD
+         , BL_CUST_SEND_YN
+         , ASGN_PLC_CD
+         , ASGN_HRBR_CD
+         , URGN_TRN_YN
+         , CAR_CARR_CD
+         , BL_PPR_RCV_YMD
+         , BL_PPR_RCV_PIC_NM
+         , DO_NO
+         , DO_SEND_YN
+         , DO_SEND_YMD
+         , DO_SEND_OFCR_ID
+         , DO_PRTER_ID
+         , DO_COLCT_COND_CONT
+         , DO_RMK
+         , DBL_AUTO_RFLC_YN
+         , DC_EXTRCHRG_KIND_CD
+         , EXPS_BAG_NO
+         , EXPS_MLT_PCKPPLC_CD
+         , EXPS_LOWR_CST_NO_CD
+         , EXPS_ITEM_PACKG_KIND_CD
+         , EXPS_PACKG_APLY_YN
+         , PACKG_YN
+         , RTN_CARGO_YN
+         , DLV_SPR_CD
+         , DLV_DLY_CD
+         , ACDT_SPR_CD
+         , CS_STAT_RMK
+         , ORGN_PRVL_YN
+         , IMP_RMK
+         , IMP_BIZMAN_REG_NO
+         , XTN_NO
+         , SELL_ADJ_RMK
+         , BUY_ADJ_RMK
+         , PO_RCV_RESN_CD
+         , ASGN_TYPE_CD
+         , ASGN_TAKIN_YMD
+         , ASGN_TAKOUT_YMD
+         , AMT_PCNT_SPR_CD
+         , DC_EXTRCHRG_RATE
+         , BKNG_WGT
+         , BKNG_QTY
+         , HOLD_YN
+         , CHG_BF_BL_NO
+         , PRT_YM
+         , ITN_NO
+         , IT_NO
+         , IT_PLC_CD
+         , IT_YMD
+         , CORP_REF_NO
+         , AES_CD
+         , LAST_FREE_YMD
+         , GO_YMD
+         , AVAIL_YMD
+         , AREA_CC_YN
+         , SHIPMT_HOUR_SPR_CD
+         , CX_PU_YN
+         , CX_PCKPPLC_NM
+         , CST_IMP_CC_YN
+         , APLY_FRGH_USD_AMT
+         , CARGO_PLC_CD
+         , IMP_BIZ_GRP_CD
+         , IMP_MRN
+         , IMP_MSN
+         , IMP_HSN
+         , CST_RQST_YMD
+         , IT_PLC_NM
+         , AMS_FILE_NO
+         , US_IMP_CC_TYPE_CD
+         , CSTM_APRV_CST_NO
+         , HOLD_RESN_RMK
+         , SEA_CARGO_RATE_CD
+         , ARR_CLOS_AUTO_APLY_YN
+         , TRCKG_AUTO_APLY_YN
+         , EXPS_MBL_YN
+         , KOREA_PAYM_YN
+         , PYR_ACNT_NO
+         , INTMD_BILG_FRGH_YN
+         , INTMD_BILG_CDX_YN
+         , AGNT_MBL_NO
+         , ATD_HM
+         , ATA_HM
+         , WGT_BLCK_YN
+         , GR_HOUR_SPR_CD
+         , GRPLC_CD
+         , ISF_SEND_EXCPT_YN
+         , IRRE_YN
+         , SHIPLN_MBL_NO
+         , SHIPTO_MGNT_NO
+         , OFCR_TEL_NO
+         , DC_EXTRCHRG_RMK
+         , IMP_SHIPMT_CHCK_YN
+         , WOODEN_YN
+         , NOT_ARRV_CARGO_YN
+         , ADJ_BIZPTNR_CD
+         , ADJ_RSLT_DEPT_CD
+         , DPT_ARRV_SPR_CD
+         , ADJ_OFCR_EMPNO
+         , DNGMATL_CD
+         , DNGMATL_CLASS_CD
+         , LTG_CONF_YN
+         , ADJ_SALES_EMP_EMPNO
+         , ARRV_CONF_YN
+         , AFR_FNL_STAT_CD
+         , AFR_STEP_STAT_CD
+         , XML_MSG_ID
+         , END_YN
+         , CONV_TEU_QTY
+         , DECL_STN_ONBR_YMD
+         , LGC_SND_REQ_YN
+         , CNEE_BIZNO
+         , WH_CONF_YN
+         , IRRE_SLIP_NO
+         , PRTY_CARGO_YN
+         , TS1_PORT_CD
+         , TS1_ETA_YMD
+         , TS1_ETD_YMD
+         , CONSOL_BL_YN
+         , DSCR_THC_YN
+         , STOP_RESN
+         , STOP_YN
+         , AGNT_PRXY_YN
+         , AGNT_PRXY_CORP_CD
+         , ORD_CARR_SEND_STAT_CD
+         , EXPS_TRCKG_RQST_YN
+         , SNGL_MBL_YN
+         , EXPS_DNGMATL_GDS_YN
+         , EXPS_DNGMATL_UN_MGNT_NO
+         , EXPS_DNGMATL_CLAS_CD
+         , EXPS_DNGMATL_DTL_CLAS_CD
+         , EXPS_TRN_DOC_CD
+         , MNFST_HOLD_YN
+         , SHPP_TEL_NO
+         , CNEE_TEL_NO
+         , SHPP_BIZMAN_REG_CONT
+         , CNEE_BIZMAN_REG_CONT
+         , CNEE_OFCR_NM
+         , SHPP_OFCR_NM
+         , NTPR_OFCR_NM
+         , NTPR_BIZMAN_REG_CONT
+         , NTPR_TEL_NO
+         , SHPP_FAXNO
+         , CNEE_FAXNO
+         , NTPR_FAXNO
+         , SHPP_EMAIL_ADDR
+         , CNEE_EMAIL_ADDR
+         , NTPR_EMAIL_ADDR
+         , SHPP_ADDR_SPR_CD
+         , CCAM_YN
+         , OPT_TS_YN
+         , HS_CD1
+         , HS_CD2
+         , HS_CD3
+         , HS_CD4
+         , HS_CD5
+         , INVC_VAL1
+         , INVC_VAL2
+         , INVC_VAL3
+         , INVC_VAL4
+         , INVC_VAL5
+         , PANTOS_AMS_DECL_YN
+         , AMS_SND_TYPE_NM
+         , SHIP_MGNT_MARK_NM
+         , SHIP_MNF_NATN_CD
+         , BF_PORT_CD
+         , AMS_SND_STAT_CD
+         , OPT_TS_REG_YN
+         , TS_ONBR_YMD
+         , TS_POL_CD
+         , TS_FLT_VSL_NM
+         , TS_VOYAGE
+         , ARRV_YMD_CHG_YN
+         , HIST_ETA_YMD
+         , STD_ETA_YMD
+         , ARRV_PRAR_GAP_DCNT
+         , REF_LDTM_DCNT
+         , LDTM_EXCEPT_YN
+         , ARRV_PRAR_GAP_CLR_NM
+         , SR_RPRS_ITEM_NM
+         , IMP_OFCR_MPNG_YN
+         , CTRT_DTL_TYPE_CD
+         , ARRV_NOTI_YN
+         , EMPTY_CNTR_RTN_CY_CD
+         , REG_DT
+         , RSTR_ID
+         , UPD_DT
+         , UPDR_ID
+         , TRNS_ID
+           )
+    VALUES (
+           #{blId}
+         , #{preFltVslNm}
+         , #{preVoyage}
+         , #{ntprCd2}
+         , #{ntprNm2}
+         , #{srtosprCd}
+         , #{cutoffYmd}
+         , #{cutoffHm}
+         , #{mnfstMgntNo}
+         , #{expMrn}
+         , #{expMsn}
+         , #{expHsn}
+         , IFNULL(#{splitMnfstYn}, 'N')
+         , #{inexTrnSprCd}
+         , #{impCcTrnTypeCd}
+         , IFNULL(#{blCustSendYn}, 'N')
+         , #{asgnPlcCd}
+         , #{asgnHrbrCd}
+         , IFNULL(#{urgnTrnYn}, 'N')
+         , #{carCarrCd}
+         , #{blPprRcvYmd}
+         , #{blPprRcvPicNm}
+         , #{doNo}
+         , IFNULL(#{doSendYn}, 'N')
+         , #{doSendYmd}
+         , #{doSendOfcrId}
+         , #{doPrterId}
+         , #{doColctCondCont}
+         , #{doRmk}
+         , IFNULL(#{dblAutoRflcYn}, 'N')
+         , #{dcExtrchrgKindCd}
+         , #{expsBagNo}
+         , #{expsMltPckpplcCd}
+         , #{expsLowrCstNoCd}
+         , #{expsItemPackgKindCd}
+         , IFNULL(#{expsPackgAplyYn}, 'N')
+         , IFNULL(#{packgYn}, 'N')
+         , IFNULL(#{rtnCargoYn}, 'N')
+         , #{dlvSprCd}
+         , #{dlvDlyCd}
+         , #{acdtSprCd}
+         , #{csStatRmk}
+         , IFNULL(#{orgnPrvlYn}, 'N')
+         , #{impRmk}
+         , #{impBizmanRegNo}
+         , #{xtnNo}
+         , #{sellAdjRmk}
+         , #{buyAdjRmk}
+         , #{poRcvResnCd}
+         , #{asgnTypeCd}
+         , #{asgnTakinYmd}
+         , #{asgnTakoutYmd}
+         , #{amtPcntSprCd}
+         , #{dcExtrchrgRate}
+         , #{bkngWgt}
+         , #{bkngQty}
+         , IFNULL(#{holdYn}, 'N')
+         , #{chgBfBlNo}
+         , #{prtYm}
+         , #{itnNo}
+         , #{itNo}
+         , #{itPlcCd}
+         , #{itYmd}
+         , #{corpRefNo}
+         , #{aesCd}
+         , #{lastFreeYmd}
+         , #{goYmd}
+         , #{availYmd}
+         , IFNULL(#{areaCcYn}, 'N')
+         , #{shipmtHourSprCd}
+         , IFNULL(#{cxPuYn}, 'N')
+         , #{cxPckpplcNm}
+         , IFNULL(#{cstImpCcYn}, 'N')
+         , #{aplyFrghUsdAmt}
+         , #{cargoPlcCd}
+         , #{impBizGrpCd}
+         , #{impMrn}
+         , #{impMsn}
+         , #{impHsn}
+         , #{cstRqstYmd}
+         , #{itPlcNm}
+         , #{amsFileNo}
+         , #{usImpCcTypeCd}
+         , #{cstmAprvCstNo}
+         , #{holdResnRmk}
+         , #{seaCargoRateCd}
+         , IFNULL(#{arrClosAutoAplyYn}, 'N')
+         , IFNULL(#{trckgAutoAplyYn}, 'N')
+         , IFNULL(#{expsMblYn}, 'N')
+         , IFNULL(#{koreaPaymYn}, 'N')
+         , #{pyrAcntNo}
+         , IFNULL(#{intmdBilgFrghYn}, 'N')
+         , IFNULL(#{intmdBilgCdxYn}, 'N')
+         , #{agntMblNo}
+         , #{atdHm}
+         , #{ataHm}
+         , IFNULL(#{wgtBlckYn}, 'N')
+         , #{grHourSprCd}
+         , #{grplcCd}
+         , IFNULL(#{isfSendExcptYn}, 'N')
+         , IFNULL(#{irreYn}, 'N')
+         , #{shiplnMblNo}
+         , #{shiptoMgntNo}
+         , #{ofcrTelNo}
+         , #{dcExtrchrgRmk}
+         , IFNULL(#{impShipmtChckYn}, 'N')
+         , IFNULL(#{woodenYn}, 'N')
+         , IFNULL(#{notArrvCargoYn}, 'N')
+         , #{adjBizptnrCd}
+         , #{adjRsltDeptCd}
+         , #{dptArrvSprCd}
+         , #{adjOfcrEmpno}
+         , #{dngmatlCd}
+         , #{dngmatlClassCd}
+         , IFNULL(#{ltgConfYn}, 'N')
+         , #{adjSalesEmpEmpno}
+         , IFNULL(#{arrvConfYn}, 'N')
+         , #{afrFnlStatCd}
+         , #{afrStepStatCd}
+         , #{xmlMsgId}
+         , IFNULL(#{endYn}, 'N')
+         , #{convTeuQty}
+         , #{declStnOnbrYmd}
+         , IFNULL(#{lgcSndReqYn}, 'N')
+         , #{cneeBizno}
+         , IFNULL(#{whConfYn}, 'N')
+         , #{irreSlipNo}
+         , IFNULL(#{prtyCargoYn}, 'N')
+         , #{ts1PortCd}
+         , #{ts1EtaYmd}
+         , #{ts1EtdYmd}
+         , IFNULL(#{consolBlYn}, 'N')
+         , IFNULL(#{dscrThcYn}, 'N')
+         , #{stopResn}
+         , IFNULL(#{stopYn}, 'N')
+         , IFNULL(#{agntPrxyYn}, 'N')
+         , #{agntPrxyCorpCd}
+         , #{ordCarrSendStatCd}
+         , IFNULL(#{expsTrckgRqstYn}, 'N')
+         , IFNULL(#{snglMblYn}, 'N')
+         , IFNULL(#{expsDngmatlGdsYn}, 'N')
+         , #{expsDngmatlUnMgntNo}
+         , #{expsDngmatlClasCd}
+         , #{expsDngmatlDtlClasCd}
+         , #{expsTrnDocCd}
+         , IFNULL(#{mnfstHoldYn}, 'N')
+         , #{shppTelNo}
+         , #{cneeTelNo}
+         , #{shppBizmanRegCont}
+         , #{cneeBizmanRegCont}
+         , #{cneeOfcrNm}
+         , #{shppOfcrNm}
+         , #{ntprOfcrNm}
+         , #{ntprBizmanRegCont}
+         , #{ntprTelNo}
+         , #{shppFaxno}
+         , #{cneeFaxno}
+         , #{ntprFaxno}
+         , #{shppEmailAddr}
+         , #{cneeEmailAddr}
+         , #{ntprEmailAddr}
+         , #{shppAddrSprCd}
+         , IFNULL(#{ccamYn}, 'N')
+         , IFNULL(#{optTsYn}, 'N')
+         , #{hsCd1}
+         , #{hsCd2}
+         , #{hsCd3}
+         , #{hsCd4}
+         , #{hsCd5}
+         , #{invcVal1}
+         , #{invcVal2}
+         , #{invcVal3}
+         , #{invcVal4}
+         , #{invcVal5}
+         , IFNULL(#{pantosAmsDeclYn}, 'N')
+         , #{amsSndTypeNm}
+         , #{shipMgntMarkNm}
+         , #{shipMnfNatnCd}
+         , #{bfPortCd}
+         , #{amsSndStatCd}
+         , IFNULL(#{optTsRegYn}, 'N')
+         , #{tsOnbrYmd}
+         , #{tsPolCd}
+         , #{tsFltVslNm}
+         , #{tsVoyage}
+         , IFNULL(#{arrvYmdChgYn}, 'N')
+         , #{histEtaYmd}
+         , #{stdEtaYmd}
+         , #{arrvPrarGapDcnt}
+         , #{refLdtmDcnt}
+         , IFNULL(#{ldtmExceptYn}, 'N')
+         , #{arrvPrarGapClrNm}
+         , #{srRprsItemNm}
+         , #{impOfcrMpngYn}
+         , #{ctrtDtlTypeCd}
+         , IFNULL(#{arrvNotiYn}, 'N')
+         , #{emptyCntrRtnCyCd}
+         , NOW()
+         , #{session.userId}
+         , NOW()
+         , #{session.userId}
+         , #{trnsId}
+           )
+    </insert>
+
+    <update id="updateBlExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.updateBlExpndBasisInfo - HBL확장정보 저장(수정) */
+    UPDATE TB_FWD_BL_EXPND
+       SET UPD_DT = NOW()
+         , UPDR_ID = #{session.userId}
+         , TRNS_ID = #{trnsId}
+
+    <if test='updateType != null and !updateType.equals("")'>
+
+      <choose>
+      <when test='updateType.equals("HblClosOfcrMpngYn")'>
+         /* HblClosOfcrMpngYn */
+         , IMP_OFCR_MPNG_YN = 'Y'
+      </when>
+      <when test='updateType.equals("BlProgStatSync")'>
+         /* BlProgStatSync */
+         , IMP_OFCR_MPNG_YN = 'Y'
+      </when>
+      <otherwise>
+         <if test="_parameter.containsKey('preFltVslNm')">
+         , PRE_FLT_VSL_NM = #{preFltVslNm}
+         </if>
+         <if test="_parameter.containsKey('preVoyage')">
+         , PRE_VOYAGE = #{preVoyage}
+         </if>
+         <if test="_parameter.containsKey('ntprCd2')">
+         , NTPR_CD2 = #{ntprCd2}
+         </if>
+         <if test="_parameter.containsKey('ntprNm2')">
+         , NTPR_NM2 = #{ntprNm2}
+         </if>
+         <if test="_parameter.containsKey('srToSprCd')">
+         , SR_TO_SPR_CD = #{srToSprCd}
+         </if>
+         <if test="_parameter.containsKey('cutoffYmd')">
+         , CUTOFF_YMD = #{cutoffYmd}
+         </if>
+         <if test="_parameter.containsKey('cutoffHm')">
+         , CUTOFF_HM = #{cutoffHm}
+         </if>
+         <if test="_parameter.containsKey('mnfstMgntNo')">
+         , MNFST_MGNT_NO = #{mnfstMgntNo}
+         </if>
+         <if test="_parameter.containsKey('expMrn')">
+         , EXP_MRN = #{expMrn}
+         </if>
+         <if test="_parameter.containsKey('expMsn')">
+         , EXP_MSN = #{expMsn}
+         </if>
+         <if test="_parameter.containsKey('expHsn')">
+         , EXP_HSN = #{expHsn}
+         </if>
+         <if test="_parameter.containsKey('splitMnfstYn')">
+         , SPLIT_MNFST_YN = #{splitMnfstYn}
+         </if>
+         <if test="_parameter.containsKey('inexTrnSprCd')">
+         , INEX_TRN_SPR_CD = #{inexTrnSprCd}
+         </if>
+         <if test="_parameter.containsKey('impCcTrnTypeCd')">
+         , IMP_CC_TRN_TYPE_CD = #{impCcTrnTypeCd}
+         </if>
+         <if test="_parameter.containsKey('blCustSendYn')">
+         , BL_CUST_SEND_YN = #{blCustSendYn}
+         </if>
+         <if test="_parameter.containsKey('asgnPlcCd')">
+         , ASGN_PLC_CD = #{asgnPlcCd}
+         </if>
+         <if test="_parameter.containsKey('asgnHrbrCd')">
+         , ASGN_HRBR_CD = #{asgnHrbrCd}
+         </if>
+         <if test="_parameter.containsKey('urgnTrnYn')">
+         , URGN_TRN_YN = #{urgnTrnYn}
+         </if>
+         <if test="_parameter.containsKey('carCarrCd')">
+         , CAR_CARR_CD = #{carCarrCd}
+         </if>
+         <if test="_parameter.containsKey('blPprRcvYmd')">
+         , BL_PPR_RCV_YMD = #{blPprRcvYmd}
+         </if>
+         <if test="_parameter.containsKey('blPprRcvPicNm')">
+         , BL_PPR_RCV_PIC_NM = #{blPprRcvPicNm}
+         </if>
+         <if test="_parameter.containsKey('doNo')">
+         , DO_NO = #{doNo}
+         </if>
+         <if test="_parameter.containsKey('doSendYn')">
+         , DO_SEND_YN = #{doSendYn}
+         </if>
+         <if test="_parameter.containsKey('doSendYmd')">
+         , DO_SEND_YMD = #{doSendYmd}
+         </if>
+         <if test="_parameter.containsKey('doSendOfcrId')">
+         , DO_SEND_OFCR_ID = #{doSendOfcrId}
+         </if>
+         <if test="_parameter.containsKey('doPrterId')">
+         , DO_PRTER_ID = #{doPrterId}
+         </if>
+         <if test="_parameter.containsKey('doColctCondCont')">
+         , DO_COLCT_COND_CONT = #{doColctCondCont}
+         </if>
+         <if test="_parameter.containsKey('doRmk')">
+         , DO_RMK = #{doRmk}
+         </if>
+         <if test="_parameter.containsKey('dblAutoRflcYn')">
+         , DBL_AUTO_RFLC_YN = #{dblAutoRflcYn}
+         </if>
+         <if test="_parameter.containsKey('dcExtrchrgKindCd')">
+         , DC_EXTRCHRG_KIND_CD = #{dcExtrchrgKindCd}
+         </if>
+         <if test="_parameter.containsKey('expsBagNo')">
+         , EXPS_BAG_NO = #{expsBagNo}
+         </if>
+         <if test="_parameter.containsKey('expsMltPckpplcCd')">
+         , EXPS_MLT_PCKPPLC_CD = #{expsMltPckpplcCd}
+         </if>
+         <if test="_parameter.containsKey('expsLowrCstNoCd')">
+         , EXPS_LOWR_CST_NO_CD = #{expsLowrCstNoCd}
+         </if>
+         <if test="_parameter.containsKey('expsItemPackgKindCd')">
+         , EXPS_ITEM_PACKG_KIND_CD = #{expsItemPackgKindCd}
+         </if>
+         <if test="_parameter.containsKey('expsPackgAplyYn')">
+         , EXPS_PACKG_APLY_YN = #{expsPackgAplyYn}
+         </if>
+         <if test="_parameter.containsKey('packgYn')">
+         , PACKG_YN = #{packgYn}
+         </if>
+         <if test="_parameter.containsKey('rtnCargoYn')">
+         , RTN_CARGO_YN = #{rtnCargoYn}
+         </if>
+         <if test="_parameter.containsKey('dlvSprCd')">
+         , DLV_SPR_CD = #{dlvSprCd}
+         </if>
+         <if test="_parameter.containsKey('dlvDlyCd')">
+         , DLV_DLY_CD = #{dlvDlyCd}
+         </if>
+         <if test="_parameter.containsKey('acdtSprCd')">
+         , ACDT_SPR_CD = #{acdtSprCd}
+         </if>
+         <if test="_parameter.containsKey('csStatRmk')">
+         , CS_STAT_RMK = #{csStatRmk}
+         </if>
+         <if test="_parameter.containsKey('orgnPrvlYn')">
+         , ORGN_PRVL_YN = #{orgnPrvlYn}
+         </if>
+         <if test="_parameter.containsKey('impRmk')">
+         , IMP_RMK = #{impRmk}
+         </if>
+         <if test="_parameter.containsKey('impBizmanRegNo')">
+         , IMP_BIZMAN_REG_NO = #{impBizmanRegNo}
+         </if>
+         <if test="_parameter.containsKey('xtnNo')">
+         , XTN_NO = #{xtnNo}
+         </if>
+         <if test="_parameter.containsKey('sellAdjRmk')">
+         , SELL_ADJ_RMK = #{sellAdjRmk}
+         </if>
+         <if test="_parameter.containsKey('buyAdjRmk')">
+         , BUY_ADJ_RMK = #{buyAdjRmk}
+         </if>
+         <if test="_parameter.containsKey('poRcvResnCd')">
+         , PO_RCV_RESN_CD = #{poRcvResnCd}
+         </if>
+         <if test="_parameter.containsKey('asgnTypeCd')">
+         , ASGN_TYPE_CD = #{asgnTypeCd}
+         </if>
+         <if test="_parameter.containsKey('asgnTakinYmd')">
+         , ASGN_TAKIN_YMD = #{asgnTakinYmd}
+         </if>
+         <if test="_parameter.containsKey('asgnTakoutYmd')">
+         , ASGN_TAKOUT_YMD = #{asgnTakoutYmd}
+         </if>
+         <if test="_parameter.containsKey('amtPcntSprCd')">
+         , AMT_PCNT_SPR_CD = #{amtPcntSprCd}
+         </if>
+         <if test="_parameter.containsKey('dcExtrchrgRate')">
+         , DC_EXTRCHRG_RATE = #{dcExtrchrgRate}
+         </if>
+         <if test="_parameter.containsKey('bkngWgt')">
+         , BKNG_WGT = #{bkngWgt}
+         </if>
+         <if test="_parameter.containsKey('bkngQty')">
+         , BKNG_QTY = #{bkngQty}
+         </if>
+         <if test="_parameter.containsKey('holdYn')">
+         , HOLD_YN = #{holdYn}
+         </if>
+         <if test="_parameter.containsKey('chgBfBlNo')">
+         , CHG_BF_BL_NO = #{chgBfBlNo}
+         </if>
+         <if test="_parameter.containsKey('prtYm')">
+         , PRT_YM = #{prtYm}
+         </if>
+         <if test="_parameter.containsKey('itnNo')">
+         , ITN_NO = #{itnNo}
+         </if>
+         <if test="_parameter.containsKey('itNo')">
+         , IT_NO = #{itNo}
+         </if>
+         <if test="_parameter.containsKey('itPlcCd')">
+         , IT_PLC_CD = #{itPlcCd}
+         </if>
+         <if test="_parameter.containsKey('itYmd')">
+         , IT_YMD = #{itYmd}
+         </if>
+         <if test="_parameter.containsKey('corpRefNo')">
+         , CORP_REF_NO = #{corpRefNo}
+         </if>
+         <if test="_parameter.containsKey('aesCd')">
+         , AES_CD = #{aesCd}
+         </if>
+         <if test="_parameter.containsKey('lastFreeYmd')">
+         , LAST_FREE_YMD = #{lastFreeYmd}
+         </if>
+         <if test="_parameter.containsKey('goYmd')">
+         , GO_YMD = #{goYmd}
+         </if>
+         <if test="_parameter.containsKey('availYmd')">
+         , AVAIL_YMD = #{availYmd}
+         </if>
+         <if test="_parameter.containsKey('areaCcYn')">
+         , AREA_CC_YN = #{areaCcYn}
+         </if>
+         <if test="_parameter.containsKey('shipmtHourSprCd')">
+         , SHIPMT_HOUR_SPR_CD = #{shipmtHourSprCd}
+         </if>
+         <if test="_parameter.containsKey('cxPuYn')">
+         , CX_PU_YN = #{cxPuYn}
+         </if>
+         <if test="_parameter.containsKey('cxPckpplcNm')">
+         , CX_PCKPPLC_NM = #{cxPckpplcNm}
+         </if>
+         <if test="_parameter.containsKey('cstImpCcYn')">
+         , CST_IMP_CC_YN = #{cstImpCcYn}
+         </if>
+         <if test="_parameter.containsKey('aplyFrghUsdAmt')">
+         , APLY_FRGH_USD_AMT = #{aplyFrghUsdAmt}
+         </if>
+         <if test="_parameter.containsKey('cargoPlcCd')">
+         , CARGO_PLC_CD = #{cargoPlcCd}
+         </if>
+         <if test="_parameter.containsKey('impBizGrpCd')">
+         , IMP_BIZ_GRP_CD = #{impBizGrpCd}
+         </if>
+         <if test="_parameter.containsKey('impMrn')">
+         , IMP_MRN = #{impMrn}
+         </if>
+         <if test="_parameter.containsKey('impMsn')">
+         , IMP_MSN = #{impMsn}
+         </if>
+         <if test="_parameter.containsKey('impHsn')">
+         , IMP_HSN = #{impHsn}
+         </if>
+         <if test="_parameter.containsKey('cstRqstYmd')">
+         , CST_RQST_YMD = #{cstRqstYmd}
+         </if>
+         <if test="_parameter.containsKey('itPlcNm')">
+         , IT_PLC_NM = #{itPlcNm}
+         </if>
+         <if test="_parameter.containsKey('amsFileNo')">
+         , AMS_FILE_NO = #{amsFileNo}
+         </if>
+         <if test="_parameter.containsKey('usImpCcTypeCd')">
+         , US_IMP_CC_TYPE_CD = #{usImpCcTypeCd}
+         </if>
+         <if test="_parameter.containsKey('cstmAprvCstNo')">
+         , CSTM_APRV_CST_NO = #{cstmAprvCstNo}
+         </if>
+         <if test="_parameter.containsKey('holdResnRmk')">
+         , HOLD_RESN_RMK = #{holdResnRmk}
+         </if>
+         <if test="_parameter.containsKey('seaCargoRateCd')">
+         , SEA_CARGO_RATE_CD = #{seaCargoRateCd}
+         </if>
+         <if test="_parameter.containsKey('arrClosAutoAplyYn')">
+         , ARR_CLOS_AUTO_APLY_YN = #{arrClosAutoAplyYn}
+         </if>
+         <if test="_parameter.containsKey('trckgAutoAplyYn')">
+         , TRCKG_AUTO_APLY_YN = #{trckgAutoAplyYn}
+         </if>
+         <if test="_parameter.containsKey('expsMblYn')">
+         , EXPS_MBL_YN = #{expsMblYn}
+         </if>
+         <if test="_parameter.containsKey('koreaPaymYn')">
+         , KOREA_PAYM_YN = #{koreaPaymYn}
+         </if>
+         <if test="_parameter.containsKey('pyrAcntNo')">
+         , PYR_ACNT_NO = #{pyrAcntNo}
+         </if>
+         <if test="_parameter.containsKey('intmdBilgFrghYn')">
+         , INTMD_BILG_FRGH_YN = #{intmdBilgFrghYn}
+         </if>
+         <if test="_parameter.containsKey('intmdBilgCdxYn')">
+         , INTMD_BILG_CDX_YN = #{intmdBilgCdxYn}
+         </if>
+         <if test="_parameter.containsKey('agntMblNo')">
+         , AGNT_MBL_NO = #{agntMblNo}
+         </if>
+         <if test="_parameter.containsKey('atdHm')">
+         , ATD_HM = #{atdHm}
+         </if>
+         <if test="_parameter.containsKey('ataHm')">
+         , ATA_HM = #{ataHm}
+         </if>
+         <if test="_parameter.containsKey('wgtBlckYn')">
+         , WGT_BLCK_YN = #{wgtBlckYn}
+         </if>
+         <if test="_parameter.containsKey('grHourSprCd')">
+         , GR_HOUR_SPR_CD = #{grHourSprCd}
+         </if>
+         <if test="_parameter.containsKey('grplcCd')">
+         , GRPLC_CD = #{grplcCd}
+         </if>
+         <if test="_parameter.containsKey('isfSendExcptYn')">
+         , ISF_SEND_EXCPT_YN = #{isfSendExcptYn}
+         </if>
+         <if test="_parameter.containsKey('irreYn')">
+         , IRRE_YN = #{irreYn}
+         </if>
+         <if test="_parameter.containsKey('shiplnMblNo')">
+         , SHIPLN_MBL_NO = #{shiplnMblNo}
+         </if>
+         <if test="_parameter.containsKey('shiptoMgntNo')">
+         , SHIPTO_MGNT_NO = #{shiptoMgntNo}
+         </if>
+         <if test="_parameter.containsKey('ofcrTelNo')">
+         , OFCR_TEL_NO = #{ofcrTelNo}
+         </if>
+         <if test="_parameter.containsKey('dcExtrchrgRmk')">
+         , DC_EXTRCHRG_RMK = #{dcExtrchrgRmk}
+         </if>
+         <if test="_parameter.containsKey('impShipmtChckYn')">
+         , IMP_SHIPMT_CHCK_YN = #{impShipmtChckYn}
+         </if>
+         <if test="_parameter.containsKey('woodenYn')">
+         , WOODEN_YN = #{woodenYn}
+         </if>
+         <if test="_parameter.containsKey('notArrvCargoYn')">
+         , NOT_ARRV_CARGO_YN = #{notArrvCargoYn}
+         </if>
+         <if test="_parameter.containsKey('adjBizptnrCd')">
+         , ADJ_BIZPTNR_CD = #{adjBizptnrCd}
+         </if>
+         <if test="_parameter.containsKey('adjRsltDeptCd')">
+         , ADJ_RSLT_DEPT_CD = #{adjRsltDeptCd}
+         </if>
+         <if test="_parameter.containsKey('dptArrvSprCd')">
+         , DPT_ARRV_SPR_CD = #{dptArrvSprCd}
+         </if>
+         <if test="_parameter.containsKey('adjOfcrEmpno')">
+         , ADJ_OFCR_EMPNO = #{adjOfcrEmpno}
+         </if>
+         <if test="_parameter.containsKey('dngmatlCd')">
+         , DNGMATL_CD = #{dngmatlCd}
+         </if>
+         <if test="_parameter.containsKey('dngmatlClassCd')">
+         , DNGMATL_CLASS_CD = #{dngmatlClassCd}
+         </if>
+         <if test="_parameter.containsKey('ltgConfYn')">
+         , LTG_CONF_YN = #{ltgConfYn}
+         </if>
+         <if test="_parameter.containsKey('adjSalesEmpEmpno')">
+         , ADJ_SALES_EMP_EMPNO = #{adjSalesEmpEmpno}
+         </if>
+         <if test="_parameter.containsKey('arrvConfYn')">
+         , ARRV_CONF_YN = #{arrvConfYn}
+         </if>
+         <if test="_parameter.containsKey('afrFnlStatCd')">
+         , AFR_FNL_STAT_CD = #{afrFnlStatCd}
+         </if>
+         <if test="_parameter.containsKey('afrStepStatCd')">
+         , AFR_STEP_STAT_CD = #{afrStepStatCd}
+         </if>
+         <if test="_parameter.containsKey('xmlMsgId')">
+         , XML_MSG_ID = #{xmlMsgId}
+         </if>
+         <if test="_parameter.containsKey('endYn')">
+         , END_YN = #{endYn}
+         </if>
+         <if test="_parameter.containsKey('convTeuQty')">
+         , CONV_TEU_QTY = #{convTeuQty}
+         </if>
+         <if test="_parameter.containsKey('declStnOnbrYmd')">
+         , DECL_STN_ONBR_YMD = #{declStnOnbrYmd}
+         </if>
+         <if test="_parameter.containsKey('lgcSndReqYn')">
+         , LGC_SND_REQ_YN = #{lgcSndReqYn}
+         </if>
+         <if test="_parameter.containsKey('cneeBizno')">
+         , CNEE_BIZNO = #{cneeBizno}
+         </if>
+         <if test="_parameter.containsKey('whConfYn')">
+         , WH_CONF_YN = #{whConfYn}
+         </if>
+         <if test="_parameter.containsKey('irreSlipNo')">
+         , IRRE_SLIP_NO = #{irreSlipNo}
+         </if>
+         <if test="_parameter.containsKey('prtyCargoYn')">
+         , PRTY_CARGO_YN = #{prtyCargoYn}
+         </if>
+         <if test="_parameter.containsKey('ts1PortCd')">
+         , TS1_PORT_CD = #{ts1PortCd}
+         </if>
+         <if test="_parameter.containsKey('ts1EtaYmd')">
+         , TS1_ETA_YMD = #{ts1EtaYmd}
+         </if>
+         <if test="_parameter.containsKey('ts1EtdYmd')">
+         , TS1_ETD_YMD = #{ts1EtdYmd}
+         </if>
+         <if test="_parameter.containsKey('consolBlYn')">
+         , CONSOL_BL_YN = #{consolBlYn}
+         </if>
+         <if test="_parameter.containsKey('dscrThcYn')">
+         , DSCR_THC_YN = #{dscrThcYn}
+         </if>
+         <if test="_parameter.containsKey('stopResn')">
+         , STOP_RESN = #{stopResn}
+         </if>
+         <if test="_parameter.containsKey('stopYn')">
+         , STOP_YN = #{stopYn}
+         </if>
+         <if test="_parameter.containsKey('agntPrxyYn')">
+         , AGNT_PRXY_YN = #{agntPrxyYn}
+         </if>
+         <if test="_parameter.containsKey('agntPrxyCorpCd')">
+         , AGNT_PRXY_CORP_CD = #{agntPrxyCorpCd}
+         </if>
+         <if test="_parameter.containsKey('ordCarrSendStatCd')">
+         , ORD_CARR_SEND_STAT_CD = #{ordCarrSendStatCd}
+         </if>
+         <if test="_parameter.containsKey('expsTrckgRqstYn')">
+         , EXPS_TRCKG_RQST_YN = #{expsTrckgRqstYn}
+         </if>
+         <if test="_parameter.containsKey('snglMblYn')">
+         , SNGL_MBL_YN = #{snglMblYn}
+         </if>
+         <if test="_parameter.containsKey('expsDngmatlGdsYn')">
+         , EXPS_DNGMATL_GDS_YN = #{expsDngmatlGdsYn}
+         </if>
+         <if test="_parameter.containsKey('expsDngmatlUnMgntNo')">
+         , EXPS_DNGMATL_UN_MGNT_NO = #{expsDngmatlUnMgntNo}
+         </if>
+         <if test="_parameter.containsKey('expsDngmatlClasCd')">
+         , EXPS_DNGMATL_CLAS_CD = #{expsDngmatlClasCd}
+         </if>
+         <if test="_parameter.containsKey('expsDngmatlDtlClasCd')">
+         , EXPS_DNGMATL_DTL_CLAS_CD = #{expsDngmatlDtlClasCd}
+         </if>
+         <if test="_parameter.containsKey('expsTrnDocCd')">
+         , EXPS_TRN_DOC_CD = #{expsTrnDocCd}
+         </if>
+         <if test="_parameter.containsKey('mnfstHoldYn')">
+         , MNFST_HOLD_YN = #{mnfstHoldYn}
+         </if>
+         <if test="_parameter.containsKey('shppTelNo')">
+         , SHPP_TEL_NO = #{shppTelNo}
+         </if>
+         <if test="_parameter.containsKey('cneeTelNo')">
+         , CNEE_TEL_NO = #{cneeTelNo}
+         </if>
+         <if test="_parameter.containsKey('shppBizmanRegCont')">
+         , SHPP_BIZMAN_REG_CONT = #{shppBizmanRegCont}
+         </if>
+         <if test="_parameter.containsKey('cneeBizmanRegCont')">
+         , CNEE_BIZMAN_REG_CONT = #{cneeBizmanRegCont}
+         </if>
+         <if test="_parameter.containsKey('cneeOfcrNm')">
+         , CNEE_OFCR_NM = #{cneeOfcrNm}
+         </if>
+         <if test="_parameter.containsKey('shppOfcrNm')">
+         , SHPP_OFCR_NM = #{shppOfcrNm}
+         </if>
+         <if test="_parameter.containsKey('ntprOfcrNm')">
+         , NTPR_OFCR_NM = #{ntprOfcrNm}
+         </if>
+         <if test="_parameter.containsKey('ntprBizmanRegCont')">
+         , NTPR_BIZMAN_REG_CONT = #{ntprBizmanRegCont}
+         </if>
+         <if test="_parameter.containsKey('ntprTelNo')">
+         , NTPR_TEL_NO = #{ntprTelNo}
+         </if>
+         <if test="_parameter.containsKey('shppFaxno')">
+         , SHPP_FAXNO = #{shppFaxno}
+         </if>
+         <if test="_parameter.containsKey('cneeFaxno')">
+         , CNEE_FAXNO = #{cneeFaxno}
+         </if>
+         <if test="_parameter.containsKey('ntprFaxno')">
+         , NTPR_FAXNO = #{ntprFaxno}
+         </if>
+         <if test="_parameter.containsKey('shppEmailAddr')">
+         , SHPP_EMAIL_ADDR = #{shppEmailAddr}
+         </if>
+         <if test="_parameter.containsKey('cneeEmailAddr')">
+         , CNEE_EMAIL_ADDR = #{cneeEmailAddr}
+         </if>
+         <if test="_parameter.containsKey('ntprEmailAddr')">
+         , NTPR_EMAIL_ADDR = #{ntprEmailAddr}
+         </if>
+         <if test="_parameter.containsKey('shppAddrSprCd')">
+         , SHPP_ADDR_SPR_CD = #{shppAddrSprCd}
+         </if>
+         <if test="_parameter.containsKey('ccamYn')">
+         , CCAM_YN = #{ccamYn}
+         </if>
+         <if test="_parameter.containsKey('optTsYn')">
+         , OPT_TS_YN = #{optTsYn}
+         </if>
+         <if test="_parameter.containsKey('hsCd1')">
+         , HS_CD1 = #{hsCd1}
+         </if>
+         <if test="_parameter.containsKey('hsCd2')">
+         , HS_CD2 = #{hsCd2}
+         </if>
+         <if test="_parameter.containsKey('hsCd3')">
+         , HS_CD3 = #{hsCd3}
+         </if>
+         <if test="_parameter.containsKey('hsCd4')">
+         , HS_CD4 = #{hsCd4}
+         </if>
+         <if test="_parameter.containsKey('hsCd5')">
+         , HS_CD5 = #{hsCd5}
+         </if>
+         <if test="_parameter.containsKey('invcVal1')">
+         , INVC_VAL1 = #{invcVal1}
+         </if>
+         <if test="_parameter.containsKey('invcVal2')">
+         , INVC_VAL2 = #{invcVal2}
+         </if>
+         <if test="_parameter.containsKey('invcVal3')">
+         , INVC_VAL3 = #{invcVal3}
+         </if>
+         <if test="_parameter.containsKey('invcVal4')">
+         , INVC_VAL4 = #{invcVal4}
+         </if>
+         <if test="_parameter.containsKey('invcVal5')">
+         , INVC_VAL5 = #{invcVal5}
+         </if>
+         <if test="_parameter.containsKey('pantosAmsDeclYn')">
+         , PANTOS_AMS_DECL_YN = #{pantosAmsDeclYn}
+         </if>
+         <if test="_parameter.containsKey('amsSndTypeNm')">
+         , AMS_SND_TYPE_NM = #{amsSndTypeNm}
+         </if>
+         <if test="_parameter.containsKey('shipMgntMarkNm')">
+         , SHIP_MGNT_MARK_NM = #{shipMgntMarkNm}
+         </if>
+         <if test="_parameter.containsKey('shipMnfNatnCd')">
+         , SHIP_MNF_NATN_CD = #{shipMnfNatnCd}
+         </if>
+         <if test="_parameter.containsKey('bfPortCd')">
+         , BF_PORT_CD = #{bfPortCd}
+         </if>
+         <if test="_parameter.containsKey('amsSndStatCd')">
+         , AMS_SND_STAT_CD = #{amsSndStatCd}
+         </if>
+         <if test="_parameter.containsKey('optTsRegYn')">
+         , OPT_TS_REG_YN = #{optTsRegYn}
+         </if>
+         <if test="_parameter.containsKey('tsOnbrYmd')">
+         , TS_ONBR_YMD = #{tsOnbrYmd}
+         </if>
+         <if test="_parameter.containsKey('tsPolCd')">
+         , TS_POL_CD = #{tsPolCd}
+         </if>
+         <if test="_parameter.containsKey('tsFltVslNm')">
+         , TS_FLT_VSL_NM = #{tsFltVslNm}
+         </if>
+         <if test="_parameter.containsKey('tsVoyage')">
+         , TS_VOYAGE = #{tsVoyage}
+         </if>
+         <if test="_parameter.containsKey('arrvYmdChgYn')">
+         , ARRV_YMD_CHG_YN = #{arrvYmdChgYn}
+         </if>
+         <if test="_parameter.containsKey('histEtaYmd')">
+         , HIST_ETA_YMD = #{histEtaYmd}
+         </if>
+         <if test="_parameter.containsKey('stdEtaYmd')">
+         , STD_ETA_YMD = #{stdEtaYmd}
+         </if>
+         <if test="_parameter.containsKey('arrvPrarGapDcnt')">
+         , ARRV_PRAR_GAP_DCNT = #{arrvPrarGapDcnt}
+         </if>
+         <if test="_parameter.containsKey('refLdtmDcnt')">
+         , REF_LDTM_DCNT = #{refLdtmDcnt}
+         </if>
+         <if test="_parameter.containsKey('ldtmExceptYn')">
+         , LDTM_EXCEPT_YN = #{ldtmExceptYn}
+         </if>
+         <if test="_parameter.containsKey('arrvPrarGapClrNm')">
+         , ARRV_PRAR_GAP_CLR_NM = #{arrvPrarGapClrNm}
+         </if>
+         <if test="_parameter.containsKey('srRprsItemNm')">
+         , SR_RPRS_ITEM_NM = #{srRprsItemNm}
+         </if>
+         <if test="_parameter.containsKey('impOfcrMpngYn')">
+         , IMP_OFCR_MPNG_YN = #{impOfcrMpngYn}
+         </if>
+         <if test="_parameter.containsKey('ctrtDtlTypeCd')">
+         , CTRT_DTL_TYPE_CD = #{ctrtDtlTypeCd}
+         </if>
+         <if test="_parameter.containsKey('arrvNotiYn')">
+         , ARRV_NOTI_YN = #{arrvNotiYn}
+         </if>
+         <if test="_parameter.containsKey('emptyCntrRtnCyCd')">
+         , EMPTY_CNTR_RTN_CY_CD = #{emptyCntrRtnCyCd}
+         </if>
+         <if test="_parameter.containsKey('nowBlNo')">
+         , CHG_BF_BL_NO = #{nowBlNo}
+         </if>
+      </otherwise>
+      </choose>
+    </if>
+     WHERE BL_ID = #{blId}
+    </update>
+
+    <update id="deleteBlExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.deleteBlExpndBasisInfo - HBL확장정보 저장(삭제) */
+    UPDATE TB_FWD_BL_EXPND
+       SET DEL_YN = 'Y'
+         , UPD_DT = NOW()
+         , UPDR_ID = #{session.userId}
+     WHERE BL_ID = #{blId}
+    </update>
+
+
+    <insert id="insertBlPrtExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlPrtExpndBasisInfo - HBL출력확장정보 저장(등록) */
+    INSERT INTO TB_FWD_BL_PRT_EXPND (
+           BL_ID
+         , PRT_KIND_CD
+         , BL_PRT_CNT
+         , VIAPLC_CD
+         , VIAPLC_PORT_CD
+         , VIAPLC_PORT_CD1
+         , VIAPLC_PORT_CD2
+         , VIAPLC_FLTNO
+         , VIAPLC_FLTNO1
+         , VIAPLC_FLTNO2
+         , PKG_NM
+         , ARRN_YN
+         , ARRN_CONT
+         , AGRE_YN
+         , MBL_LBL_PRNT_YN
+         , HBL_LBL_PRNT_YN
+         , DIM_RIDR_YN
+         , ORIGN_RIDR_YN
+         , RMK
+         , DEL_YN
+         , REG_DT
+         , RSTR_ID
+         , UPD_DT
+         , UPDR_ID
+         , EPRS_RELES_YN
+         , IATA_AGNT_MARK_NM
+         , CARR_PRT_RMK
+         , CSTM_PRT_RMK
+         , PRT_SELL_RATE_KIND_CD
+         , PRT_SELL_RATE_PCNT
+         , PRT_SELL_RATE
+         , PRT_BUY_RATE_KIND_CD
+         , PRT_BUY_RATE_PCNT
+         , PRT_BUY_RATE
+         , PRT_CARR_NM
+         , PRT_CTY_NM
+         , PRT_AGNT_NM
+         , PRT_ORGN_CD
+         , PRT_ORGN_NM
+         , EXP_SCAN_YN
+         , EXP_SCAN_WORKR_ID
+         , EXP_SCAN_DT
+         , MNFST_ARR_YMD
+         , MNFST_FLT_VSL_NM
+         , MNFST_POL_CD
+         , PRT_FRGH_BLCK_YN
+         , MBL_LBL_PRT_DT
+         , PREFIX_NM
+         , PRT_ORIGN_CARR_NM
+         , CSTM_CERT_NO
+         , CI_PL_EDMS_KPI_YN
+         , MBL_EDMS_KPI_YN
+         , HBL_EDMS_KPI_YN
+         , FRGH_AUTO_CRT_ERR_YN
+         , POSTOFFICE_YN
+         , DOC_RECV_YMD
+         , BL_KIND_CD
+         , BL_TYPE_CD
+         , INFO_BLCK_YN
+         , PTNR_ADDR_PRNT_YN
+         , DNGMATL_CLAS_CD
+         , DNGMATL_UN_NO
+         , PACKG_GRP_CD
+         , EXPS_ADD_CARGO_CWT
+         , EXPS_ADD_CARGO_CTRT_RATE
+         , EXPS_ADD_CARGO_QTY
+         , EXPS_ADD_CARGO_RATE_SPR_CD
+         , EXPS_ADD_CARGO_WGT
+         , EXPS_ADD_CARGO_WGT_UNIT_CD
+         , EXPS_ADD_CARGO_ITEM_RMK
+         , FRGH_AUTO_CRT_ERR_CONT
+         , FRGH_APLY_YN
+         , DNGMATL_UN_SPR_CD
+         , OTHFWDR_YN
+         , WGT_FRGH_APLY_YN
+         , EQIP_YN
+         , ATCHFILE_SPR_CD
+         , MNFST_ATCH_YN
+         , MBL_ATCH_YN
+         , PTNR_HBL_ATCH_YN
+         , CI_ATCH_YN
+         , PL_ATCH_YN
+         , CI_PL_ATCH_YN
+         , LICE_ATCH_YN
+         , SCHD_ATCH_YN
+         , SHPP_HBL_ATCH_YN
+         , CARGO_DNGMATL_CRAFT_TYPE
+         , EMAIL_SEND_YN
+         , EMAIL_SEND_STAT_CD
+         , TRNS_ID
+           )
+    VALUES (
+           #{blId}
+         , #{prtKindCd}
+         , #{blPrtCnt}
+         , #{viaplcCd}
+         , #{viaplcPortCd}
+         , #{viaplcPortCd1}
+         , #{viaplcPortCd2}
+         , #{viaplcFltno}
+         , #{viaplcFltno1}
+         , #{viaplcFltno2}
+         , #{pkgNm}
+         , IFNULL(#{arrnYn}, 'N')
+         , #{arrnCont}
+         , IFNULL(#{agreYn}, 'N')
+         , IFNULL(#{mblLblPrntYn}, 'N')
+         , IFNULL(#{hblLblPrntYn}, 'N')
+         , IFNULL(#{dimRidrYn}, 'N')
+         , IFNULL(#{orignRidrYn}, 'N')
+         , #{rmk}
+         , 'N'
+         , NOW()
+         , #{session.userId}
+         , NOW()
+         , #{session.userId}
+         , IFNULL(#{eprsRelesYn}, 'N')
+         , #{iataAgntMarkNm}
+         , #{carrPrtRmk}
+         , #{cstmPrtRmk}
+         , #{prtSellRateKindCd}
+         , #{prtSellRatePcnt}
+         , #{prtSellRate}
+         , #{prtBuyRateKindCd}
+         , #{prtBuyRatePcnt}
+         , #{prtBuyRate}
+         , #{prtCarrNm}
+         , #{prtCtyNm}
+         , #{prtAgntNm}
+         , #{prtOrgnCd}
+         , #{prtOrgnNm}
+         , IFNULL(#{expScanYn}, 'N')
+         , #{expScanWorkrId}
+         , #{expScanDt}
+         , #{mnfstArrYmd}
+         , #{mnfstFltVslNm}
+         , #{mnfstPolCd}
+         , IFNULL(#{prtFrghBlckYn}, 'N')
+         , #{mblLblPrtDt}
+         , #{prefixNm}
+         , #{prtOrignCarrNm}
+         , #{cstmCertNo}
+         , IFNULL(#{ciPlEdmsKpiYn}, 'N')
+         , IFNULL(#{mblEdmsKpiYn}, 'N')
+         , IFNULL(#{hblEdmsKpiYn}, 'N')
+         , #{frghAutoCrtErrYn}
+         , IFNULL(#{postofficeYn}, 'N')
+         , #{docRecvYmd}
+         , #{blKindCd}
+         , #{blTypeCd}
+         , IFNULL(#{infoBlckYn}, 'N')
+         , IFNULL(#{ptnrAddrPrntYn}, 'N')
+         , #{dngmatlClasCd}
+         , #{dngmatlUnNo}
+         , #{packgGrpCd}
+         , #{expsAddCargoCwt}
+         , #{expsAddCargoCtrtRate}
+         , #{expsAddCargoQty}
+         , #{expsAddCargoRateSprCd}
+         , #{expsAddCargoWgt}
+         , #{expsAddCargoWgtUnitCd}
+         , #{expsAddCargoItemRmk}
+         , #{frghAutoCrtErrCont}
+         , IFNULL(#{frghAplyYn}, 'N')
+         , #{dngmatlUnSprCd}
+         , IFNULL(#{othfwdrYn}, 'N')
+         , IFNULL(#{wgtFrghAplyYn}, 'N')
+         , IFNULL(#{eqipYn}, 'N')
+         , #{atchfileSprCd}
+         , IFNULL(#{mnfstAtchYn}, 'N')
+         , IFNULL(#{mblAtchYn}, 'N')
+         , IFNULL(#{ptnrHblAtchYn}, 'N')
+         , IFNULL(#{ciAtchYn}, 'N')
+         , IFNULL(#{plAtchYn}, 'N')
+         , IFNULL(#{ciPlAtchYn}, 'N')
+         , IFNULL(#{liceAtchYn}, 'N')
+         , IFNULL(#{schdAtchYn}, 'N')
+         , IFNULL(#{shppHblAtchYn}, 'N')
+         , #{cargoDngmatlCraftType}
+         , IFNULL(#{emailSendYn}, 'N')
+         , #{emailSendStatCd}
+         , #{trnsId}
+           )
+    </insert>
+
+    <update id="updateBlPrtExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.updateBlPrtExpndBasisInfo - HBL출력확장정보 저장(수정) */
+    UPDATE TB_FWD_BL_PRT_EXPND
+       SET UPD_DT = NOW()
+         , UPDR_ID = #{session.userId}
+         , TRNS_ID = #{trnsId}
+          /* 중복되는 컬럼 */
+    <if test='updateType != null and !updateType.equals("")'>
+      <choose>
+      <when test='updateType.equals("WgtClosYn")'>
+         /* WgtClosYn */
+         , PRT_AGNT_NM = #{prtAgntNm}
+         , IATA_AGNT_MARK_NM = #{iataAgntMarkNm}
+         , PRT_CTY_NM = #{prtCtyNm}
+         , PRT_CARR_NM = #{prtCarrNm}
+         , PREFIX_NM = #{prefixNm}
+         , PRT_ORIGN_CARR_NM = #{prtOrignCarrNm}
+      </when>
+      <when test='updateType.equals("AirLblPrtYn")'>
+         /* AirLblPrtYn */
+        <if test='hblLblPrntYn != null and !hblLblPrntYn.equals("")'>
+         , HBL_LBL_PRNT_YN = #{hblLblPrntYn}
+        </if>
+        <if test='mblLblPrntYn != null and !mblLblPrntYn.equals("")'>
+         , MBL_LBL_PRNT_YN = #{mblLblPrntYn}
+         <if test='mblLblPrntYn eq "Y"'>
+         , MBL_LBL_PRT_DT = NOW()
+         </if>
+        </if>
+      </when>
+      <otherwise>
+         <if test="_parameter.containsKey('prtKindCd')">
+         , PRT_KIND_CD = #{prtKindCd}
+         </if>
+         <if test="_parameter.containsKey('blPrtCnt')">
+         , BL_PRT_CNT = #{blPrtCnt}
+         </if>
+         <if test="_parameter.containsKey('viaplcCd')">
+         , VIAPLC_CD = #{viaplcCd}
+         </if>
+         <if test="_parameter.containsKey('viaplcPortCd')">
+         , VIAPLC_PORT_CD = #{viaplcPortCd}
+         </if>
+         <if test="_parameter.containsKey('viaplcPortCd1')">
+         , VIAPLC_PORT_CD1 = #{viaplcPortCd1}
+         </if>
+         <if test="_parameter.containsKey('viaplcPortCd2')">
+         , VIAPLC_PORT_CD2 = #{viaplcPortCd2}
+         </if>
+         <if test="_parameter.containsKey('viaplcFltno')">
+         , VIAPLC_FLTNO = #{viaplcFltno}
+         </if>
+         <if test="_parameter.containsKey('viaplcFltno1')">
+         , VIAPLC_FLTNO1 = #{viaplcFltno1}
+         </if>
+         <if test="_parameter.containsKey('cstKindCd')">
+         , VIAPLC_FLTNO2 = #{cstKindCd}
+         </if>
+         <if test="_parameter.containsKey('pkgNm')">
+         , PKG_NM = #{pkgNm}
+         </if>
+         <if test="_parameter.containsKey('arrnYn')">
+         , ARRN_YN = #{arrnYn}
+         </if>
+         <if test="_parameter.containsKey('arrnCont')">
+         , ARRN_CONT = #{arrnCont}
+         </if>
+         <if test="_parameter.containsKey('agreYn')">
+         , AGRE_YN = #{agreYn}
+         </if>
+         <if test="_parameter.containsKey('mblLblPrntYn')">
+         , MBL_LBL_PRNT_YN = #{mblLblPrntYn}
+         </if>
+         <if test="_parameter.containsKey('hblLblPrntYn')">
+         , HBL_LBL_PRNT_YN = #{hblLblPrntYn}
+         </if>
+         <if test="_parameter.containsKey('dimRidrYn')">
+         , DIM_RIDR_YN = #{dimRidrYn}
+         </if>
+         <if test="_parameter.containsKey('orignRidrYn')">
+         , ORIGN_RIDR_YN = #{orignRidrYn}
+         </if>
+         <if test="_parameter.containsKey('rmk')">
+         , RMK = #{rmk}
+         </if>
+         <if test="_parameter.containsKey('eprsRelesYn')">
+         , EPRS_RELES_YN = #{eprsRelesYn}
+         </if>
+         <if test="_parameter.containsKey('carrPrtRmk')">
+         , CARR_PRT_RMK = #{carrPrtRmk}
+         </if>
+         <if test="_parameter.containsKey('cstmPrtRmk')">
+         , CSTM_PRT_RMK = #{cstmPrtRmk}
+         </if>
+         <if test="_parameter.containsKey('prtSellRateKindCd')">
+         , PRT_SELL_RATE_KIND_CD = #{prtSellRateKindCd}
+         </if>
+         <if test="_parameter.containsKey('prtSellRatePcnt')">
+         , PRT_SELL_RATE_PCNT = #{prtSellRatePcnt}
+         </if>
+         <if test="_parameter.containsKey('prtSellRate')">
+         , PRT_SELL_RATE = #{prtSellRate}
+         </if>
+         <if test="_parameter.containsKey('prtBuyRateKindCd')">
+         , PRT_BUY_RATE_KIND_CD = #{prtBuyRateKindCd}
+         </if>
+         <if test="_parameter.containsKey('prtBuyRatePcnt')">
+         , PRT_BUY_RATE_PCNT = #{prtBuyRatePcnt}
+         </if>
+         <if test="_parameter.containsKey('prtBuyRate')">
+         , PRT_BUY_RATE = #{prtBuyRate}
+         </if>
+         <if test="_parameter.containsKey('prtOrgnCd')">
+         , PRT_ORGN_CD = #{prtOrgnCd}
+         </if>
+         <if test="_parameter.containsKey('prtOrgnNm')">
+         , PRT_ORGN_NM = #{prtOrgnNm}
+         </if>
+         <if test="_parameter.containsKey('expScanYn')">
+         , EXP_SCAN_YN = #{expScanYn}
+         </if>
+         <if test="_parameter.containsKey('expScanWorkrId')">
+         , EXP_SCAN_WORKR_ID = #{expScanWorkrId}
+         </if>
+         <if test="_parameter.containsKey('expScanDt')">
+         , EXP_SCAN_DT = #{expScanDt}
+         </if>
+         <if test="_parameter.containsKey('mnfstArrYmd')">
+         , MNFST_ARR_YMD = #{mnfstArrYmd}
+         </if>
+         <if test="_parameter.containsKey('mnfstFltVslNm')">
+         , MNFST_FLT_VSL_NM = #{mnfstFltVslNm}
+         </if>
+         <if test="_parameter.containsKey('mnfstPolCd')">
+         , MNFST_POL_CD = #{mnfstPolCd}
+         </if>
+         <if test="_parameter.containsKey('prtFrghBlckYn')">
+         , PRT_FRGH_BLCK_YN = #{prtFrghBlckYn}
+         </if>
+         <if test="_parameter.containsKey('mblLblPrtDt')">
+         , MBL_LBL_PRT_DT = #{mblLblPrtDt}
+         </if>
+         <if test="_parameter.containsKey('cstmCertNo')">
+         , CSTM_CERT_NO = #{cstmCertNo}
+         </if>
+         <if test="_parameter.containsKey('ciPlEdmsKpiYn')">
+         , CI_PL_EDMS_KPI_YN = #{ciPlEdmsKpiYn}
+         </if>
+         <if test="_parameter.containsKey('mblEdmsKpiYn')">
+         , MBL_EDMS_KPI_YN = #{mblEdmsKpiYn}
+         </if>
+         <if test="_parameter.containsKey('hblEdmsKpiYn')">
+         , HBL_EDMS_KPI_YN = #{hblEdmsKpiYn}
+         </if>
+         <if test="_parameter.containsKey('frghAutoCrtErrYn')">
+         , FRGH_AUTO_CRT_ERR_YN = #{frghAutoCrtErrYn}
+         </if>
+         <if test="_parameter.containsKey('postofficeYn')">
+         , POSTOFFICE_YN = #{postofficeYn}
+         </if>
+         <if test="_parameter.containsKey('docRecvYmd')">
+         , DOC_RECV_YMD = #{docRecvYmd}
+         </if>
+         <if test="_parameter.containsKey('blKindCd')">
+         , BL_KIND_CD = #{blKindCd}
+         </if>
+         <if test="_parameter.containsKey('blTypeCd')">
+         , BL_TYPE_CD = #{blTypeCd}
+         </if>
+         <if test="_parameter.containsKey('infoBlckYn')">
+         , INFO_BLCK_YN = #{infoBlckYn}
+         </if>
+         <if test="_parameter.containsKey('ptnrAddrPrntYn')">
+         , PTNR_ADDR_PRNT_YN = #{ptnrAddrPrntYn}
+         </if>
+         <if test="_parameter.containsKey('dngmatlClasCd')">
+         , DNGMATL_CLAS_CD = #{dngmatlClasCd}
+         </if>
+         <if test="_parameter.containsKey('dngmatlUnNo')">
+         , DNGMATL_UN_NO = #{dngmatlUnNo}
+         </if>
+         <if test="_parameter.containsKey('packgGrpCd')">
+         , PACKG_GRP_CD = #{packgGrpCd}
+         </if>
+         <if test="_parameter.containsKey('expsAddCargoCwt')">
+         , EXPS_ADD_CARGO_CWT = #{expsAddCargoCwt}
+         </if>
+         <if test="_parameter.containsKey('expsAddCargoCtrtRate')">
+         , EXPS_ADD_CARGO_CTRT_RATE = #{expsAddCargoCtrtRate}
+         </if>
+         <if test="_parameter.containsKey('expsAddCargoQty')">
+         , EXPS_ADD_CARGO_QTY = #{expsAddCargoQty}
+         </if>
+         <if test="_parameter.containsKey('expsAddCargoRateSprCd')">
+         , EXPS_ADD_CARGO_RATE_SPR_CD = #{expsAddCargoRateSprCd}
+         </if>
+         <if test="_parameter.containsKey('expsAddCargoWgt')">
+         , EXPS_ADD_CARGO_WGT = #{expsAddCargoWgt}
+         </if>
+         <if test="_parameter.containsKey('expsAddCargoWgtUnitCd')">
+         , EXPS_ADD_CARGO_WGT_UNIT_CD = #{expsAddCargoWgtUnitCd}
+         </if>
+         <if test="_parameter.containsKey('expsAddCargoItemRmk')">
+         , EXPS_ADD_CARGO_ITEM_RMK = #{expsAddCargoItemRmk}
+         </if>
+         <if test="_parameter.containsKey('frghAutoCrtErrCont')">
+         , FRGH_AUTO_CRT_ERR_CONT = #{frghAutoCrtErrCont}
+         </if>
+         <if test="_parameter.containsKey('frghAplyYn')">
+         , FRGH_APLY_YN = #{frghAplyYn}
+         </if>
+         <if test="_parameter.containsKey('dngmatlUnSprCd')">
+         , DNGMATL_UN_SPR_CD = #{dngmatlUnSprCd}
+         </if>
+         <if test="_parameter.containsKey('othfwdrYn')">
+         , OTHFWDR_YN = #{othfwdrYn}
+         </if>
+         <if test="_parameter.containsKey('wgtFrghAplyYn')">
+         , WGT_FRGH_APLY_YN = #{wgtFrghAplyYn}
+         </if>
+         <if test="_parameter.containsKey('eqipYn')">
+         , EQIP_YN = #{eqipYn}
+         </if>
+         <if test="_parameter.containsKey('atchfileSprCd')">
+         , ATCHFILE_SPR_CD = #{atchfileSprCd}
+         </if>
+         <if test="_parameter.containsKey('mnfstAtchYn')">
+         , MNFST_ATCH_YN = #{mnfstAtchYn}
+         </if>
+         <if test="_parameter.containsKey('mblAtchYn')">
+         , MBL_ATCH_YN = #{mblAtchYn}
+         </if>
+         <if test="_parameter.containsKey('ptnrHblAtchYn')">
+         , PTNR_HBL_ATCH_YN = #{ptnrHblAtchYn}
+         </if>
+         <if test="_parameter.containsKey('ciAtchYn')">
+         , CI_ATCH_YN = #{ciAtchYn}
+         </if>
+         <if test="_parameter.containsKey('plAtchYn')">
+         , PL_ATCH_YN = #{plAtchYn}
+         </if>
+         <if test="_parameter.containsKey('ciPlAtchYn')">
+         , CI_PL_ATCH_YN = #{ciPlAtchYn}
+         </if>
+         <if test="_parameter.containsKey('liceAtchYn')">
+         , LICE_ATCH_YN = #{liceAtchYn}
+         </if>
+         <if test="_parameter.containsKey('schdAtchYn')">
+         , SCHD_ATCH_YN = #{schdAtchYn}
+         </if>
+         <if test="_parameter.containsKey('shppHblAtchYn')">
+         , SHPP_HBL_ATCH_YN = #{shppHblAtchYn}
+         </if>
+         <if test="_parameter.containsKey('cargoDngmatlCraftType')">
+         , CARGO_DNGMATL_CRAFT_TYPE = #{cargoDngmatlCraftType}
+         </if>
+         <if test="_parameter.containsKey('emailSendYn')">
+         , EMAIL_SEND_YN = #{emailSendYn}
+         </if>
+         <if test="_parameter.containsKey('emailSendStatCd')">
+         , EMAIL_SEND_STAT_CD = #{emailSendStatCd}
+         </if>
+         <if test="_parameter.containsKey('prtCtyNm')">
+         , PRT_CTY_NM = #{prtCtyNm}                 /*발행도시명*/
+         </if>
+         <if test="_parameter.containsKey('prtAgntNm')">
+         , PRT_AGNT_NM = #{prtAgntNm}               /*발행대리점명*/
+         </if>
+         <if test="_parameter.containsKey('iataAgntMarkNm')">
+         , IATA_AGNT_MARK_NM = #{iataAgntMarkNm}    /*IATA대리점표기명*/
+         </if>
+         <if test="_parameter.containsKey('prtCarrNm')">
+         , PRT_CARR_NM = #{prtCarrNm}               /*발행운송사명*/
+         </if>
+         <if test="_parameter.containsKey('prefixNm')">
+         , PREFIX_NM = #{prefixNm}
+         </if>
+         <if test="_parameter.containsKey('prtOrignCarrNm')">
+         , PRT_ORIGN_CARR_NM = #{prtOrignCarrNm}
+         </if>
+      </otherwise>
+      </choose>
+    </if>
+     WHERE BL_ID = #{blId}
+    </update>
+
+    <update id="deleteBlPrtExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.deleteBlPrtExpndBasisInfo - HBL출력확장정보 저장(삭제) */
+    UPDATE TB_FWD_BL_PRT_EXPND
+       SET DEL_YN = 'Y'
+         , UPD_DT = NOW()
+         , UPDR_ID = #{session.userId}
+         , TRNS_ID = #{trnsId}
+     WHERE BL_ID = #{blId}
+    </update>
+
+    <insert id="insertBlCstExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlCstExpndBasisInfo - HBL고객확장정보 저장(등록) */
+    INSERT INTO TB_FWD_BL_CST_EXPND (
+           BL_ID
+         , CST_KIND_CD
+         , CST_TXN_TYPE_CD
+         , CST_OBU_CD
+         , CST_SHPP_CD
+         , CST_CNEE_CD
+         , CST_CORP_YN
+         , CST_RATE_APLY_YN
+         , CST_CARR_CD
+         , CST_FWDR_CD
+         , DEL_YN
+         , CST_BUYER_NM
+         , CST_BUYER_CD
+         , CST_OEM_YN
+         , BL_CRT_TYPE_DTL_CD
+         , CST_DEPT_NM
+         , ACTU_TRKR_CD
+         , ACTU_TRKR_NM
+         , CST_EXFOUT_HEADR_ID
+         , CST_EXFOUT_YMD_HMS
+         , CST_CWT
+         , CST_VOL_WGT
+         , WGT_UNIT_CD
+         , CST_GWT
+         , CST_MODEL_NM
+         , IMP_CONF_YN
+         , ITEM_MODEL_NM
+         , PCS_QTY
+         , ORD_MODEL_ID
+         , SEND_YMD
+         , IMPC_CD
+         , EXCHGND_CD
+         , DPT_HMS
+         , POSTOFFICE_YN
+         , US_INLAND_TYPE_CD
+         , GLB_YN
+         , OTHFWDR_BL_YN
+         , REG_DT
+         , RSTR_ID
+         , UPD_DT
+         , UPDR_ID
+         , TRNS_ID
+           )
+    VALUES (
+           #{blId}
+         , #{cstKindCd}
+         , #{cstTxnTypeCd}
+         , #{cstObuCd}
+         , #{cstShppCd}
+         , #{cstCneeCd}
+         , IFNULL(#{cstCorpYn}, 'N')
+         , IFNULL(#{cstRateAplyYn}, 'N')
+         , #{cstCarrCd}
+         , #{cstFwdrCd}
+         , 'N'
+         , #{cstBuyerNm}
+         , #{cstBuyerCd}
+         , IFNULL(#{cstOemYn}, 'N')
+         , #{blCrtTypeDtlCd}
+         , #{cstDeptNm}
+         , #{actuTrkrCd}
+         , #{actuTrkrNm}
+         , #{cstExfoutHeadrId}
+         , #{cstExfoutYmdHms}
+         , #{cstCwt}
+         , #{cstVolWgt}
+         , #{wgtUnitCd}
+         , #{cstGwt}
+         , #{cstModelNm}
+         , #{impConfYn}
+         , #{itemModelNm}
+         , #{pcsQty}
+         , #{ordModelId}
+         , #{sendYmd}
+         , #{impcCd}
+         , #{exchgndCd}
+         , #{dptHms}
+         , #{postofficeYn}
+         , #{usInlandTypeCd}
+         , IFNULL(#{glbYn}, 'N')
+         , IFNULL(#{othfwdrBlYn}, 'N')
+         , NOW()
+         , #{session.userId}
+         , NOW()
+         , #{session.userId}
+         , #{trnsId}
+           )
+    </insert>
+
+
+    <update id="updateBlCstExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.updateBlCstExpndBasisInfo - HBL고객확장정보 저장(수정) */
+    UPDATE TB_FWD_BL_CST_EXPND
+       SET UPD_DT      = NOW()
+         , UPDR_ID     = #{userId}
+         , TRNS_ID     = #{trnsId}
+    <if test='updateType != null and !updateType.equals("")'>
+
+      <choose>
+      <otherwise>
+        <if test="_parameter.containsKey('cstKindCd')">
+        , CST_KIND_CD = #{cstKindCd}
+        </if>
+        <if test="_parameter.containsKey('cstTxnTypeCd')">
+         , CST_TXN_TYPE_CD = #{cstTxnTypeCd}
+         </if>
+        <if test="_parameter.containsKey('cstObuCd')">
+         , CST_OBU_CD = #{cstObuCd}
+         </if>
+        <if test="_parameter.containsKey('cstShppCd')">
+         , CST_SHPP_CD = #{cstShppCd}
+         </if>
+        <if test="_parameter.containsKey('cstCneeCd')">
+         , CST_CNEE_CD = #{cstCneeCd}
+         </if>
+        <if test="_parameter.containsKey('cstCorpYn')">
+         , CST_CORP_YN = IFNULL(#{cstCorpYn}, 'N')
+         </if>
+        <if test="_parameter.containsKey('cstRateAplyYn')">
+         , CST_RATE_APLY_YN = #{cstRateAplyYn}
+         </if>
+        <if test="_parameter.containsKey('cstCarrCd')">
+         , CST_CARR_CD = #{cstCarrCd}
+         </if>
+        <if test="_parameter.containsKey('cstFwdrCd')">
+         , CST_FWDR_CD = #{cstFwdrCd}
+         </if>
+        <if test="_parameter.containsKey('cstBuyerNm')">
+         , CST_BUYER_NM = #{cstBuyerNm}
+         </if>
+        <if test="_parameter.containsKey('cstBuyerCd')">
+         , CST_BUYER_CD = #{cstBuyerCd}
+         </if>
+        <if test="_parameter.containsKey('cstOemYn')">
+         , CST_OEM_YN = #{cstOemYn}
+         </if>
+        <if test="_parameter.containsKey('blCrtTypeDtlCd')">
+         , BL_CRT_TYPE_DTL_CD = #{blCrtTypeDtlCd}
+         </if>
+        <if test="_parameter.containsKey('cstDeptNm')">
+         , CST_DEPT_NM = #{cstDeptNm}
+         </if>
+        <if test="_parameter.containsKey('actuTrkrCd')">
+         , ACTU_TRKR_CD = #{actuTrkrCd}
+         </if>
+        <if test="_parameter.containsKey('actuTrkrNm')">
+         , ACTU_TRKR_NM = #{actuTrkrNm}
+         </if>
+        <if test="_parameter.containsKey('cstExfoutHeadrId')">
+         , CST_EXFOUT_HEADR_ID = #{cstExfoutHeadrId}
+         </if>
+        <if test="_parameter.containsKey('cstExfoutYmdHms')">
+         , CST_EXFOUT_YMD_HMS = #{cstExfoutYmdHms}
+         </if>
+        <if test="_parameter.containsKey('cstCwt')">
+         , CST_CWT = #{cstCwt}
+         </if>
+        <if test="_parameter.containsKey('cstVolWgt')">
+         , CST_VOL_WGT = #{cstVolWgt}
+         </if>
+        <if test="_parameter.containsKey('wgtUnitCd')">
+         , WGT_UNIT_CD = #{wgtUnitCd}
+         </if>
+        <if test="_parameter.containsKey('cstGwt')">
+         , CST_GWT = #{cstGwt}
+         </if>
+        <if test="_parameter.containsKey('cstModelNm')">
+         , CST_MODEL_NM = #{cstModelNm}
+         </if>
+        <if test="_parameter.containsKey('impConfYn')">
+         , IMP_CONF_YN = #{impConfYn}
+         </if>
+        <if test="_parameter.containsKey('itemModelNm')">
+         , ITEM_MODEL_NM = #{itemModelNm}
+         </if>
+        <if test="_parameter.containsKey('pcsQty')">
+         , PCS_QTY = #{pcsQty}
+         </if>
+        <if test="_parameter.containsKey('ordModelId')">
+         , ORD_MODEL_ID = #{ordModelId}
+         </if>
+        <if test="_parameter.containsKey('sendYmd')">
+         , SEND_YMD = #{sendYmd}
+         </if>
+        <if test="_parameter.containsKey('impcCd')">
+         , IMPC_CD = #{impcCd}
+         </if>
+        <if test="_parameter.containsKey('exchgndCd')">
+         , EXCHGND_CD = #{exchgndCd}
+         </if>
+        <if test="_parameter.containsKey('dptHms')">
+         , DPT_HMS = #{dptHms}
+         </if>
+        <if test="_parameter.containsKey('postofficeYn')">
+         , POSTOFFICE_YN = #{postofficeYn}
+         </if>
+        <if test="_parameter.containsKey('usInlandTypeCd')">
+         , US_INLAND_TYPE_CD = #{usInlandTypeCd}
+         </if>
+        <if test="_parameter.containsKey('glbYn')">
+         , GLB_YN = #{glbYn}
+         </if>
+        <if test="_parameter.containsKey('othfwdrBlYn')">
+         , OTHFWDR_BL_YN = #{othfwdrBlYn}
+         </if>
+      </otherwise>
+      </choose>
+    </if>
+     WHERE BL_ID = #{blId}
+    </update>
+
+    <update id="deleteBlCstExpndBasisInfo" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.deleteBlCstExpndBasisInfo - HBL고객확장정보 저장(삭제) */
+    UPDATE TB_FWD_BL_CST_EXPND
+       SET DEL_YN = 'Y'
+         , UPD_DT = NOW()
+         , UPDR_ID = #{session.userId}
+         , TRNS_ID = #{trnsId}
+     WHERE BL_ID = #{blId}
+    </update>
+
+
+
+    <insert id="insertBlBasisInfoLog" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlBasisInfoLog */
+    INSERT INTO TB_FWD_BL_LOG(
+                 BL_ID
+               , LOG_SEQ
+               , LOG_DT
+               , TRNS_ID
+               , BL_NO
+               , SMT_NO
+               , EO_NO
+               , EXCT_SPR_CD
+               , BL_SPR_CD
+               , BL_KIND_CD
+               , BL_OWN_SPR_CD
+               , BL_STAT_CD
+               , EXPS_BIZ_TYPE_CD
+               , EXPS_CARGO_SPR_CD
+               , SR_NO
+               , MBL_ID
+               , MBL_NO
+               , BKNG_NO
+               , ONBR_YMD
+               , ARR_YMD
+               , ETD_YMD
+               , ETA_YMD
+               , BL_PRT_YMD
+               , NEGO_ONBR_YMD
+               , BL_SWITCH_YN
+               , EXP_TS_TYPE_CD
+               , CONSOL_SPR_CD
+               , CONSOL_BL_ID
+               , CONSOL_CLOS_YN
+               , WGT_CLOS_YN
+               , ONBR_CLOS_YN
+               , ORIGN_PRNT_YN
+               , ARR_CLOS_YN
+               , FNL_CLOS_YN
+               , ORIGN_BL_ID
+               , SHPP_CD
+               , SHPP_NM
+               , CNEE_CD
+               , CNEE_NM
+               , NTPR_CD
+               , NTPR_NM
+               , CARR_GRP_CD
+               , CARR_NM
+               , FLT_VSL_NM
+               , VOYAGE
+               , POR_CD
+               , POR_NM
+               , POL_CD
+               , POL_NM
+               , POD_CD
+               , POD_NM
+               , PDEL_CD
+               , PDEL_NM
+               , FDEST_CD
+               , FDEST_NM
+               , FRGTTERM_CD
+               , ETC_EXPS_COND_CD
+               , INCOT_CD
+               , CARGO_TYPE_CD
+               , TRN_TYPE_CD
+               , PORT_DOOR_SPR_CD
+               , LDNG_COND_CD
+               , DSCR_COND_CD
+               , LADG_TYPE_CD
+               , RPRS_ITEM_CD
+               , RPRS_ITEM_NM
+               , REF_NO_SPR_CD
+               , RPRS_REF_NO
+               , PKG_QTY
+               , PKG_UNIT_CD
+               , INSD_PKG_QTY
+               , INSD_PKG_UNIT_CD
+               , EXPS_SELL_ZONE_CD
+               , SELL_SVC_GDS_CD
+               , SELL_GWT
+               , SELL_LB_GWT
+               , SELL_NWT
+               , SELL_VOL_WGT
+               , SELL_WGT_UNIT_CD
+               , SELL_CBM
+               , SELL_CFT
+               , SELL_CWT
+               , SELL_LB_CWT
+               , EXPS_BUY_ZONE_CD
+               , BUY_SVC_GDS_CD
+               , BUY_GWT
+               , BUY_LB_GWT
+               , BUY_NWT
+               , BUY_VOL_WGT
+               , BUY_WGT_UNIT_CD
+               , BUY_CBM
+               , BUY_CFT
+               , BUY_CWT
+               , BUY_LB_CWT
+               , EXCHGRT_APLY_YMD
+               , APLY_EXCHGRT
+               , CUR_CD
+               , INSU_JOIN_YN
+               , INF_CUR_CD
+               , INF_AMT
+               , INVC_CUR_CD
+               , INVC_AMT
+               , HUB_BILG_YN
+               , CLAIM_YN
+               , ADJ_YN
+               , IMP_BL_SPLIT_ADJ_YN
+               , NCV_YN
+               , ROUT_SPR_CD
+               , T1_HLG_SPR_CD
+               , BL_CRT_TYPE_CD
+               , EXP_CC_RQST_YN
+               , IMP_CC_RQST_YN
+               , DECL_BL_NO
+               , RMK
+               , MBL_RMK
+               , HLDS_BL_YN
+               , TT_LC_TYPE_CD
+               , FLT_TYPE_CD
+               , MSTR_WRK_GRP_CD
+               , ULD_WRK_YN
+               , CTRT_TYPE_CD
+               , CALLSIGN
+               , SELL_RTON
+               , BUY_RTON
+               , SHIPMT_CONF_YN
+               , IMP_TS_TYPE_CD
+               , ADJ_CLOS_YN
+               , SPLIT_BL_YN
+               , LOCL_PTNR_YN
+               , BL_STAT_YN
+               , FIELD_CLOS_YN
+               , FDEST_ETA_YMD
+               , NON_PTNR_YN
+               , EXP_WRK_YMD
+               , EXPS_CONSOL_SELL_BL_ID
+               , EXPS_CONSOL_BUY_BL_ID
+               , COMB_BL_YN
+               , SHIPLN_BKNG_NO
+               , CONSOL_DSBL_HBL_YN
+               , SPLIT_RESN_CD
+               , FHD_YN
+               , NON_EXCT_BL_YN
+               , SELL_LB_VOL_WGT
+               , BUY_LB_VOL_WGT
+               , PTNR_BL_PRT_YMD
+               , REG_YMD
+               , WH_CLOS_YN
+               , SELL_MR_TON_WGT
+               , BUY_MR_TON_WGT
+               , DEL_YN
+               , REG_DT
+               , RSTR_ID
+               , UPD_DT
+               , UPDR_ID)
+        SELECT   A.BL_ID
+               , IFNULL((SELECT MAX(A.LOG_SEQ) FROM TB_FWD_BL_LOG A WHERE A.BL_ID = #{blId}), 0) +1 AS LOG_SEQ
+               , NOW() AS LOG_DT
+               , TRNS_ID
+               , A.BL_NO
+               , A.SMT_NO
+               , A.EO_NO
+               , A.EXCT_SPR_CD
+               , A.BL_SPR_CD
+               , A.BL_KIND_CD
+               , A.BL_OWN_SPR_CD
+               , A.BL_STAT_CD
+               , A.EXPS_BIZ_TYPE_CD
+               , A.EXPS_CARGO_SPR_CD
+               , A.SR_NO
+               , A.MBL_ID
+               , A.MBL_NO
+               , A.BKNG_NO
+               , A.ONBR_YMD
+               , A.ARR_YMD
+               , A.ETD_YMD
+               , A.ETA_YMD
+               , A.BL_PRT_YMD
+               , A.NEGO_ONBR_YMD
+               , A.BL_SWITCH_YN
+               , A.EXP_TS_TYPE_CD
+               , A.CONSOL_SPR_CD
+               , A.CONSOL_BL_ID
+               , A.CONSOL_CLOS_YN
+               , A.WGT_CLOS_YN
+               , A.ONBR_CLOS_YN
+               , A.ORIGN_PRNT_YN
+               , A.ARR_CLOS_YN
+               , A.FNL_CLOS_YN
+               , A.ORIGN_BL_ID
+               , A.SHPP_CD
+               , A.SHPP_NM
+               , A.CNEE_CD
+               , A.CNEE_NM
+               , A.NTPR_CD
+               , A.NTPR_NM
+               , A.CARR_GRP_CD
+               , A.CARR_NM
+               , A.FLT_VSL_NM
+               , A.VOYAGE
+               , A.POR_CD
+               , A.POR_NM
+               , A.POL_CD
+               , A.POL_NM
+               , A.POD_CD
+               , A.POD_NM
+               , A.PDEL_CD
+               , A.PDEL_NM
+               , A.FDEST_CD
+               , A.FDEST_NM
+               , A.FRGTTERM_CD
+               , A.ETC_EXPS_COND_CD
+               , A.INCOT_CD
+               , A.CARGO_TYPE_CD
+               , A.TRN_TYPE_CD
+               , A.PORT_DOOR_SPR_CD
+               , A.LDNG_COND_CD
+               , A.DSCR_COND_CD
+               , A.LADG_TYPE_CD
+               , A.RPRS_ITEM_CD
+               , A.RPRS_ITEM_NM
+               , A.REF_NO_SPR_CD
+               , A.RPRS_REF_NO
+               , A.PKG_QTY
+               , A.PKG_UNIT_CD
+               , A.INSD_PKG_QTY
+               , A.INSD_PKG_UNIT_CD
+               , A.EXPS_SELL_ZONE_CD
+               , A.SELL_SVC_GDS_CD
+               , A.SELL_GWT
+               , A.SELL_LB_GWT
+               , A.SELL_NWT
+               , A.SELL_VOL_WGT
+               , A.SELL_WGT_UNIT_CD
+               , A.SELL_CBM
+               , A.SELL_CFT
+               , A.SELL_CWT
+               , A.SELL_LB_CWT
+               , A.EXPS_BUY_ZONE_CD
+               , A.BUY_SVC_GDS_CD
+               , A.BUY_GWT
+               , A.BUY_LB_GWT
+               , A.BUY_NWT
+               , A.BUY_VOL_WGT
+               , A.BUY_WGT_UNIT_CD
+               , A.BUY_CBM
+               , A.BUY_CFT
+               , A.BUY_CWT
+               , A.BUY_LB_CWT
+               , A.EXCHGRT_APLY_YMD
+               , A.APLY_EXCHGRT
+               , A.CUR_CD
+               , A.INSU_JOIN_YN
+               , A.INF_CUR_CD
+               , A.INF_AMT
+               , A.INVC_CUR_CD
+               , A.INVC_AMT
+               , A.HUB_BILG_YN
+               , A.CLAIM_YN
+               , A.ADJ_YN
+               , A.IMP_BL_SPLIT_ADJ_YN
+               , A.NCV_YN
+               , A.ROUT_SPR_CD
+               , A.T1_HLG_SPR_CD
+               , A.BL_CRT_TYPE_CD
+               , A.EXP_CC_RQST_YN
+               , A.IMP_CC_RQST_YN
+               , A.DECL_BL_NO
+               , A.RMK
+               , A.MBL_RMK
+               , A.HLDS_BL_YN
+               , A.TT_LC_TYPE_CD
+               , A.FLT_TYPE_CD
+               , A.MSTR_WRK_GRP_CD
+               , A.ULD_WRK_YN
+               , A.CTRT_TYPE_CD
+               , A.CALLSIGN
+               , A.SELL_RTON
+               , A.BUY_RTON
+               , A.SHIPMT_CONF_YN
+               , A.IMP_TS_TYPE_CD
+               , A.ADJ_CLOS_YN
+               , A.SPLIT_BL_YN
+               , A.LOCL_PTNR_YN
+               , A.BL_STAT_YN
+               , A.FIELD_CLOS_YN
+               , A.FDEST_ETA_YMD
+               , A.NON_PTNR_YN
+               , A.EXP_WRK_YMD
+               , A.EXPS_CONSOL_SELL_BL_ID
+               , A.EXPS_CONSOL_BUY_BL_ID
+               , A.COMB_BL_YN
+               , A.SHIPLN_BKNG_NO
+               , A.CONSOL_DSBL_HBL_YN
+               , A.SPLIT_RESN_CD
+               , A.FHD_YN
+               , A.NON_EXCT_BL_YN
+               , A.SELL_LB_VOL_WGT
+               , A.BUY_LB_VOL_WGT
+               , A.PTNR_BL_PRT_YMD
+               , A.REG_YMD
+               , A.WH_CLOS_YN
+               , A.SELL_MR_TON_WGT
+               , A.BUY_MR_TON_WGT
+               , A.DEL_YN
+               , A.REG_DT
+               , A.RSTR_ID
+               , A.UPD_DT
+               , A.UPDR_ID
+        FROM TB_FWD_BL A
+        WHERE BL_ID = #{blId}
+    </insert>
+
+
+    <insert id="insertBlExpndBasisInfoLog" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlExpndBasisInfoLog */
+    INSERT INTO TB_FWD_BL_EXPND_LOG (
+          BL_ID
+        , LOG_SEQ
+        , PRE_FLT_VSL_NM
+        , PRE_VOYAGE
+        , NTPR_CD2
+        , NTPR_NM2
+        , SR_TO_SPR_CD
+        , CUTOFF_YMD
+        , CUTOFF_HM
+        , MNFST_MGNT_NO
+        , EXP_MRN
+        , EXP_MSN
+        , EXP_HSN
+        , SPLIT_MNFST_YN
+        , INEX_TRN_SPR_CD
+        , IMP_CC_TRN_TYPE_CD
+        , BL_CUST_SEND_YN
+        , ASGN_PLC_CD
+        , ASGN_HRBR_CD
+        , URGN_TRN_YN
+        , CAR_CARR_CD
+        , BL_PPR_RCV_YMD
+        , BL_PPR_RCV_PIC_NM
+        , DO_NO
+        , DO_SEND_YN
+        , DO_SEND_YMD
+        , DO_SEND_OFCR_ID
+        , DO_PRTER_ID
+        , DO_COLCT_COND_CONT
+        , DO_RMK
+        , DBL_AUTO_RFLC_YN
+        , DC_EXTRCHRG_KIND_CD
+        , EXPS_BAG_NO
+        , EXPS_MLT_PCKPPLC_CD
+        , EXPS_LOWR_CST_NO_CD
+        , EXPS_ITEM_PACKG_KIND_CD
+        , EXPS_PACKG_APLY_YN
+        , PACKG_YN
+        , RTN_CARGO_YN
+        , DLV_SPR_CD
+        , DLV_DLY_CD
+        , ACDT_SPR_CD
+        , CS_STAT_RMK
+        , ORGN_PRVL_YN
+        , IMP_RMK
+        , IMP_BIZMAN_REG_NO
+        , XTN_NO
+        , SELL_ADJ_RMK
+        , BUY_ADJ_RMK
+        , PO_RCV_RESN_CD
+        , ASGN_TYPE_CD
+        , ASGN_TAKIN_YMD
+        , ASGN_TAKOUT_YMD
+        , AMT_PCNT_SPR_CD
+        , DC_EXTRCHRG_RATE
+        , BKNG_WGT
+        , BKNG_QTY
+        , HOLD_YN
+        , CHG_BF_BL_NO
+        , PRT_YM
+        , ITN_NO
+        , IT_NO
+        , IT_PLC_CD
+        , IT_YMD
+        , CORP_REF_NO
+        , AES_CD
+        , LAST_FREE_YMD
+        , GO_YMD
+        , AVAIL_YMD
+        , AREA_CC_YN
+        , SHIPMT_HOUR_SPR_CD
+        , CX_PU_YN
+        , CX_PCKPPLC_NM
+        , CST_IMP_CC_YN
+        , APLY_FRGH_USD_AMT
+        , CARGO_PLC_CD
+        , IMP_BIZ_GRP_CD
+        , IMP_MRN
+        , IMP_MSN
+        , IMP_HSN
+        , CST_RQST_YMD
+        , IT_PLC_NM
+        , AMS_FILE_NO
+        , US_IMP_CC_TYPE_CD
+        , CSTM_APRV_CST_NO
+        , HOLD_RESN_RMK
+        , SEA_CARGO_RATE_CD
+        , ARR_CLOS_AUTO_APLY_YN
+        , TRCKG_AUTO_APLY_YN
+        , EXPS_MBL_YN
+        , KOREA_PAYM_YN
+        , PYR_ACNT_NO
+        , INTMD_BILG_FRGH_YN
+        , INTMD_BILG_CDX_YN
+        , AGNT_MBL_NO
+        , ATD_HM
+        , ATA_HM
+        , WGT_BLCK_YN
+        , GR_HOUR_SPR_CD
+        , GRPLC_CD
+        , ISF_SEND_EXCPT_YN
+        , IRRE_YN
+        , SHIPLN_MBL_NO
+        , SHIPTO_MGNT_NO
+        , OFCR_TEL_NO
+        , DC_EXTRCHRG_RMK
+        , IMP_SHIPMT_CHCK_YN
+        , WOODEN_YN
+        , NOT_ARRV_CARGO_YN
+        , ADJ_BIZPTNR_CD
+        , ADJ_RSLT_DEPT_CD
+        , DPT_ARRV_SPR_CD
+        , ADJ_OFCR_EMPNO
+        , DNGMATL_CD
+        , DNGMATL_CLASS_CD
+        , LTG_CONF_YN
+        , ADJ_SALES_EMP_EMPNO
+        , ARRV_CONF_YN
+        , AFR_FNL_STAT_CD
+        , AFR_STEP_STAT_CD
+        , XML_MSG_ID
+        , END_YN
+        , CONV_TEU_QTY
+        , DECL_STN_ONBR_YMD
+        , LGC_SND_REQ_YN
+        , CNEE_BIZNO
+        , WH_CONF_YN
+        , IRRE_SLIP_NO
+        , PRTY_CARGO_YN
+        , TS1_PORT_CD
+        , TS1_ETA_YMD
+        , TS1_ETD_YMD
+        , CONSOL_BL_YN
+        , DSCR_THC_YN
+        , STOP_RESN
+        , STOP_YN
+        , AGNT_PRXY_YN
+        , AGNT_PRXY_CORP_CD
+        , ORD_CARR_SEND_STAT_CD
+        , EXPS_TRCKG_RQST_YN
+        , SNGL_MBL_YN
+        , EXPS_DNGMATL_GDS_YN
+        , EXPS_DNGMATL_UN_MGNT_NO
+        , EXPS_DNGMATL_CLAS_CD
+        , EXPS_DNGMATL_DTL_CLAS_CD
+        , EXPS_TRN_DOC_CD
+        , MNFST_HOLD_YN
+        , SHPP_TEL_NO
+        , CNEE_TEL_NO
+        , SHPP_BIZMAN_REG_CONT
+        , CNEE_BIZMAN_REG_CONT
+        , CNEE_OFCR_NM
+        , SHPP_OFCR_NM
+        , NTPR_OFCR_NM
+        , NTPR_BIZMAN_REG_CONT
+        , NTPR_TEL_NO
+        , SHPP_FAXNO
+        , CNEE_FAXNO
+        , NTPR_FAXNO
+        , SHPP_EMAIL_ADDR
+        , CNEE_EMAIL_ADDR
+        , NTPR_EMAIL_ADDR
+        , SHPP_ADDR_SPR_CD
+        , CCAM_YN
+        , OPT_TS_YN
+        , HS_CD1
+        , HS_CD2
+        , HS_CD3
+        , HS_CD4
+        , HS_CD5
+        , INVC_VAL1
+        , INVC_VAL2
+        , INVC_VAL3
+        , INVC_VAL4
+        , INVC_VAL5
+        , PANTOS_AMS_DECL_YN
+        , AMS_SND_TYPE_NM
+        , SHIP_MGNT_MARK_NM
+        , SHIP_MNF_NATN_CD
+        , BF_PORT_CD
+        , AMS_SND_STAT_CD
+        , OPT_TS_REG_YN
+        , TS_ONBR_YMD
+        , TS_POL_CD
+        , TS_FLT_VSL_NM
+        , TS_VOYAGE
+        , ARRV_YMD_CHG_YN
+        , HIST_ETA_YMD
+        , STD_ETA_YMD
+        , ARRV_PRAR_GAP_DCNT
+        , REF_LDTM_DCNT
+        , LDTM_EXCEPT_YN
+        , ARRV_PRAR_GAP_CLR_NM
+        , SR_RPRS_ITEM_NM
+        , IMP_OFCR_MPNG_YN
+        , CTRT_DTL_TYPE_CD
+        , ARRV_NOTI_YN
+        , EMPTY_CNTR_RTN_CY_CD
+        , TRNS_ID
+        , REG_DT
+        , RSTR_ID
+        , UPD_DT
+        , UPDR_ID
+        , LOG_DT
+           )
+    SELECT
+           BL_ID
+        , IFNULL((SELECT MAX(A.LOG_SEQ) FROM TB_FWD_BL_EXPND_LOG A WHERE A.BL_ID = #{blId}), 0) +1 AS LOG_SEQ
+        , PRE_FLT_VSL_NM
+        , PRE_VOYAGE
+        , NTPR_CD2
+        , NTPR_NM2
+        , SR_TO_SPR_CD
+        , CUTOFF_YMD
+        , CUTOFF_HM
+        , MNFST_MGNT_NO
+        , EXP_MRN
+        , EXP_MSN
+        , EXP_HSN
+        , SPLIT_MNFST_YN
+        , INEX_TRN_SPR_CD
+        , IMP_CC_TRN_TYPE_CD
+        , BL_CUST_SEND_YN
+        , ASGN_PLC_CD
+        , ASGN_HRBR_CD
+        , URGN_TRN_YN
+        , CAR_CARR_CD
+        , BL_PPR_RCV_YMD
+        , BL_PPR_RCV_PIC_NM
+        , DO_NO
+        , DO_SEND_YN
+        , DO_SEND_YMD
+        , DO_SEND_OFCR_ID
+        , DO_PRTER_ID
+        , DO_COLCT_COND_CONT
+        , DO_RMK
+        , DBL_AUTO_RFLC_YN
+        , DC_EXTRCHRG_KIND_CD
+        , EXPS_BAG_NO
+        , EXPS_MLT_PCKPPLC_CD
+        , EXPS_LOWR_CST_NO_CD
+        , EXPS_ITEM_PACKG_KIND_CD
+        , EXPS_PACKG_APLY_YN
+        , PACKG_YN
+        , RTN_CARGO_YN
+        , DLV_SPR_CD
+        , DLV_DLY_CD
+        , ACDT_SPR_CD
+        , CS_STAT_RMK
+        , ORGN_PRVL_YN
+        , IMP_RMK
+        , IMP_BIZMAN_REG_NO
+        , XTN_NO
+        , SELL_ADJ_RMK
+        , BUY_ADJ_RMK
+        , PO_RCV_RESN_CD
+        , ASGN_TYPE_CD
+        , ASGN_TAKIN_YMD
+        , ASGN_TAKOUT_YMD
+        , AMT_PCNT_SPR_CD
+        , DC_EXTRCHRG_RATE
+        , BKNG_WGT
+        , BKNG_QTY
+        , HOLD_YN
+        , CHG_BF_BL_NO
+        , PRT_YM
+        , ITN_NO
+        , IT_NO
+        , IT_PLC_CD
+        , IT_YMD
+        , CORP_REF_NO
+        , AES_CD
+        , LAST_FREE_YMD
+        , GO_YMD
+        , AVAIL_YMD
+        , AREA_CC_YN
+        , SHIPMT_HOUR_SPR_CD
+        , CX_PU_YN
+        , CX_PCKPPLC_NM
+        , CST_IMP_CC_YN
+        , APLY_FRGH_USD_AMT
+        , CARGO_PLC_CD
+        , IMP_BIZ_GRP_CD
+        , IMP_MRN
+        , IMP_MSN
+        , IMP_HSN
+        , CST_RQST_YMD
+        , IT_PLC_NM
+        , AMS_FILE_NO
+        , US_IMP_CC_TYPE_CD
+        , CSTM_APRV_CST_NO
+        , HOLD_RESN_RMK
+        , SEA_CARGO_RATE_CD
+        , ARR_CLOS_AUTO_APLY_YN
+        , TRCKG_AUTO_APLY_YN
+        , EXPS_MBL_YN
+        , KOREA_PAYM_YN
+        , PYR_ACNT_NO
+        , INTMD_BILG_FRGH_YN
+        , INTMD_BILG_CDX_YN
+        , AGNT_MBL_NO
+        , ATD_HM
+        , ATA_HM
+        , WGT_BLCK_YN
+        , GR_HOUR_SPR_CD
+        , GRPLC_CD
+        , ISF_SEND_EXCPT_YN
+        , IRRE_YN
+        , SHIPLN_MBL_NO
+        , SHIPTO_MGNT_NO
+        , OFCR_TEL_NO
+        , DC_EXTRCHRG_RMK
+        , IMP_SHIPMT_CHCK_YN
+        , WOODEN_YN
+        , NOT_ARRV_CARGO_YN
+        , ADJ_BIZPTNR_CD
+        , ADJ_RSLT_DEPT_CD
+        , DPT_ARRV_SPR_CD
+        , ADJ_OFCR_EMPNO
+        , DNGMATL_CD
+        , DNGMATL_CLASS_CD
+        , LTG_CONF_YN
+        , ADJ_SALES_EMP_EMPNO
+        , ARRV_CONF_YN
+        , AFR_FNL_STAT_CD
+        , AFR_STEP_STAT_CD
+        , XML_MSG_ID
+        , END_YN
+        , CONV_TEU_QTY
+        , DECL_STN_ONBR_YMD
+        , LGC_SND_REQ_YN
+        , CNEE_BIZNO
+        , WH_CONF_YN
+        , IRRE_SLIP_NO
+        , PRTY_CARGO_YN
+        , TS1_PORT_CD
+        , TS1_ETA_YMD
+        , TS1_ETD_YMD
+        , CONSOL_BL_YN
+        , DSCR_THC_YN
+        , STOP_RESN
+        , STOP_YN
+        , AGNT_PRXY_YN
+        , AGNT_PRXY_CORP_CD
+        , ORD_CARR_SEND_STAT_CD
+        , EXPS_TRCKG_RQST_YN
+        , SNGL_MBL_YN
+        , EXPS_DNGMATL_GDS_YN
+        , EXPS_DNGMATL_UN_MGNT_NO
+        , EXPS_DNGMATL_CLAS_CD
+        , EXPS_DNGMATL_DTL_CLAS_CD
+        , EXPS_TRN_DOC_CD
+        , MNFST_HOLD_YN
+        , SHPP_TEL_NO
+        , CNEE_TEL_NO
+        , SHPP_BIZMAN_REG_CONT
+        , CNEE_BIZMAN_REG_CONT
+        , CNEE_OFCR_NM
+        , SHPP_OFCR_NM
+        , NTPR_OFCR_NM
+        , NTPR_BIZMAN_REG_CONT
+        , NTPR_TEL_NO
+        , SHPP_FAXNO
+        , CNEE_FAXNO
+        , NTPR_FAXNO
+        , SHPP_EMAIL_ADDR
+        , CNEE_EMAIL_ADDR
+        , NTPR_EMAIL_ADDR
+        , SHPP_ADDR_SPR_CD
+        , CCAM_YN
+        , OPT_TS_YN
+        , HS_CD1
+        , HS_CD2
+        , HS_CD3
+        , HS_CD4
+        , HS_CD5
+        , INVC_VAL1
+        , INVC_VAL2
+        , INVC_VAL3
+        , INVC_VAL4
+        , INVC_VAL5
+        , PANTOS_AMS_DECL_YN
+        , AMS_SND_TYPE_NM
+        , SHIP_MGNT_MARK_NM
+        , SHIP_MNF_NATN_CD
+        , BF_PORT_CD
+        , AMS_SND_STAT_CD
+        , OPT_TS_REG_YN
+        , TS_ONBR_YMD
+        , TS_POL_CD
+        , TS_FLT_VSL_NM
+        , TS_VOYAGE
+        , ARRV_YMD_CHG_YN
+        , HIST_ETA_YMD
+        , STD_ETA_YMD
+        , ARRV_PRAR_GAP_DCNT
+        , REF_LDTM_DCNT
+        , LDTM_EXCEPT_YN
+        , ARRV_PRAR_GAP_CLR_NM
+        , SR_RPRS_ITEM_NM
+        , IMP_OFCR_MPNG_YN
+        , CTRT_DTL_TYPE_CD
+        , ARRV_NOTI_YN
+        , EMPTY_CNTR_RTN_CY_CD
+        , TRNS_ID
+        , REG_DT
+        , RSTR_ID
+        , UPD_DT
+        , UPDR_ID
+        , NOW() AS LOG_DT
+      FROM TB_FWD_BL_EXPND
+     WHERE BL_ID = #{blId}
+    </insert>
+
+    <insert id="insertBlPrtExpndBasisInfoLog" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlPrtExpndBasisInfoLog */
+    INSERT INTO TB_FWD_BL_PRT_EXPND_LOG (
+           BL_ID
+         , LOG_SEQ
+         , PRT_KIND_CD
+         , BL_PRT_CNT
+         , VIAPLC_CD
+         , VIAPLC_PORT_CD
+         , VIAPLC_PORT_CD1
+         , VIAPLC_PORT_CD2
+         , VIAPLC_FLTNO
+         , VIAPLC_FLTNO1
+         , VIAPLC_FLTNO2
+         , PKG_NM
+         , ARRN_YN
+         , ARRN_CONT
+         , AGRE_YN
+         , MBL_LBL_PRNT_YN
+         , HBL_LBL_PRNT_YN
+         , DIM_RIDR_YN
+         , ORIGN_RIDR_YN
+         , EPRS_RELES_YN
+         , IATA_AGNT_MARK_NM
+         , CARR_PRT_RMK
+         , CSTM_PRT_RMK
+         , PRT_SELL_RATE_KIND_CD
+         , PRT_SELL_RATE_PCNT
+         , PRT_SELL_RATE
+         , PRT_BUY_RATE_KIND_CD
+         , PRT_BUY_RATE_PCNT
+         , PRT_BUY_RATE
+         , PRT_CARR_NM
+         , PRT_CTY_NM
+         , PRT_AGNT_NM
+         , PRT_ORGN_CD
+         , PRT_ORGN_NM
+         , EXP_SCAN_YN
+         , EXP_SCAN_WORKR_ID
+         , EXP_SCAN_DT
+         , MNFST_ARR_YMD
+         , MNFST_FLT_VSL_NM
+         , MNFST_POL_CD
+         , PRT_FRGH_BLCK_YN
+         , MBL_LBL_PRT_DT
+         , PREFIX_NM
+         , PRT_ORIGN_CARR_NM
+         , CSTM_CERT_NO
+         , CI_PL_EDMS_KPI_YN
+         , MBL_EDMS_KPI_YN
+         , HBL_EDMS_KPI_YN
+         , FRGH_AUTO_CRT_ERR_YN
+         , POSTOFFICE_YN
+         , DOC_RECV_YMD
+         , BL_KIND_CD
+         , BL_TYPE_CD
+         , INFO_BLCK_YN
+         , PTNR_ADDR_PRNT_YN
+         , DNGMATL_CLAS_CD
+         , DNGMATL_UN_NO
+         , PACKG_GRP_CD
+         , EXPS_ADD_CARGO_CWT
+         , EXPS_ADD_CARGO_CTRT_RATE
+         , EXPS_ADD_CARGO_QTY
+         , EXPS_ADD_CARGO_RATE_SPR_CD
+         , EXPS_ADD_CARGO_WGT
+         , EXPS_ADD_CARGO_WGT_UNIT_CD
+         , EXPS_ADD_CARGO_ITEM_RMK
+         , FRGH_AUTO_CRT_ERR_CONT
+         , FRGH_APLY_YN
+         , DNGMATL_UN_SPR_CD
+         , OTHFWDR_YN
+         , WGT_FRGH_APLY_YN
+         , EQIP_YN
+         , ATCHFILE_SPR_CD
+         , MNFST_ATCH_YN
+         , MBL_ATCH_YN
+         , PTNR_HBL_ATCH_YN
+         , CI_ATCH_YN
+         , PL_ATCH_YN
+         , CI_PL_ATCH_YN
+         , LICE_ATCH_YN
+         , SCHD_ATCH_YN
+         , SHPP_HBL_ATCH_YN
+         , CARGO_DNGMATL_CRAFT_TYPE
+         , EMAIL_SEND_YN
+         , EMAIL_SEND_STAT_CD
+         , ATCHFILE_NO
+         , AGNT_CD
+         , RMK
+         , TRNS_ID
+         , DEL_YN
+         , REG_DT
+         , RSTR_ID
+         , UPD_DT
+         , UPDR_ID
+         , LOG_DT
+           )
+    SELECT
+           BL_ID
+         , IFNULL((SELECT MAX(A.LOG_SEQ) FROM TB_FWD_BL_PRT_EXPND_LOG A WHERE A.BL_ID = #{blId}), 0) +1 AS LOG_SEQ
+         , PRT_KIND_CD
+         , BL_PRT_CNT
+         , VIAPLC_CD
+         , VIAPLC_PORT_CD
+         , VIAPLC_PORT_CD1
+         , VIAPLC_PORT_CD2
+         , VIAPLC_FLTNO
+         , VIAPLC_FLTNO1
+         , VIAPLC_FLTNO2
+         , PKG_NM
+         , ARRN_YN
+         , ARRN_CONT
+         , AGRE_YN
+         , MBL_LBL_PRNT_YN
+         , HBL_LBL_PRNT_YN
+         , DIM_RIDR_YN
+         , ORIGN_RIDR_YN
+         , EPRS_RELES_YN
+         , IATA_AGNT_MARK_NM
+         , CARR_PRT_RMK
+         , CSTM_PRT_RMK
+         , PRT_SELL_RATE_KIND_CD
+         , PRT_SELL_RATE_PCNT
+         , PRT_SELL_RATE
+         , PRT_BUY_RATE_KIND_CD
+         , PRT_BUY_RATE_PCNT
+         , PRT_BUY_RATE
+         , PRT_CARR_NM
+         , PRT_CTY_NM
+         , PRT_AGNT_NM
+         , PRT_ORGN_CD
+         , PRT_ORGN_NM
+         , EXP_SCAN_YN
+         , EXP_SCAN_WORKR_ID
+         , EXP_SCAN_DT
+         , MNFST_ARR_YMD
+         , MNFST_FLT_VSL_NM
+         , MNFST_POL_CD
+         , PRT_FRGH_BLCK_YN
+         , MBL_LBL_PRT_DT
+         , PREFIX_NM
+         , PRT_ORIGN_CARR_NM
+         , CSTM_CERT_NO
+         , CI_PL_EDMS_KPI_YN
+         , MBL_EDMS_KPI_YN
+         , HBL_EDMS_KPI_YN
+         , FRGH_AUTO_CRT_ERR_YN
+         , POSTOFFICE_YN
+         , DOC_RECV_YMD
+         , BL_KIND_CD
+         , BL_TYPE_CD
+         , INFO_BLCK_YN
+         , PTNR_ADDR_PRNT_YN
+         , DNGMATL_CLAS_CD
+         , DNGMATL_UN_NO
+         , PACKG_GRP_CD
+         , EXPS_ADD_CARGO_CWT
+         , EXPS_ADD_CARGO_CTRT_RATE
+         , EXPS_ADD_CARGO_QTY
+         , EXPS_ADD_CARGO_RATE_SPR_CD
+         , EXPS_ADD_CARGO_WGT
+         , EXPS_ADD_CARGO_WGT_UNIT_CD
+         , EXPS_ADD_CARGO_ITEM_RMK
+         , FRGH_AUTO_CRT_ERR_CONT
+         , FRGH_APLY_YN
+         , DNGMATL_UN_SPR_CD
+         , OTHFWDR_YN
+         , WGT_FRGH_APLY_YN
+         , EQIP_YN
+         , ATCHFILE_SPR_CD
+         , MNFST_ATCH_YN
+         , MBL_ATCH_YN
+         , PTNR_HBL_ATCH_YN
+         , CI_ATCH_YN
+         , PL_ATCH_YN
+         , CI_PL_ATCH_YN
+         , LICE_ATCH_YN
+         , SCHD_ATCH_YN
+         , SHPP_HBL_ATCH_YN
+         , CARGO_DNGMATL_CRAFT_TYPE
+         , EMAIL_SEND_YN
+         , EMAIL_SEND_STAT_CD
+         , ATCHFILE_NO
+         , AGNT_CD
+         , RMK
+         , TRNS_ID
+         , DEL_YN
+         , REG_DT
+         , RSTR_ID
+         , UPD_DT
+         , UPDR_ID
+         , NOW() AS LOG_DT
+      FROM TB_FWD_BL_PRT_EXPND
+     WHERE BL_ID = #{blId}
+    </insert>
+
+    <insert id="insertBlCstExpndBasisInfoLog" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlCstExpndBasisInfoLog */
+    INSERT INTO TB_FWD_BL_CST_EXPND_LOG (
+          BL_ID
+        , LOG_SEQ
+        , CST_KIND_CD
+        , CST_TXN_TYPE_CD
+        , CST_OBU_CD
+        , CST_SHPP_CD
+        , CST_CNEE_CD
+        , CST_CORP_YN
+        , CST_RATE_APLY_YN
+        , CST_CARR_CD
+        , CST_FWDR_CD
+        , CST_BUYER_NM
+        , CST_BUYER_CD
+        , CST_OEM_YN
+        , BL_CRT_TYPE_DTL_CD
+        , CST_DEPT_NM
+        , ACTU_TRKR_CD
+        , ACTU_TRKR_NM
+        , CST_EXFOUT_HEADR_ID
+        , CST_EXFOUT_YMD_HMS
+        , CST_CWT
+        , CST_VOL_WGT
+        , WGT_UNIT_CD
+        , CST_GWT
+        , CST_MODEL_NM
+        , IMP_CONF_YN
+        , ITEM_MODEL_NM
+        , PCS_QTY
+        , ORD_MODEL_ID
+        , SEND_YMD
+        , IMPC_CD
+        , EXCHGND_CD
+        , DPT_HMS
+        , POSTOFFICE_YN
+        , US_INLAND_TYPE_CD
+        , GLB_YN
+        , OTHFWDR_BL_YN
+        , TRNS_ID
+        , DEL_YN
+        , REG_DT
+        , RSTR_ID
+        , UPD_DT
+        , UPDR_ID
+        , LOG_DT
+           )
+    SELECT
+           BL_ID
+        , IFNULL((SELECT MAX(A.LOG_SEQ) FROM TB_FWD_BL_CST_EXPND_LOG A WHERE A.BL_ID = #{blId}), 0) +1 AS LOG_SEQ
+        , CST_KIND_CD
+        , CST_TXN_TYPE_CD
+        , CST_OBU_CD
+        , CST_SHPP_CD
+        , CST_CNEE_CD
+        , CST_CORP_YN
+        , CST_RATE_APLY_YN
+        , CST_CARR_CD
+        , CST_FWDR_CD
+        , CST_BUYER_NM
+        , CST_BUYER_CD
+        , CST_OEM_YN
+        , BL_CRT_TYPE_DTL_CD
+        , CST_DEPT_NM
+        , ACTU_TRKR_CD
+        , ACTU_TRKR_NM
+        , CST_EXFOUT_HEADR_ID
+        , CST_EXFOUT_YMD_HMS
+        , CST_CWT
+        , CST_VOL_WGT
+        , WGT_UNIT_CD
+        , CST_GWT
+        , CST_MODEL_NM
+        , IMP_CONF_YN
+        , ITEM_MODEL_NM
+        , PCS_QTY
+        , ORD_MODEL_ID
+        , SEND_YMD
+        , IMPC_CD
+        , EXCHGND_CD
+        , DPT_HMS
+        , POSTOFFICE_YN
+        , US_INLAND_TYPE_CD
+        , GLB_YN
+        , OTHFWDR_BL_YN
+        , TRNS_ID
+        , DEL_YN
+        , REG_DT
+        , RSTR_ID
+        , UPD_DT
+        , UPDR_ID
+        , NOW() AS LOG_DT
+      FROM TB_FWD_BL_CST_EXPND
+     WHERE BL_ID = #{blId}
+    </insert>
+
+    <insert id="insertHblIntgItemMpng" parameterType="dataItem" >
+        /* fwd.document.fwdBlReg.insertHblIntgItemMpng */
+        INSERT INTO TB_FWD_BL_ITEM_MPNG(
+         BL_ID
+        ,INTG_ITEM_NO
+        ,MPNG_KIND_CD
+        ,DEL_YN
+        ,REG_DT
+        ,RSTR_ID
+        ,UPD_DT
+        ,UPDR_ID
+        )
+        VALUES
+        (
+         #{blId}
+        ,#{intgItemNo}
+        ,#{mpngKindCd}
+        ,'N'
+        ,NOW()
+        ,#{userId}
+        ,NOW()
+        ,#{userId}
+        )
+    </insert>
+
+    <update id="updateHblIntgItemMpng" parameterType="dataItem" >
+        /* fwd.document.fwdBlReg.updateHblIntgItemMpng */
+        UPDATE TB_FWD_BL_ITEM_MPNG
+           SET UPD_DT        = NOW()
+              ,UPDR_ID       = #{userId}
+         WHERE BL_ID         = #{blId}
+           AND INTG_ITEM_NO  = #{intgItemNo}
+    </update>
+
+    <update id="deleteHblIntgItemMpng" parameterType="dataItem" >
+        /* fwd.document.fwdBlReg.deleteHblIntgItemMpng */
+        UPDATE TB_FWD_BL_ITEM_MPNG
+           SET DEL_YN        = 'Y'
+              ,UPD_DT        = NOW()
+              ,UPDR_ID       = #{userId}
+         WHERE BL_ID         = #{blId}
+        <if test="intgItemNo != null and intgItemNo != ''">
+           AND INTG_ITEM_NO = #{intgItemNo}
+        </if>
+
+    </update>
+
+
+
+    <insert id="insertBlTaskSpclDtl" parameterType="dataItem" >
+        /* fwd.document.fwdBlReg.insertBlTaskSpclDtl */
+        INSERT INTO TB_FWD_BL_TASK_SPC_DTL(
+             BL_ID
+            ,TASK_SPR_CD
+            ,CORP_CD
+            ,CC_SPR_CD
+            ,CC_RES_CD
+            ,MNFST_ARR_YMD
+            ,MNFST_FLT_VSL_NM
+            ,MNFST_POL_CD
+            ,MNFST_POD_CD
+            ,MNFST_GWT
+            ,MNFST_CBM
+            ,MNFST_PKG_QTY
+            ,MNFST_PKG_UNIT_CD
+            ,MNFST_TRKR_CD
+            ,CSTM_SEND_YN
+            ,MNFST_FNL_SEND_DT
+            ,MNFST_FNL_SENDR_ID
+            ,MNFSTCC_INSPT_REQ_YN
+            ,MNFSTCC_RES_CD
+            ,MNFSTCC_FNL_SEND_DT
+            ,MNFSTCC_FNL_SENDR_ID
+            ,DEL_YN
+            ,REG_DT
+            ,RSTR_ID
+            ,CLAS_MACH_BL_SEND_DT
+            ,CLAS_MACH_BL_SEND_RES_CD
+            ,LIST_EXCLSN_CONF_YN
+            ,CRMRDDN_CARGO_CONF_YN
+            ,SUM_WTHDR_CONF_YN
+            ,MNFST_ITEM_NM
+            ,UNLD_ITEM_CD
+            ,MNFSTCC_PMSN_ITEM_CD
+            ,CSTM_IMPER_MGNT_NO
+            ,CSTM_TXN_TYPE_CD
+            ,CSTM_CNEE_TYPE_CD
+            ,HOMEPAGE_ADDR
+            ,SSN
+            ,CORP_BIZ_GRP_CD
+            ,LOCL_WRK_CLAS_CD
+            ,AMS_BL_NO
+            ,SUB_BL_NO
+            ,TRKR_SVC_CD
+            ,TRXN_SEND_YN
+            ,APRV_YN
+            ,APRVR_ID
+            ,AUTO_UPD_BLCK_YN
+            ,ITEM_SEND_YN
+            ,HBL_ERR_MSG_CONT
+            ,KCNET_SEND_SPR_CD
+            ,ITEM_NM_INSPT_ANS_YN
+            ,MSG_NO
+            ,TAKOUT_CSTM_APRV_YMD_HMS
+            ,TAKIN_CSTM_APRV_YMD_HMS
+            ,PRT_CARR_CD
+            ,PRT_PIC_NM
+            ,PRT_T1_NO
+            ,PRT_INV_AMT
+            ,PRT_CNEE_ZIPCD
+            ,PRT_CNEE_NM
+            ,PRT_PKG_QTY
+            ,PRT_CWT
+            ,PRT_BUY_SVC_GDS_CD
+            ,PRT_CNEE_1ADDR
+            ,PRT_CNEE_2ADDR
+            ,PRT_CNEE_3ADDR
+            ,PRT_CNEE_STATE_NM
+            ,PRT_CNEE_CTY_NM
+            ,PRT_CNEE_MBPNO
+            ,PRT_CNEE_TEL_NO
+            ,PRT_PACK_YN
+            ,PRT_MBL_NO
+            ,PRT_DT
+            ,PRTER_ID
+            ,MNFSTCC_SUBMT_NO
+            ,TAKIN_YN
+            ,TAKOUT_YN
+            ,DECL_YN
+            ,TAKIN_DT
+            ,TAKOUT_DT
+            ,CSTM_SEND_EXCPT_YN
+            ,BRKR_BL_SEND_YN
+            ,TRNS_ID
+        )
+        VALUES (
+             #{blId}
+            ,#{taskSprCd}
+            ,#{corpCd}
+            ,#{ccSprCd}
+            ,#{ccResCd}
+            ,#{mnfstArrYmd}
+            ,#{mnfstFltVslNm}
+            ,#{mnfstPolCd}
+            ,#{mnfstPodCd}
+            ,#{mnfstGwt}
+            ,#{mnfstCbm}
+            ,#{mnfstPkgQty}
+            ,#{mnfstPkgUnitCd}
+            ,#{mnfstTrkrCd}
+            ,IFNULL(#{cstmSendYn}, 'N')
+            ,#{mnfstFnlSendDt}
+            ,#{mnfstFnlSendrId}
+            ,IFNULL(#{mnfstccInsptReqYn}, 'N')
+            ,#{mnfstccResCd}
+            ,#{mnfstccFnlSendDt}
+            ,#{mnfstccFnlSendrId}
+            ,'N'
+            ,NOW()
+            ,#{userId}
+            ,#{clasMachBlSendDt}
+            ,#{clasMachBlSendResCd}
+            ,IFNULL(#{listExclsnConfYn}, 'N')
+            ,IFNULL(#{crmrddnCargoConfYn}, 'N')
+            ,IFNULL(#{sumWthdrConfYn}, 'N')
+            ,#{mnfstItemNm}
+            ,#{unldItemCd}
+            ,#{mnfstccPmsnItemCd}
+            ,#{cstmImperMgntNo}
+            ,#{cstmTxnTypeCd}
+            ,#{cstmCneeYypeCd}
+            ,#{homepageAddr}
+            ,#{ssn}
+            ,#{corpBizGrpCd}
+            ,#{loclWrkClasCd}
+            ,#{amsBlNo}
+            ,#{subBlNo}
+            ,#{trkrSvcCd}
+            ,IFNULL(#{trxnSendYn}, 'N')
+            ,IFNULL(#{aprvYn}, 'N')
+            ,#{aprvrId}
+            ,IFNULL(#{autoUpdBlckYn}, 'N')
+            ,IFNULL(#{itemSendYn}, 'N')
+            ,#{hblErrMsgCont}
+            ,#{kcnetSendSprCd}
+            ,IFNULL(#{itemNmInsptAnsYn}, 'N')
+            ,#{msgNo}
+            ,#{takoutCstmAprvYmdHms}
+            ,#{takinCstmAprvYmdHms}
+            ,#{prtCarrCd}
+            ,#{prtPicNm}
+            ,#{prtT1No}
+            ,#{prtInvAmt}
+            ,#{prtCneeZipcd}
+            ,#{prtCneeNm}
+            ,#{prtPkgQty}
+            ,#{prtCwt}
+            ,#{prtBuySvcGdsCd}
+            ,#{prtCnee1addr}
+            ,#{prtCnee2addr}
+            ,#{prtCnee3addr}
+            ,#{prtCneeStateNm}
+            ,#{prtCneeCtyNm}
+            ,#{prtCneeMbpno}
+            ,#{prtCneeTelNo}
+            ,IFNULL(#{prtPackYn}, 'N')
+            ,#{prtMblNo}
+            ,#{prtDt}
+            ,#{prterId}
+            ,#{mnfstccSubmtNo}
+            ,IFNULL(#{takinYn}, 'N')
+            ,IFNULL(#{takoutYn}, 'N')
+            ,IFNULL(#{declYn}, 'N')
+            ,#{takinDt}
+            ,#{takoutDt}
+            ,IFNULL(#{cstmSendExcptYn}, 'N')
+            ,IFNULL(#{brkrBlSendYn}, 'N')
+            ,#{trnsId}
+            )
+    </insert>
+
+    <update id="deleteBlTaskSpclDtl" parameterType="dataItem" >
+        /* fwd.document.fwdBlReg.deleteBlTaskSpclDtl */
+        UPDATE TB_FWD_BL_TASK_SPC_DTL
+           SET DEL_YN       = 'Y'
+              ,UPD_DT       = NOW()
+              ,UPDR_ID      = #{session.userId}
+              ,TRNS_ID      = #{trnsId}
+         WHERE BL_ID        = #{blId}
+           AND TASK_SPR_CD  = #{taskSprCd}
+    </update>
+
+    <update id="updateBlTaskSpclDtl" parameterType="dataItem" >
+        /* fwd.document.fwdBlReg.updateBlTaskSpclDtl */
+        UPDATE TB_FWD_BL_TASK_SPC_DTL
+           SET UPD_DT       = NOW()
+              ,UPDR_ID      = #{session.userId}
+              ,TRNS_ID      = #{trnsId}
+    <if test='updateType != null and !updateType.equals("")'>
+      <choose>
+      <when test='updateType.equals("OnbrClosYn")'>
+      </when>
+      <otherwise>
+	        <if test="_parameter.containsKey('corpCd')">
+	              ,CORP_CD      = #{corpCd}
+	        </if>
+	        <if test="_parameter.containsKey('ccSprCd')">
+	              ,CC_SPR_CD    = #{ccSprCd}
+	        </if>
+	        <if test="_parameter.containsKey('ccResCd')">
+	              ,CC_RES_CD      = #{ccResCd}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstArrYmd')">
+	              ,MNFST_ARR_YMD      = #{mnfstArrYmd}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstFltVslNm')">
+	              ,MNFST_FLT_VSL_NM      = #{mnfstFltVslNm}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstPolCd')">
+	              ,MNFST_POL_CD      = #{mnfstPolCd}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstPodCd')">
+	              ,MNFST_POD_CD      = #{mnfstPodCd}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstGwt')">
+	              ,MNFST_GWT      = #{mnfstGwt}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstCbm')">
+	              ,MNFST_CBM      = #{mnfstCbm}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstPkgQty')">
+	              ,MNFST_PKG_QTY      = #{mnfstPkgQty}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstPkgUnitCd')">
+	              ,MNFST_PKG_UNIT_CD      = #{mnfstPkgUnitCd}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstTrkrCd')">
+	              ,MNFST_TRKR_CD      = #{mnfstTrkrCd}
+	        </if>
+	        <if test="_parameter.containsKey('cstmSendYn')">
+	              ,CSTM_SEND_YN      = IFNULL(#{cstmSendYn}, 'N')
+	        </if>
+	        <if test="_parameter.containsKey('mnfstFnlSendDt')">
+	              ,MNFST_FNL_SEND_DT      = #{mnfstFnlSendDt}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstFnlSendDtNow')">
+                  ,MNFST_FNL_SEND_DT      = NOW()
+            </if>
+	        <if test="_parameter.containsKey('mnfstFnlSendrId')">
+	              ,MNFST_FNL_SENDR_ID      = #{mnfstFnlSendrId}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstccInsptReqYn')">
+	              ,MNFSTCC_INSPT_REQ_YN      = #{mnfstccInsptReqYn}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstccResCd')">
+	              ,MNFSTCC_RES_CD      = #{mnfstccResCd}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstccFnlSendDt')">
+	              ,MNFSTCC_FNL_SEND_DT      = #{mnfstccFnlSendDt}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstccFnlSendrId')">
+	              ,MNFSTCC_FNL_SENDR_ID      = #{mnfstccFnlSendrId}
+	        </if>
+	        <if test="_parameter.containsKey('clasMachBlSendDt')">
+	              ,CLAS_MACH_BL_SEND_DT      = #{clasMachBlSendDt}
+	        </if>
+	        <if test="_parameter.containsKey('clasMachBlSendResCd')">
+	              ,CLAS_MACH_BL_SEND_RES_CD      = #{clasMachBlSendResCd}
+	        </if>
+	        <if test="_parameter.containsKey('listExclsnConfYn')">
+	              ,LIST_EXCLSN_CONF_YN      = #{listExclsnConfYn}
+	        </if>
+	        <if test="_parameter.containsKey('crmrddnCargoConfYn')">
+	              ,CRMRDDN_CARGO_CONF_YN      = #{crmrddnCargoConfYn}
+	        </if>
+	        <if test="_parameter.containsKey('sumWthdrConfYn')">
+	              ,SUM_WTHDR_CONF_YN      = #{sumWthdrConfYn}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstItemNm')">
+	              ,MNFST_ITEM_NM      = #{mnfstItemNm}
+	        </if>
+	        <if test="_parameter.containsKey('unldItemCd')">
+	              ,UNLD_ITEM_CD      = #{unldItemCd}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstccPmsnItemCd')">
+	              ,MNFSTCC_PMSN_ITEM_CD      = #{mnfstccPmsnItemCd}
+	        </if>
+	        <if test="_parameter.containsKey('cstmImperMgntNo')">
+	              ,CSTM_IMPER_MGNT_NO      = #{cstmImperMgntNo}
+	        </if>
+	        <if test="_parameter.containsKey('cstmTxnTypeCd')">
+	              ,CSTM_TXN_TYPE_CD      = #{cstmTxnTypeCd}
+	        </if>
+	        <if test="_parameter.containsKey('cstmCneeTypeCd')">
+	              ,CSTM_CNEE_TYPE_CD      = #{cstmCneeTypeCd}
+	        </if>
+	        <if test="_parameter.containsKey('homepageAddr')">
+	              ,HOMEPAGE_ADDR      = #{homepageAddr}
+	        </if>
+	        <if test="_parameter.containsKey('ssn')">
+	              ,SSN      = #{ssn}
+	        </if>
+	        <if test="_parameter.containsKey('corpBizGrpCd')">
+	              ,CORP_BIZ_GRP_CD      = #{corpBizGrpCd}
+	        </if>
+	        <if test="_parameter.containsKey('loclWrkClasCd')">
+	              ,LOCL_WRK_CLAS_CD      = #{loclWrkClasCd}
+	        </if>
+	        <if test="_parameter.containsKey('amsBlNo')">
+	              ,AMS_BL_NO      = #{amsBlNo}
+	        </if>
+	        <if test="_parameter.containsKey('subBlNo')">
+	              ,SUB_BL_NO      = #{subBlNo}
+	        </if>
+	        <if test="_parameter.containsKey('trkrSvcCd')">
+	              ,TRKR_SVC_CD      = #{trkrSvcCd}
+	        </if>
+	        <if test="_parameter.containsKey('trxnSendYn')">
+	              ,TRXN_SEND_YN      = #{trxnSendYn}
+	        </if>
+	        <if test="_parameter.containsKey('aprvYn')">
+	              ,APRV_YN      = #{aprvYn}
+	        </if>
+	        <if test="_parameter.containsKey('aprvrId')">
+	              ,APRVR_ID      = #{aprvrId}
+	        </if>
+	        <if test="_parameter.containsKey('autoUpdBlckYn')">
+	              ,AUTO_UPD_BLCK_YN      = #{autoUpdBlckYn}
+	        </if>
+	        <if test="_parameter.containsKey('itemSendYn')">
+	              ,ITEM_SEND_YN      = #{itemSendYn}
+	        </if>
+	        <if test="_parameter.containsKey('hblErrMsgCont')">
+	              ,HBL_ERR_MSG_CONT      = #{hblErrMsgCont}
+	        </if>
+	        <if test="_parameter.containsKey('kcnetSendSprCd')">
+	              ,KCNET_SEND_SPR_CD      = #{kcnetSendSprCd}
+	        </if>
+	        <if test="_parameter.containsKey('itemNmInsptAnsYn')">
+	              ,ITEM_NM_INSPT_ANS_YN      = #{itemNmInsptAnsYn}
+	        </if>
+	        <if test="_parameter.containsKey('msgNo')">
+	              ,MSG_NO      = #{msgNo}
+	        </if>
+	        <if test="_parameter.containsKey('takoutCstmAprvYmdHms')">
+	              ,TAKOUT_CSTM_APRV_YMD_HMS      = #{takoutCstmAprvYmdHms}
+	        </if>
+	        <if test="_parameter.containsKey('takinCstmAprvYmdHms')">
+	              ,TAKIN_CSTM_APRV_YMD_HMS      = #{takinCstmAprvYmdHms}
+	        </if>
+	        <if test="_parameter.containsKey('prtCarrCd')">
+	              ,PRT_CARR_CD      = #{prtCarrCd}
+	        </if>
+	        <if test="_parameter.containsKey('prtPicNm')">
+	              ,PRT_PIC_NM      = #{prtPicNm}
+	        </if>
+	        <if test="_parameter.containsKey('prtT1No')">
+	              ,PRT_T1_NO      = #{prtT1No}
+	        </if>
+	        <if test="_parameter.containsKey('prtInvAmt')">
+	              ,PRT_INV_AMT      = #{prtInvAmt}
+	        </if>
+	        <if test="_parameter.containsKey('prtCneeZipcd')">
+	              ,PRT_CNEE_ZIPCD      = #{prtCneeZipcd}
+	        </if>
+	        <if test="_parameter.containsKey('prtCneeNm')">
+	              ,PRT_CNEE_NM      = #{prtCneeNm}
+	        </if>
+	        <if test="_parameter.containsKey('prtPkgQty')">
+	              ,PRT_PKG_QTY      = #{prtPkgQty}
+	        </if>
+	        <if test="_parameter.containsKey('prtCwt')">
+	              ,PRT_CWT      = #{prtCwt}
+	        </if>
+	        <if test="_parameter.containsKey('prtBuySvcGdsCd')">
+	              ,PRT_BUY_SVC_GDS_CD      = #{prtBuySvcGdsCd}
+	        </if>
+	        <if test="_parameter.containsKey('prtCnee1addr')">
+	              ,PRT_CNEE_1ADDR      = #{prtCnee1addr}
+	        </if>
+	        <if test="_parameter.containsKey('prtCnee2addr')">
+	              ,PRT_CNEE_2ADDR      = #{prtCnee2addr}
+	        </if>
+	        <if test="_parameter.containsKey('prtCnee3addr')">
+	              ,PRT_CNEE_3ADDR      = #{prtCnee3addr}
+	        </if>
+	        <if test="_parameter.containsKey('prtCneeStateNm')">
+	              ,PRT_CNEE_STATE_NM      = #{prtCneeStateNm}
+	        </if>
+	        <if test="_parameter.containsKey('prtCneeCtyNm')">
+	              ,PRT_CNEE_CTY_NM      = #{prtCneeCtyNm}
+	        </if>
+	        <if test="_parameter.containsKey('prtCneeMbpno')">
+	              ,PRT_CNEE_MBPNO      = #{prtCneeMbpno}
+	        </if>
+	        <if test="_parameter.containsKey('prtCneeTelNo')">
+	              ,PRT_CNEE_TEL_NO      = #{prtCneeTelNo}
+	        </if>
+	        <if test="_parameter.containsKey('prtPackYn')">
+	              ,PRT_PACK_YN      = #{prtPackYn}
+	        </if>
+	        <if test="_parameter.containsKey('prtMblNo')">
+	              ,PRT_MBL_NO      = #{prtMblNo}
+	        </if>
+	        <if test="_parameter.containsKey('prtDt')">
+	              ,PRT_DT      = #{prtDt}
+	        </if>
+	        <if test="_parameter.containsKey('prterId')">
+	              ,PRTER_ID      = #{prterId}
+	        </if>
+	        <if test="_parameter.containsKey('mnfstccSubmtNo')">
+	              ,MNFSTCC_SUBMT_NO      = #{mnfstccSubmtNo}
+	        </if>
+	        <if test="_parameter.containsKey('takinYn')">
+	              ,TAKIN_YN      = #{takinYn}
+	        </if>
+	        <if test="_parameter.containsKey('takoutYn')">
+	              ,TAKOUT_YN      = #{takoutYn}
+	        </if>
+	        <if test="_parameter.containsKey('declYn')">
+	              ,DECL_YN      = #{declYn}
+	        </if>
+	         <if test="_parameter.containsKey('takinDt')">
+	              ,TAKIN_DT      = #{takinDt}
+	        </if>
+	        <if test="_parameter.containsKey('takoutDt')">
+	              ,TAKOUT_DT      = #{takoutDt}
+	        </if>
+	        <if test="_parameter.containsKey('cstmSendExcptYn')">
+	              ,CSTM_SEND_EXCPT_YN      = #{cstmSendExcptYn}
+	        </if>
+	        <if test="_parameter.containsKey('brkrBlSendYn')">
+	              ,BRKR_BL_SEND_YN      = #{brkrBlSendYn}
+	        </if>
+        </otherwise>
+        </choose>
+        </if>
+         WHERE BL_ID        = #{blId}
+           AND TASK_SPR_CD  = #{taskSprCd}
+
+    </update>
+
+    <insert id="insertBlTaskSpclDtlLog" parameterType="dataItem" >
+    /* fwd.document.fwdBlReg-mapper.insertBlTaskSpclDtlLog */
+    INSERT INTO TB_FWD_BL_TASK_SPC_DTL_LOG (
+          BL_ID
+        , LOG_SEQ
+        , TASK_SPR_CD
+        , CORP_CD
+        , CC_SPR_CD
+        , CC_RES_CD
+        , MNFST_ARR_YMD
+        , MNFST_FLT_VSL_NM
+        , MNFST_POL_CD
+        , MNFST_POD_CD
+        , MNFST_GWT
+        , MNFST_CBM
+        , MNFST_PKG_QTY
+        , MNFST_PKG_UNIT_CD
+        , MNFST_TRKR_CD
+        , CSTM_SEND_YN
+        , MNFST_FNL_SEND_DT
+        , MNFST_FNL_SENDR_ID
+        , MNFSTCC_INSPT_REQ_YN
+        , MNFSTCC_RES_CD
+        , MNFSTCC_FNL_SEND_DT
+        , MNFSTCC_FNL_SENDR_ID
+        , CLAS_MACH_BL_SEND_DT
+        , CLAS_MACH_BL_SEND_RES_CD
+        , LIST_EXCLSN_CONF_YN
+        , CRMRDDN_CARGO_CONF_YN
+        , SUM_WTHDR_CONF_YN
+        , MNFST_ITEM_NM
+        , UNLD_ITEM_CD
+        , MNFSTCC_PMSN_ITEM_CD
+        , CSTM_IMPER_MGNT_NO
+        , CSTM_TXN_TYPE_CD
+        , CSTM_CNEE_TYPE_CD
+        , HOMEPAGE_ADDR
+        , SSN
+        , CORP_BIZ_GRP_CD
+        , LOCL_WRK_CLAS_CD
+        , AMS_BL_NO
+        , SUB_BL_NO
+        , TRKR_SVC_CD
+        , TRXN_SEND_YN
+        , APRV_YN
+        , APRVR_ID
+        , AUTO_UPD_BLCK_YN
+        , ITEM_SEND_YN
+        , HBL_ERR_MSG_CONT
+        , KCNET_SEND_SPR_CD
+        , ITEM_NM_INSPT_ANS_YN
+        , MSG_NO
+        , TAKOUT_CSTM_APRV_YMD_HMS
+        , TAKIN_CSTM_APRV_YMD_HMS
+        , PRT_CARR_CD
+        , PRT_PIC_NM
+        , PRT_T1_NO
+        , PRT_INV_AMT
+        , PRT_CNEE_ZIPCD
+        , PRT_CNEE_NM
+        , PRT_PKG_QTY
+        , PRT_CWT
+        , PRT_BUY_SVC_GDS_CD
+        , PRT_CNEE_1ADDR
+        , PRT_CNEE_2ADDR
+        , PRT_CNEE_3ADDR
+        , PRT_CNEE_STATE_NM
+        , PRT_CNEE_CTY_NM
+        , PRT_CNEE_MBPNO
+        , PRT_CNEE_TEL_NO
+        , PRT_PACK_YN
+        , PRT_MBL_NO
+        , PRT_DT
+        , PRTER_ID
+        , MNFSTCC_SUBMT_NO
+        , TAKIN_YN
+        , TAKOUT_YN
+        , DECL_YN
+        , TAKIN_DT
+        , TAKOUT_DT
+        , CSTM_SEND_EXCPT_YN
+        , BRKR_BL_SEND_YN
+        , TRNS_ID
+        , DEL_YN
+        , REG_DT
+        , RSTR_ID
+        , UPD_DT
+        , UPDR_ID
+        , LOG_DT
+           )
+    SELECT
+           BL_ID
+        , IFNULL((SELECT MAX(A.LOG_SEQ) FROM TB_FWD_BL_TASK_SPC_DTL_LOG A WHERE A.BL_ID = #{blId}), 0) +1 AS LOG_SEQ
+        , TASK_SPR_CD
+        , CORP_CD
+        , CC_SPR_CD
+        , CC_RES_CD
+        , MNFST_ARR_YMD
+        , MNFST_FLT_VSL_NM
+        , MNFST_POL_CD
+        , MNFST_POD_CD
+        , MNFST_GWT
+        , MNFST_CBM
+        , MNFST_PKG_QTY
+        , MNFST_PKG_UNIT_CD
+        , MNFST_TRKR_CD
+        , CSTM_SEND_YN
+        , MNFST_FNL_SEND_DT
+        , MNFST_FNL_SENDR_ID
+        , MNFSTCC_INSPT_REQ_YN
+        , MNFSTCC_RES_CD
+        , MNFSTCC_FNL_SEND_DT
+        , MNFSTCC_FNL_SENDR_ID
+        , CLAS_MACH_BL_SEND_DT
+        , CLAS_MACH_BL_SEND_RES_CD
+        , LIST_EXCLSN_CONF_YN
+        , CRMRDDN_CARGO_CONF_YN
+        , SUM_WTHDR_CONF_YN
+        , MNFST_ITEM_NM
+        , UNLD_ITEM_CD
+        , MNFSTCC_PMSN_ITEM_CD
+        , CSTM_IMPER_MGNT_NO
+        , CSTM_TXN_TYPE_CD
+        , CSTM_CNEE_TYPE_CD
+        , HOMEPAGE_ADDR
+        , SSN
+        , CORP_BIZ_GRP_CD
+        , LOCL_WRK_CLAS_CD
+        , AMS_BL_NO
+        , SUB_BL_NO
+        , TRKR_SVC_CD
+        , TRXN_SEND_YN
+        , APRV_YN
+        , APRVR_ID
+        , AUTO_UPD_BLCK_YN
+        , ITEM_SEND_YN
+        , HBL_ERR_MSG_CONT
+        , KCNET_SEND_SPR_CD
+        , ITEM_NM_INSPT_ANS_YN
+        , MSG_NO
+        , TAKOUT_CSTM_APRV_YMD_HMS
+        , TAKIN_CSTM_APRV_YMD_HMS
+        , PRT_CARR_CD
+        , PRT_PIC_NM
+        , PRT_T1_NO
+        , PRT_INV_AMT
+        , PRT_CNEE_ZIPCD
+        , PRT_CNEE_NM
+        , PRT_PKG_QTY
+        , PRT_CWT
+        , PRT_BUY_SVC_GDS_CD
+        , PRT_CNEE_1ADDR
+        , PRT_CNEE_2ADDR
+        , PRT_CNEE_3ADDR
+        , PRT_CNEE_STATE_NM
+        , PRT_CNEE_CTY_NM
+        , PRT_CNEE_MBPNO
+        , PRT_CNEE_TEL_NO
+        , PRT_PACK_YN
+        , PRT_MBL_NO
+        , PRT_DT
+        , PRTER_ID
+        , MNFSTCC_SUBMT_NO
+        , TAKIN_YN
+        , TAKOUT_YN
+        , DECL_YN
+        , TAKIN_DT
+        , TAKOUT_DT
+        , CSTM_SEND_EXCPT_YN
+        , BRKR_BL_SEND_YN
+        , TRNS_ID
+        , DEL_YN
+        , REG_DT
+        , RSTR_ID
+        , UPD_DT
+        , UPDR_ID
+        , NOW() AS LOG_DT
+      FROM TB_FWD_BL_TASK_SPC_DTL
+     WHERE BL_ID = #{blId}
+     AND TASK_SPR_CD = #{taskSprCd}
+    </insert>
+
+    <select id="selectIntgTaskDept" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdBlReg-mapper.selectIntgTaskDept */
+        SELECT NULL AS INTG_TASK_NO
+            , SMT_NO
+            , EO_NO
+            , VSBT_SPR_CD
+            , TASK_SPR_CD
+            , DPT_ARRV_SPR_CD
+            , STG_SPR_CD
+            , SVC_TYPE_CD
+            , EXCT_BIZPTNR_CD
+            , EXCT_DEPT_CD
+            , RSLT_DEPT_CD
+            , LOCL_PTNR_YN
+            , PTNR_CD
+            , CONF_REQD_YN
+            , CONF_YN
+            , CONF_DT
+            , CONFR_ID
+            , AUTO_CONF_STAT_CD
+            , CARR_CD
+            , AGNT_CD
+            , CSBR_CD
+            , OFCR_EMPNO
+            , FRGH_FIX_YN
+            , BIZ_YMD
+            , BIZ_PRAR_YMD
+            , CRT_SPR_CD
+            , STG1_CMPT_YMD
+            , STG2_CMPT_YMD
+            , STG3_CMPT_YMD
+            , CST_BL_ID
+            , ORIGN_BL_ID
+            , ONBR_YMD
+            , ARR_YMD
+            , ADJ_HD_YN
+            , ADJ_HD_RESN
+            , SELL_PRE_BILG_SPR_CD
+            , BUY_PRE_BILG_SPR_CD
+            , BUY_ADJ_HD_YN
+            , BUY_ADJ_HD_RESN
+            , PRTL_ADJ_DIV_YN
+            /* , INTERFACE_ID */
+            , DEL_YN
+            , REG_DT
+            , RSTR_ID
+            , UPD_DT
+            , UPDR_ID
+         FROM TB_SMT_INTG_TASK_DEPT
+        WHERE SMT_NO = #{copySmtNo}
+          AND EO_NO = #{copyEoNo}
+          AND DEL_YN = 'N'
+    </select>
+</mapper>

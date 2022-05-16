@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />		
+		<link rel="stylesheet" href="../css/lib/jquery-ui.min.css" />
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+		<script src="../js/lib/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<a href="#nav">메인메뉴 바로가기</a>
+				<a href="#content">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+			<!--팝업-->
+			<!--로그아웃 팝업-->
+			<div class="logout_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="logout_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">로그 아웃</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">로그아웃</span> 하시겠습니까?</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="blue_btn mr5" onclick="location.href='./login.html'">예</button>
+							<button type="button" class="gray_btn lastClose layerClose">아니요</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//로그아웃 팝업-->
+			<!--필수서류 미첨부 팝업-->
+			<div class="attachments_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="attachments_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">첨부파일 미첨부 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">(필수서류 미첨부) </span>필수 입력 값입니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn lastClose layerClose">확인</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//필수서류 미첨부 팝업-->
+			<!--제출하기 팝업-->
+			<div class="reception_complete_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="reception_complete_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">접수 제출하기 안내</h4>							
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<span class="popup_titlebox_title">2021년 기술제안 사업 신청서 제출 </span>
+						<div class="popup_titlebox_txt">
+							<p><span class="font_blue">[예]</span> 버튼을 누르면 사업 신청서 제출이 완료되며, 수정은 불가능합니다.</p>							
+							<p>제출 완료 후에는 접수 대기 상태이며, 담당자가 제출서류를 확인하여 이상이 없을 경우, <br />
+								제출 완료될 예정이며, 접수번호가 부여됩니다.</p>
+							<p class="font_blue fz_b"><span class="fw500 font_blue">사업 신청서를 제출하시겠습니까?</span></p>
+							<p>- 귀한 시간 내주셔서 감사드립니다. -</p>
+						</div>
+					    <div class="popup_button_area_center">
+							<button type="submit" class="blue_btn mr5">예</button>
+							<button type="button" class="gray_btn lastClose layerClose popup_close_btn">아니요</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//제출하기 팝업-->
+
+			<!--셀페체크리스트항목 팝업-->
+			<div class="selfchecklist_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="selfchecklist_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">셀프체크리스트 항목</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<h4 class="popup_txt_title">신청사항 또는 가점사항</h4>
+						<div class="table_area">
+							<table class="list fixed">
+								<caption>신청사항 또는 가점사항</caption>
+								<colgroup>
+									<col style="width: 81%;">																		
+									<col style="width: 19%;">
+								</colgroup>
+								<thead>
+								<tr>
+									<th scope="col" class="first">질문</th>
+									<th scope="col" class="last">선택</th>
+								</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="first ta_l">동일 솔루션(제품·서비스)의 타 실증 사업 수행한 또는 중입니까? <br />
+										(계획서 제출 전 국가과학기술지식정보서비스(www.ntis.go.kr)에서 개별 확인 후 지원)<br />
+										<span class="font_blue">※ 기존 예산지원 사업으로 개발[완료]된 솔루션(제품·서비스)은 지원 가능</span></td>																
+										<td class="last">
+											<input type="radio" id="area_class1" name="area_class_g1" value="예" checked /> 
+											<label for="area_class1">예</label>
+											<input type="radio" id="area_class1_1" name="area_class_g1" value="아니오" /> 
+											<label for="area_class1_1">아니오</label>		
+										</td>
+									</tr>
+									<tr>
+										<td class="first ta_l">주관기관이 접수마감일 기준 본점 또는 지점이 법인등기부등본 상 서울시에 소재한 중소기업(법인) 또는 서울시 소재 관할 세무서에 사업자등록을 한 중소기업(법인)입니까?</td>																		
+										<td class="last">
+											<input type="radio" id="area_class2" name="questions_class_g2" value="예" checked /> <label for="area_class2">예</label>
+											<input type="radio" id="area_class2_1" name="questions_class_g2" value="아니오" /> <label for="area_class2_1">아니오</label>		
+										</td>
+									</tr>
+									<tr>
+										<td class="first ta_l">주관기관이 접수마감일 기준 사업개시 후 7년 미만인 중소기업(법인)입니까? <br />
+										<span class="font_blue">※ 신청자격은 아니며 인건비 계상 관련 단순 참고사항임</span></td>														
+										<td class="last">
+											<input type="radio" id="area_class3" name="questions_class_g3" value="예" checked /> <label for="area_class3">예</label>
+											<input type="radio" id="area_class3_1" name="questions_class_g3" value="아니오" /> <label for="area_class3_1">아니오</label>		
+										</td>
+									</tr>
+									<tr>
+										<td class="first ta_l">주관기관이 접수마감일 기준 사업개시 후 7년 미만인 중소기업(법인)입니까? <br />
+										<span class="font_blue">※ 신청자격은 아니며 인건비 계상 관련 단순 참고사항임</span></td>														
+										<td class="last">
+											<input type="radio" id="area_class4" name="questions_class_g4" value="예" checked /> <label for="area_class4">예</label>
+											<input type="radio" id="area_class4_1" name="questions_class_g4" value="아니오" /> <label for="area_class4_1">아니오</label>		
+										</td>
+									</tr>
+									<tr>
+										<td class="first ta_l">주관기관이 접수마감일 기준 사업개시 후 7년 미만인 중소기업(법인)입니까? <br />
+										<span class="font_blue">※ 신청자격은 아니며 인건비 계상 관련 단순 참고사항임</span></td>														
+										<td class="last">
+											<input type="radio" id="area_class5" name="questions_class_g5" value="예" checked /> <label for="area_class5">예</label>
+											<input type="radio" id="area_class5_1" name="questions_class_g5" value="아니오" /> <label for="area_class5_1">아니오</label>		
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>						
+					    <div class="popup_button_area_center">
+							<button type="button" class="blue_btn selfchecklistnecessary_warning_popup_open">완료</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//셀페체크리스트항목 팝업-->
+			<!--셀프체크리스트 팝업 경고창 팝업-->
+			<div class="selfchecklistnecessary_warning_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="selfchecklistnecessary_warning_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">항목 미체크 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0">체크 하지 않은 항목이 있습니다.<br /><span class="font_blue">모두 체크해주세요.</span></p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">확인</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//셀프체크리스트 팝업 경고창 팝업-->
+			<!--소속 캠퍼스타운 팝업-->
+			<div class="reception_campus_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="reception_campus_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">소속 캠퍼스타운</h4>							
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">						
+						<div class="popup_titlebox_txt">
+							<ul class="clearfix">
+								<li>
+									<input type="radio" id="campus1" class="fl" name="campus" />
+									<label for="campus1" class="fl">건국대학교</label>
+								</li>
+								<li>
+									<input type="radio" id="campus2" class="fl" name="campus" />
+									<label for="campus2" class="fl">경희대학교</label>
+								</li>
+								<li>
+									<input type="radio" id="campus3" class="fl" name="campus" />
+									<label for="campus3" class="fl">서울여자간호대학교</label>
+								</li>
+								<li>
+									<input type="radio" id="campus4" class="fl" name="campus" />
+									<label for="campus4" class="fl">4.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus5" class="fl" name="campus" />
+									<label for="campus5" class="fl">5.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus6" class="fl" name="campus" />
+									<label for="campus6" class="fl">6.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus7" class="fl" name="campus" />
+									<label for="campus7" class="fl">7.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus8" class="fl" name="campus" />
+									<label for="campus8" class="fl">8.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus9" class="fl" name="campus" />
+									<label for="campus9" class="fl">9.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus10" class="fl" name="campus" />
+									<label for="campus10" class="fl">10.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus11" class="fl" name="campus" />
+									<label for="campus11" class="fl">11.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus12" class="fl" name="campus" />
+									<label for="campus12" class="fl">12.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus13" class="fl" name="campus" />
+									<label for="campus13" class="fl">13.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus14" class="fl" name="campus" />
+									<label for="campus14" class="fl">14.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus15" class="fl" name="campus" />
+									<label for="campus15" class="fl">15.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus16" class="fl" name="campus" />
+									<label for="campus16" class="fl">16.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus17" class="fl" name="campus" />
+									<label for="campus17" class="fl">17.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus18" class="fl" name="campus" />
+									<label for="campus18" class="fl">18.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus19" class="fl" name="campus" />
+									<label for="campus19" class="fl">19.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus20" class="fl" name="campus" />
+									<label for="campus20" class="fl">20.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus21" class="fl" name="campus" />
+									<label for="campus21" class="fl">21.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus22" class="fl" name="campus" />
+									<label for="campus22" class="fl">22.캠퍼스타운</label>
+								</li>								
+								<li>
+									<input type="radio" id="campus23" class="fl" name="campus" />
+									<label for="campus23" class="fl">23.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus24" class="fl" name="campus" />
+									<label for="campus24" class="fl">24.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus25" class="fl" name="campus" />
+									<label for="campus25" class="fl">25.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus26" class="fl" name="campus" />
+									<label for="campus26" class="fl">26.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus27" class="fl" name="campus" />
+									<label for="campus27" class="fl">27.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus28" class="fl" name="campus" />
+									<label for="campus28" class="fl">28.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus29" class="fl" name="campus" />
+									<label for="campus29" class="fl">29.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus30" class="fl" name="campus" />
+									<label for="campus30" class="fl">30.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus31" class="fl" name="campus" />
+									<label for="campus31" class="fl">31.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus32" class="fl" name="campus" />
+									<label for="campus32" class="fl">32.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus33" class="fl" name="campus" />
+									<label for="campus33" class="fl">33.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus34" class="fl" name="campus" />
+									<label for="campus34" class="fl">34.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus35" class="fl" name="campus" />
+									<label for="campus35" class="fl">35.캠퍼스타운</label>
+								</li>
+								<li>
+									<input type="radio" id="campus36" class="fl" name="campus" />
+									<label for="campus36" class="fl">36.캠퍼스타운</label>
+								</li>
+							</ul>
+						</div>
+					    <div class="popup_button_area_center">
+							<button type="submit" class="blue_btn mr5 popup_close_btn">선택</button>
+							<button type="button" class="gray_btn lastClose layerClose popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//소속 캠퍼스타운 팝업-->
+
+			<!--전문가 정보 팝업-->
+			<div class="reception_expert_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="reception_expert_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">전문가 정보</h4>							
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">						
+						<div class="popup_titlebox_txt">
+							<div class="table_area">
+								<table class="write fixed">
+									<caption>개인 정보</caption>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 80%;">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row">성명</th>
+											<td><span>홍길동</span></td> 
+										</tr>									  
+										<tr>
+											<th scope="row">기관명(학교)</th>
+											<td><span>한국대학교</span></td> 
+										</tr>
+										<tr>
+											<th scope="row">부서(학과)</th>
+											<td><span>학과이름</span></td> 
+										</tr>
+										<tr>
+											<th scope="row">휴대전화</th>
+											<td><span class="ls">010-****-5678</span></td> 
+										</tr>
+										<tr>
+											<th scope="row">이메일</th>
+											<td><span class="ls">manager@innothink.kr</span></td> 
+										</tr>
+										<tr>
+											<th scope="row">주소</th>
+											<td><span>서울시 중구</span></td> 
+										</tr>										
+									</tbody>
+								</table>
+
+								<h4 class="sub_title_h4">기술분류 및 연구분야</h4>
+								<table class="write fixed">
+									<caption>기술분류 및 연구분야</caption>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 80%;">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row">국가과학기술분류</th>
+											<td><span class="fl mr5">지구과학</span><span class="fl mr5">&gt;</span><span class="fl mr5">ND07.자연재해 분석/예측 </span><span class="fl mr5">&gt;</span><span class="fl">ND0701.기상재해 분석/예측</span></td> 
+										</tr>									  
+										<tr>
+											<th scope="row">4차산업기술분류</th>
+											<td><span>빅데이터</span></td> 
+										</tr>
+										<tr>
+											<th scope="row">연구분야</th>
+											<td><span>빅데이터, 데이터, 빅</span></td> 
+										</tr>																		
+									</tbody>
+								</table>
+
+								<h4 class="sub_title_h4">논문/저서</h4>
+								<table class="list fixed">
+									<caption>논문/저서</caption>
+									<colgroup>
+										<col style="width: 50%;">
+										<col style="width: 25%;">
+										<col style="width: 15%;">
+										<col style="width: 10%;">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">논문/저자명</th>
+											<th scope="col">학술지명</th>
+											<th scope="col">발행일자</th>											
+											<th scope="col" class="last">SCI 여부</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first"><span>논문 저서명 첫번째</span></td>
+											<td><span>학술지명</span></td>
+											<td ><span>2020-01-20</span></td>											
+											<td class="last">
+												<input type="checkbox" id="treatise_check1" />
+												<label for="treatise_check1">SCI</label>
+											</td>
+										</tr>
+										<tr>
+											<td class="first"><span>논문 저서명 두번째</span></td>
+											<td><span>학술지명</span></td>
+											<td><span>2020-01-20</span></td>											
+											<td class="last">
+												<input type="checkbox" id="treatise_check2" />
+												<label for="treatise_check2">SCI</label>
+											</td>
+										</tr>
+										<tr>
+											<td class="first"><span>논문 저서명 세번째</span></td>
+											<td><span>학술지명</span></td>
+											<td><span>2020-01-20</span></td>											
+											<td class="last">
+												<input type="checkbox" id="treatise_check3" />
+												<label for="treatise_check3">SCI</label>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<h4 class="sub_title_h4">지식재산권</h4>
+								<table class="list fixed">
+									<caption>지식재산권</caption>
+									<colgroup>
+										<col style="width: 10%;">
+										<col style="width: 50%;">
+										<col style="width: 15%;">
+										<col style="width: 10%;">
+										<col style="width: 15%;">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">출원.등록</th>
+											<th scope="col">특허명</th>
+											<th scope="col">출원번호/등록번호</th>	
+											<th scope="col">출원인</th>	
+											<th scope="col" class="last">출원일/등록일</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first"><span>출원</span></td>
+											<td><span>특허명</span></td>
+											<td><span class="ls">10-111-1111</span></td>
+											<td><span>홍길동</span></td>
+											<td class="last"><span class="ls">2020-01-20</span></td>
+										</tr>
+										<tr>
+											<td class="first"><span>출원</span></td>
+											<td><span>특허명</span></td>
+											<td><span class="ls">10-111-1111</span></td>
+											<td><span>홍길동</span></td>
+											<td class="last"><span class="ls">2020-01-20</span></td>
+										</tr>
+										<tr>
+											<td class="first"><span>출원</span></td>
+											<td ><span>특허명</span></td>
+											<td><span class="ls">10-111-1111</span></td>
+											<td><span>홍길동</span></td>
+											<td class="last"><span class="ls">2020-01-20</span></td>
+										</tr>
+									</tbody>
+								</table>
+
+								<h4 class="sub_title_h4">기술이전</h4>
+								<table class="list fixed">
+									<caption>기술이전</caption>
+									<colgroup>
+										<col style="width: 65%;">
+										<col style="width: 15%;">
+										<col style="width: 20%;">							
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">기술이전 기술명</th>
+											<th scope="col">기술이전일</th>												
+											<th scope="col" class="last">기술이전기업</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first"><span>기술이전 기술명칭</span></td>											
+											<td><span class="ls">2020-01-20</span></td>
+											<td class="last"><span>㈜기업이름</span></td>
+										</tr>
+										<tr>
+											<td class="first"><span>기술이전 기술명칭</span></td>											
+											<td><span class="ls">2020-01-20</span></td>
+											<td class="last"><span>㈜기업이름</span></td>
+										</tr>
+										<tr>
+											<td class="first"><span>기술이전 기술명칭</span></td>											
+											<td><span class="ls">2020-01-20</span></td>
+											<td class="last"><span>㈜기업이름</span></td>
+										</tr>
+									</tbody>
+								</table>
+
+								<h4 class="sub_title_h4">R&D과제</h4>
+								<table class="list fixed">
+									<caption>R&D과제</caption>
+									<colgroup>
+										<col style="width: 40%;">
+										<col style="width: 20%;">
+										<col style="width: 20%;">	
+										<col style="width: 20%;">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">과제명</th>
+											<th scope="col">과제기간</th>			
+											<th scope="col">연구분야</th>	
+											<th scope="col" class="last">4차산업기술분류</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first"><span>과제명</span></td>											
+											<td><span class="ls">2019.01 ~ 2020.12</span></td>
+											<td><span>연구분야</span></td>
+											<td class="last"><span>빅데이터</span></td>
+										</tr>
+										<tr>
+											<td class="first"><span>과제명</span></td>											
+											<td><span class="ls">2019.01 ~ 2020.12</span></td>
+											<td><span>연구분야</span></td>
+											<td class="last"><span>빅데이터</span></td>
+										</tr>
+										<tr>
+											<td class="first"><span>과제명</span></td>											
+											<td><span class="ls">2019.01 ~ 2020.12</span></td>
+											<td><span>연구분야</span></td>
+											<td class="last"><span>빅데이터</span></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					    <div class="popup_button_area_center">							
+							<button type="button" class="gray_btn lastClose layerClose popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//전문가 정보 팝업-->			
+			
+			<!--임시저장 팝업-->
+			<div class="save_popup2_box">		
+				<div class="popup_bg"></div>
+				<div class="save_popup2_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">임시저장 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">임시저장</span> 되었습니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//임시저장 팝업-->
+
+			<!--접수완료 팝업-->
+			<div class="save_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="save_popup_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">접수완료 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">접수완료</span> 되었습니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//접수완료 팝업-->
+
+			<!--매칭신청완료 팝업-->
+			<div class="machhing_save_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="machhing_save_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">매칭신청 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">매칭신청 완료</span> 되었습니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//매칭신청완료 팝업-->
+
+			<!--매칭포기 팝업-->
+			<div class="machhing_ab_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="machhing_ab_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">매칭포기 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0">기술매칭 접수를 취소하시려면 <span class="fw">[접수취소]</span>를 선택하시고, 희망전문가를 다시 검색하셔서 전문가 매칭을 다시 하시려면 <span class="font_blue">[신규 매칭]</span> 을 선택해 주세요.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn del_select mr5">접수 취소</button>
+							<button type="button" class="blue_btn popup_close_btn">신규 매칭</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//!--매칭포기 팝업-->
+			<!-- header -->
+			<div id="header">
+				<header>			
+					<!-- hsection -->
+					<div class="hsection">
+						<div class="clearfix">
+							<ul class="fl member_class clearfix">
+								<li class="active"><a href="./" title="연구자">연구자</a></li>
+								<!--<li><a href="./member_signup_agreement.html" title="평가위원 등록">평가위원 등록</a></li>-->
+								<li><a href="./estimation_list.html" title="평가위원">평가위원</a></li>
+								<!--<li><a href="#">전문가</a></li>-->
+							</ul>
+							<ul class="fr top_area">
+								<li>
+									<!--a href="./login.html" title="기업 로그인" class="clearfix">
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="기업 로그인" /><span class="fl">기업 로그인</span>
+									</a-->
+								</li>
+								<li class="login_area">						
+									<!--a href="" title="로그아웃" class="openLayer logout_pop_open">
+										<img src="../images/icon/icon_logout.png" class="fl top_img" alt="로그아웃"><span class="fl">로그아웃</span>
+									</a-->
+									<!--로그인-->
+									<a href="./login.html" title="로그아웃" class="clearfix">
+										<!--최초 로그인팝업-->
+										<!--a href="./login.html" title="로그아웃" class="clearfix login_first_popup_open"-->
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="로그인" /><span class="fl">로그인</span>
+									</a>									
+								</li>
+								<!--li>
+									<a href="./mypage_company.html" title="마이페이지" class="clearfix">
+										<img src="../images/icon/icon_mypage.png" class="fl top_img" alt="마이페이지" /><span class="fl">마이페이지</span>
+									</a>
+								</li-->
+								<li>
+									<a href="./member_signup.html" title="회원가입" class="clearfix">
+										<img src="../images/icon/icon_member_sign.png" class="fl top_img" alt="회원가입" /><span class="fl">회원가입</span>
+									</a>
+								</li>
+								<!--li>
+									<a href="" title="전체메뉴" class="clearfix">
+										<img src="../images/icon/icon_menu.png" class="fl top_img" alt="전체메뉴" /><span class="fl">전체메뉴</span>
+									</a>
+								</li-->
+							</ul>
+						</div>
+					</div>
+					<!--// hsection -->
+					
+					<!-- nav -->
+					<div id="nav">
+						<div class="gnb clearfix">
+							<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="fl logo">
+								<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템" /></h1>
+							</a>
+							<nav>
+								<ul class="menu fl">
+									<li><a href="./announcement.html" title="공고"><span>공고</span></a></li>
+									<li><a href="./reception.html" title="접수"><span>접수</span></a></li>
+									<li><a href="./agreement.html" title="협약"><span>협약</span></a></li>
+									<li><a href="./execute.html" title="수행"><span>수행</span></a></li>
+									<li><a href="./estimation.html" title="평가"><span>평가</span></a></li>
+									<li><a href="./compute.html" title="정산"><span>정산</span></a></li>
+									<li><a href="./information.html" title="알림·정보"><span>알림·정보</span></a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--// nav -->
+				</header>
+			</div>
+			<!--// header -->			
+			<!-- container -->
+			<div id="container" class="mb50">
+				<h2 class="hidden">서브 컨텐츠 화면</h2>					
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area">
+							<h3>접수</h3>
+							<div class="route hidden">
+								<ul class="clearfix">
+									<li><i class="fas fa-home">홈</i></li>
+									<li>접수</li>
+									<li>접수</li>
+								</ul>
+							</div>
+							
+										
+							<!--기관-->
+							<div class="content_area copmpany_area" id="copmpany_area">													
+								<div class="table_area">
+									<h4>기관 정보</h4>	
+									<!--기관정보-->
+									<table class="write fixed">
+										<caption>기관 정보</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_registration_number">사업자 등록번호</label></span></th>
+												<td><input disabled type="text" id="reception_company_registration_number" maxlength="3" class="form-control w_18 fl ls" placeholder="000-00-00000" />
+													<!--span style="display:block;" class="fl mc8">-</span>
+													<input disabled type="text" id="reception_company_registration_number2" maxlength="2" class="form-control brc-on-focusd-inline-block w_6 fl ls" placeholder="00" />
+													<span style="display:block;" class="fl mc8">-</span>
+													<input disabled type="text" id="reception_company_registration_number3" maxlength="5" class="form-control brc-on-focusd-inline-block w_10 fl ls" placeholder="00000" /-->
+												</td> 
+											</tr>									  
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_name">기관명</label></span></th>
+												<td><input disabled type="text" id="reception_company_name" class="form-control w40" placeholder="㈜이노싱크컨설팅" /></td>
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_address">주소</label></span></th>
+												<td><input disabled type="text" id="reception_company_address" class="form-control w100 fl mr5" placeholder="경기도 부천시 시민대로 123" />
+													<!--button class="gray_btn fl">찾기</button--></td> 
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_tel">전화</label></span></th> 
+												<td><input disabled type="tel" id="reception_company_tel" class="form-control w_20 fl ls" placeholder="0707-1234-1234" />
+													<!--span style="display:block;" class="fl mc8">-</span>
+													<input disabled type="tel" id="reception_company_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl" /><span style="display:block;" class="fl mc8 ls">-</span>
+													<input disabled type="tel" id="reception_company_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls" /-->
+												</td>
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_ceo_name">대표자명</label></span></th> 
+												<td><input disabled type="text" id="reception_company_ceo_name" class="form-control w_20" placeholder="홍길동" /></td>
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_sectors">업종</label></span></th> 
+												<td><input type="text" id="reception_company_sectors" class="form-control w_40" /></td>
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_business_class">업태</label></span></th> 
+												<td><input type="text" id="reception_business_class" class="form-control w_40" /></td>
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_day">설립일</label></span></th> 
+												<td>													
+													<div class="datepicker_area fl mr5">
+														<input type="text" id="reception_company_day" class="datepicker form-control w_14 mr5 ls" />
+													</div>
+												</td> 
+										   </tr>
+										   <tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_classification_of_establishment">설립 구분</label></span></th> 
+												<td><input type="text" id="reception_classification_of_establishment" class="form-control w_40" /></td> 
+										   </tr>
+										   <tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_company_class">기업 분류</label></span></th> 
+												<td><input type="text" id="reception_company_class" class="form-control w_40" /></td> 
+										   </tr>
+										   <tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_other_class">기업 유형</label></span></th> 
+												<td><input type="text" id="reception_other_class" class="form-control w_40" /></td> 
+										   </tr>
+										   <tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>기업부설연구소 유무</span></th> 
+												<td>
+													<input type="radio" id="re_member_offerarea_class" name="re_offerarea_class_g" value="있음" checked /> 
+													<label for="re_member_offerarea_class">있음</label>
+													<input type="radio" id="re_member_offerarea_class2" name="re_offerarea_class_g" value="없음" /> 
+													<label for="re_member_offerarea_class2">없음</label>
+												</td>
+										   </tr>
+										   <tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="reception_employee">종업원수</label></span></th> 
+												<td><input type="text" id="reception_employee" class="form-control w_10 fl mr5 ls won_comma" /><span class="fl mt10">(명)</span></td> 
+										   </tr>
+										   <tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													매출액(최근3년)</span></th> 
+												<td>
+													<div class="2018_box fl mr20">
+														<label for="reception_capital1" class="hidden">2018년</label>
+														<input type="number" id="reception_capital1" class="form-control w_18 fl mr5 ls won_comma" placeholder="2018년 입력"  />
+														<span class="fl mt10">(원)</span>
+													</div>
+													<div class="2019_box fl mr20">
+														<label for="reception_capital2" class="hidden">2019년</label>
+														<input type="number" id="reception_capital2" class="form-control w_18 fl mr5 ls won_comma" placeholder="2019년 입력"  />
+														<span class="fl mt10">(원)</span>
+													</div>
+													<div class="2020_box">
+														<label for="reception_capital3" class="hidden">2020년</label>
+														<input type="number" id="reception_capital3" class="form-control w_18 fl mr5 ls won_comma" placeholder="2020년 입력"  />
+														<span class="fl mt10">(원)</span>
+													</div>
+												</td> 
+										   </tr>
+										   <tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+												<label for="reception_won">자본금</label></span></th> 
+												<td>
+												    <input type="number" id="reception_won" class="form-control w_18 fl mr5 ls won_comma"  /><span class="fl mt10">(원)</span>
+													
+												</td> 
+										   </tr>
+										</tbody>
+							        </table>
+									<!--//기관정보-->								    
+									
+									<!--연구책임자 정보-->
+									<h4>연구책임자 정보</h4>		
+									<span><input type="checkbox" id="companyinfo_check"><label for="companyinfo_check">개인정보와 동일</label></span>
+								    <table class="write fixed company_d">
+										<caption>연구책임자 정보</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>
+											<tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="company_reception_name">성명</label></span></th>
+											    <td><input type="text" id="company_reception_name" class="form-control w_20" placeholder="홍길동" /></td> 
+										    </tr>
+											<tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="company_reception_phone">휴대전화</label></span></th>
+											    <td>
+													<select name="company_reception_phone" id="company_reception_phone" class="w_8 fl d_input ls">
+														<option value="010">010</option>
+													</select>
+													<span style="display:block;" class="fl mc8">-</span>
+													<input type="tel" id="company_reception_phone2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls" placeholder="1234">
+													<span style="display:block;" class="fl mc8">-</span>
+													<label for="company_reception_phone2" class="hidden">전화</label>
+													<input type="tel" id="company_reception_phone3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls" placeholder="1234">
+													<label for="company_reception_phone3" class="hidden">전화</label>
+												</td> 
+										    </tr>
+										    <tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>이메일</span></th>
+											    <td>
+													<label for="company_reception_charge_mail" class="hidden">이메일</label>
+												    <input type="text" name="company_reception_charge_mail" id="company_reception_charge_mail" class="form-control w_20 fl ls" placeholder="abc1234" />
+												    <span class="fl ml1 mr1 pt10 mail_f">@</span>
+													<label for="company_reception_charge_mail2" class="hidden">이메일</label>
+												    <input type="text" name="company_reception_charge_mail2" id="company_reception_charge_mail2" class="form-control w_18 fl ls" placeholder="email.com" disabled  />	
+													<label for="company_reception_charge_mail3" class="hidden">이메일</label>
+													<select name="selectEmail" id="company_reception_charge_mail3" class="fl ml5 in_wp200 ace-select d_input"> 
+													   <option value="0">------선택------</option> 
+													   <option value="1">직접입력</option> 
+													   <option value="naver.com">naver.com</option> 
+													   <option value="hanmail.net">hanmail.net</option> 
+													   <option value="hotmail.com">hotmail.com</option> 
+													   <option value="nate.com">nate.com</option> 
+													   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+													   <option value="empas.com">empas.com</option> 
+													   <option value="dreamwiz.com">dreamwiz.com</option> 
+													   <option value="freechal.com">freechal.com</option> 
+													   <option value="lycos.co.kr">lycos.co.kr</option> 
+													   <option value="korea.com">korea.com</option> 
+													   <option value="gmail.com">gmail.com</option> 
+													   <option value="hanmir.com">hanmir.com</option> 
+													   <option value="paran.com">paran.com</option> 
+													</select>
+												</td> 
+										    </tr>
+										    <tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													<label for="company_reception_company_ceo_address">주소</label><label for="company_reception_company_ceo_address2" class="hidden">주소</label></span></th> 
+												<td>
+													<input disabled type="text" id="company_reception_company_ceo_address" class="form-control w50 fl  mr5" placeholder="경기도 성남시 분당구 서현동" />
+													<input disabled type="text" id="company_reception_company_ceo_address2" class="form-control w30 fl mr5" placeholder="112-1 명성빌라 201호" />
+													<button type="submit" class="gray_btn2 fl d_input address_search" title="검색">검색</button>
+												</td>
+										    </tr>
+										</tbody>						 
+									</table>
+
+									<p class="mt30 mb10"><span class="font_blue">(선택)</span> 소속기관이 있는경우 입력해주세요.</p>
+									<table class="write fixed">
+										<caption>연구책임자 정보</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>		
+											<tr>
+												<th scope="row"><span class="icon_box"><label for="member_reception_company_name">기관명</label></span></th>
+												<td class="clearfix">
+												   <input type="text" id="member_reception_company_name" class="form-control w100 fl" />  
+												</td>
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><label for="member_reception_company_partment">부서명</label></span></th>
+												<td class="clearfix">
+												   <input type="text" id="member_reception_company_partment" class="form-control w_20 fl" /> 
+												</td>
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><label for="member_reception_mypage_company_rank">직책</label></span></th>
+												<td class="clearfix">
+												   <input type="text" id="member_reception_mypage_company_rank" class="form-control w_20 fl" />  
+												</td>
+											</tr>
+									    </tbody>						 
+									</table>
+									<!--//연구책임자 정보-->
+									
+									<!--기술연구개발 - 기술컨설팅 요청사항 -->										
+									<h4 class="fl sub_title_h4">기술컨설팅 요청사항</h4>							  
+								    <table class="write fixed">
+									   <caption>기술컨설팅 요청사항</caption> 
+									   <colgroup>
+										   <col style="width: 20%">
+										   <col style="width: 80%">
+									   </colgroup>
+									   <tbody>
+										   <tr>
+											   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>구분</span></th>
+											   <td>
+													<input type="radio" id="research_reception_class" name="research_reception_class_g" value="창업아이디어" checked /> 
+													<label for="research_reception_class">창업아이디어</label>
+													<input type="radio" id="research_reception_class2" name="research_reception_class_g" value="기술개선/융합" /> 
+													<label for="research_reception_class2">기술개선/융합</label>
+												</td>
+										   </tr>								   
+										   <tr>
+											   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="esearch_reception_belong">소속 캠퍼스타운</label></span></th>
+											   <td><input type="text" id="esearch_reception_belong" class="form-control w90 fl mr5" /><button type="button" class="gray_btn2 fl">찾아보기</button> </td>
+										   </tr>
+										   <tr>
+											   <th scope="row" rowspan="3"><span class="icon_box"><span class="necessary_icon">*</span>국가과학기술분류</span></th>
+											   <td>
+													<label for="esearch_reception_science_MainCategory" class="fl mt5 mr5">대분류</label>
+													<select name="esearch_reception_science_MainCategory" id="esearch_reception_science_MainCategory" class="ace-select" style="width: 94.8%;">
+														<option value="지구 과학">지구 과학</option>
+														<option value="농림 수산 식품">농림 수산 식품</option>
+													</select>
+											   </td>
+										   </tr>
+										   <tr>
+											   <td>
+												   <label for="esearch_reception_science_MiddleCategory" class="fl mt5 mr5">중분류</label>
+												   <select name="esearch_reception_science_MiddleCategory" id="esearch_reception_science_MiddleCategory" class="ace-select" style="width: 94.8%;">
+													   <option value="ND07. 자연재해 분석/예측">ND07. 자연재해 분석/예측</option>
+													   <option value="LB11. 조경학">LB11. 조경학</option>
+												   </select>
+											   </td>
+										   </tr>
+										   <tr>
+											   <td>
+												   <label for="esearch_reception_science_SubClass" class="fl mt5 mr5">소분류</label>
+												   <select name="esearch_reception_science_SubClass" id="esearch_reception_science_SubClass" class="ace-select" style="width: 94.8%;">
+													 <option value="ND0701. 기상재해 분석/예측">ND0701. 기상재해 분석/예측</option>
+													 <option value="ND0702. 지진발생 분석/예측">ND0702. 지진발생 분석/예측</option>
+													 <option value="LB1101. 조경 계획">LB1101. 조경 계획</option>
+													 <option value="LB1102. 조경 설계">LB1102. 조경 설계</option>
+												   </select>
+											 </td>
+										   </tr>
+										   <tr>
+											   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="con_industry_4th_technology">4차 산업혁명 기술분류</label></span></th>
+											   <td>
+													<select name="con_industry_4th_technology" id="con_industry_4th_technology" class="w20 ace-select">
+														<option value="5G">5G</option>
+														<option value="스마트헬스케어">스마트헬스케어</option>
+													</select>
+												</td> 
+										   </tr>
+										   <tr>
+											   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>사전 컨설팅 실시 여부</span></th>
+											   <td>
+											   		<input type="radio" id="research_company_reception_practice" name="research_company_reception_practice_g" value="실시" checked /> 
+													<label for="research_company_reception_practice">실시</label>
+													<input type="radio" id="research_company_reception_practice2" name="research_company_reception_practice_g" value="미실시" /> 
+													<label for="research_company_reception_practice2">미실시</label>
+											   </td>
+										   </tr>							   	   
+									   </tbody>
+								    </table>
+									<!--//기술연구개발 - 기술컨설팅 요청사항 -->
+									
+									<!--기술연구개발 - 기술정보-->
+									<h4>기술 정보</h4>	
+									<table class="write fixed research_tabel_">
+										<caption>기술 정보</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>
+											<tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="research_reception_sevice_name">제품/서비스명</label></span></th>
+											    <td><input type="text" id="research_reception_sevice_name" class="form-control w100" /></td> 
+										    </tr>											
+										    <tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="research_reception_sevice_txt">제품/서비스 내용</label></span></th>
+											    <td><input type="text" id="research_reception_sevice_txt" class="form-control w100" placeholder="컨설팅 전문가가 기업이 보유한 현 기술(제품/서비스)에 대해 파악할 수 있도록 상세하게 입력" /></td> 										    
+											</tr>
+											<tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="research_reception_donghyang">시장/기술 동향</label></span></th>
+											    <td><input type="text" id="research_reception_donghyang" class="form-control w100" placeholder="기술의 시장성 및 기술 동향 입력" /></td> 										    
+											</tr>	
+										    <tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_reception_txt">기술연구개발 내용</label></span></th>
+											    <td><input type="text" id="reception_reception_txt" class="form-control w100" placeholder="기업이 개발하고자 하는 기술 내용 입력" /></td> 
+										    </tr>
+											<tr>
+											    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_range_txt">기술연구개발 범위</label></span></th>
+											    <td><input type="text" id="reception_range_txt" class="form-control w100" placeholder="기술연구개발에서 전문가에게 요청하는 사항 및 개발 범위 입력" /></td> 
+										    </tr>											
+											<tr>
+											    <th scope="row"><label for="reception_get_class">첨부 파일</label></th>
+											    <td>
+													<div class="clearfix file_form_txt">													   
+													    <div class="clearfix file_form_txt">													   
+													    <!--업로드 버튼-->
+													        <div class="job_file_upload w100"> 
+															    <div class="custom-file w100">
+																    <input type="file" class="custom-file-input custom-file-input-write-company2" id="inputGroupFile05">
+																    <label class="custom-file-label custom-control-label-write-company2" for="inputGroupFile05">선택된 파일 없음</label>
+															    </div>															
+													       </div>													   
+													   <!--//업로드 버튼-->
+												        </div>
+												    </div>
+												    </div>
+												</td> 
+										    </tr>
+										 </tbody>						 
+									</table>
+									<!--//기술연구개발 - 기술정보-->	
+									
+
+									<!--전문가 검색-->
+									<h4 class="fl sub_title_h4">전문가 검색</h4>							  
+								    <table class="write fixed expert_search_table">
+									   <caption>전문가 검색</caption> 
+									   <colgroup>
+										   <col style="width: 20%">
+										   <col style="width: 80%">
+									   </colgroup>
+									   <tbody>
+										   <tr>
+											   <th scope="row" rowspan="3"><span class="icon_box">국가과학기술분류</span></th>
+											   <td>
+													<label for="expert_reception_science_MainCategory" class="fl mt5 mr5">대분류</label>
+													<select name="expert_reception_science_MainCategory" id="expert_reception_science_MainCategory" class="ace-select" style="width: 94.8%;">
+														<option value="지구 과학">지구 과학</option>
+														<option value="농림 수산 식품">농림 수산 식품</option>
+													</select>
+											   </td>
+										   </tr>								   
+										   <tr>
+											   <td>
+												   <label for="expert_reception_science_MiddleCategory" class="fl mt5 mr5">중분류</label>
+												   <select name="expert_reception_science_MiddleCategory" id="expert_reception_science_MiddleCategory" class="ace-select" style="width: 94.8%;">
+													   <option value="ND07. 자연재해 분석/예측">ND07. 자연재해 분석/예측</option>
+													   <option value="LB11. 조경학">LB11. 조경학</option>
+												   </select>
+											   </td>
+										   </tr>
+										   <tr>
+											   <td>
+												   <label for="expert_reception_science_SubClass" class="fl mt5 mr5">소분류</label>
+												   <select name="expert_reception_science_SubClass" id="expert_reception_science_SubClass" class="ace-select" style="width: 94.8%;">
+													 <option value="ND0701. 기상재해 분석/예측">ND0701. 기상재해 분석/예측</option>
+													 <option value="ND0702. 지진발생 분석/예측">ND0702. 지진발생 분석/예측</option>
+													 <option value="LB1101. 조경 계획">LB1101. 조경 계획</option>
+													 <option value="LB1102. 조경 설계">LB1102. 조경 설계</option>
+												   </select>
+											 </td>
+										   </tr>										   
+										   <tr>
+											   <th scope="row"><span class="icon_box"><label for="expert_research_sphere">연구 분야</label></span></th>
+											   <td>
+													<textarea name="expert_research_sphere" id="expert_research_sphere" cols="30" rows="2" class="w100"></textarea>
+											   </td> 
+										   </tr>
+										   <tr>
+											   <th scope="row"><span class="icon_box"><label for="expert_expert_name">성명</label></span></th>
+											   <td>
+													<input type="text" class="w_20 form-control" id="expert_expert_name" />
+											   </td> 
+										   </tr>
+										   <tr>
+											   <th scope="row"><span class="icon_box"><label for="expert_company_name">기관명</label></span></th>
+											   <td>
+													<input type="text" class="w100 form-control" id="expert_company_name" />
+											   </td> 
+										   </tr>
+									   </tbody>
+								    </table>
+									
+									<div class="clearfix">
+										<button type="submit" class="blue_btn mt10 w100" style="padding: 26px 0; font-weight: 500; font-size: 20px;height: auto;" title="검색">검색</button>
+									</div>
+									
+									<div class="table_count_area mt50 clearfix">
+										<div class="count_area fl mt5" style="padding-top: 20px;">
+											[총 <span class="fw500 font_blue">100</span>건]
+										</div>
+										<div class="fr">
+											<button type="button" class="blue_btn2 fr mr5 mt5 mb5">선택</button>
+										</div>
+									</div>
+
+									<!--리스트시작-->
+									<div class="table_area">										
+										<table class="list fixed expert_table">
+											<caption>전문가 목록</caption>
+											<colgroup>
+												<col style="width: 5%;">
+												<col style="width: 25%;">
+												<col style="width: 18%;">
+												<col style="width: 5%;">
+												<col style="width: 10%;">
+												<col style="width: 10%;">
+												<col style="width: 12%;">
+												<col style="width: 15%;">
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="col" class="first"><input type="checkbox" id="allCheck">&nbsp;<label for="allCheck">&nbsp;</label></th>
+													<th scope="col">국가과학기술분류</th>
+													<th scope="col">연구분야</th>
+													<th scope="col">성명</th>
+													<th scope="col">기관명</th>
+													<th scope="col">부서</th>
+													<th scope="col">휴대전화</th>
+													<th scope="col" class="last">이메일</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="first">
+														<input type="checkbox" id="checkbox1" />
+														<label for="checkbox1">&nbsp;</label>
+													</td>
+													<td>
+														<a href="" class="expert_search_view_popupopen_btn">
+															<span class="fl mr5">지구 과학</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl mr5">ND07. 자연재해 분석/예측</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl">ND0701. 기상재해 분석/예측</span>
+														</a>											
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">홍길동</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">(주)이노씽크</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">000부서</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn ls">000-0000-0000</a></span>
+													</td>
+													<td class="last">
+														<span><a href="" class="expert_search_view_popupopen_btn ls">manager@Innothink.kr</a></span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first"><input type="checkbox" id="checkbox2" />&nbsp;<label for="checkbox2">&nbsp;</label></td>
+													<td>
+														<a href="" class="expert_search_view_popupopen_btn">
+															<span class="fl mr5">지구 과학</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl mr5">ND07. 자연재해 분석/예측</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl">ND0701. 기상재해 분석/예측</span>
+														</a>											
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">홍길동</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">(주)이노씽크</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">000부서</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn ls">000-0000-0000</a></span>
+													</td>
+													<td class="last">
+														<span><a href="" class="expert_search_view_popupopen_btn ls">manager@Innothink.kr</a></span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first"><input type="checkbox" id="checkbox3" />&nbsp;<label for="checkbox3">&nbsp;</label></td>
+													<td>
+														<a href="" class="expert_search_view_popupopen_btn">
+															<span class="fl mr5">지구 과학</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl mr5">ND07. 자연재해 분석/예측</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl">ND0701. 기상재해 분석/예측</span>
+														</a>											
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">홍길동</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">(주)이노씽크</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">000부서</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn ls">000-0000-0000</a></span>
+													</td>
+													<td class="last">
+														<span><a href="" class="expert_search_view_popupopen_btn ls">manager@Innothink.kr</a></span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first"><input type="checkbox" id="checkbox4" />&nbsp;<label for="checkbox4">&nbsp;</label></td>
+													<td>
+														<a href="" class="expert_search_view_popupopen_btn">
+															<span class="fl mr5">지구 과학</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl mr5">ND07. 자연재해 분석/예측</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl">ND0701. 기상재해 분석/예측</span>
+														</a>											
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">홍길동</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">(주)이노씽크</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">000부서</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn ls">000-0000-0000</a></span>
+													</td>
+													<td class="last">
+														<span><a href="" class="expert_search_view_popupopen_btn ls">manager@Innothink.kr</a></span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first"><input type="checkbox" id="checkbox5" />&nbsp;<label for="checkbox5">&nbsp;</label></td>
+													<td>
+														<a href="" class="expert_search_view_popupopen_btn">
+															<span class="fl mr5">지구 과학</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl mr5">ND07. 자연재해 분석/예측</span>
+															<span class="fl mr5">&gt;</span>
+															<span class="fl">ND0701. 기상재해 분석/예측</span>
+														</a>											
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">홍길동</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">(주)이노씽크</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn">000부서</a></span>
+													</td>
+													<td>
+														<span><a href="" class="expert_search_view_popupopen_btn ls">000-0000-0000</a></span>
+													</td>
+													<td class="last">
+														<span><a href="" class="expert_search_view_popupopen_btn ls">manager@Innothink.kr</a></span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<!--div class="data_null ta_c">해당 조건에 맞는 전문가 검색 결과가 없습니다.</div-->
+										<div class="paging_area">
+											<a href="" class="stimg" title="맨처음 페이지로 이동"><img src="../images/icon/btn_paging_first.png" alt="맨처음 페이지로 이동"></a>
+											<a href="" class="stimg" title="전 페이지로 이동"><img src="../images/icon/btn_paging_prev.png" alt="전 페이지로 이동"></a>
+											<strong>1</strong>
+											<a href="">2</a>
+											<a href="">3</a>
+											<a href="j">4</a>
+											<a href="">5</a>
+											<a href="">6</a>
+											<a href="">7</a>
+											<a href="">8</a>
+											<a href="">9</a>
+											<a href="">10</a>
+											<a href="" class="stimg" title="다음 페이지로 이동"><img src="../images/icon/btn_paging_next.png" alt="다음 페이지로 이동"></a>
+											<a href="" class="stimg" title="맨마지막 페이지로 이동"><img src="../images/icon/btn_paging_last.png" alt="맨마지막 페이지로 이동"></a>
+										</div>
+									</div>
+									<!--//리스트 end-->
+
+									<!--희망전문가-->
+									<div class="table_area clearfix">
+										<div class="clearfix">
+											<h4 class="fl">희망 전문가</h4>
+											<span class="fl mt60" style="display:inline-block;">&nbsp;&nbsp;(위의 전문가 검색 후 선택하면 자동으로 입력됩니다.)</span>
+										</div>
+										<p class="mt30 fl"> - 원할한 매칭을 위해 <span class="font_blue">최소 3인</span> 이상의 매칭을 권장합니다.</p>
+										<button type="button" class="gray_btn fr mt20 expert_hope_search_table_del mb10">삭제</button>
+										<table class="list fixed expert_hope_search_table mt10">
+											<caption>희망 전문가 목록</caption>
+											<colgroup>
+												<col style="width: 5%;">
+												<col style="width: 25%;">
+												<col style="width: 18%;">
+												<col style="width: 5%;">
+												<col style="width: 10%;">
+												<col style="width: 10%;">
+												<col style="width: 12%;">
+												<col style="width: 15%;">
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="col" class="first">&nbsp;</th>
+													<th scope="col">국가과학기술분류</th>
+													<th scope="col">연구분야</th>
+													<th scope="col">성명</th>
+													<th scope="col">기관명</th>
+													<th scope="col">부서</th>
+													<th scope="col">휴대전화</th>
+													<th scope="col" class="last">이메일</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="first">
+														<input type="checkbox" id="checkbox1_1" />&nbsp;<label for="checkbox1_1">&nbsp;</label>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+														<!--span class="fl mr5">대분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl mr5">준분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl">소분류</span-->														
+													</td>
+													<td>
+														<span>1</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td class="last">
+														<span>&nbsp;</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first">
+														<input type="checkbox" id="checkbox1_2" />&nbsp;<label for="checkbox1_2">&nbsp;</label>
+													</td>
+													<td>
+														<span>2</span>
+														<!--span class="fl mr5">대분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl mr5">준분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl">소분류</span-->														
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td class="last">
+														<span>&nbsp;</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first">
+														<input type="checkbox" id="checkbox1_3" />&nbsp;<label for="checkbox1_3">&nbsp;</label>
+													</td>
+													<td>
+														<span>3</span>
+														<!--span class="fl mr5">대분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl mr5">준분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl">소분류</span-->														
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td class="last">
+														<span>&nbsp;</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first">
+														<!--input type="checkbox" id="checkbox1_4" />&nbsp;<label for="checkbox1_4">&nbsp;</label-->
+													</td>
+													<td>
+														<span>&nbsp;</span>
+														<!--span class="fl mr5">대분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl mr5">준분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl">소분류</span-->														
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td class="last">
+														<span>&nbsp;</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="first">
+														<!--input type="checkbox" id="checkbox1_5" />&nbsp;<label for="checkbox1_5">&nbsp;</label-->
+													</td>
+													<td>
+														<span>&nbsp;</span>
+														<!--span class="fl mr5">대분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl mr5">준분류</span>
+														<span class="fl mr5">&gt;</span>
+														<span class="fl">소분류</span-->														
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td>
+														<span>&nbsp;</span>
+													</td>
+													<td class="last">
+														<span>&nbsp;</span>
+													</td>
+												</tr>
+											</tbody>											
+										</table>
+										<!--div class="data_null ta_c">해당 조건에 맞는 전문가 검색 결과가 없습니다.</div-->
+										<div class="paging_area">
+											<a href="" class="stimg" title="맨처음 페이지로 이동"><img src="../images/icon/btn_paging_first.png" alt="맨처음 페이지로 이동"></a>
+											<a href="" class="stimg" title="전 페이지로 이동"><img src="../images/icon/btn_paging_prev.png" alt="전 페이지로 이동"></a>
+											<strong>1</strong>
+											<a href="">2</a>											
+											<a href="" class="stimg" title="다음 페이지로 이동"><img src="../images/icon/btn_paging_next.png" alt="다음 페이지로 이동"></a>
+											<a href="" class="stimg" title="맨마지막 페이지로 이동"><img src="../images/icon/btn_paging_last.png" alt="맨마지막 페이지로 이동"></a>
+										</div>										
+										
+										<!--직접입력-->
+										<div class="clearfix fl mt510">
+											<input type="checkbox" id="checkbox_txtwrite" class="expert_input_btn" />
+											<label for="checkbox_txtwrite">직접입력 (검색 목록에 없을 경우 <span class="font_blue">직접 입력</span>해 주세요.)</label>
+										</div>
+										<div class="fr clearfix">
+											<button type="button" class="fl green_btn expert_input_table_txt_add mb10 mt10 mr5">추가</button>
+											<button type="button" class="fl gray_btn expert_input_table_txt_del mb10 mt10">초기화</button>
+										</div>
+										<div class="box_table">
+											<table class="list fixed expert_hope_search_table2 mt10 expert_input_table mb20">
+												<caption>희망 전문가 직접입력 목록</caption>
+												<colgroup>
+													<col style="width: 5%;">
+													<col style="width: 17%;">
+													<col style="width: 8%;">
+													<col style="width: 15%;">
+													<col style="width: 10%;">
+													<col style="width: 18%;">
+													<col style="width: 12%;">
+												</colgroup>
+												<thead>
+													<tr>
+														<th scope="col" class="first">&nbsp;</th>													
+														<th scope="col">연구분야</th>
+														<th scope="col">성명</th>
+														<th scope="col">기관명</th>
+														<th scope="col">부서</th>
+														<th scope="col">휴대전화</th>
+														<th scope="col" class="last">이메일</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="first">
+															<div class="d_n">
+																<input type="checkbox" id="checkbox3_1" />&nbsp;<label for="checkbox3_1">&nbsp;</label>
+															</div>
+														</td>
+														<td>
+															<label for="direct_input_research" class="hidden">연구분야</label>
+															<textarea name="direct_input_research" id="direct_input_research" cols="30" rows="2" class="w100" ></textarea>						
+														</td>													
+														<td>
+															<label for="direct_input_name" class="hidden">성명</label>
+															<input type="text" id="direct_input_name" class="form-control w100" />		
+														</td>
+														<td>
+															<label for="direct_company_name" class="hidden">기관명</label>
+															<input type="text" id="direct_company_name" class="form-control w100" />
+														</td>
+														<td>
+															<label for="direct_companypart_name" class="hidden">부서</label>
+															<input type="text" id="direct_companypart_name" class="form-control w100" />
+														</td>
+														<td>
+															<label for="direct_companypart_phone" class="hidden">휴대전화</label>
+															<select name="direct_companypart_phone" id="direct_companypart_phone" class="w_8 fl d_input ls">
+																<option value="010">010</option>
+															</select>
+															<span style="display:none;" class="fl mc8">-</span>
+
+															<label for="direct_companypart_name2" class="hidden">전화</label>
+															<input type="tel" id="direct_companypart_name2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl">
+															<span style="display:none;" class="fl mc8 ls">-</span>
+
+															<label for="direct_companypart_name3" class="hidden">전화</label>
+															<input type="tel" id="direct_companypart_name3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls">
+														</td>
+														<td class="last">
+															<label for="direct_companypart_email" class="hidden">이메일</label>
+															<input type="text" id="direct_companypart_email" class="form-control w100" placeholder="ex)XXX@email.com" />
+														</td>
+													</tr>												
+												</tbody>											
+											</table>
+										</div>
+
+										<div class="clearfix" style="text-align: center;">
+											<button type="button" class="blue_btn2 select_write" style="display: none;margin:0 auto">선택</button>
+										</div>
+									</div>
+									<!--//희망전문가-->
+
+									
+									
+
+									<!--기술연구개발 -제출서류 -->
+									<h4>제출 서류</h4>	
+									<table class="write fixed">
+										<caption>제출 서류</caption>
+										<colgroup>
+											<col style="width: 15%;">
+											<col style="width: 40%;">
+											<col style="width: 45%;">
+										</colgroup>
+										<tbody>
+											<tr>
+											    <th scope="row" rowspan="5" class="ta_c"><span class="font_red">(필수)</span></th>
+											    <th scope="row">기술연구개발 신청서</th> 
+												<td>
+													<div class="filebox"> 
+														<label for="research_member_search_file1" class="hidden">파일선택</label>
+														<input id="research_member_search_file1" class="upload-name in_w80" value="파일선택" disabled="disabled" /> 
+														<label for="research_member_ex_filename1">찾아보기</label>
+														<input type="file" id="research_member_ex_filename1" class="upload-hidden" /> 
+													</div>
+												</td> 
+										    </tr>
+											<tr>
+											    <th scope="row">기술개선/기술융합:TRL 6단계 증명서류 /<br /> 창업아이디어: TRL 3단계 증명서류</th> 
+												<td>
+													<div class="filebox"> 
+														<label for="research_member_search_file2" class="hidden">파일선택</label>
+														<input id="research_member_search_file2" class="upload-name in_w80" value="파일선택" disabled="disabled" /> 
+														<label for="research_member_ex_filename2">찾아보기</label> 
+														<input type="file" id="research_member_ex_filename2" class="upload-hidden" /> 
+													</div>
+												</td> 
+										    </tr>
+											<tr>												
+											    <th scope="row">캠퍼스타운 기술연구개발 확인서(캠타기업은 필수)</th> 
+												<td>
+													<div class="filebox"> 
+														<label for="research_member_search_file3" class="hidden">파일선택</label>
+														<input id="research_member_search_file3" class="upload-name in_w80" value="파일선택" disabled="disabled" /> 
+														<label for="research_member_ex_filename3">찾아보기</label> 
+														<input type="file" id="research_member_ex_filename3" class="upload-hidden" /> 
+													</div>
+												</td> 
+										    </tr>
+											<tr>
+											    <th scope="row">사업자등록증</th> 
+												<td>
+													<div class="filebox"> 
+														<label for="research_member_search_file4" class="hidden">파일선택</label>
+														<input id="research_member_search_file4" class="upload-name in_w80" value="파일선택" disabled="disabled" /> 
+														<label for="research_member_ex_filename4">찾아보기</label> 
+														<input type="file" id="research_member_ex_filename4" class="upload-hidden" /> 
+													</div>
+												</td> 
+										    </tr>
+											<tr>
+											    <th scope="row">재무제표(최근 3년 이내)</th> 
+												<td>
+													<div class="filebox"> 
+														<label for="research_member_search_file5" class="hidden">파일선택</label>
+														<input id="research_member_search_file5" class="upload-name in_w80" value="파일선택" disabled="disabled" /> 
+														<label for="research_member_ex_filename5">찾아보기</label> 
+														<input type="file" id="research_member_ex_filename5" class="upload-hidden" /> 
+													</div>
+												</td> 
+										    </tr>
+											<tr>
+												<th scope="row" rowspan="2" class="ta_c"><span class="font_blue">(선택)</span></th> 
+											    <th scope="row">특허</th> 
+												<td>
+													<div class="filebox"> 
+														<label for="research_member_search_file6" class="hidden">파일선택</label>
+														<input id="research_member_search_file6" class="upload-name in_w80" value="파일선택" disabled="disabled" /> 
+														<label for="research_member_ex_filename6">찾아보기</label> 
+														<input type="file" id="research_member_ex_filename6" class="upload-hidden" /> 
+													</div>
+												</td> 
+										    </tr>	
+											<tr>												
+											    <th scope="row">논문</th> 
+												<td>
+													<div class="filebox"> 
+														<label for="research_member_search_file7" class="hidden">파일선택</label>
+														<input id="research_member_search_file7" class="upload-name in_w80" value="파일선택" disabled="disabled" /> 
+														<label for="research_member_ex_filename7">찾아보기</label> 
+														<input type="file" id="research_member_ex_filename7" class="upload-hidden" /> 
+													</div>
+												</td> 
+										    </tr>	
+										 </tbody>						 
+									</table>									
+									<!--//기술연구개발 -제출서류 -->
+
+									<div class="button_box clearfix fr pb20">
+										<button type="button" class="purple_btn fl mr5 selfchecklist_popup_open">셀프 체크리스트</button>
+										<button type="button" class="blue_btn2 fl mr5 save_popup2_open openLayer5">임시저장</button>
+										<button type="button" class="blue_btn fl mr5 machhing_save_popup_open">매칭완료</button>
+										<button type="button" class="gray_btn fl" onclick="location.href='reception.html'">목록</button>
+									</div>
+								</div>	<!--//table_area-->							
+							</div><!--//content_area-->
+							<!--//기관-->
+						</div>
+					</div><!--//sub_contents-->
+				</section>
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->		
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	<script>
+		//달력
+		$(".datepicker").datepicker({  
+			  showOn: "both", // 버튼과 텍스트 필드 모두 캘린더를 보여준다.
+			  //buttonImage: "/application/db/jquery/images/calendar.gif", // 버튼 이미지
+			  buttonText	: false, 
+			  buttonImageOnly: false, // 버튼에 있는 이미지만 표시한다.
+			  changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+			  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+			  minDate: '-100y', // 현재날짜로부터 100년이전까지 년을 표시한다.
+			  nextText: '다음 달', // next 아이콘의 툴팁.
+			  prevText: '이전 달', // prev 아이콘의 툴팁.
+			  numberOfMonths: [1,1], // 한번에 얼마나 많은 월을 표시할것인가. [2,3] 일 경우, 2(행) x 3(열) = 6개의 월을 표시한다.
+			  stepMonths: 3, // next, prev 버튼을 클릭했을때 얼마나 많은 월을 이동하여 표시하는가. 
+			  yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+			  showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. ( ...으로 표시되는부분이다.) 
+			  currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
+			  closeText: '닫기',  // 닫기 버튼 패널
+			  dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+			  showAnim: "slide", //애니메이션을 적용한다.  
+			  showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
+			  dayNamesMin: ['일', '월',  '화', '수', '목', '금', '토'], // 요일의 한글 형식.
+			  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
+		  });
+	</script>
+	</body>
+</html>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.homeBoard">
+
+	<resultMap id="homeBoard" type="HomeBoardVO">
+		<result property ="board_id"			column="BOARD_ID"	/>
+		<result property ="board_type"			column="BOARD_TYPE"	/>
+		<result property ="title"				column="TITLE"	/>
+		<result property ="writer"				column="WRITER"	/>
+		<result property ="hits"				column="HITS"	/>
+		<result property ="file_yn"				column="FILE_YN"	/>
+		<result property ="open_yn"				column="OPEN_YN"	/>
+		<result property ="file_id"				column="FILE_ID"	/>
+		<result property ="use_yn"				column="USE_YN"	/>
+		<result property ="reg_date"			column="REG_DATE"	/>
+		<result property ="description"			column="DESCRIPTION"	/>
+		<result property ="business_name"		column="BUSINESS_NAME"	/>
+		<result property ="institue_name"		column="INSTITUE_NAME"	/>
+		<result property ="skill_keyword"		column="SKILL_KEYWORD"	/>
+		<result property ="skill_effect"		column="SKILL_EFFECT"	/>
+		<result property ="from_date"			column="FROM_DATE"	/>
+		<result property ="to_date"				column="TO_DATE"	/>
+		
+		<result property ="total_count"			column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	<insert id="insertInfo" parameterType="HomeBoardVO">
+		/* com.anchordata.webframework.homeBoard.insertInfo */
+		<selectKey resultType="int"  keyProperty="board_id" order="BEFORE"> 
+			SELECT IFNULL(MAX(BOARD_ID),0)+1 FROM HOME_BOARD
+		</selectKey> 
+		INSERT INTO HOME_BOARD ( 
+			BOARD_ID
+			,	TITLE
+			,	BOARD_TYPE
+			,	WRITER
+			,	HITS
+			,	FILE_YN
+			,	OPEN_YN
+			,	DESCRIPTION
+			<if test='business_name != null and business_name != "" '>
+				, BUSINESS_NAME
+			</if>
+			<if test='institue_name != null and institue_name != "" '>
+				, INSTITUE_NAME
+			</if>
+			<if test='skill_keyword != null and skill_keyword != "" '>
+				, SKILL_KEYWORD
+			</if>
+			<if test='skill_effect != null and skill_effect != "" '>
+				, SKILL_EFFECT
+			</if>
+			<if test='from_date != null and from_date != "" '>
+				, FROM_DATE
+			</if>
+			<if test='to_date != null and to_date != "" '>
+				, TO_DATE
+			</if>
+		) 
+		VALUES (
+			#{board_id}
+			,	#{title} 
+			,	#{board_type} 
+			,	#{writer}
+			,	#{hits}
+			,	#{file_yn}
+			,	#{open_yn}
+			,	#{description}
+			<if test='business_name != null and business_name != "" '>
+				, #{business_name}
+			</if>
+			<if test='institue_name != null and institue_name != "" '>
+				, #{institue_name}
+			</if>
+			<if test='skill_keyword != null and skill_keyword != "" '>
+				, #{skill_keyword}
+			</if>
+			<if test='skill_effect != null and skill_effect != "" '>
+				, #{skill_effect}
+			</if>
+			<if test='from_date != null and from_date != "" '>
+				, #{from_date}
+			</if>
+			<if test='to_date != null and to_date != "" '>
+				, #{to_date}
+			</if>
+		);
+	</insert>
+	
+	<select id="selectSearchPagingList" parameterType="DataMap"  resultMap="homeBoard">
+		/* com.anchordata.webframework.homeBoard.selectSearchPagingList */
+		<include refid="common.pagingPre"/>
+		SELECT
+			BOARD_ID
+			, BOARD_TYPE
+			, OPEN_YN
+			, TITLE
+			, WRITER
+			, DESCRIPTION
+			, HITS
+			, FILE_YN
+			, REG_DATE
+			, BUSINESS_NAME
+			, INSTITUE_NAME
+			, SKILL_KEYWORD
+			, SKILL_EFFECT
+			, FROM_DATE
+			, TO_DATE
+		FROM
+			HOME_BOARD A
+		WHERE
+			1 = 1
+			AND USE_YN = 'Y'
+			AND BOARD_TYPE = #{board_type}
+			<if test='keyword != null and keyword != "" '>
+				AND ( TITLE LIKE CONCAT('%',#{keyword},'%') OR DESCRIPTION LIKE CONCAT('%',#{keyword},'%') )
+			</if>
+			<if test='business_name != null and business_name != "" '>
+				AND ( BUSINESS_NAME LIKE CONCAT('%',#{business_name},'%') )
+			</if>
+			<if test='title != null and title != "" '>
+				AND ( TITLE LIKE CONCAT('%',#{title},'%') )
+			</if>
+			<if test='institue_name != null and institue_name != "" '>
+				AND ( INSTITUE_NAME LIKE CONCAT('%',#{institue_name},'%') )
+			</if>
+			<if test='open_yn != null and open_yn != "" '>
+				AND ( OPEN_YN = #{open_yn} )
+			</if>
+			<if test='description != null and description != "" '>
+				AND ( DESCRIPTION = #{description} )
+			</if>
+			
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<select id="selectDetail" parameterType="HomeBoardVO"  resultMap="homeBoard">
+		/* com.anchordata.webframework.homeBoard.selectDetail */
+		SELECT
+			BOARD_ID
+			, BOARD_TYPE
+			, OPEN_YN
+			, TITLE
+			, WRITER
+			, DESCRIPTION
+			, HITS
+			, FILE_YN
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, BUSINESS_NAME
+			, INSTITUE_NAME
+			, SKILL_KEYWORD
+			, SKILL_EFFECT
+			, FROM_DATE
+			, TO_DATE
+		FROM HOME_BOARD A
+		WHERE 
+			BOARD_ID = #{board_id}
+	</select>
+	
+	<update id="updateInfo" parameterType="HomeBoardVO">
+		/* com.anchordata.webframework.homeBoard.updateInfo */
+		UPDATE HOME_BOARD SET 
+			UPDATE_DATE = NOW()  
+			<if test='title != null and title != "" '>
+				,TITLE = #{title}
+			</if>
+			<if test='description != null and description != "" '>
+				,DESCRIPTION = #{description}
+			</if>
+			<if test='open_yn != null and open_yn != "" '>
+				,OPEN_YN = #{open_yn}
+			</if>
+			<if test='business_name != null and business_name != "" '>
+				, BUSINESS_NAME = #{business_name}
+			</if>
+			<if test='institue_name != null and institue_name != "" '>
+				, INSTITUE_NAME = #{institue_name}
+			</if>
+			<if test='skill_keyword != null and skill_keyword != "" '>
+				, SKILL_KEYWORD = #{skill_keyword}
+			</if>
+			<if test='skill_effect != null and skill_effect != "" '>
+				, SKILL_EFFECT = #{skill_effect}
+			</if>
+			<if test='from_date != null and from_date != "" '>
+				, FROM_DATE = #{from_date}
+			</if>
+			<if test='to_date != null and to_date != "" '>
+				, TO_DATE = #{to_date}
+			</if>
+			<if test='hits != null and hits != "" '>
+				, HITS = (HITS+1)
+			</if>
+		WHERE BOARD_ID = #{board_id}
+	</update>
+	
+	<delete id="deleteInfo" parameterType="HomeBoardVO">
+		/* com.anchordata.webframework.homeBoard.deleteInfo */
+		DELETE FROM HOME_BOARD
+		WHERE BOARD_ID = #{board_id}
+	</delete>	
+	
+	
+	<insert id="insertRelativeFileInfo" parameterType="HomeBoardVO">
+		/* com.anchordata.webframework.homeBoard.insertRelativeFileInfo */
+		INSERT INTO HOME_BOARD_FILE_RELATIVE ( 
+			BOARD_ID
+			,	FILE_ID
+			,	FILE_TYPE
+		) 
+		VALUES ( 
+			#{board_id}
+			,	#{file_id}
+			,	#{file_type}
+		);
+	</insert>
+	
+	<select id="selectRelativeFileInfo" parameterType="HomeBoardVO" resultType="int">
+		/* com.anchordata.webframework.homeBoard.selectRelativeFileInfo */
+		SELECT
+			FILE_ID
+		FROM
+			HOME_BOARD_FILE_RELATIVE
+		WHERE
+			BOARD_ID = #{board_id} 
+			<if test='file_type != null and file_type != "" '>
+				AND FILE_TYPE = #{file_type}
+			</if>
+	</select>
+	
+	<delete id="deleteRelativeInfo" parameterType="HomeBoardVO">
+		DELETE FROM HOME_BOARD_FILE_RELATIVE			
+		WHERE 
+			BOARD_ID = #{board_id} 
+	</delete>
+	
+	<delete id="deleteRelativeInfoWithFileId" parameterType="HomeBoardVO">
+		DELETE FROM HOME_BOARD_FILE_RELATIVE			
+		WHERE 
+			FILE_ID IN
+			<foreach collection="delete_file_list" item="file_id" separator="," open="(" close=")" >
+				#{file_id}
+			</foreach>
+	</delete>
+	
+	
+</mapper>

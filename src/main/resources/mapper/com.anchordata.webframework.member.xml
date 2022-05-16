@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.member">
+
+	<resultMap id="member" type="MemberVO">
+		<result property ="member_seq"				column="MEMBER_SEQ"	/>
+		<result property ="member_id"				column="MEMBER_ID"	/>
+		<result property ="name"					column="NAME"	/>
+		<result property ="birth"					column="BIRTH"	/>
+		<result property ="pwd"						column="PWD"	/>
+		<result property ="phone"					column="PHONE"	/>
+		<result property ="mobile_phone"			column="MOBILE_PHONE"	/>
+		<result property ="email"					column="EMAIL"	/>
+		<result property ="address"				    column="ADDRESS"	/>
+		<result property ="address_detail"		    column="ADDRESS_DETAIL"	/>
+		<result property ="nationality"				column="NATIONALITY"	/>
+		<result property ="residence_yn"			column="RESIDENCE_YN"	/>
+		<result property ="institution_type"		column="INSTITUTION_TYPE"	/>
+		<result property ="gender"					column="GENDER"	/>
+		<result property ="auth_level_super_admin"	column="AUTH_LEVEL_SUPER_ADMIN"	/>
+		<result property ="auth_level_admin"		column="AUTH_LEVEL_ADMIN"	/>
+		<result property ="auth_level_manager"		column="AUTH_LEVEL_MANAGER"	/>
+		<result property ="auth_level_expert"		column="AUTH_LEVEL_EXPERT"	/>
+		<result property ="auth_level_commissioner"	column="AUTH_LEVEL_COMMISSIONER"	/>
+		<result property ="auth_level_member"		column="AUTH_LEVEL_MEMBER"	/>
+		<result property ="reg_terms_yn"			column="REG_TERMS_YN"	/>
+		<result property ="private_info_yn"			column="PRIVATE_INFO_YN"	/>
+		<result property ="security_yn"				column="SECURITY_YN"	/>
+		<result property ="admin_use_yn"			column="ADMIN_USE_YN"	/>
+		<result property ="use_yn"					column="USE_YN"	/>
+		<result property ="login_date"				column="LOGIN_DATE"	/>
+		<result property ="reg_date"				column="REG_DATE"	/>
+		<result property ="institution_id"			column="INSTITUTION_ID"	/>
+
+		<result property ="total_count"				column="TOTAL_COUNT"	/>
+
+		<!-- Extension Table -->
+		<result property ="department_type"			column="DEPARTMENT_TYPE"	/>
+		<result property ="university"				column="UNIVERSITY"	/>
+		<result property ="department"				column="DEPARTMENT"	/>
+		<result property ="position"				column="POSITION"	/>
+		<result property ="lab_address"				column="LAB_ADDRESS"	/>
+		<result property ="lab_address_detail"		column="LAB_ADDRESS_DETAIL"	/>
+		<result property ="lab_phone"				column="LAB_PHONE"	/>
+		<result property ="degree"					column="DEGREE"	/>
+		<result property ="university_degree"		column="UNIVERSITY_DEGREE"	/>
+		<result property ="university_degree_date"	column="UNIVERSITY_DEGREE_DATE"	/>
+		<result property ="major"					column="MAJOR"	/>
+		<result property ="research"				column="RESEARCH"	/>
+		<result property ="large"					column="LARGE"	/>
+		<result property ="middle"					column="MIDDLE"	/>
+		<result property ="small"					column="SMALL"	/>
+		<result property ="four_industry"			column="FOUR_INDUSTRY"	/>
+		<result property ="thesis_1"				column="THESIS_1"	/>
+		<result property ="thesis_name_1"			column="THESIS_NAME_1"	/>
+		<result property ="thesis_date_1"			column="THESIS_DATE_1"	/>
+		<result property ="thesis_sci_yn_1"			column="THESIS_SCI_YN_1" />
+		<result property ="thesis_2"				column="THESIS_2"	/>
+		<result property ="thesis_name_2"			column="THESIS_NAME_2"	/>
+		<result property ="thesis_date_2"			column="THESIS_DATE_2"	/>
+		<result property ="thesis_sci_yn_2"			column="THESIS_SCI_YN_2" />
+		<result property ="thesis_3"				column="THESIS_3"	/>
+		<result property ="thesis_name_3"			column="THESIS_NAME_3"	/>
+		<result property ="thesis_date_3"			column="THESIS_DATE_3"	/>
+		<result property ="thesis_sci_yn_3"			column="THESIS_SCI_YN_3" />
+		<result property ="iprs_1"					column="IPRS_1"	/>
+		<result property ="iprs_enroll_1"			column="IPRS_ENROLL_1"	/>
+		<result property ="iprs_number_1"			column="IPRS_NUMBER_1"	/>
+		<result property ="iprs_name_1"				column="IPRS_NAME_1"	/>
+		<result property ="iprs_date_1"				column="IPRS_DATE_1"	/>
+		<result property ="iprs_2"					column="IPRS_2"	/>
+		<result property ="iprs_enroll_2"			column="IPRS_ENROLL_2"	/>
+		<result property ="iprs_number_2"			column="IPRS_NUMBER_2"	/>
+		<result property ="iprs_name_2"				column="IPRS_NAME_2"	/>
+		<result property ="iprs_date_2"				column="IPRS_DATE_2"	/>
+		<result property ="iprs_3"					column="IPRS_3"	/>
+		<result property ="iprs_enroll_3"			column="IPRS_ENROLL_3"	/>
+		<result property ="iprs_number_3"			column="IPRS_NUMBER_3"	/>
+		<result property ="iprs_name_3"				column="IPRS_NAME_3"	/>
+		<result property ="iprs_date_3"				column="IPRS_DATE_3"	/>
+		<result property ="tech_tran_name_1"		column="TECH_TRAN_NAME_1"	/>
+		<result property ="tech_tran_date_1"		column="TECH_TRAN_DATE_1"	/>
+		<result property ="tech_tran_company_1"		column="TECH_TRAN_COMPANY_1"	/>
+		<result property ="tech_tran_name_2"		column="TECH_TRAN_NAME_2"	/>
+		<result property ="tech_tran_date_2"		column="TECH_TRAN_DATE_2"	/>
+		<result property ="tech_tran_company_2"		column="TECH_TRAN_COMPANY_2"	/>
+		<result property ="tech_tran_name_3"		column="TECH_TRAN_NAME_3"	/>
+		<result property ="tech_tran_date_3"		column="TECH_TRAN_DATE_3"	/>
+		<result property ="tech_tran_company_3"		column="TECH_TRAN_COMPANY_3"	/>
+		<result property ="rnd_name_1"				column="RND_NAME_1"	/>
+		<result property ="rnd_date_start_1"		column="RND_DATE_START_1"	/>
+		<result property ="rnd_date_end_1"			column="RND_DATE_END_1"	/>
+		<result property ="rnd_class_1"				column="RND_CLASS_1"	/>
+		<result property ="rnd_4th_industry_1"		column="RND_4TH_INDUSTRY_1"	/>
+		<result property ="rnd_name_2"				column="RND_NAME_2"	/>
+		<result property ="rnd_date_start_2"		column="RND_DATE_START_2"	/>
+		<result property ="rnd_date_end_2"			column="RND_DATE_END_2"	/>
+		<result property ="rnd_class_2"				column="RND_CLASS_2"	/>
+		<result property ="rnd_4th_industry_2"		column="RND_4TH_INDUSTRY_2"	/>
+		<result property ="rnd_name_3"				column="RND_NAME_3"	/>
+		<result property ="rnd_date_start_3"		column="RND_DATE_START_3"	/>
+		<result property ="rnd_date_end_3"			column="RND_DATE_END_3"	/>
+		<result property ="rnd_class_3"				column="RND_CLASS_3"	/>
+		<result property ="rnd_4th_industry_3"		column="RND_4TH_INDUSTRY_3"	/>		
+		
+		<result property ="four_industry_name"			column="FOUR_INDUSTRY_NAME"	/>
+		<result property ="rnd_4th_industry_1_name"		column="RND_4TH_INDUSTRY_1_NAME"	/>
+		<result property ="rnd_4th_industry_2_name"		column="RND_4TH_INDUSTRY_2_NAME"	/>
+		<result property ="rnd_4th_industry_3_name"		column="RND_4TH_INDUSTRY_3_NAME"	/>
+		<result property ="rnd_4th_industry_3_name"		column="RND_4TH_INDUSTRY_3_NAME"	/>
+		<result property ="institution_type_name"		column="INSTITUTION_TYPE_NAME"	/>
+		<result property ="nationality_name"			column="NATIONALITY_NAME"	/>
+		<result property ="institution_name"			column="INSTITUTION_NAME"	/>
+		
+		
+	</resultMap>
+	
+	
+	<insert id="insertMemberInfo" useGeneratedKeys="true" keyProperty="member_seq" parameterType="MemberVO">
+		INSERT INTO MEMBER ( 
+			MEMBER_ID
+			,	NAME
+			,	BIRTH
+			,	PWD
+			,	PHONE
+			,	MOBILE_PHONE
+			,	EMAIL
+			,	ADDRESS
+			,	ADDRESS_DETAIL
+			,	NATIONALITY
+			,	RESIDENCE_YN
+			,	INSTITUTION_TYPE
+			,	GENDER
+			,	AUTH_LEVEL_MEMBER
+			,	REG_TERMS_YN
+			,	PRIVATE_INFO_YN
+			,	SECURITY_YN
+		) 
+		VALUES ( 
+			#{member_id}
+			,	#{name} 
+			,	#{birth}
+			,	#{pwd}
+			,	#{phone}
+			,	#{mobile_phone}
+			,	#{email}
+			,	#{address}
+			,	#{address_detail}
+			,	#{nationality}
+			,	#{residence_yn}
+			,	#{institution_type}
+			,	#{gender}
+			,	#{auth_level_member}
+			,	#{reg_terms_yn}
+			,	#{private_info_yn}
+			,	#{security_yn}
+		);
+	</insert>
+	
+	<update id="updateMemberInfo" parameterType="MemberVO">
+		UPDATE MEMBER 
+		SET
+			INSTITUTION_TYPE = #{department_type}
+			,	MOBILE_PHONE = #{mobile_phone}
+			,	EMAIL = #{email}
+			, 	ADDRESS = #{address}
+			, 	ADDRESS_DETAIL = #{address_detail}
+			<if test='pwd != null and pwd != "" '>
+				,	PWD = #{pwd}
+			</if>
+		WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	<insert id="insertExtensionInfo" useGeneratedKeys="true" keyProperty="member_seq" parameterType="MemberVO">
+		INSERT INTO EXPERT ( 
+			MEMBER_ID
+			,	DEPARTMENT_TYPE
+			,	UNIVERSITY
+			,	DEPARTMENT
+			,	POSITION
+			,	LAB_ADDRESS
+			,	LAB_ADDRESS_DETAIL
+			,	LAB_PHONE
+			,	DEGREE
+			,	UNIVERSITY_DEGREE
+			,	UNIVERSITY_DEGREE_DATE
+			,	MAJOR
+			,	RESEARCH
+			,	LARGE
+			,	MIDDLE
+			,	SMALL
+			,	FOUR_INDUSTRY
+			,	THESIS_1
+			,	THESIS_NAME_1
+			,	THESIS_DATE_1
+			,	THESIS_SCI_YN_1
+			,	THESIS_2
+			,	THESIS_NAME_2
+			,	THESIS_DATE_2
+			,	THESIS_SCI_YN_2
+			,	THESIS_3
+			,	THESIS_NAME_3
+			,	THESIS_DATE_3
+			,	THESIS_SCI_YN_3
+			,	IPRS_1
+			,	IPRS_ENROLL_1
+			,	IPRS_NUMBER_1
+			,	IPRS_NAME_1
+			,	IPRS_DATE_1
+			,	IPRS_2
+			,	IPRS_ENROLL_2
+			,	IPRS_NUMBER_2
+			,	IPRS_NAME_2
+			,	IPRS_DATE_2
+			,	IPRS_3
+			,	IPRS_ENROLL_3
+			,	IPRS_NUMBER_3
+			,	IPRS_NAME_3
+			,	IPRS_DATE_3
+			,	TECH_TRAN_NAME_1
+			,	TECH_TRAN_DATE_1
+			,	TECH_TRAN_COMPANY_1
+			,	TECH_TRAN_NAME_2
+			,	TECH_TRAN_DATE_2
+			,	TECH_TRAN_COMPANY_2
+			,	TECH_TRAN_NAME_3
+			,	TECH_TRAN_DATE_3
+			,	TECH_TRAN_COMPANY_3
+			,	RND_NAME_1
+			,	RND_DATE_START_1
+			,	RND_DATE_END_1
+			,	RND_CLASS_1
+			,	RND_4TH_INDUSTRY_1
+			,	RND_NAME_2
+			,	RND_DATE_START_2
+			,	RND_DATE_END_2
+			,	RND_CLASS_2
+			,	RND_4TH_INDUSTRY_2
+			,	RND_NAME_3
+			,	RND_DATE_START_3
+			,	RND_DATE_END_3
+			,	RND_CLASS_3
+			,	RND_4TH_INDUSTRY_3			
+		) 
+		VALUES ( 
+			#{member_id}
+			,	#{department_type} 
+			,	#{university}
+			,	#{department}
+			,	#{position}
+			,	#{lab_address}
+			,	#{lab_address_detail}
+			,	#{lab_phone}
+			,	#{degree}
+			,	#{university_degree}
+			,	#{university_degree_date}
+			,	#{major}
+			,	#{research}
+			,	#{large}
+			,	#{middle}
+			,	#{small}
+			,	#{four_industry}
+			,	#{thesis_1}
+			,	#{thesis_name_1}
+			,	#{thesis_date_1}
+			,	#{thesis_sci_yn_1}
+			,	#{thesis_2}
+			,	#{thesis_name_2}
+			,	#{thesis_date_2}
+			,	#{thesis_sci_yn_2}
+			,	#{thesis_3}
+			,	#{thesis_name_3}
+			,	#{thesis_date_3}
+			,	#{thesis_sci_yn_3}
+			,	#{iprs_1}
+			,	#{iprs_enroll_1}
+			,	#{iprs_number_1}
+			,	#{iprs_name_1}
+			,	#{iprs_date_1}
+			,	#{iprs_2}
+			,	#{iprs_enroll_2}
+			,	#{iprs_number_2}
+			,	#{iprs_name_2}
+			,	#{iprs_date_2}
+			,	#{iprs_3}
+			,	#{iprs_enroll_3}
+			,	#{iprs_number_3}
+			,	#{iprs_name_3}
+			,	#{iprs_date_3}
+			,	#{tech_tran_name_1}
+			,	#{tech_tran_date_1}
+			,	#{tech_tran_company_1}
+			,	#{tech_tran_name_2}
+			,	#{tech_tran_date_2}
+			,	#{tech_tran_company_2}
+			,	#{tech_tran_name_3}
+			,	#{tech_tran_date_3}
+			,	#{tech_tran_company_3}
+			,	#{rnd_name_1}
+			,	#{rnd_date_start_1}
+			,	#{rnd_date_end_1}
+			,	#{rnd_class_1}
+			,	#{rnd_4th_industry_1}
+			,	#{rnd_name_2}
+			,	#{rnd_date_start_2}
+			,	#{rnd_date_end_2}
+			,	#{rnd_class_2}
+			,	#{rnd_4th_industry_2}
+			,	#{rnd_name_3}
+			,	#{rnd_date_start_3}
+			,	#{rnd_date_end_3}
+			,	#{rnd_class_3}
+			,	#{rnd_4th_industry_3}
+		);
+	</insert>
+	
+	<update id="updateMemberExtensionInfo" parameterType="MemberVO">
+		UPDATE MEMBER SET   
+				DEPARTMENT = #{department}
+			,	POSITION = #{position}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	
+	<!-- PJS 생성  -->
+	<select id="selectExpertDetail" parameterType="MemberVO"  resultMap="member">
+		SELECT
+			A.MEMBER_ID
+			,	B.NAME
+			,	B.EMAIL
+			,	B.MOBILE_PHONE
+			,	A.DEPARTMENT_TYPE
+			,	A.UNIVERSITY
+			,	A.DEPARTMENT
+			,	A.POSITION
+			,	A.LAB_ADDRESS
+			,	A.LAB_ADDRESS_DETAIL
+			,	A.LAB_PHONE
+			,	A.DEGREE
+			,	A.UNIVERSITY_DEGREE
+			,	IFNULL(A.UNIVERSITY_DEGREE_DATE, "") AS UNIVERSITY_DEGREE_DATE
+			,	A.MAJOR
+			,	A.RESEARCH
+			,	A.LARGE
+			,	A.MIDDLE
+			,	A.SMALL
+			,	A.FOUR_INDUSTRY
+			, 	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.FOUR_INDUSTRY ) AS FOUR_INDUSTRY_NAME
+			,	A.THESIS_1
+			,	A.THESIS_NAME_1
+			,	A.THESIS_DATE_1
+			,	A.THESIS_SCI_YN_1
+			,	A.THESIS_2
+			,	A.THESIS_NAME_2
+			,	A.THESIS_DATE_2
+			,	A.THESIS_SCI_YN_2
+			,	A.THESIS_3
+			,	A.THESIS_NAME_3
+			,	A.THESIS_DATE_3
+			,	A.THESIS_SCI_YN_3
+			,	A.IPRS_1
+			,	A.IPRS_ENROLL_1
+			,	A.IPRS_NUMBER_1
+			,	A.IPRS_NAME_1
+			,	A.IPRS_DATE_1
+			,	A.IPRS_2
+			,	A.IPRS_ENROLL_2
+			,	A.IPRS_NUMBER_2
+			,	A.IPRS_NAME_2
+			,	A.IPRS_DATE_2
+			,	A.IPRS_3
+			,	A.IPRS_ENROLL_3
+			,	A.IPRS_NUMBER_3
+			,	A.IPRS_NAME_3
+			,	A.IPRS_DATE_3
+			,	A.TECH_TRAN_NAME_1
+			,	A.TECH_TRAN_DATE_1
+			,	A.TECH_TRAN_COMPANY_1
+			,	A.TECH_TRAN_NAME_2
+			,	A.TECH_TRAN_DATE_2
+			,	A.TECH_TRAN_COMPANY_2
+			,	A.TECH_TRAN_NAME_3
+			,	A.TECH_TRAN_DATE_3
+			,	A.TECH_TRAN_COMPANY_3
+			,	A.RND_NAME_1
+			,	A.RND_DATE_START_1
+			,	A.RND_DATE_END_1
+			,	A.RND_CLASS_1
+			,	A.RND_4TH_INDUSTRY_1
+			, 	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.RND_4TH_INDUSTRY_1 ) AS RND_4TH_INDUSTRY_1_NAME
+			,	A.RND_NAME_2
+			,	A.RND_DATE_START_2
+			,	A.RND_DATE_END_2
+			,	A.RND_CLASS_2
+			,	A.RND_4TH_INDUSTRY_2
+			, 	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.RND_4TH_INDUSTRY_2 ) AS RND_4TH_INDUSTRY_2_NAME
+			,	A.RND_NAME_3
+			,	A.RND_DATE_START_3
+			,	A.RND_DATE_END_3
+			,	A.RND_CLASS_3
+			,	A.RND_4TH_INDUSTRY_3
+			, 	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.RND_4TH_INDUSTRY_3 ) AS RND_4TH_INDUSTRY_3_NAME					
+		FROM
+			EXPERT A
+		JOIN
+			MEMBER B
+		ON	B.AUTH_LEVEL_EXPERT = 'Y' AND A.MEMBER_ID = B.MEMBER_ID
+		WHERE 
+			A.MEMBER_ID = #{member_id}
+	</select>
+
+	
+	<!-- PJS 생성  -->
+	<select id="selectDetail" parameterType="MemberVO"  resultMap="member">
+		SELECT
+			A.MEMBER_SEQ
+			, A.MEMBER_ID
+			, A.NAME
+			, A.MOBILE_PHONE
+			, A.EMAIL
+			, A.ADDRESS
+			, A.ADDRESS_DETAIL
+			, A.INSTITUTION_TYPE
+			, (SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000004' AND B.DETAIL_ID = A.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+			, A.AUTH_LEVEL_MANAGER
+			, A.AUTH_LEVEL_EXPERT
+			, A.AUTH_LEVEL_COMMISSIONER
+			, A.INSTITUTION_ID
+			, A.DEPARTMENT
+			, A.POSITION
+			, B.NAME AS UNIVERSITY
+			, B.ADDRESS	AS LAB_ADDRESS		
+			, B.ADDRESS_DETAIL AS LAB_ADDRESS_DETAIL					
+			, B.PHONE AS LAB_PHONE					
+		FROM
+			MEMBER A
+		LEFT JOIN 
+			INSTITUTION B
+		ON 
+			B.REG_NO = A.INSTITUTION_ID			
+		WHERE 
+			A.MEMBER_ID = #{member_id}
+	</select>	
+	
+	
+	<select id="selectSearchExpertPagingList" parameterType="MemberVO" resultMap="member">
+		<include refid="common.pagingPre"/>
+		SELECT
+			A.MEMBER_ID
+			,	A.LARGE
+			,	A.MIDDLE
+			,	A.SMALL
+			,	A.RESEARCH
+			,	B.NAME
+			, 	A.UNIVERSITY
+			,	A.DEPARTMENT
+			,	B.MOBILE_PHONE
+			,	B.EMAIL
+			,	B.INSTITUTION_TYPE
+			, 	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000004' AND B.DETAIL_ID = B.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+			,	B.REG_DATE
+		FROM
+			EXPERT A
+		JOIN
+			MEMBER B
+		ON	B.AUTH_LEVEL_EXPERT = 'Y' AND A.MEMBER_ID = B.MEMBER_ID
+		WHERE
+			1=1
+			<if test='institution_name != null and institution_name != "" '>
+				AND A.UNIVERSITY LIKE CONCAT('%',#{institution_name},'%')
+			</if> 
+			<if test='institution_type != null and institution_type != "" '>
+				AND B.INSTITUTION_TYPE = #{institution_type}
+			</if> 
+			<if test='name != null and name != "" '>
+				AND B.NAME LIKE CONCAT('%',#{name},'%')
+			</if> 
+			<if test='member_id != null and member_id != "" '>
+				AND B.MEMBER_ID LIKE CONCAT('%',#{member_id},'%')
+			</if> 
+			<!-- 기관명이다. 처음에 Field명을 잘 못 잡았다. 수정하기엔 너무 많아 일단 보류 -->
+			<if test='university != null and university != "" '>
+				AND A.UNIVERSITY LIKE CONCAT('%',#{university},'%')
+			</if>
+			
+			<if test='research != null and research != "" '>
+				AND A.RESEARCH LIKE CONCAT('%',#{research},'%')
+			</if>
+			<if test='large != null and large != "" '>
+				AND A.LARGE LIKE CONCAT('%',#{large},'%')
+			</if>
+			<if test='middle != null and middle != "" '>
+				AND A.MIDDLE LIKE CONCAT('%',#{middle},'%')
+			</if>
+			<if test='small != null and small != "" '>
+				AND A.SMALL LIKE CONCAT('%',#{small},'%')
+			</if>
+			<if test='search_text != null and search_text != "" '>
+				AND ( 
+						A.LARGE LIKE CONCAT('%',#{search_text},'%') OR A.MIDDLE LIKE CONCAT('%',#{search_text},'%') OR
+				    	A.SMALL LIKE CONCAT('%',#{search_text},'%') OR A.RESEARCH LIKE CONCAT('%',#{search_text},'%') OR
+				    	A.UNIVERSITY LIKE CONCAT('%',#{search_text},'%')
+				    )
+			</if>
+			<if test='from_date != null and from_date != "" and to_date != null and to_date != "" '>
+	      		AND REG_DATE <![CDATA[ >= ]]>  #{from_date} AND  REG_DATE <![CDATA[ <= ]]> #{to_date} 
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<update id="updateAdminUseYN" parameterType="MemberVO">
+		UPDATE MEMBER SET   
+			ADMIN_USE_YN = #{admin_use_yn}
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	<update id="updateAuthLeveleCommissioner" parameterType="MemberVO">
+		UPDATE MEMBER SET   
+			AUTH_LEVEL_COMMISSIONER = #{auth_level_commissioner}
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	<select id="findLoginInfo" parameterType="String" resultMap="member">
+		SELECT
+			MEMBER_ID
+			,	PWD
+			,	AUTH_LEVEL_SUPER_ADMIN
+			,	AUTH_LEVEL_ADMIN
+			,	AUTH_LEVEL_EXPERT
+			,	AUTH_LEVEL_COMMISSIONER
+			,	AUTH_LEVEL_MANAGER
+		FROM
+			MEMBER
+		WHERE
+			MEMBER_ID = #{member_id}
+	</select>
+	
+	
+	<select id="findID" parameterType="MemberVO" resultMap="member">
+		SELECT
+			MEMBER_ID
+		FROM
+			MEMBER
+		WHERE
+			NAME = #{name}
+			AND MOBILE_PHONE = #{mobile_phone}
+	</select>
+	
+	<delete id="deleteMemberInfo" parameterType="MemberVO">
+		DELETE FROM MEMBER	
+		WHERE MEMBER_ID = #{member_id}
+	</delete>
+	
+	
+	<update id="updateLoginTime" parameterType="String">
+		UPDATE MEMBER SET   
+			LOGIN_DATE = NOW()
+		WHERE 
+			MEMBER_ID = #{member}
+	</update>
+	
+	
+	<update id="updateMemberBlock" parameterType="String">
+		UPDATE MEMBER SET   
+			USE_YN = 
+				CASE 
+					WHEN (SELECT USE_YN FROM MEMBER WHERE MEMBER_ID = #{member}) = 'Y'
+					THEN 'N'
+					ELSE 'Y'
+				END	
+		WHERE 
+			MEMBER_ID = #{member}
+	</update>
+	
+	
+	<select id="selectMemberCount" resultType="java.util.HashMap">
+		SELECT
+			 COUNT(*) AS TOTAL_MEMBER,
+			 (SELECT COUNT(*) FROM MEMBER WHERE USE_YN = 'N') AS TOTAL_BLOCK_MEMBER,
+			 (SELECT COUNT(*) FROM MEMBER WHERE ADMIN_USE_YN = 'N') AS TOTAL_DELETE_MEMBER
+		FROM
+			MEMBER
+		WHERE 
+			AUTH_LEVEL != '99'
+			AND ADMIN_USE_YN	= 'Y'
+			AND USE_YN = 'Y'
+	</select>
+	
+	
+	<select id="selectSearchList" parameterType="MemberVO" resultMap="member">
+		SELECT 
+			MEMBER_ID
+			,	NAME
+			, 	DATE_FORMAT(BIRTH,'%Y-%m-%d') AS BIRTH
+		FROM
+			MEMBER
+		WHERE
+			1 = 1
+			AND AUTH_LEVEL != '99'
+			AND ADMIN_USE_YN	= 'Y'
+			AND USE_YN = 'Y'
+			<!--  content - 주요 역서에서 찾는다.  -->
+			<if test='name != null and name != "" '>
+				AND NAME LIKE CONCAT('%',#{name},'%')
+			</if>
+	</select>
+	
+	
+	<select id="selectAllList" resultMap="member">
+		SELECT 
+			MEMBER_ID
+			,	NAME
+			, 	DATE_FORMAT(BIRTH,'%Y-%m-%d') AS BIRTH
+			,	GENDER
+			,	EMAIL
+			,	PHONE
+			,	POINT
+			,	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE 
+		FROM
+			MEMBER		
+	</select>
+	
+	
+	<!-- PJS 생성  -->
+	<!-- 2020-03-21 -->
+	<select id="selectPagingList" parameterType="HashMap"  resultMap="member">
+		<include refid="common.pagingPre"/>
+		SELECT
+			MEMBER_SEQ
+			, MEMBER_ID
+			, DATE_FORMAT(STR_TO_DATE(BIRTH,'%Y%m%d'),'%Y-%m-%d') AS BIRTH
+			, GENDER
+			, NAME
+			, EMAIL
+			, PHONE
+			, POINT
+			, AUTH_LEVEL
+			, RECV_MAIL_YN
+			, RECV_MSG_YN
+			, REG_TERMS_YN
+			, PRIVATE_INFO_YN
+			, PAYMENT_YN
+			, LOGIN_DATE
+			, DATE_FORMAT(reg_date, '%Y-%m-%d') AS REG_DATE
+			, USE_YN
+		FROM
+			MEMBER A
+		WHERE
+			1 = 1
+			AND AUTH_LEVEL != '99'
+			AND A.ADMIN_USE_YN	= 'Y'
+			AND A.USE_YN = 'Y'
+		ORDER BY 
+			MEMBER_ID DESC
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="selectAdminSearchPagingList" parameterType="HashMap"  resultMap="member">
+		<include refid="common.pagingPre"/>
+		SELECT
+			MEMBER_SEQ
+			, MEMBER_ID
+			, NAME
+			, USE_YN
+			, ADMIN_USE_YN
+			, REG_DATE
+		FROM
+			MEMBER A
+		WHERE
+			AUTH_LEVEL != 'D000001'
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="selectSearchPagingList" parameterType="HashMap"  resultMap="member">
+		<include refid="common.pagingPre"/>
+		SELECT
+			MEMBER_SEQ
+			, MEMBER_ID
+			, DATE_FORMAT(STR_TO_DATE(BIRTH,'%Y%m%d'),'%Y-%m-%d') AS BIRTH
+			, GENDER
+			, NAME
+			, EMAIL
+			, PHONE
+			, POINT
+			, AUTH_LEVEL
+			, RECV_MAIL_YN
+			, RECV_MSG_YN
+			, REG_TERMS_YN
+			, PRIVATE_INFO_YN
+			, PAYMENT_YN
+			, LOGIN_DATE
+			, DATE_FORMAT(reg_date, '%Y-%m-%d') AS REG_DATE
+			, USE_YN
+		FROM
+			MEMBER A
+		WHERE
+			1 = 1
+			AND AUTH_LEVEL != '99'
+			AND A.ADMIN_USE_YN	= 'Y'
+			AND A.USE_YN = 'Y'
+			
+			<!--  NAME  -->
+			<if test='name != null and name != "" '>
+				AND NAME LIKE CONCAT('%',#{name},'%')
+			</if>
+			
+			<!--  member_id  -->
+			<if test='member_id != null and member_id != "" '>
+				AND MEMBER_ID LIKE CONCAT('%',#{member_id},'%')
+			</if>
+			
+			<!--  content - 주요 역서에서 찾는다.  -->
+			<if test='content != null and content != "" '>
+				AND MAJOR_TRANSLATION LIKE CONCAT('%',#{content},'%')
+			</if>
+		ORDER BY 
+			MEMBER_SEQ DESC
+
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="selectMemeberExist" parameterType="MemberVO" resultMap="member">
+		SELECT
+			MEMBER_ID
+			,	EMAIL
+		FROM
+			MEMBER
+		WHERE
+			MEMBER_ID = #{member_id}
+			<if test='name != null and name != "" '>
+				AND NAME = #{name}
+			</if>
+			<if test='mobile_phone != null and mobile_phone != "" '>
+				AND MOBILE_PHONE = #{mobile_phone}
+			</if>
+	</select>
+	
+	
+	<select id="selectMemeberPwd" parameterType="MemberVO" resultMap="member">
+		SELECT
+			PWD
+		FROM
+			MEMBER
+		WHERE
+			MEMBER_ID = #{member_id}
+	</select>
+	
+	
+	<update id="updateNewPwd" parameterType="MemberVO">
+		UPDATE MEMBER SET   
+			PWD = #{pwd}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	
+	<update id="updateInstitution" parameterType="DataMap" >
+		UPDATE MEMBER SET   
+			INSTITUTION_ID = #{institution_id}
+			, INSTITUTION_TYPE = #{institution_type}
+			, DEPARTMENT = #{department}
+			, POSITION = #{position}
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	<select id="selectSearchResearcherPagingList" parameterType="HashMap"  resultMap="member">
+		<include refid="common.pagingPre"/>
+		SELECT
+			MEMBER_ID
+			,	NAME
+			,	BIRTH
+			,	PWD
+			,	PHONE
+			,	MOBILE_PHONE
+			,	EMAIL
+			,	ADDRESS
+			,	ADDRESS_DETAIL
+			,	NATIONALITY
+			,	RESIDENCE_YN
+			,	INSTITUTION_TYPE
+			,	GENDER
+			,	AUTH_LEVEL_ADMIN
+			,	AUTH_LEVEL_MANAGER
+			,	AUTH_LEVEL_EXPERT
+			,	AUTH_LEVEL_MEMBER
+			,	REG_TERMS_YN
+			,	PRIVATE_INFO_YN
+			,	SECURITY_YN
+			, 	DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE
+			, 	DEPARTMENT
+			, 	POSITiON	
+			,	(SELECT NAME FROM INSTITUTION B WHERE B.REG_NO = A.INSTITUTION_ID ) AS INSTITUTION_NAME
+			, 	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000003' AND B.DETAIL_ID = A.NATIONALITY ) AS NATIONALITY_NAME
+			, 	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000004' AND B.DETAIL_ID = A.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+		FROM
+			MEMBER A
+		WHERE
+			1 = 1
+			AND AUTH_LEVEL_ADMIN != 'Y'
+			AND AUTH_LEVEL_EXPERT != 'Y'
+			AND AUTH_LEVEL_MANAGER != 'Y'
+			AND USE_YN = 'Y'
+			
+			<!--  NAME  -->
+			<if test='name != null and name != "" '>
+				AND NAME LIKE CONCAT('%',#{name},'%')
+			</if>
+			
+			<!--  member_id  -->
+			<if test='member_id != null and member_id != "" '>
+				AND MEMBER_ID LIKE CONCAT('%',#{member_id},'%')
+			</if>
+			
+			<!--  nationality  -->
+			<if test='nationality != null and nationality != "" '>
+				AND NATIONALITY LIKE CONCAT('%',#{nationality},'%')
+			</if>
+			
+			<!--  institution_type  -->
+			<if test='institution_type != null and institution_type != "" '>
+				AND INSTITUTION_TYPE LIKE CONCAT('%',#{institution_type},'%')
+			</if>
+			
+			<!--  institution_name  -->
+			<if test='institution_name != null and institution_name != "" '>
+				AND (SELECT NAME FROM INSTITUTION B WHERE B.REG_NO = A.INSTITUTION_ID) LIKE CONCAT('%',#{institution_name},'%')
+			</if>
+			
+			<if test='from_date != null and from_date != "" and to_date != null and to_date != "" '>
+	      		AND REG_DATE <![CDATA[ >= ]]>  #{from_date} AND  REG_DATE <![CDATA[ <= ]]> #{to_date} 
+			</if>
+		ORDER BY 
+			MEMBER_SEQ DESC
+
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<insert id="insertMemberHistory" parameterType="String">
+		INSERT INTO MEMBER_HISTORY ( 
+			MEMBER_ID
+		) 
+		VALUES ( 
+			#{member_id}
+		);
+	</insert>
+	
+	<select id="selectMemberHistory" parameterType="String" resultType="String">
+		SELECT
+			LOGIN_DATE
+		FROM
+			MEMBER_HISTORY
+		WHERE
+			MEMBER_ID = #{member_id}
+		ORDER BY LOGIN_DATE DESC			
+	</select>
+	
+	<delete id="deleteMemberHistory" parameterType="String">
+		DELETE FROM MEMBER_HISTORY			
+		WHERE
+			MEMBER_ID = #{member_id}
+	</delete>
+	
+</mapper>

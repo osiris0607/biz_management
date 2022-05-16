@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.uploadFile">
+
+	
+	<resultMap id="uploadFile" type="UploadFileVO">
+		<result property ="file_id"				column="FILE_ID"	/>
+		<result property ="name"				column="NAME"	/>
+		<result property ="path"				column="PATH"	/>
+		<result property ="type"				column="TYPE"	/>
+		<result property ="description"			column="DESCRIPTION"	/>
+		<result property ="binary_content"		column="BINARY_CONTENT"	/>
+	</resultMap>
+	
+	<insert id="insertUploadFileInfo" useGeneratedKeys="true" keyProperty="file_id" parameterType="UploadFileVO">
+		INSERT INTO UPLOAD_FILE ( 
+			NAME
+			<if test='path != null and path != "" '>
+			,	PATH
+			</if>
+			<if test='type != null and type != "" '>
+			,	TYPE
+			</if>
+			<if test='description != null and description != "" '>
+			,	DESCRIPTION
+			</if>
+			,	BINARY_CONTENT
+		) 
+		VALUES ( 
+			#{name} 
+			<if test='path != null and path != "" '>
+			,	#{path}
+			</if>
+			<if test='type != null and type != "" '>
+			,	#{type}
+			</if>
+			<if test='description != null and description != "" '>
+			,	#{description}
+			</if>
+			,	#{binary_content}
+		);
+	</insert>
+	
+	
+	<update id="updateInfo" parameterType="UploadFileVO">
+		UPDATE UPLOAD_FILE SET 
+			DESCRIPTION = #{description}  
+			<if test='name != null and name != "" '>
+			,	NAME = #{name}
+			</if>
+			<if test='path != null and path != "" '>
+			,	PATH = #{path}
+			</if>
+			<if test='type != null and type != "" '>
+			,	TYPE = #{type}
+			</if>
+			<if test='binary_content != null and binary_content != "" '>
+			,	BINARY_CONTENT = #{binary_content}
+			</if>
+		WHERE 
+			FILE_ID = #{file_id}
+	</update>
+		
+
+	<select id="selectUploadFileID" parameterType="UploadFileVO"  resultMap="uploadFile">
+		SELECT
+			IFNULL(MAX(FILE_ID),0)+1 AS FILE_ID
+		FROM
+			UPLOAD_FILE
+	</select>
+	
+	
+	<select id="selectUploadFileContent" parameterType="UploadFileVO"  resultMap="uploadFile">
+		SELECT
+			FILE_ID
+			,	NAME
+			,	DESCRIPTION
+			,	BINARY_CONTENT
+		FROM
+			UPLOAD_FILE
+		WHERE
+			FIlE_ID	= #{file_id} 
+	</select>
+	
+	
+	<select id="selectSearchList" parameterType="UploadFileVO"  resultMap="uploadFile">
+		SELECT
+			FILE_ID
+			,	NAME
+			,	DESCRIPTION
+			,	BINARY_CONTENT
+		FROM
+			UPLOAD_FILE
+		WHERE
+			1=1
+			<if test='serach_file_ids != null and serach_file_ids.size > 0 '>
+			AND	(
+					FIlE_ID IN
+					<foreach collection="serach_file_ids" item="file_id" separator="," open="(" close=")" >
+						#{file_id}
+					</foreach>					
+				)
+			</if>
+			
+	</select>
+	
+	
+	
+	<delete id="deleteInfo" parameterType="UploadFileVO">
+		DELETE FROM UPLOAD_FILE			
+		WHERE 
+		<choose>
+			<when test = 'file_id != null and file_id != "" '>
+				FIlE_ID = #{file_id}
+			</when>
+			<when test = 'serach_file_ids != null and serach_file_ids.size > 0  '>
+				FIlE_ID IN
+					<foreach collection="serach_file_ids" item="file_id" separator="," open="(" close=")" >
+						#{file_id}
+					</foreach>	
+			</when>
+		</choose>
+	</delete>
+	
+
+</mapper>

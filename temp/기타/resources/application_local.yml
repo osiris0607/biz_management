@@ -1,0 +1,164 @@
+devon:
+    interceptor:
+        locale-change:
+            param-name: lang
+    mybatis:
+        multi-sql-session:
+            sql-session-list:
+              -
+                id: mainSqlSession
+                data-source: mainDataSource
+                config-location: classpath:/sqlMap/mybatis-config_local.xml
+                mapper-locations: classpath:/sqlMap/forwarding/**/*.xml
+              -
+                id: replicaSqlSession
+                data-source: replicaDataSource
+                config-location: classpath:/sqlMap/mybatis-config_local.xml
+                mapper-locations: classpath:/sqlMap/forwarding/**/*.xml                                
+              -
+                id: archiveSqlSession
+                data-source: archiveDataSource
+                config-location: classpath:/sqlMap/mybatis-config_local.xml
+                mapper-locations: classpath:/sqlMap/forwarding/**/*.xml                
+        common-dao:
+            data-source-type: multi
+            sql-session-list: mainSqlSession, replicaSqlSession, archiveSqlSession
+            use-original-exception: true
+    paging:
+        index-page:
+            server:
+                global-policy:
+                    custom-row-size: 10, 15, 20
+                    page-size: 5
+                    row-size: 5
+                optional-policy-map:
+                    policy1:
+                        row-size: 3
+                    policy2:
+                        custom-row-size: 10, 50, 100
+                        page-size: 3
+                        row-size: 10
+        scroll-page:
+            executor:
+                scroll-paging-transfer:
+                    condition-key-orderby-separator: '@'
+                    condition-key-separator: '|'
+                    condition-key-value-equity-separator: =
+            server:
+                global-policy:
+                    custom-page-count: 5, 10, 20
+                    page-count: 10
+            ui:
+                global-policy:
+                    custom-page-count: 10, 20, 50
+                    ui-class-name: devonframe.scrollpaging.ui.DefaultScrollPagingUI
+    resolver:
+        locale:
+            header:
+                enabled: true
+    servlet:
+        multipart:
+            default-encoding: utf-8
+            max-file-size: 50MB
+            max-request-size: 50MB
+logging:
+    config: classpath:log/log4j2-spring_local.xml
+redis:
+    default:
+        ttl: 86400
+    host: 10.85.179.3
+    port: 6379
+server:
+    error:
+        include-exception: true
+        include-message: always
+        include-stacktrace: always
+        path: /error
+    port: 9080
+    servlet:
+        context-path: /forwarding
+        encoding:
+            enabled: true
+    shutdown: graceful
+    connection-timeout : 180s    
+spring:
+    datasource:
+        hikari:
+            auto-commit: false
+            minimumIdle: 1
+            maximumPoolSize : 10
+        initialization-mode: NEVER
+    main :  ### DB Url Rules : https://mariadb.com/kb/en/failover-and-high-availability-with-mariadb-connector-j/
+        datasource :
+            name : mainDataSource
+            platform : MySQL
+            url: jdbc:log4jdbc:mariadb://10.85.178.3/NFFWD?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_0900_as_ci
+            username: APP_NFF
+            password: APP_NFF1!!          
+            driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    replica :
+        datasource :
+            name : replicaDataSource
+            platform : MySQL
+            url: jdbc:log4jdbc:mariadb:loadbalance://10.85.178.13,10.85.178.45,10.85.178.56/NFFWD?assureReadOnly=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_0900_as_ci
+            username: APP_NFF
+            password: APP_NFF1!!          
+            driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy            
+    archive : 
+        datasource :
+            name : archiveDataSource
+            platform : MySQL        
+            url: jdbc:log4jdbc:mariadb://10.85.178.3/NFFWD?assureReadOnly=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_0900_as_ci
+            username: APP_NFF
+            password: APP_NFF1!!     
+            driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    devtools:
+        livereload:
+            enabled: false
+        restart:
+            enabled: true            
+    lifecycle:
+        timeout-per-shutdown-phase: 20s
+    kafka:
+        consumer:
+            auto-start: false
+            bootstrap-servers: condev01:9092,condev02:9092,condev03:9092
+            group-id: client-common-webservice
+            enable-auto-commit: true
+            auto-commit-interval-ms: 1000
+            session:
+                timeout : 20000            
+            auto-offset-reset: earliest
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer        
+project:  
+    url :
+        base : http://127.0.0.1:8080
+        worlflow : http://127.0.0.1:8080/workflow
+        klnet : https://api2.plism.com/cxfServlet/forward/IMPTEST1
+        sap : http://10.86.224.59:8540/ws
+    kafka:
+        topic-name: commFWD_Topic
+    context: forwarding 
+    use-replication : true
+    use-archive : true
+    use-redis-cache : true
+    process-package : com.lxpantos.forwarding
+    api :
+        access-key: cc0fc173-57d0-427c-943a-d5cb33db3088     
+    file :
+        storage : C:\\Pantos_NFF\\temp\\fileUpload
+    batch :
+        server-url : http://10.85.177.220/jjob-manager
+        private-token : 6b1c386ef096758fab9f 
+    chatbot : 
+        chatbot-id : c30c6107-f148-4dbd-b8d6-7447e62cdf52
+        id : SUBSCR1604020672503
+        password : lcLfI3o21KpKanlL9i14kNFA3dpkuRPLmoJc/eoddzMibCtxZZ16XBiN+0WYjK5EtNgMZm5eOsGStPKEDKfBSg==
+gcp : 
+    project-id: pjt-pantos-nff-dev-2106-1
+    credential: pjt-pantos-nff-dev-2106-1-33de6ec7446e.json
+    cloud-storage : 
+        bucket-name: ngff-dev-attachment-file-storage
+        download-temporary: ngff-dev-temporary-file-storage-for-download   
+                   

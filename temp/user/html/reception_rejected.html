@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 관리자사이트" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템 관리자사이트" />
+		<title>신기술접수소 사업평가관리시스템</title>		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/lib/solid.min.css" />
+		<link rel="stylesheet" href="../css/lib/jquery-ui.min.css" />
+		<script src="../js/lib/jquery-1.11.0.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+		<script src="../js/lib/jquery-ui.js"></script>
+	</head>
+	<body>
+	   <!-- skip_nav --> 
+       <div id="skip_nav">  
+           <a href="#nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a>
+           <a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+       </div>
+       <!-- //skip_nav --> 
+
+	   <!--popup-->
+	   <!--로그아웃 팝업-->
+	   <div class="logout_popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="logout_popup">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">로그 아웃</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">로그아웃</span> 하시겠습니까?</p>
+				   <div class="popup_button_area_center">
+					   <button type="button" class="blue_btn mr5" onclick="location.href='./login.html'">예</button>
+					   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+				   </div>
+			   </div>
+		   </div>
+	   </div>
+	   <!--//로그아웃 팝업-->
+
+	   <!--임시저장 팝업-->
+	   <div class="temporary_storage_popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="temporary_storage_popup">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">접수관리 임시 저장</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>작성하신 정보로 <span class="font_blue">임시저장</span> 하시겠습니까?</p>
+				   <div class="popup_button_area_center">
+					   <button type="button" class="blue_btn mr5">예</button>
+					   <button type="button" class="gray_btn popup_close_btn">아니요</button>
+				   </div>
+			   </div>
+		   </div>
+	   </div>
+	   <!--//임시저장 팝업-->
+
+	   <!--반려 팝업-->
+	   <div class="be_rejected_popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="be_rejected_popup">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">접수관리 반려</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">반려 </span> 처리가 되었습니다.</p>
+				   <div class="popup_button_area_center">
+					   <button type="button" class="blue_btn mr5">확인</button>
+					   <button type="button" class="gray_btn popup_close_btn">닫기</button>
+				   </div>
+			   </div>
+		   </div>
+	   </div>
+	   <!--//반려 팝업-->
+
+	   <!--접수등록 팝업-->
+	   <div class="application_completed_popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="application_completed_popup">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">접수 등록</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>작성하신 정보로 <span class="font_blue">접수 등록</span> 하시겠습니까?</p>
+				   <div class="popup_button_area_center">
+					   <button type="button" class="blue_btn mr5">예</button>
+					   <button type="button" class="gray_btn popup_close_btn">아니요</button>
+				   </div>
+			   </div>
+		   </div>
+	   </div>
+	   <!--//접수등록 팝업-->
+	   
+	   <div class="wrapper">
+			<header class="header">
+			   <div class="header_wrapper clearfix">
+                  <div class="fl logo_box clearfix">
+                       <h1 class="header_site-logo fl">
+					       <a href="./index.html" title="신기술접수소 사업평가 관리시스템 홈페이지 이동" class="home_logo clearfix">
+						       <img class="fl" src="../images/admin_logo.png" alt="신기술접수소">
+							   <span class="logo_txt fl">사업평가&middot;관리 시스템</span>
+						   </a>
+					   </h1>            
+                   </div>
+                   <div class="class_select_box fr clearfix pc_show">
+                       <span class="fl margint15 marginr10"><span class="header_name">총괄 관리자</span>님 반갑습니다.</span>
+                        <li><a href="./" title="연구자">연구자</a></li>
+						<!--<li><a href="./member_signup_agreement.html" title="평가위원 등록">평가위원 등록</a></li>-->
+						<li class="active"><a href="./estimation_list.html" title="평가위원">평가위원</a></li>
+						<!--<li><a href="#">전문가</a></li>-->                     
+                       <a href="javascript:void(0)" title="전체 메뉴 보기" class="gnb_all fr ir marginl15">전체 메뉴 보기</a>
+                       <a href="javascript:void(0)" title="로그아웃" class="login_icon logout fl margint15 ir"><span>로그아웃</span></a>            
+                       <!--a href="javascript:void(0)" title="로그인" class="login_icon login fl margint15 ir"><span>로그인</span></a-->                     
+                   </div>                 
+               </div>
+                                     
+               <!--pc 상단 메뉴-->
+               <nav class="nav pc_show" id="nav">
+                  <ul class="clearfix">
+                      <li><a href="./announcement.html" title="공고관리"><i class="far fa-file-alt mr8"></i>공고관리</a></li>
+                      <li><a href="./reception.html" title="접수관리" class="active"><i class="fas fa-edit  mr8"></i>접수관리</a></li>
+                      <li><a href="./estimation.html" title="평가관리"><i class="fas fa-clipboard-check  mr8"></i>평가관리</a></li>
+                      <li><a href="./execute.html" title="수행관리"><i class="fas fa-clipboard-list  mr8"></i>수행관리</a></li>
+                      <li><a href="./agreement.html" title="협약관리"><i class="far fa-handshake  mr8"></i>협약관리</a></li>
+                      <li><a href="./compute.html" title="정산관리"><i class="fas fa-coins  mr8"></i>정산관리</a></li>
+                      <li><a href="./information.html" title="알림&middot;정보관리"><i class="fas fa-bullhorn  mr8"></i>알림&middot;정보관리</a></li>
+                      <li><a href="./commissioner.html" title="평가위원관리"><i class="fas fa-user-tie mr8"></i>평가위원관리</a></li>
+                      <li><a href="./member.html" title="회원관리"><i class="fas fa-user-cog  mr8"></i>회원관리</a></li>
+                  </ul>                   
+               </nav>
+               <!--//pc 상단 메뉴-->
+            </header>
+            
+            <div class="container" id="content">
+                <h2 class="hidden">컨텐츠 화면</h2>
+                <div class="sub">
+                   <!--left menu 서브 메뉴-->     
+                   <div id="lnb">
+				       <div class="lnb_area">
+		                   <!-- 레프트 메뉴 서브 타이틀 -->	
+					       <div class="lnb_title_area">
+						       <h2 class="title">접수관리</h2>
+						   </div>
+		                   <!--// 레프트 메뉴 서브 타이틀 -->
+						   <div class="lnb_menu_area">	
+						       <ul class="lnb_menu">
+								   <li class="on"><a href="./reception.html" title="접수관리">접수관리</a></li>
+							   </ul>				
+						   </div>					
+					   </div>			
+				   </div>
+				   <!--left menu 서브 메뉴-->
+
+				   <!--본문시작-->
+                   <div class="contents">
+                       <div class="location_area">
+					       <div class="location_division">
+							   <!--페이지 경로-->
+					           <ul class="location clearfix">
+							       <li><a href="./index.html"><i class="nav-icon fa fa-home"></i></a></li>
+								   <li>접수관리</li>
+								   <li><strong>접수관리</strong></li>
+							   </ul>	
+							  <!--//페이지 경로-->
+							  <!--페이지타이틀-->
+							   <h3 class="title_area">접수관리</h3>
+							  <!--//페이지타이틀-->
+						    </div>
+					    </div>
+					    <div class="contents_view">
+						   <!--접수관리 view-->
+						   <!--기관정보-->
+						   <div class="view_top_area clearfix mt30">
+							   <h4 class="fl sub_title_h4">기관 정보</h4>							  
+						   </div>
+						   <table class="list2 agency_information">
+							   <caption>기관 정보</caption> 
+							   <colgroup>
+								   <col style="width: 20%" />
+								   <col style="width: 80%" />
+							   </colgroup>
+							   <thead>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_registration_number">사업자 등록번호</label></span></th>
+									   <td><span>000-00-00000</span></td> 
+								   </tr>
+							   </thead>
+							   <tbody>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_name">기관명</label></span></th>
+									   <td><span>㈜이노싱크컨설팅</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_address">주소</label></span></th>
+									   <td><span>경기도 부천시 시민대로 123</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_tel">전화</label></span></th> 
+									   <td><span>경기도 부천시 시민대로 123</span></td>
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_ceo_name">대표자명</label></span></th> 
+									   <td><span>홍길동</span></td>
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_sectors">업종</label></span></th> 
+									   <td><span>서비스업</span></td>
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_business_class">업태</label></span></th> 
+									   <td><span>학술연구용역</span></td>
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_day">설립일</label></span></th> 
+									   <td><span>2015-01-02</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_classification_of_establishment">설립 구분</label></span></th> 
+									   <td><span>영리</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_company_class">기업 분류</label></span></th> 
+									   <td><span>중소기업</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_other_class">기타 유형</label></span></th> 
+									   <td><span>해당없음</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="reception_or_lab">기업부설연구소 유무</label></span></th> 
+									   <td><span>있음</span></td> 
+								   </tr>
+							   </tbody>
+						   </table>					   
+						   <!--//기관정보-->
+
+						   <!--연구책임자 정보-->
+						   <div class="view_top_area mt30" style="clear:both">
+							   <h4 class="sub_title_h4">연구책임자 정보</h4>							  
+						   </div>
+						   <table class="list2 font_white">
+							   <caption>연구책임자 정보</caption> 
+							   <colgroup>
+								   <col style="width: 20%" />
+								   <col style="width: 80%" />
+							   </colgroup>
+							   <thead>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_charge_name">성명</label></span></th>
+									   <td><span>홍길동</span></td> 
+								   </tr>
+							   </thead>
+							   <tbody>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_charge_part">부서</label></span></th>
+									   <td><span>사업화전략팀</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_charge_position">직책</label></span></th>
+									   <td><span>선임</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_charge_tel">휴대전화</label></span></th>
+									   <td><span>00-000-00000</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_charge_mail">이메일</label></span></th>
+									   <td><span>manager@Innothink.kr</span></td> 
+								   </tr>								   
+							   </tbody>
+						   </table>					   
+						   <!--//연구책임자 정보-->
+                           
+						   <!--기술 정보-->
+						   <div class="view_top_area clearfix mt30">
+							   <h4 class="fl sub_title_h4">기술 정보</h4>							  
+						   </div>
+                           <table class="list2 font_white">
+							   <caption>기술 정보</caption> 
+							   <colgroup>
+								   <col style="width: 20%" />
+								   <col style="width: 80%" />
+							   </colgroup>
+							   <thead>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_technical_name">기술명</label></span></th>
+									   <td><span></span></td> 
+								   </tr>
+							   </thead>
+							   <tbody>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_technical_overview">기술 개요</label></span></th>
+									   <td><span></span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_field">실증 분야</label></span></th>
+									   <td><span>예산지원형</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_technology_class">국가기술분류</label></span></th>
+									   <td><span></span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_industrytechnology_class">4차 산업혁명 기술분류</label></span></th>
+									   <td><span></span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_technology_point">기술 특징</label></span></th>
+									   <td><span></span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row"><span class="icon_box"><label for="reception_get_class">적용 분야</label></span></th>
+									   <td><span></span></td> 
+								   </tr>
+							   </tbody>
+						   </table>	
+						   <!--//기술 정보-->
+						   <!--전문가 정보
+						   <div class="view_top_area clearfix mt30">
+							   <h4 class="fl sub_title_h4">전문가 정보</h4>							  
+						   </div>
+                           <table class="list2 font_white">
+							   <caption>전문가 정보</caption> 
+							   <colgroup>
+								   <col style="width: 20%" />
+								   <col style="width: 80%" />
+							   </colgroup>
+							   <thead>
+								   <tr>
+									   <th scope="row">성명</th>
+									   <td><span>홍길동</span></td> 
+								   </tr>
+							   </thead>
+							   <tbody>
+								   <tr>
+									   <th scope="row">소속 기관</th>
+									   <td><span>기관</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row">휴대 전화</th>
+									   <td><span>010-3333-5555</span></td> 
+								   </tr>
+								   <tr>
+									   <th scope="row">이메일</th>
+									   <td><span>abc@dfdf.com</span></td> 
+								   </tr>								   
+							   </tbody>
+						   </table>	
+						   <!--//기술 정보-->
+						   <!--제출서류 확인-->
+						   <div class="view_top_area clearfix mt30">
+							   <h4 class="fl sub_title_h4">제출서류 확인</h4>							  
+						   </div>
+						   <table class="list">
+							   <caption>제출서류 확인</caption>     
+							   <colgroup>
+								   <col style="width:5%">
+								   <col style="width:15%">
+								   <col style="width:20%">
+								   <col style="width:10%">
+								   <col style="width:10%">
+							   </colgroup>
+							   <thead>
+								   <tr>
+									   <th scope="col" rowspan="2">순번</th>
+									   <th scope="col" rowspan="2">제출서류</th>
+									   <th scope="col" rowspan="2">파일명</th>
+									   <th scope="col" colspan="2">접수 결과 입력</th>
+								   </tr>
+								   <tr>
+								       <th scope="col">적합</th>
+									   <th scope="col">부적합</th>
+								   </tr>
+							   </thead>
+							   <tbody>
+								   <tr>
+									   <td>1</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(필수)기술제안서" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="기술제안서.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted" /><label>&nbsp;</label></td>                           
+								   </tr>   
+								   <tr>
+									   <td>2</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(필수)기술 등록 및 활용 동의서" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="기술 등록 및 활용 동의서.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted2" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted2" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>3</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(필수)R&D 참여 현황 및 사업비 사용계획" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="R&D 참여 현황 및 사업비 사용계획.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted3" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted3" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>4</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(필수)특허(출원, 등록) 증빙자료" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="특허(출원, 등록) 증빙자료.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted4" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted4" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>5</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(필수)사업자등록증, 법인등기부등본, 최근 2년간 표준재무제표증명원 각 1부" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="사업자등록증, 법인등기부등본, 최근 2년간 표준재무제표증명원 각 1부.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted5" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted5" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>6</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(필수)TRL 6단계 이상 증빙자료" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="TRL 6단계 이상 증빙자료.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted6" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted6" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>7</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(선택) 서울시산학연협력사업 최근 3년 이내 ‘우수‘ 최종평가 증빙" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="서울시산학연협력사업 최근 3년 이내 ‘우수‘ 최종평가 증빙.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted7" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted7" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>8</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(선택)여성기업인 확인서" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="여성기업인 확인서.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted8" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted8" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>9</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(선택)장애인기업 확인서" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="장애인기업 확인서.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted9" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted9" /><label>&nbsp;</label></td>                           
+								   </tr> 
+								   <tr>
+									   <td>10</td>
+									   <td><input type="text" class="w100 form-control" placeholder="(선택)사회적기업 확인서" /></td>
+									   <td><input type="text" class="w100 form-control" placeholder="사회적기업 확인서.pdf" /></td>
+									   <td><input type="radio" name="documents_submitted10" checked="checked" /><label>&nbsp;</label></td>
+									   <td><input type="radio" name="documents_submitted10" /><label>&nbsp;</label></td>                           
+								   </tr> 
+							   </tbody>
+							   <tfoot>
+							       <tr>
+							       	<th colspan="3" class="border_1">결과</th>
+									<td colspan="2" class="ta_c"><span><span style="color:red;">부적합(자동생성)</span><!--span style="color:#2874d0">적합(자동생성)</span--></span></td>
+							       </tr>
+							   </tfoot>
+						   </table>
+						   <!--제출서류 확인-->
+						   <div class="fr mt30">
+						       <button type="button" class="blue_btn2 temporary_storage_popup_box_open">임시 저장</button>
+						       <button type="button" class="gray_btn be_rejected_popup_box_open">반려</button>
+							   <button type="button" class="blue_btn application_completed_popup_open">접수 등록</button>
+							   <button type="button" class="gray_btn2" onclick="location.href='./reception.html'">목록</button>
+						   </div>
+						   <!--//제출서류 확인-->
+					   </div><!--contents_view-->
+                   </div>
+				   <!--//contents--> 
+
+                </div>
+                <!--//sub--> 
+            </div>
+            <!--//container-->
+            <!-- [S] Footer -->
+                <!--footer class="footer">
+                  <div class="footer__wrapper">
+                    <div class="footer__site-logo">
+                      <span class="is-a11y-hidden">신기술접수소</span>
+                    </div>
+                    <address class="footer__address">
+                      <span class="footer__address-division">서울기술연구원(03909) 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 TEL. 02-6912-0941</span>
+
+                    </address>
+                    <small class="footer__copyright">COPYRIGHT &copy; 2020 Seoul Metropolitan Government all rights reserved.</small>
+                  </div>
+                </footer-->
+                <!-- [E] Footer -->
+         </div>
+         <script src="../js/script.js"></script>
+	</body>
+</html>

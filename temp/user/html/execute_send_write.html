@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/lib/jquery-ui.min.css" />
+		<!--sign-->
+		<link rel="stylesheet" type="text/css" href="../css/lib/jquery.signaturepad.css" />	
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>			
+		<script src="../js/lib/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<a href="#nav">메인메뉴 바로가기</a>
+				<a href="#content">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+
+			<!--팝업-->
+			<!--로그아웃 팝업-->
+			<div class="logout_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="logout_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">로그 아웃</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">로그아웃</span> 하시겠습니까?</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="blue_btn mr5" onclick="location.href='./login.html'">예</button>
+							<button type="button" class="gray_btn lastClose layerClose">아니요</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//로그아웃 팝업-->
+			
+			<!--제출하기 팝업-->
+			<div class="agreement_send_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="agreement_send_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">제출 안내</h4>							
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">						
+						<div class="popup_titlebox_txt">
+							<p><span class="font_blue">[예]</span> 버튼을 누르면 제출이 완료되며, 수정은 불가능합니다.</p>							
+							<p>제출 완료 후에는 제출완료 상태이며, 담당자가 제출서류를 확인하여 이상이 없을 경우, <br />
+								완료될 예정입니다.</p>
+							<p class="font_blue fz_b"><span class="fw500 font_blue">제출하시겠습니까?</span></p>
+						</div>
+					    <div class="popup_button_area_center">
+							<button type="submit" class="blue_btn mr5 ok_btn">예</button>
+							<button type="button" class="gray_btn lastClose layerClose popup_close_btn">아니요</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//제출하기 팝업-->
+
+			
+
+			
+
+			<!--임시저장 팝업-->
+			<div class="save_popup2_box">		
+				<div class="popup_bg"></div>
+				<div class="save_popup2_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">임시저장 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">임시저장</span> 되었습니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//임시저장 팝업-->
+
+			<!--접수완료 팝업-->
+			<div class="save_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="save_popup_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">접수완료 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">접수완료</span> 되었습니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//접수완료 팝업-->
+
+			
+
+			<!-- header -->
+			<div id="header">
+				<header>			
+					<!-- hsection -->
+					<div class="hsection">
+						<div class="clearfix">
+							<ul class="fl member_class clearfix">
+								<li class="active"><a href="./" title="연구자">연구자</a></li>
+								<!--<li><a href="./member_signup_agreement.html" title="평가위원 등록">평가위원 등록</a></li>-->
+								<li><a href="./estimation_list.html" title="평가위원">평가위원</a></li>
+								<!--<li><a href="#">전문가</a></li>-->
+							</ul>
+							<ul class="fr top_area">
+								<li>
+									<!--a href="./login.html" title="기업 로그인" class="clearfix">
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="기업 로그인" /><span class="fl">기업 로그인</span>
+									</a-->
+								</li>
+								<li class="login_area">						
+									<!--a href="" title="로그아웃" class="openLayer logout_pop_open">
+										<img src="../images/icon/icon_logout.png" class="fl top_img" alt="로그아웃"><span class="fl">로그아웃</span>
+									</a-->
+									<!--로그인-->
+									<a href="./login.html" title="로그아웃" class="clearfix">
+										<!--최초 로그인팝업-->
+										<!--a href="./login.html" title="로그아웃" class="clearfix login_first_popup_open"-->
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="로그인" /><span class="fl">로그인</span>
+									</a>									
+								</li>
+								<!--li>
+									<a href="./mypage_company.html" title="마이페이지" class="clearfix">
+										<img src="../images/icon/icon_mypage.png" class="fl top_img" alt="마이페이지" /><span class="fl">마이페이지</span>
+									</a>
+								</li-->
+								<li>
+									<a href="./member_signup.html" title="회원가입" class="clearfix">
+										<img src="../images/icon/icon_member_sign.png" class="fl top_img" alt="회원가입" /><span class="fl">회원가입</span>
+									</a>
+								</li>
+								<!--li>
+									<a href="" title="전체메뉴" class="clearfix">
+										<img src="../images/icon/icon_menu.png" class="fl top_img" alt="전체메뉴" /><span class="fl">전체메뉴</span>
+									</a>
+								</li-->
+							</ul>
+						</div>
+					</div>
+					<!--// hsection -->
+					
+					<!-- nav -->
+					<div id="nav">
+						<div class="gnb clearfix">
+							<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="fl logo">
+								<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템" /></h1>
+							</a>
+							<nav>
+								<ul class="menu fl">
+									<li><a href="./announcement.html" title="공고"><span>공고</span></a></li>
+									<li><a href="./reception.html" title="접수"><span>접수</span></a></li>
+									<li><a href="./agreement.html" title="협약"><span>협약</span></a></li>
+									<li><a href="./execute.html" title="수행"><span>수행</span></a></li>
+									<li><a href="./estimation.html" title="평가"><span>평가</span></a></li>
+									<li><a href="./compute.html" title="정산"><span>정산</span></a></li>
+									<li><a href="./information.html" title="알림·정보"><span>알림·정보</span></a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--// nav -->
+				</header>
+			</div>
+			<!--// header -->			
+			<!-- container -->
+			<div id="container" class="mb50">
+				<h2 class="hidden">서브 컨텐츠 화면</h2>					
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area">
+							<h3>수행</h3>
+							<div class="route hidden">
+								<ul class="clearfix">
+									<li><i class="fas fa-home">홈</i></li>
+									<li>수행</li>
+									<li>수행</li>
+								</ul>
+							</div>
+							
+							
+							<!--기관-->
+							<div class="content_area copmpany_area execute_area" id="copmpany_area">													
+								<div class="table_area">
+									<h4>과제 정보</h4>	
+									<!--과제 정보-->
+									<table class="write fixed assignment_info">
+										<caption>과제 정보</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>	
+											<tr>
+												<th scope="row">과제번호</th>
+											    <td><span>A123457</span></td> 
+										    </tr>
+										    <tr>
+												<th scope="row">사업명</th>
+											    <td><span>기술제안</span></td> 
+										    </tr>																	       
+											<tr>
+												<th scope="row">공고명</th>
+											    <td><span>기술제안</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">기술명</th>
+											    <td><span>기술명</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">연구기관/연구책임자</th>
+											    <td><span class="fl">연구기관</span> <span class="fl ml5 mr5">/</span> <span class="fl">홍길동</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">연구기간</th>
+											    <td><span class="fl">2021</span><span class="fl">-</span><span class="fl">09</span><span class="fl">-</span><span class="fl">17</span><span class="fl ml5 mr5">~</span><span class="fl">2021</span><span class="fl">-</span><span class="fl">09</span><span class="fl">-</span><span class="fl">17</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">연구비</th>
+											    <td><span class="fl mr5">200,000,000</span><span class="fl">(만원)</span></td> 
+											</tr>
+										</tbody>
+							        </table>
+									<!--//과제 정보-->								    
+									
+									<!--과제 보고서-->									
+									<h4 class="sub_title_h4">과제 보고서</h4>										
+								    <table class="write fixed">
+										<caption>과제 보고서</caption> 
+										<colgroup>
+										    <col style="width: 20%">
+										    <col style="width: 80%">
+										</colgroup>
+										<tbody>		
+										    <tr>
+												<th scope="row">중간보고서</th>
+												<td>										
+													<div class="clearfix file_form_txt">													   
+													   <a href="" download>중간보고서.pdf</a>
+												    </div>			
+												</td> 
+										    </tr>															       
+										    <tr>
+												<th scope="row">최종보고서</th>
+												<td>										
+													<div class="clearfix file_form_txt">													   
+													   <!--업로드 버튼-->
+													   <div class="job_file_upload w100"> 
+															<div class="custom-file w100">
+																<input type="file" class="custom-file-input custom-file-input-write-company" id="inputGroupFile02">
+																<label class="custom-file-label custom-control-label-write-company" for="inputGroupFile02">선택된 파일 없음</label>
+															</div>															
+													   </div>													   
+													   <!--//업로드 버튼-->
+												    </div>			
+												</td> 
+										    </tr>
+											<tr>
+												<th scope="row">기타</th>
+												<td>										
+													<div class="clearfix file_form_txt">													   
+													   <a href="" download>기타.pdf</a>
+												    </div>	
+												</td> 
+										    </tr>
+										</tbody>
+									</table>
+									<!--//과제 보고서-->									
+									
+									<!--과제 변경 이력-->
+									<h4>과제 변경 이력</h4>
+									<table class="write fixed documentstory">
+										<caption>제출서류</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 40%;">
+											<col style="width: 40%;">
+										</colgroup>
+										<tbody>	
+										    <tr>
+												<th scope="col">변경 완료일</th>
+											    <th scope="col">변경 내용</th> 
+												<th scope="col">변경 공문</th> 
+										    </tr>																	       
+											<tr>
+												<td><span>2021</span><span>-</span><span>09</span><span>-</span><span>17</span></td>
+												<td><span>참여 연구원 변경</span></td>
+												<td><a href="" download>변경공문.pdf</a></td>
+											</tr>																				
+										</tbody>
+							        </table>
+									<!--//과제 변경 이력-->
+									
+
+
+									<div class="button_box clearfix fr pb20">										
+										<button type="button" class="blue_btn2 fl mr5 save_popup2_open">임시저장</button>
+										<button type="button" class="blue_btn fl mr5 agreement_send_popup_open">제출하기</button>
+										<button type="button" class="gray_btn fl" onclick="location.href='./execute.html'">목록</button>
+									</div>
+								</div>	<!--//table_area-->							
+							</div><!--//content_area-->
+							<!--//기관-->
+						</div>
+					</div><!--//sub_contents-->
+				</section>
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->		
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	
+	</body>
+</html>

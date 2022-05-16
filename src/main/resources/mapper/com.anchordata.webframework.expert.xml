@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.expert">
+	
+	<resultMap id="expert" type="ExpertVO">
+		<result property ="member_seq"					column="MEMBER_SEQ"	/>
+		<result property ="name"						column="NAME"	/>
+		<result property ="birth"						column="BIRTH"	/>
+		<result property ="university"					column="UNIVERSITY"	/>
+		<result property ="department"					column="DEPARTMENT"	/>
+		<result property ="address"						column="ADDRESS"	/>
+		<result property ="phone"						column="PHONE"	/>
+		<result property ="mobile_phone"				column="MOBILE_PHONE"	/>
+		<result property ="email"						column="EMAIL"	/>
+		<result property ="degree"						column="DEGREE"	/>
+		<result property ="university_degree"			column="UNIVERSITY_DEGREE"	/>
+		<result property ="major"						column="MAJOR"	/>
+		<result property ="research"					column="RESEARCH"	/>
+		<result property ="large"			    		column="LARGE"	/>
+		<result property ="middle"						column="MIDDLE"	/>
+		<result property ="small"						column="SMALL"	/>
+		<result property ="four_industry"				column="FOUR_INDUSTRY"	/>
+		<result property ="thesis_1"					column="THESIS_1"	/>
+		<result property ="thesis_name_1"				column="THESIS_NAME_1"	/>
+		<result property ="thesis_date_1"				column="THESIS_DATE_1"	/>
+		<result property ="thesis_sci_yn_1"				column="THESIS_SCI_YN_1" />
+		<result property ="thesis_2"					column="THESIS_2"	/>
+		<result property ="thesis_name_2"				column="THESIS_NAME_2"	/>
+		<result property ="thesis_date_2"				column="THESIS_DATE_2"	/>
+		<result property ="thesis_sci_yn_2"				column="THESIS_SCI_YN_2" />
+		<result property ="thesis_3"					column="THESIS_3"	/>
+		<result property ="thesis_name_3"				column="THESIS_NAME_3"	/>
+		<result property ="thesis_date_3"				column="THESIS_DATE_3"	/>
+		<result property ="thesis_sci_yn_3"				column="THESIS_SCI_YN_3" />
+		<result property ="iprs_1"						column="IPRS_1"	/>
+		<result property ="iprs_enroll_1"				column="IPRS_ENROLL_1"	/>
+		<result property ="iprs_number_1"				column="IPRS_NUMBER_1"	/>
+		<result property ="iprs_name_1"					column="IPRS_NAME_1"	/>
+		<result property ="iprs_date_1"					column="IPRS_DATE_1"	/>
+		<result property ="iprs_2"						column="IPRS_2"	/>
+		<result property ="iprs_enroll_2"				column="IPRS_ENROLL_2"	/>
+		<result property ="iprs_number_2"				column="IPRS_NUMBER_2"	/>
+		<result property ="iprs_name_2"					column="IPRS_NAME_2"	/>
+		<result property ="iprs_date_2"					column="IPRS_DATE_2"	/>
+		<result property ="iprs_3"						column="IPRS_3"	/>
+		<result property ="iprs_enroll_3"				column="IPRS_ENROLL_3"	/>
+		<result property ="iprs_number_3"				column="IPRS_NUMBER_3"	/>
+		<result property ="iprs_name_3"					column="IPRS_NAME_3"	/>
+		<result property ="iprs_date_3"					column="IPRS_DATE_3"	/>
+		<result property ="tech_tran_name_1"			column="TECH_TRAN_NAME_1"	/>
+		<result property ="tech_tran_date_1"			column="TECH_TRAN_DATE_1"	/>
+		<result property ="tech_tran_company_1"			column="TECH_TRAN_COMPANY_1"	/>
+		<result property ="tech_tran_name_2"			column="TECH_TRAN_NAME_2"	/>
+		<result property ="tech_tran_date_2"			column="TECH_TRAN_DATE_2"	/>
+		<result property ="tech_tran_company_2"			column="TECH_TRAN_COMPANY_2"	/>
+		<result property ="tech_tran_name_3"			column="TECH_TRAN_NAME_3"	/>
+		<result property ="tech_tran_date_3"			column="TECH_TRAN_DATE_3"	/>
+		<result property ="tech_tran_company_3"			column="TECH_TRAN_COMPANY_3"	/>
+		<result property ="rnd_name_1"					column="RND_NAME_1"	/>
+		<result property ="rnd_date_start_1"			column="RND_DATE_START_1"	/>
+		<result property ="rnd_date_end_1"				column="RND_DATE_END_1"	/>
+		<result property ="rnd_class_1"					column="RND_CLASS_1"	/>
+		<result property ="rnd_4th_industry_1"			column="RND_4TH_INDUSTRY_1"	/>
+		<result property ="rnd_name_2"					column="RND_NAME_2"	/>
+		<result property ="rnd_date_start_2"			column="RND_DATE_START_2"	/>
+		<result property ="rnd_date_end_2"				column="RND_DATE_END_2"	/>
+		<result property ="rnd_class_2"					column="RND_CLASS_2"	/>
+		<result property ="rnd_4th_industry_2"			column="RND_4TH_INDUSTRY_2"	/>
+		<result property ="rnd_name_3"					column="RND_NAME_3"	/>
+		<result property ="rnd_date_start_3"			column="RND_DATE_START_3"	/>
+		<result property ="rnd_date_end_3"				column="RND_DATE_END_3"	/>
+		<result property ="rnd_class_3"					column="RND_CLASS_3"	/>
+		<result property ="rnd_4th_industry_3"			column="RND_4TH_INDUSTRY_3"	/>
+		
+		<result property ="total_count"					column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- !!!!!!!!!!!!!   EXPERT POOL DATA !!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --> 
+	<select id="selectAllList" parameterType="ExpertVO" resultMap="expert">
+		SELECT
+			MEMBER_SEQ 
+			,	NAME
+			,	BIRTH
+			, 	UNIVERSITY
+			,	DEPARTMENT
+			,	ADDRESS
+			,	PHONE
+			,	MOBILE_PHONE
+			,	EMAIL
+			,	DEGREE
+			,	UNIVERSITY_DEGREE
+			,	MAJOR
+			,	RESEARCH
+			,	LARGE
+			,	MIDDLE
+			,	SMALL
+			,	FOUR_INDUSTRY
+		FROM
+			EXPERT_POOL
+		WHERE
+			1=1
+			<if test='name != null and name != "" '>
+				AND NAME LIKE CONCAT('%',#{name},'%')
+			</if>
+			
+			<if test='email != null and email != "" '>
+				AND EMAIL LIKE CONCAT('%',#{email},'%')
+			</if>
+			
+			<if test='mobile_phone != null and mobile_phone != "" '>
+				AND MOBILE_PHONE LIKE CONCAT('%',#{mobile_phone},'%')
+			</if>
+	</select>
+	
+	<select id="selectDetail" parameterType="ExpertVO"  resultMap="expert">
+		SELECT
+			MEMBER_SEQ 
+			,	NAME
+			,	BIRTH
+			, 	UNIVERSITY
+			,	DEPARTMENT
+			,	ADDRESS
+			,	PHONE
+			,	MOBILE_PHONE
+			,	EMAIL
+			,	DEGREE
+			,	UNIVERSITY_DEGREE
+			,	MAJOR
+			,	RESEARCH
+			,	LARGE
+			,	MIDDLE
+			,	SMALL
+			,	FOUR_INDUSTRY
+		FROM EXPERT_POOL
+		WHERE 
+			MEMBER_SEQ = #{member_seq}
+	</select>
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- !!!!!!!!!!!!!   EXPERT POOL DATA END !!!!!!!!!!!!!!!!!!!! -->
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	
+	
+	
+	
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- !!!!!!!!!!!!!   NEW EXPERT DATA   !!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<select id="selectSearchPagingList" parameterType="ExpertVO" resultMap="expert">
+		<include refid="common.pagingPre"/>
+		SELECT
+			MEMBER_ID
+			,	A.LARGE
+			,	A.MIDDLE
+			,	A.SMALL
+			,	A.RESEARCH
+			,	B.NAME
+			, 	A.UNIVERSITY
+			,	A.DEPARTMENT
+			,	B.MOBILE_PHONE
+			,	B.EMAIL
+		FROM
+			EXPERT A
+		JOIN
+			MEMBER B
+		ON	B.AUTH_LEVEL_EXPERT = 'Y' AND A.MEMBER_ID = B.MEMBER_ID
+		WHERE
+			1=1
+			<if test='name != null and name != "" '>
+				AND NAME LIKE CONCAT('%',#{name},'%')
+			</if> 
+			
+			<!-- 기관명이다. 처음에 Field명을 잘 못 잡았다. 수정하기엔 너무 많아 일단 보류 -->
+			<if test='university != null and university != "" '>
+				AND UNIVERSITY LIKE CONCAT('%',#{university},'%')
+			</if>
+			
+			<if test='research != null and research != "" '>
+				AND RESEARCH LIKE CONCAT('%',#{research},'%')
+			</if>
+			<if test='large != null and large != "" '>
+				AND LARGE LIKE CONCAT('%',#{large},'%')
+			</if>
+			<if test='middle != null and middle != "" '>
+				AND MIDDLE LIKE CONCAT('%',#{middle},'%')
+			</if>
+			<if test='small != null and small != "" '>
+				AND SMALL LIKE CONCAT('%',#{small},'%')
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+</mapper>

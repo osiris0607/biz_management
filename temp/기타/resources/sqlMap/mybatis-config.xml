@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled"              value="true"    />
+        <setting name="lazyLoadingEnabled"        value="true"    />
+        <setting name="multipleResultSetsEnabled" value="true"    />
+        <setting name="defaultExecutorType"       value="REUSE"   />
+        <setting name="jdbcTypeForNull"           value="VARCHAR" />
+        <setting name="logImpl"                   value="SLF4J"   />
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="dataItem" type="com.lxpantos.framework.vo.DataItem" />
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.ClobTypeHandler" jdbcType="CLOB" javaType="java.lang.String"/>
+    </typeHandlers>
+    
+    <plugins>
+        <plugin interceptor="com.lxpantos.framework.dao.interceptor.CursorMetaInterceptor" />
+        <plugin interceptor="devonframe.log.trace.interceptor.QueryLoggingInterceptor" /> 
+        <plugin interceptor="devonframe.paging.interceptor.MyBatisPagingInterceptor" />
+        <plugin interceptor="devonframe.scrollpaging.interceptor.MyBatisScrollPagingInterceptor" />
+    </plugins>      
+    
+</configuration>

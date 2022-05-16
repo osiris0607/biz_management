@@ -1,0 +1,39 @@
+sit:
+  bizsiren:
+    account_id: "SAOQ001"
+    service_name: "010002"
+    request_number: "123409875"
+    cert_gubun: "H"
+    user_ret_url: "31http://localhost:8080/user/api/signup/cert/bizsiren/retUrl"
+    expert_ret_url: "31http://localhost:8080/user/api/expert/cert/bizsiren/retUrl"
+---
+
+spring:
+    profiles: dev
+
+sit:
+  bizsiren:
+    service_name: "010002"
+    user_ret_url: "31http://localhost:8080/user/api/signup/cert/bizsiren/retUrl"
+    expert_ret_url: "31http://localhost:8080/user/api/expert/cert/bizsiren/retUrl"
+    
+---
+spring:
+    profiles: prod
+
+sit:
+  bizsiren:
+    service_name: "010002"
+    user_ret_url: "31http://localhost:8080/user/api/signup/cert/bizsiren/retUrl"
+    expert_ret_url: "31http://localhost:8080/user/api/expert/cert/bizsiren/retUrl"
+    
+---
+spring:
+    profiles: prod_test
+
+sit:
+  bizsiren:
+    service_name: "011001"
+    user_ret_url: "31http://103.55.191.104:8080/user/api/signup/cert/bizsiren/retUrl"
+    expert_ret_url: "31http://103.55.191.104::8080/user/api/expert/cert/bizsiren/retUrl"
+    

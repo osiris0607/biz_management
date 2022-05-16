@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/lib/jquery-ui.min.css">
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+		<script src="../js/lib/jquery-ui.js"></script>
+	</head>
+
+    <body>	    
+        <div id="wrap">
+			<div id="skip_nav">  
+				<!--a href="#nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a-->
+				<a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+			</div>
+
+			<!--popup-->
+			<!--아이디 중복 팝업-->
+			<div class="id_check_info_popup_box">
+				<div class="popup_bg"></div>
+				<div class="id_check_info_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">아이디 중복 안내</h4>
+						<a href="javascript:void(0)" title="닫기" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<div class="popup_txt_areabg">
+							<p tabindex="0">입력하신 <span class="font_blue">000</span> 아이디가 중복 됩니다.<br />
+							다른 아이디로 다시 입력해 주시기 바랍니다.</p>	
+							<!--p tabindex="0">입력하신 <span class="font_blue">000</span> 아이디는 사용이 가능합니다.</p-->
+						</div>
+						
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn popup_close_btn" title="확인">확인</button>
+						</div>
+					</div>						
+				</div> 
+			</div>
+			<!--//아이디 중복 팝업-->
+
+			<!--보안서약서 팝업-->
+			<div class="security_popup_box">
+				<div class="popup_bg"></div>
+				<div class="security_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">기술 보안 서약 확인</h4>
+						<a href="javascript:void(0)" title="닫기" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<div class="popup_txt_areabg">
+						    <h5 class="mt30">기술 보안 서약서</h5>
+							<p>본인은 서울기술연구원에서 주관하고 있는 『캠퍼스타운 기술매칭사업』의 기술컨설팅 및 기술연구개발 프로세스에 참여함에 따라 습득하게 된 기업의 기술 및 경영정보 등의 제반 내용을 외부에 누설하지 않을 것이며, 위 내용을 위반할 시에는 관계 법령에 따라 어떠한 처벌을 받음은 물론 어떠한 제재조치를 당하여도 이의를 제기하지 않을 것임을 서약합니다.</p>
+						</div>
+						<div class="clearfix">
+							<div class="fr">
+								<input type="checkbox" id="securitypopup_txt_check" class="fl ml10" />
+								<label for="securitypopup_txt_check" class="fl mt5">동의합니다.</label>
+							</div>
+						</div>
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn popup_close_btn" title="확인">확인</button>
+						</div>
+					</div>						
+				</div> 
+			</div>
+			<!--//보안서약서 팝업-->
+
+			<!--개인정보 수집 및 이용 동의 팝업-->
+			<div class="personal_information_popup_box">
+				<div class="popup_bg"></div>
+				<div class="personal_information_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">개인정보 수집 및 이용 동의 확인</h4>
+						<a href="javascript:void(0)" title="닫기" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<div class="popup_txt_areabg">
+							<h5 class="mt30">개인정보 수집 및 이용 동의</h5>
+							<p>서울기술연구원은 기업의 기술사업화 및 연구지원 사업 등과 관련하여 개인정보 수집 및 이용을 위해, 개인정보보호법 제15조(개인정보의 수집·이용) 및 22조(동의를 받는 방법)에 따라 정보주체의 개인정보 제공 동의를 받고자 합니다.</p>
+							<h6>&lt; 개인정보 수집‧이용에 대한 동의 &gt; </h6>
+							<ol>
+								<li>1. 수집·이용 목적<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;- 서울기술연구원을 포함한 서울시 및 산하기관의 기업 기술사업화 및 연구지원 사업 등의 원활한 사업수행, 서비스 및 각종 정보 제공을 위한 정보 수집‧이용 활용
+								</li>
+								<li>2. 수집하려는 개인정보의 항목<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;- 성명, 생년월일, 과학기술인등록번호, 연락처(휴대번호, 이메일), 전문분야, 소속, 직위(직급), 최종학력, 주요 경력, 연구 이력
+								</li>
+								<li>3. 보유 및 이용 기간: 받은날로부터 5년</li>
+								<li>4. 귀하는 개인정보 수집 및 이용 동의에 대한 거부 권리가 있으나, 개인정보 수집 및 이용에 동의하지 않을 경우 기업지원사업 등에서 제외될 수 있습니다. </li>
+							</ol>
+
+							<h6>&lt; 개인정보 제3자 제공 동의 &gt; </h6>
+							<ol>
+								<li>1. 제공받는자: 서울시, 기술매칭사업 신청자</li>
+								<li>2. 제공받는자의 이용 목적: 기술매칭 신청 시 전문가 정보 열람</li>
+								<li>3. 제공하는 개인정보 항목: 성명, 전문분야, 소속, 주요경력, 연구이력</li>
+								<li>4. 제공받는자의 이용 기간: 기술매칭사업 신청기간</li>
+								<li>5. 귀하는 위와 같이 개인정보를 제3자에게 제공하는 것에 대한 동의를 거부할 권리가 있습니다. 단 제3자 동의를 하지 않을 경우 기업지원사업 등에서 제외될 수 있습니다.</li>
+							</ol>
+						</div>
+						<div class="clearfix">
+							<div class="fr">
+								<input type="checkbox" id="personal_information_popup_check" class="fl ml10" />
+								<label for="personal_information_popup_check" class="fl mt5">동의합니다.</label>
+							</div>
+						</div>
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn popup_close_btn" title="확인">확인</button>
+						</div>
+					</div>						
+				</div> 
+			</div>
+			<!--//개인정보 수집 및 이용 동의 팝업-->
+			<!--//popup-->
+
+			<div id="container">
+				<div class="content_area login_area_box">
+					<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="logo">
+						<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템"></h1>
+					</a>
+				</div>
+				<p class="ta_c header_logo_p">사업평가 · 관리시스템입니다.</p>
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area login_box_area expert_box2">						
+							<h4 class="ta_l">개인정보</h4>
+							<div class="table_area">
+								<table class="write fixed mb50">
+									<caption>개인 정보</caption>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 80%;">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row">
+												<span class="icon_box"><span class="necessary_icon">*</span>
+												<label for="expert_name">성명</label></span>
+											</th>
+											<td><input type="text" id="expert_name" class="form-control w20" /></td>
+										</tr>
+										<tr>
+											<th scope="row">
+												<span class="icon_box"><span class="necessary_icon">*</span>
+												<label for="expert_member_day">생년월일</label></span>
+											</th>
+											<td><input type="number" id="expert_member_day" class="form-control w40 ls" placeholder="8자리 YYYYMMDD형식으로 입력해주세요."></td>
+										</tr>
+										<tr>
+											<th scope="row">
+												<span class="icon_box"><span class="necessary_icon">*</span>
+												<label for="expert_member_id">아이디</label></span>
+											</th>
+											<td><input type="text" id="expert_member_id" class="form-control w40 fl mr5 ls" placeholder="영문, 숫자, 특수문자 조합하여 9자리 이상"><button type="button" class="gray_btn2 fl mr10 id_check_info_popup_open" title="중복확인">중복확인</button></td> 
+										</tr>									  
+										<tr>
+											<th scope="row">
+												<span class="icon_box"><span class="necessary_icon">*</span>
+												<label for="expert_member_pw">비밀번호</label></span>
+											</th>
+											<td><input type="password" id="expert_member_pw" class="form-control w40 fl mr5 ls" placeholder="영문, 숫자, 특수문자 조합하여 9자리 이상"></td> 										
+										</tr>	
+										<tr>
+											<th scope="row">
+												<span class="icon_box"><span class="necessary_icon">*</span>
+												<label for="expert_member_pw2">비밀번호 학인</label></span>
+											</th>
+											<td><input type="password" id="expert_member_pw2" class="form-control w40 fl mr5 ls" placeholder="영문, 숫자, 특수문자 조합하여 9자리 이상"></td> 										
+										</tr>	
+
+										<tr>
+											<th scope="row">
+												<span class="icon_box"><span class="necessary_icon">*</span><label for="expert_tel">휴대전화</label></span>
+											</th>
+											<td>
+												<select name="expert_tel" id="expert_tel" class="w_8 fl">
+													<option value="010">010</option>
+												</select>
+												<span style="display:block;" class="fl mc8">-</span>
+												<label for="expert_tel2" class="hidden">전화</label>
+												<input type="tel" id="expert_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls">
+												<span style="display:block;" class="fl mc8 ls">-</span>
+												<label for="expert_tel3" class="hidden">전화</label>
+												<input type="tel" id="expert_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls">
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">
+												<span class="icon_box"><span class="necessary_icon">*</span><label for="expert_email">이메일</label></span>
+											</th>
+											<td>
+												<input type="text" name="str_email" id="expert_email" class="form-control w_20 fl ls" placeholder="abc123">
+												<span class="fl ml1 mr1 pt10 mail_f">@</span>
+												<label for="expert_email2" class="hidden">이메일</label>
+												<input type="text" name="str_email2" id="expert_email2" class="form-control w_18 fl" disabled="" placeholder="naver.com">
+												<label for="expert_email3" class="hidden">이메일 선택</label>
+												<select name="selectEmail" id="expert_email3" class="fl ml5 in_wp200 ace-select"> 
+												   <option value="0">------선택------</option> 
+												   <option value="1">직접입력</option> 
+												   <option value="naver.com">naver.com</option> 
+												   <option value="hanmail.net">hanmail.net</option> 
+												   <option value="hotmail.com">hotmail.com</option> 
+												   <option value="nate.com">nate.com</option> 
+												   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+												   <option value="empas.com">empas.com</option> 
+												   <option value="dreamwiz.com">dreamwiz.com</option> 
+												   <option value="freechal.com">freechal.com</option> 
+												   <option value="lycos.co.kr">lycos.co.kr</option> 
+												   <option value="korea.com">korea.com</option> 
+												   <option value="gmail.com">gmail.com</option> 
+												   <option value="hanmir.com">hanmir.com</option> 
+												   <option value="paran.com">paran.com</option> 
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="security_box info_txt">
+								<p>※ <span class="font_blue">보안 서약 확인</span> 및 <span class="font_blue">개인정보 수집 및 이용</span>에 동의하여 주세요.</p>
+							</div>
+							<h4 class="ta_l">보안 서약 확인</h4>	
+							<div class="clearfix">
+								<button type="button" class="blue_btn fl mr10 w20 security_popup_open" title="보안서약서 내용보기">보안서약서 내용보기</button>
+								<input type="checkbox" id="security_txt_check" class="fl ml10" />
+								<label for="security_txt_check" class="fl mt5">동의합니다.</label>
+							</div>
+							<h4 class="ta_l">개인정보 수집 및 이용 동의</h4>
+							<div class="clearfix mt30">
+								<button type="button" class="blue_btn fl mr10 w20 personal_information_popup_open" title="개인정보 수집 및 이용 동의">개인정보 수집 및 이용 동의</button>
+								<input type="checkbox" id="personal_information_check" class="fl ml10" />
+								<label for="personal_information_check" class="fl mt5">동의합니다.</label>
+							</div>
+							
+
+							<div class="info_txt mt50">
+								<p>※ 정보를 확인하신 후, 추가적으로 수정하실 사항이 있으면 수정해 주세요. <br />
+								※ 수정하실 사항이 없으신 경우, <span class="font_blue">[완료]</span>버튼을 클릭하여 주세요.</p>
+							</div>
+							<!--기관 정보-->
+							<h4 class="ta_l">기관 정보</h4>
+							<div class="table_area">
+								<table class="write fixed mb70">
+									<caption>기관 정보</caption>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 80%;">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>소속기관 유형</span></th>
+											<td>
+												<input type="radio" id="expert_company_type_radio5" class="expert_company_type_radio5_check" name="expert_company_g" value="0" checked>
+												<label for="expert_company_type_radio5">개인</label>
+												<input type="radio" id="expert_company_type_radio1" name="expert_company_g" value="1">
+												<label for="expert_company_type_radio1">기업</label>
+												<input type="radio" id="expert_company_type_radio2" name="expert_company_g" value="1">
+												<label for="expert_company_type_radio2">학교</label>
+												<input type="radio" id="expert_company_type_radio3" name="expert_company_g" value="1">
+												<label for="expert_company_type_radio3">연구원</label>
+												<input type="radio" id="expert_company_type_radio4" name="expert_company_g" value="1">
+												<label for="expert_company_type_radio4">공공기관</label>													
+												<input type="radio" id="expert_company_type_radio6" name="expert_company_g" value="1">
+												<label for="expert_company_type_radio6">기타(협/단체 등)</label>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="expert_company_name">기관명</label></span></th>
+											<td><input type="text" id="expert_company_name" class="form-control w100 fl mr5" /></td>
+										</tr>
+										<tr>
+											<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="expert_company_company_address">주소</label></span></th>
+											<td>
+												<!--span>서울시 강남구 대치동 304-4번지</span-->
+												<input type="text" id="expert_company_company_address" class="form-control w60 fl mr5">
+												<label for="expert_company_company_address2" class="hidden">주소</label>
+												<input type="text" id="expert_company_company_address2" class="form-control w30 fl mr5">
+												<button type="button" class="gray_btn2 fl" title="검색">검색</button>												
+											</td>
+										</tr>									  
+										<tr>
+											<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="expert_company_company_tel">전화</label></span></th>
+											<td>
+												<select name="expert_company_company_tel" id="expert_company_company_tel" class="w_8 fl">
+													<option value="031">031</option>
+													<option value="02">02</option>
+												</select>
+												<span style="display:block;" class="fl mc8">-</span>
+												<label for="expert_company_company_tel2" class="hidden">전화</label>
+												<input type="tel" id="expert_company_company_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls">
+												<span style="display:block;" class="fl mc8 ls">-</span>
+												<label for="expert_company_company_tel3" class="hidden">전화</label>
+												<input type="tel" id="expert_company_company_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls">
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="expert_part">부서(학과)</label></span></th>
+											<td><input type="text" id="expert_part" class="form-control w_34" /></td> 
+										</tr>									  
+										<tr>
+											<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="expert_position">직책</label></span></th>
+											<td><input type="text" id="expert_position" class="form-control w_34" /></td> 
+										</tr>																		
+									</tbody>
+								</table>
+							</div>
+							<!--//기관 정보-->
+
+							<!--최종 학력-->
+							<h4 class="ta_l">최종 학력</h4>
+							<div class="table_area">
+								<table class="write fixed mb70">
+									<caption>최종 학력</caption>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 80%;">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row"><label for="expert_schoolname">학교명</label></th>
+											<td><input type="text" id="expert_schoolname" class="form-control w60 fl mr5"></td>
+										</tr>
+										<tr>
+											<th scope="row"><label for="expert_majorin">전공</label></th>
+											<td><input type="text" id="expert_majorin" class="form-control w60 fl mr5"></td>
+										</tr>
+										<tr>
+											<th scope="row"><label for="expert_anacademidegree">학위</label></th>
+											<td>
+												<select name="expert_anacademidegree" id="expert_anacademidegree" class="w20 ace-select">					
+													<option value="학사">학사</option>
+													<option value="석사">석사</option>
+													<option value="박사">박사</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><label for="expert_anacademidegree_day">학위취득연도</label></th>
+											<td>
+												<input type="number" id="expert_anacademidegree_day" class="form-control w20 fl mr5 ta_r ls" oninput="numberMaxLength(this);" style="padding-right: 10px;" />
+												<span class="fl mt10">년</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--//최종 학력-->
+
+							<!--기술분류 및 연구분야-->
+							<h4 class="ta_l">기술분류 및 연구분야</h4>
+							<div class="table_area">
+								<table class="write fixed mb50">
+									<caption>기술분류 및 연구분야</caption>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 80%;">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row" rowspan="3">국가과학기술분류</th>
+											<td>
+												<label for="MainCategory" class="fl mt5 mr5">대분류</label>
+												<select name="MainCategory" id="MainCategory" class="ace-select" style="width: 94.8%;">
+													<option value="지구 과학">지구 과학</option>
+													<option value="농림 수산 식품">농림 수산 식품</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label for="MiddleCategory" class="fl mt5 mr5">중분류</label>
+												<select name="MiddleCategory" id="MiddleCategory" class="ace-select" style="width: 94.8%;">
+													<option value="ND07. 자연재해 분석/예측">ND07. 자연재해 분석/예측</option>
+													<option value="LB11. 조경학">LB11. 조경학</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label for="SubClass" class="fl mt5 mr5">소분류</label>
+												<select name="SubClass" id="SubClass" class="ace-select" style="width: 94.8%;">
+													<option value="ND0701. 기상재해 분석/예측">ND0701. 기상재해 분석/예측</option>
+													<option value="ND0702. 지진발생 분석/예측">ND0702. 지진발생 분석/예측</option>
+													<option value="LB1101. 조경 계획">LB1101. 조경 계획</option>
+													<option value="LB1102. 조경 설계">LB1102. 조경 설계</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><label for="4th_technology">4차산업기술분류</label></th>
+											<td>
+												<select name="4th_technology" id="4th_technology" class="w20 ace-select">
+													<option value="5G">5G</option>
+													<option value="스마트헬스케어">스마트헬스케어</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><label for="research_class">연구분야</label></th>
+											<td>
+												<textarea name="research_class" id="research_class" cols="30" rows="2" class="w100"></textarea>
+											</td>
+										</tr>										
+									</tbody>
+								</table>
+							</div>
+							<!--//기술분류 및 연구분야-->
+
+							<!--논문/저서 -->
+							<div class="clearfix">
+								<div class="fl"><h4 class="ta_l">논문/저서<span class="font_red" style="font-size:16px">(대표 3개)</span></h4></div>				
+							</div>							
+							<div class="table_area treatise_table_box">
+								<table class="list fixed treatise_table">
+									<caption>논문/저서</caption>
+									<colgroup>
+										<col style="width: 48%;">
+										<col style="width: 10%;">
+										<col style="width: 14%;">
+										<col style="width: 10%;">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">논문/저서명</th>
+											<th scope="col">학술자명</th>
+											<th scope="col">발행일자</th>
+											<th scope="col" class="last">SCI 여부</th>										
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first"><input type="text" id="treatise1" class="form-control w100 fl"><label for="treatise1" class="hidden">논문/저서명1</label></td>
+											<td><input type="text" id="academic_personname1" class="form-control w100 fl"><label for="academic_personname1" class="hidden">학술자명1</label></td>
+											<td>
+												<label for="posting_day1" class="hidden">발행일자1</label>
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="posting_day1" class="datepicker form-control w_14 mr5 ls" />
+												</div>
+											</td>	
+											<td class="last">
+												<div class="clearfix" style="margin: auto;width:50px">
+													<input type="checkbox" id="mypage_company_ceo_check1" class="fl ml10 mr5" /><label for="mypage_company_ceo_check1" class="fl">SCI</label>
+												</div>												
+											</td>
+										</tr>
+										<tr>
+											<td class="first"><input type="text" id="treatise2" class="form-control w100 fl"><label for="treatise2" class="hidden">논문/저서명1</label></td>
+											<td><input type="text" id="academic_personname2" class="form-control w100 fl"><label for="academic_personname2" class="hidden">학술자명1</label></td>
+											<td>
+												<label for="posting_day2" class="hidden">발행일자2</label>
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="posting_day2" class="datepicker form-control w_14 mr5 ls">
+												</div>
+											</td>	
+											<td class="last">
+												<div class="clearfix" style="margin: auto;width:50px">
+													<input type="checkbox" id="mypage_company_ceo_check2" class="fl ml10 mr5" /><label for="mypage_company_ceo_check2" class="fl">SCI</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td class="first"><input type="text" id="treatise3" class="form-control w100 fl"><label for="treatise3" class="hidden">논문/저서명1</label></td>
+											<td><input type="text" id="academic_personname3" class="form-control w100 fl"><label for="academic_personname3" class="hidden">학술자명1</label></td>
+											<td>
+												<label for="posting_day3" class="hidden">발행일자3</label>
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="posting_day3" class="datepicker form-control w_14 mr5 ls">
+												</div>
+											</td>
+											<td class="last">
+												<div class="clearfix" style="margin: auto;width:50px">
+													<input type="checkbox" id="mypage_company_ceo_check3" class="fl ml10 mr5" /><label for="mypage_company_ceo_check3" class="fl">SCI</label>
+												</div>
+											</td>
+										</tr>										
+									</tbody>
+								</table>
+							</div>
+							<!--//논문/저서 -->
+
+							<!--지식 재산권 -->
+							<div class="clearfix mt50">
+								<div class="fl"><h4 class="ta_l">지식 재산권<span class="font_red" style="font-size:16px">(대표 3개)</span></h4></div>			
+							</div>								
+							<div class="table_area license_table_box">
+								<table class="list fixed license_table write2">
+									<caption>지식 재산권</caption>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 33%;">
+										<col style="width: 20%;">
+										<col style="width: 10%;">
+										<col style="width: 17%;">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">출원/등록</th>
+											<th scope="col">특허명</th>
+											<th scope="col">출원번호/등록번호</th>
+											<th scope="col">출원인</th>
+											<th scope="col" class="last">출원일/등록일</th>										
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first clearfix">												
+												<input type="radio" id="license_pending1" name="license_class1" checked />
+												<label for="license_pending1">출원</label>
+												<input type="radio" id="license_enrollment1" name="license_class1" />
+												<label for="license_enrollment1">등록</label>												
+											</td>
+											<td>
+												<input type="text" id="license_name1" class="form-control w100 fl" />
+												<label for="license_name1" class="hidden">특허명1</label>
+											</td>
+											<td>
+												<input type="text" id="license_number1" class="form-control w100 fl ls" />
+												<label for="license_number1" class="hidden">출원번호/등록번호1</label>
+											</td>	
+											<td>
+												<input type="text" id="license_personname1" class="form-control w100 fl" />
+												<label for="license_personname1" class="hidden">출원인1</label>											
+											</td>
+											<td class="last">
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="license_day1" class="datepicker form-control w_14 mr5 ls" />
+												</div>
+												<label for="license_day1" class="hidden">출원일/등록일1</label>											
+											</td>
+										</tr>
+										<tr>
+											<td class="first clearfix">												
+												<input type="radio" id="license_pending2" name="license_class2" checked />
+												<label for="license_pending2">출원</label>
+												<input type="radio" id="license_enrollment2" name="license_class2" />
+												<label for="license_enrollment2">등록</label>												
+											</td>
+											<td>
+												<input type="text" id="license_name2" class="form-control w100 fl" />
+												<label for="license_name2" class="hidden">특허명1</label>
+											</td>
+											<td>
+												<input type="text" id="license_number2" class="form-control w100 fl ls" />
+												<label for="license_number2" class="hidden">출원번호/등록번호1</label>
+											</td>	
+											<td>
+												<input type="text" id="license_personname2" class="form-control w100 fl" />
+												<label for="license_personname2" class="hidden">출원인1</label>											
+											</td>
+											<td class="last">
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="license_day2" class="datepicker form-control w_14 mr5 ls" />
+												</div>
+												<label for="license_day2" class="hidden">출원일/등록일1</label>											
+											</td>
+										</tr>	
+										<tr>
+											<td class="first clearfix">												
+												<input type="radio" id="license_pending3" name="license_class3" checked />
+												<label for="license_pending3">출원</label>
+												<input type="radio" id="license_enrollment3" name="license_class3" />
+												<label for="license_enrollment3">등록</label>												
+											</td>
+											<td>
+												<input type="text" id="license_name3" class="form-control w100 fl" />
+												<label for="license_name3" class="hidden">특허명1</label>
+											</td>
+											<td>
+												<input type="text" id="license_number3" class="form-control w100 fl ls" />
+												<label for="license_number3" class="hidden">출원번호/등록번호1</label>
+											</td>	
+											<td>
+												<input type="text" id="license_personname3" class="form-control w100 fl" />
+												<label for="license_personname3" class="hidden">출원인1</label>											
+											</td>
+											<td class="last">
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="license_day3" class="datepicker form-control w_14 mr5 ls" />
+												</div>
+												<label for="license_day3" class="hidden">출원일/등록일1</label>											
+											</td>
+										</tr>	
+									</tbody>
+								</table>
+							</div>
+							<!--//지식재산권 -->
+
+							<!--기술이전-->
+							<div class="clearfix mt50">
+								<div class="fl"><h4 class="ta_l">기술이전<span class="font_red" style="font-size:16px">(최근 3년)</span></h4></div>
+								<!--div class="fr"><button type="button" class="blue_btn2 mt20 technology_transmigrate_add" title="추가">추가</button></div-->
+							</div>								
+							<div class="table_area technology_transmigrate_table_box">
+								<table class="list fixed technology_transmigrate_table write2">
+									<caption>기술이전</caption>
+									<colgroup>
+										<col style="width: 50%;">
+										<col style="width: 17%;">
+										<col style="width: 33%;">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">기술이전 기술명</th>
+											<th scope="col">기술이전일</th>
+											<th scope="col" class="last">기술이전기업</th>										
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first clearfix">												
+												<input type="text" id="technology_transmigrate_name1" class="w100" />
+												<label for="technology_transmigrate_name1" class="hidden">기술명1</label>											
+											</td>
+											<td>												
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="technology_transmigrate_day1" class="datepicker form-control w_14 mr5 ls" />
+												</div>
+												<label for="technology_transmigrate_day1" class="hidden">기술이전일1</label>	
+											</td>											
+											<td class="last">
+												<input type="text" id="technology_transmigrate_company1" class="w100" />
+												<label for="technology_transmigrate_company1" class="hidden">기술이전기업1</label>									
+											</td>
+										</tr>
+										<tr>
+											<td class="first clearfix">												
+												<input type="text" id="technology_transmigrate_name2" class="w100" />
+												<label for="technology_transmigrate_name2" class="hidden">기술명2</label>										
+											</td>
+											<td>												
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="technology_transmigrate_day2" class="datepicker form-control w_14 mr5 ls" />
+												</div>
+												<label for="technology_transmigrate_day2" class="hidden">기술이전일2</label>	
+											</td>											
+											<td class="last">
+												<input type="text" id="technology_transmigrate_company2" class="w100" />
+												<label for="technology_transmigrate_company2" class="hidden">기술이전기업2</label>									
+											</td>
+										</tr>
+										<tr>
+											<td class="first clearfix">												
+												<input type="text" id="technology_transmigrate_name3" class="w100" />
+												<label for="technology_transmigrate_name3" class="hidden">기술명3</label>																	
+											</td>
+											<td>												
+												<div class="datepicker_area fl mr5">
+													<input type="text" id="technology_transmigrate_day3" class="datepicker form-control w_14 mr5 ls" />
+												</div>
+												<label for="technology_transmigrate_day3" class="hidden">기술이전일3</label>	
+											</td>											
+											<td class="last">
+												<input type="text" id="technology_transmigrate_company3" class="w100" />
+												<label for="technology_transmigrate_company3" class="hidden">기술이전기업3</label>									
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--//기술이전 -->
+
+							<!--R&D과제 -->
+							<div class="clearfix mt50">
+								<div class="fl"><h4 class="ta_l">R&D과제<span class="font_red" style="font-size:16px">(최근 3년)</span></h4></div>
+								<!--div class="fr"><button type="button" class="blue_btn2 mt20 rnd_add" title="추가">추가</button></div-->
+							</div>								
+							<div class="table_area rnd_table_box">
+								<table class="list fixed rnd_table write2">
+									<caption>R&D과제</caption>
+									<colgroup>
+										<col style="width: 30%;">
+										<col style="width: 30%;">
+										<col style="width: 25%;">
+										<col style="width: 15%;">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" class="first">과제명</th>
+											<th scope="col">과제기간</th>
+											<th scope="col">연구분야</th>
+											<th scope="col" class="last">4차산업기술분류</th>										
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="first clearfix">	
+												<label for="rnd_problem_name1" class="hidden">기술명1</label>			
+												<input type="text" id="rnd_problem_name1" class="w100" />													
+											</td>
+											<td class="clearfix">												
+												<div class="datepicker_area fl">
+													<label for="rnd_problem_day1" class="hidden">기술이전일1</label>
+													<input type="text" id="rnd_problem_day1" class="datepicker form-control w_12 ls" />
+												</div>												
+												<span class="fl ml5 mr5 mt5">~</span>
+												<div class="datepicker_area fl mr5">
+													<label for="rnd_problem_day1_1" class="hidden">기술이전일1</label>
+													<input type="text" id="rnd_problem_day1_1" class="datepicker form-control w_12 ls" />
+												</div>												
+											</td>
+											<td>
+												<label for="rnd_research_class1_" class="hidden">연구분야1</label>	
+												<textarea name="rnd_research_class1_" id="rnd_research_class1_" cols="30" rows="2" class="w100"></textarea>	
+											</td>
+											<td class="last">												
+												<label for="rnd_4th_technology1" class="hidden">4차산업기술분류</label>												
+												<select name="rnd_4th_technology1" id="rnd_4th_technology1" class="w100 ace-select">
+													<option value="5G">5G</option>
+													<option value="빅데이터">스마트헬스케어</option>													
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td class="first clearfix">	
+												<label for="rnd_problem_name2" class="hidden">기술명2</label>			
+												<input type="text" id="rnd_problem_name2" class="w100" />													
+											</td>
+											<td class="clearfix">												
+												<div class="datepicker_area fl">
+													<label for="rnd_problem_day2" class="hidden">기술이전일2</label>
+													<input type="text" id="rnd_problem_day2" class="datepicker form-control w_12 ls" />
+												</div>												
+												<span class="fl ml5 mr5 mt5">~</span>
+												<div class="datepicker_area fl mr5">
+													<label for="rnd_problem_day2_1" class="hidden">기술이전일2</label>
+													<input type="text" id="rnd_problem_day2_1" class="datepicker form-control w_12 ls" />
+												</div>												
+											</td>
+											<td>
+												<label for="rnd_research_class1__" class="hidden">연구분야2</label>	
+												<textarea name="rnd_research_class1__" id="rnd_research_class1__" cols="30" rows="2" class="w100"></textarea>	
+											</td>
+											<td class="last">												
+												<label for="rnd_4th_technology2" class="hidden">4차산업기술분류</label>	
+												<select name="rnd_4th_technology2" id="rnd_4th_technology2" class="w100 ace-select">
+													<option value="5G">5G</option>
+													<option value="빅데이터">빅데이터</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td class="first clearfix">	
+												<label for="rnd_problem_name3" class="hidden">기술명3</label>			
+												<input type="text" id="rnd_problem_name3" class="w100" />													
+											</td>
+											<td class="clearfix">												
+												<div class="datepicker_area fl">
+													<label for="rnd_problem_day3" class="hidden">기술이전일3</label>
+													<input type="text" id="rnd_problem_day3" class="datepicker form-control w_12 ls" />
+												</div>												
+												<span class="fl ml5 mr5 mt5">~</span>
+												<div class="datepicker_area fl mr5">
+													<label for="rnd_problem_day3_1" class="hidden">기술이전일3</label>
+													<input type="text" id="rnd_problem_day3_1" class="datepicker form-control w_12 ls" />
+												</div>												
+											</td>
+											<td>
+												<label for="rnd_research_class3" class="hidden">연구분야3</label>	
+												<textarea name="rnd_research_class3" id="rnd_research_class3" cols="30" rows="2" class="w100"></textarea>	
+											</td>
+											<td class="last">												
+												<label for="rnd_4th_technology3" class="hidden">4차산업기술분류</label>	
+												<select name="SubClass" id="rnd_4th_technology3" class="w100 ace-select">
+													<option value="5G">5G</option>
+													<option value="빅데이터">빅데이터</option>
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--//기술이전 -->
+							<div class="mt30">
+								<button type="button" class="w100 expert_certificationcomplate_btn mb50" title="완료" onclick="location.href='./expert_complete.html'">완료</button>
+							</div>
+						</div>
+					</div>								
+				</section>
+			</div>
+		</div>
+		<script src="../js/script.js"></script>
+		<script>			
+			//달력
+			$(".datepicker").datepicker({  
+				  showOn: "both", // 버튼과 텍스트 필드 모두 캘린더를 보여준다.
+				  //buttonImage: "/application/db/jquery/images/calendar.gif", // 버튼 이미지
+				  buttonText	: false, 
+				  buttonImageOnly: false, // 버튼에 있는 이미지만 표시한다.
+				  changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+				  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+				  minDate: '-100y', // 현재날짜로부터 100년이전까지 년을 표시한다.
+				  nextText: '다음 달', // next 아이콘의 툴팁.
+				  prevText: '이전 달', // prev 아이콘의 툴팁.
+				  numberOfMonths: [1,1], // 한번에 얼마나 많은 월을 표시할것인가. [2,3] 일 경우, 2(행) x 3(열) = 6개의 월을 표시한다.
+				  stepMonths: 3, // next, prev 버튼을 클릭했을때 얼마나 많은 월을 이동하여 표시하는가. 
+				  yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+				  showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. ( ...으로 표시되는부분이다.) 
+				  currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
+				  closeText: '닫기',  // 닫기 버튼 패널
+				  dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				  showAnim: "slide", //애니메이션을 적용한다.  
+				  showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
+				  dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+				  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
+			  });
+		</script>
+
+  </body>
+</html>

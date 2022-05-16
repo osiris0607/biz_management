@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.rsltmgnt.searslt">
+
+    <!--KPI오류내역요약조회 -->
+    <select id="inqKpiErrRptSmry" parameterType="dataItem" resultType="dataItem">
+        /*fwd.rsltmgnt.searslt.inqKpiErrRptSmry*/
+         SELECT (
+                  SELECT CASE WHEN 'EN' = 'EN' THEN X.DTL_CD_NM ELSE X.ETC_CONT1 END
+                    FROM TB_COM_ETC_CD X 
+                   WHERE X.CLAS_CD = '1037' 
+                     AND X.DTL_CD =  SUBSTR(LL.EXCT_BIZPTNR_CD,1,1)
+                )  AS EXCT_CORP_AREA 
+             , LL.EXCT_BIZPTNR_CD  
+             ,( <include refid = "smt.common.smtcomn.fcCmGetCorpNm">
+                      <property name = "corpCd" value = "LL.EXCT_BIZPTNR_CD"></property>
+                      <property name = "inNmGb" value = "'5'"></property>
+                  </include> )  AS CORP_NM
+             , MM.ORD_TYPE_CD
+             ,( <include refid = "smt.common.smtcomn.inqEtcCdNm">
+                      <property name = "clasCd" value = "'0001'"></property>
+                      <property name = "dtlCd" value = "MM.ORD_TYPE_CD"></property>
+                   </include> 
+                ) AS ORD_TYPE_NM
+             , COUNT ( KK.BL_ID ) AS TOT_BL_CNT 
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' THEN  1 ELSE 0 END ) AS ACCU_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0001' THEN 1
+                          ELSE 0
+                      END
+                   ) AS PERF_CODE_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0002' THEN 1
+                          ELSE 0
+                      END
+                   ) AS MDM_CODE_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0003' THEN 1
+                          ELSE 0
+                      END
+                   ) AS WT_PKG_CODE_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0004' THEN 1
+                          ELSE 0
+                      END
+                   ) AS PS_CODE_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0005' THEN 1
+                          ELSE 0
+                      END
+                   ) AS H_FREIGHT_CODE_CNT
+             , SUM ( CASE WHEN  DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0006' THEN 1
+                          ELSE 0
+                      END
+                   ) AS POD_CODE_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0007' THEN 1
+                          ELSE 0
+                      END
+                   ) AS INCOT_CODE_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ACCU' AND DD.BIZ_KPI_TYPE_CD = '0012' THEN 1
+                          ELSE 0
+                     END
+                   ) AS OTHER_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ONTI' THEN 1 ELSE 0 END ) AS ONTI_CNT
+              , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ONTI' AND DD.BIZ_KPI_TYPE_CD = '0008' THEN 1
+                          ELSE 0
+                      END
+                   ) AS STAGE1_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ONTI' AND DD.BIZ_KPI_TYPE_CD = '0009' THEN 1
+                          ELSE 0
+                      END
+                   ) AS OB_CLOSE_CNT
+             , SUM ( CASE WHEN  DD.BIZ_KPI_SPR_CD = 'ONTI' AND DD.BIZ_KPI_TYPE_CD = '0010' THEN 1
+                          ELSE 0
+                      END
+                   ) AS ONTI_OP_COST_CNT
+             , SUM ( CASE WHEN DD.BIZ_KPI_SPR_CD = 'ONTI' AND DD.BIZ_KPI_TYPE_CD = '0011' THEN 1
+                          ELSE 0
+                      END
+                   ) AS ONTI_OTHER_CNT
+          FROM (
+                  SELECT A.BL_ID 
+                       , A.EO_NO
+                    FROM TB_FWD_BL A 
+                       , TB_SMT_INTG_TASK_DEPT B
+                   WHERE A.BL_ID = B.CST_BL_ID 
+                     AND A.EO_NO = B.EO_NO
+                     AND B.TASK_SPR_CD = #{taskSprCd}  -- ROLE
+                     AND B.EXCT_BIZPTNR_CD = #{corpCd} -- CORP
+                     <if test="ofcrEmpno != null and ofcrEmpno != ''">
+				        AND B.OFCR_EMPNO = #{ofcrEmpno}
+				    </if>
+				    <if test="dateType == 'OBD'">
+				        AND A.ONBR_YMD BETWEEN #{fromDate} AND #{toDate} 
+				    </if>
+				    <if test="dateType == 'ARR'">
+				        AND A.ARR_YMD BETWEEN #{fromDate} AND #{toDate}
+				    </if>        
+               ) KK
+              , TB_SMT_INTG_TASK_DEPT LL
+              , TB_SMT_ORD MM
+              -- , TB_FW_INTG_SUB_MPNG CC
+              , TB_FWD_INTG_BIZKPI DD
+                 
+         WHERE KK.BL_ID = LL.CST_BL_ID 
+           AND KK.EO_NO = LL.EO_NO 
+           AND LL.TASK_SPR_CD = 'EXP'
+           AND LL.SMT_NO = MM.SMT_NO   
+           AND LL.DEL_YN = 'N'
+           AND MM.DEL_YN = 'N'   
+          -- AND KK.BL_ID = CC.INTG_KEY_ID
+          --  AND CC.INTG_SUB_ID = DD.INTG_SUB_ID
+          --  AND CC.MPNG_KIND_CD = 'KPI'
+         GROUP BY LL.EXCT_BIZPTNR_CD 
+                , MM.ORD_TYPE_CD                
+         ORDER BY 1,2,3 
+    </select>
+    
+    <!--KPI오류내역상세조회 -->
+    <select id="inqKpiErrRptDtl" parameterType="dataItem" resultType="dataItem">
+        /*fwd.rsltmgnt.searslt.inqKpiErrRptDtl*/
+         SELECT (
+	              SELECT CASE WHEN 'EN' = 'EN' THEN X.DTL_CD_NM ELSE X.ETC_CONT1 END
+	                FROM TB_COM_ETC_CD X 
+	               WHERE X.CLAS_CD = '1037' 
+	                 AND X.DTL_CD =  SUBSTR(LL.EXCT_BIZPTNR_CD,1,1)
+	           )  AS EXCT_CORP_AREA
+	         , ( <include refid = "smt.common.smtcomn.fcCmGetCorpNm">
+	                 <property name = "corpCd" value = "LL.EXCT_BIZPTNR_CD"></property>
+	                 <property name = "inNmGb" value = "'5'"></property>
+	             </include> )  AS CORP_CD
+	         , MM.ORD_TYPE_CD AS ORD_TYPE_CD
+	         , ( <include refid = "smt.common.smtcomn.inqEtcCdNm">
+	                <property name = "clasCd" value = "'0001'"></property>
+	                <property name = "dtlCd" value = "MM.ORD_TYPE_CD"></property>
+	             </include> ) AS ORD_TYPE_NM
+	         , MM.SMT_NO  AS SMT_NO
+	         , KK.BL_ID  AS HBL_ID
+	         , KK.BL_NO  AS HBL_NO
+	         , (<include refid="com.comn.comnmgnt.inqEmpNm">
+	              <property name="empno" value="LL.OFCR_EMPNO" />
+	           </include>) AS EXP_OFCR_NM
+	         , (<include refid = "smt.common.smtcomn.fcCmGetAcctgDeptNm">
+	              <property name = "acctgDeptCd" value = "LL.EXCT_DEPT_CD"></property>
+	           </include>) AS EXP_OFCR_DEPT_NM
+	         , (<include refid = "smt.common.smtcomn.fcCmGetCorpNm">
+	              <property name = "corpCd" value = "NN.EXCT_BIZPTNR_CD"></property>
+	              <property name = "inNmGb" value = "'5'"></property>
+	            </include> ) AS IMP_CORP_CD
+	         , (<include refid="com.comn.comnmgnt.inqEmpNm">
+	              <property name="empno" value="NN.OFCR_EMPNO" />
+	           </include>) AS IMP_OFCR_NM
+	         , (<include refid = "smt.common.smtcomn.fcCmGetAcctgDeptNm">
+	              <property name = "acctgDeptCd" value = "NN.EXCT_DEPT_CD"></property>
+	           </include>) AS IMP_OFCR_DEPT_NM
+	         , DD.BIZ_KPI_SPR_CD AS MGT_TYPE
+	         , (<include refid = "smt.common.smtcomn.inqEtcCdNm">
+	              <property name = "clasCd" value = "'1079'"></property>
+	              <property name = "dtlCd" value = "DD.BIZ_KPI_TYPE_CD"></property>
+	           </include>) AS ERR_TYPE
+	         , KK.POL_CD
+	         , KK.POL_NM
+	         , KK.POD_CD
+	         , KK.POD_NM
+	         , KK.SHPP_CD
+	         , KK.SHPP_NM
+	         , KK.CNEE_CD
+	         , KK.CNEE_NM
+	         , KK.NTPR_CD
+	         , KK.NTPR_NM
+	         , KK.ONBR_YMD
+	         , KK.ARR_YMD 
+	         , KK.INTG_TASK_NO
+	         , KK.EXCT_SPR_CD 
+	         , KK.BL_SPR_CD
+	         , KK.NON_EXCT_BL_YN
+	         , MM.SMT_UI_SPR_CD
+	         , (SELECT S.FRM_CONT /* 구분별내용 */
+	            FROM   -- TB_FW_INTG_SUB_MPNG T /* 통합SUB맵핑 */
+	                  TB_FWD_INTG_RMK S /* 통합비고 */
+	            WHERE  -- T.DEL_YN = 'N' /* 사용여부 */
+	            -- AND    T.INTG_KEY_ID = KK.BL_ID
+	            -- AND    T.MPNG_KIND_CD = 'RMK' /* 통합SUB종류코드 */
+	            -- AND    T.INTG_SUB_ID = S.INTG_SUB_ID /* 통합SUBID */
+	                   S.RMK_SPR_CD  = 'DESC' /* 적요구분코드 */
+	            LIMIT 1) DESCRIPTION
+	      FROM ( 
+	             SELECT A.BL_ID
+	                  , A.BL_NO 
+	                  , A.EO_NO
+	                  , A.POL_CD
+	                  , A.POL_NM
+	                  , A.POD_CD
+	                  , A.POD_NM
+	                  , A.SHPP_CD
+	                  , A.SHPP_NM
+	                  , A.CNEE_CD
+	                  , A.CNEE_NM
+	                  , A.NTPR_CD
+	                  , A.NTPR_NM
+	                  , A.ONBR_YMD
+	                  , A.ARR_YMD
+	                  , B.INTG_TASK_NO 
+	                  , A.EXCT_SPR_CD
+	                  , A.BL_SPR_CD
+	                  , A.NON_EXCT_BL_YN
+	               FROM TB_FWD_BL A 
+	                 , TB_SMT_INTG_TASK_DEPT B
+	             WHERE A.BL_ID = B.CST_BL_ID 
+	               AND A.EO_NO = B.EO_NO
+	                <if test="ofcrEmpno != null and ofcrEmpno != ''">
+	                        AND B.OFCR_EMPNO = #{ofcrEmpno}
+	                </if>
+	                <if test="dateType == 'OBD'">
+	                    AND A.ONBR_YMD BETWEEN #{fromDate} AND #{toDate} 
+	                </if>
+	                <if test="dateType == 'ARR'">
+	                    AND A.ARR_YMD BETWEEN #{fromDate} AND #{toDate}
+	                </if> 
+	               AND B.TASK_SPR_CD = #{taskSprCd}  -- ROLE
+	               AND B.EXCT_BIZPTNR_CD = #{corpCd} -- CORP
+	           ) KK
+	         , TB_SMT_INTG_TASK_DEPT LL  -- 선적지
+	         , TB_SMT_INTG_TASK_DEPT NN  -- 선적지
+	         , TB_SMT_ORD MM
+	         -- , TB_FW_INTG_SUB_MPNG CC
+	         , TB_FWD_INTG_BIZKPI DD
+	     WHERE KK.BL_ID = LL.CST_BL_ID 
+	       AND KK.EO_NO = LL.EO_NO 
+	       AND LL.TASK_SPR_CD = 'EXP'
+	       AND KK.BL_ID = NN.CST_BL_ID 
+	       AND KK.EO_NO = NN.EO_NO 
+	       AND NN.TASK_SPR_CD = 'IMP'
+	       AND LL.SMT_NO = MM.SMT_NO   
+	       AND LL.DEL_YN = 'N'
+	       AND MM.DEL_YN = 'N' 
+	       AND NN.DEL_YN = 'N'   
+	       -- AND KK.BL_ID = CC.INTG_KEY_ID
+	       -- AND CC.INTG_SUB_ID = DD.INTG_SUB_ID
+	       -- AND CC.MPNG_KIND_CD = 'KPI'   
+	       AND MM.ORD_TYPE_CD = #{ordTypeCd}       
+	       AND (SELECT CASE WHEN 'EN' = 'EN' THEN X.DTL_CD_NM ELSE X.ETC_CONT1 END
+	            FROM TB_COM_ETC_CD X 
+	            WHERE X.CLAS_CD = '1037' 
+	            AND X.DTL_CD =  SUBSTR(LL.EXCT_BIZPTNR_CD,1,1)) = #{exctCorpArea}
+	            <if test="errCd == 'ACCU'">
+			        AND DD.BIZ_KPI_SPR_CD = #{errCd} 
+			    </if>         
+			    <if test="errCd == 'ONTI'">
+			        AND DD.BIZ_KPI_SPR_CD = #{errCd}
+			    </if>
+			    <if test="errCd != null and errCd != '' and errCd != 'ACCU' and errCd != 'ONTI'">
+			        AND DD.BIZ_KPI_TYPE_CD = #{errCd}
+			    </if>         
+	    ORDER BY 1,2,3,4,5,6
+    </select>
+    
+   </mapper>     

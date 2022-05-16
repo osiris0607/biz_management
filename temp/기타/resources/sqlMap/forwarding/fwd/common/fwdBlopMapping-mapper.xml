@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.common.fwdBlopMapping">
+
+    <select id="selectFwdBlopMapping" parameterType="dataItem" resultType="dataItem">
+        <![CDATA[
+        /* fwd.common.fwdBlopMapping.selectBlopMapping */
+		SELECT 'F' CHK 
+		     , OPRT_MPNG_NO
+		     , A.CORP_CD 
+		     , B.BIZPTNR_ENG_NM AS CORP_CD_NM
+		     , A.DEPT_CD
+		     , C.ACCTG_DEPT_ENG_NM AS DEPT_CD_NM
+		     , A.EXCT_SPR_CD 
+		     , D.DTL_CD_NM AS EXCT_SPR_CD_NM
+		     , A.TASK_SPR_CD                      /*역할구분코드*/  
+		     , E.DTL_CD_NM AS TASK_SPR_CD_NM         /*역할구분코드*/
+		     , A.SHPP_CD
+		     , F.BIZPTNR_ENG_NM AS SHPP_CD_NM
+		     , A.NTPR_CD
+		     , G.BIZPTNR_ENG_NM AS NTPR_CD_NM
+		     , A.OPRT_ID
+		     , H.ENG_EMP_NM  AS  OPRT_ID_NM
+		     , A.USE_YN
+		     , A.DEL_YN
+		     , DATE_FORMAT(A.REG_DT,'%Y-%m-%d') AS REG_DT
+		     , A.RSTR_ID
+		     , DATE_FORMAT(A.UPD_DT,'%Y-%m-%d') AS UPD_DT
+		     , A.UPDR_ID            
+		  FROM TB_FWD_OPRT_MPNG A LEFT OUTER JOIN TB_COM_BIZPTNR B
+		    ON A.CORP_CD = B.BIZPTNR_CD 
+		  LEFT OUTER JOIN TB_COM_ACCTG_DEPT C
+		    ON A.DEPT_CD = C.ACCTG_DEPT_CD
+          LEFT OUTER JOIN TB_COM_ETC_CD D
+		    ON D.CLAS_CD = '0320'
+		   AND A.EXCT_SPR_CD = D.DTL_CD
+		  LEFT OUTER JOIN TB_COM_ETC_CD E
+		    ON E.CLAS_CD = '0031' 
+		   AND A.TASK_SPR_CD = E.DTL_CD
+          LEFT OUTER JOIN TB_COM_BIZPTNR F
+	        ON A.SHPP_CD = F.BIZPTNR_CD
+		  LEFT OUTER JOIN TB_COM_BIZPTNR G
+		    ON A.NTPR_CD = G.BIZPTNR_CD
+		  LEFT OUTER JOIN TB_COM_EMP H
+		    ON A.OPRT_ID = H.EMPNO
+		 WHERE A.CORP_CD = #{corpCd}
+		   AND A.DEL_YN = 'N'
+        ]]>
+        
+        <if test="ptnrCd != null and ptnrCd != '' and ptnrKd == 'SHPR'">
+           AND A.SHPP_CD = #{ptnrCd}
+        </if>
+        <if test="ptnrCd != null and ptnrCd != '' and ptnrKd == 'NTFY'">                
+           AND A.NTPR_CD = #{ptnrCd}
+        </if>
+        <if test="deptCd != null and deptCd != ''">
+           AND A.DEPT_CD = #{deptCd}
+        </if>        
+        <if test="exctSprCd != null and exctSprCd != ''">
+           AND A.EXCT_SPR_CD = #{exctSprCd}
+        </if>
+        
+    </select>
+    
+    
+    <insert id="insertFwdBlopMapping">
+        <![CDATA[
+        /* fwd.common.fwdBlopMapping.insertFwdBlopMapping */
+	    INSERT INTO TB_FWD_OPRT_MPNG (  
+               OPRT_MPNG_NO
+	         , CORP_CD
+	         , DEPT_CD
+	         , EXCT_SPR_CD
+	         , TASK_SPR_CD
+	         , SHPP_CD
+	         , NTPR_CD
+	         , OPRT_ID
+	         , USE_YN 
+	         , DEL_YN
+	         , REG_DT
+	         , RSTR_ID
+	         , UPD_DT
+	         , UPDR_ID 
+	           )
+	    VALUES (  
+	           #{oprtMpngNo}
+	         , #{corpCd}
+	         , #{deptCd}
+	         , #{exctSprCd}
+	         , #{taskSprCd}
+	         , #{shppCd}
+	         , #{ntprCd}
+	         , #{oprtId}
+	         , #{useYn}
+	         , 'N'
+	         , NOW()
+	         , #{userId}
+	         , NOW()
+	         , #{userId}  
+	           )
+        ]]>    
+    </insert>
+    
+    <update id="updateFwdBlopMapping">
+        <![CDATA[
+        /* fwd.common.fwdBlopMapping.updateFwdBlopMapping */
+        UPDATE TB_FWD_OPRT_MPNG
+           SET CORP_CD      = #{corpCd}
+             , DEPT_CD      = #{deptCd}
+             , EXCT_SPR_CD  = #{exctSprCd}
+             , TASK_SPR_CD  = #{taskSprCd}
+             , SHPP_CD      = #{shppCd}
+             , NTPR_CD      = #{ntprCd}
+             , OPRT_ID      = #{oprtId}
+             , USE_YN       = #{useYn}
+             , UPD_DT       = NOW() 
+             , UPDR_ID      = #{userId}                 
+         WHERE OPRT_MPNG_NO = #{oprtMpngNo}        
+        ]]>
+    </update>
+    
+    <delete id="deleteFwdBlopMapping">
+        <![CDATA[
+        /* fwd.common.fwdBlopMapping.deleteFwdBlopMapping */
+        UPDATE TB_FWD_OPRT_MPNG
+           SET DEL_YN       =  'Y'
+             , UPD_DT       = NOW() 
+             , UPDR_ID      = #{userId}  
+         WHERE OPRT_MPNG_NO = #{oprtMpngNo}        
+        ]]>
+    </delete>
+</mapper>

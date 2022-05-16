@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled"              	value="ture"/>  
+        <setting name="lazyLoadingEnabled"        	value="false"/>  
+        <setting name="multipleResultSetsEnabled" 	value="true"/>  
+        <setting name="useColumnLabel"            	value="true"/>  
+        <setting name="useGeneratedKeys"          	value="false"/>  
+        <setting name="defaultExecutorType"       	value="REUSE"/>
+        <setting name="mapUnderscoreToCamelCase" 	value="true" />
+        <setting name="callSettersOnNulls" 			value="true"/>
+	</settings>
+    
+    <typeAliases>
+    	<typeAlias type="com.anchordata.webframework.base.util.DataMap" alias="DataMap" />
+    	
+    	<typeAlias type="com.anchordata.webframework.service.commonCode.CommonCodeVO" alias="CommonCodeVO" />
+    	<typeAlias type="com.anchordata.webframework.service.main.MainVO" alias="MainVO" />
+    	<typeAlias type="com.anchordata.webframework.service.member.MemberVO" alias="MemberVO" />
+    	<typeAlias type="com.anchordata.webframework.service.member.ExpertVO" alias="ExpertVO" />
+    	<typeAlias type="com.anchordata.webframework.service.member.CommissionerVO" alias="CommissionerVO" />
+    	<typeAlias type="com.anchordata.webframework.service.member.CommissionerEvaluationItemVO" alias="CommissionerEvaluationItemVO" />
+    	<typeAlias type="com.anchordata.webframework.service.member.ManagerVO" alias="ManagerVO" />
+    	<typeAlias type="com.anchordata.webframework.service.notice.NoticeVO" alias="NoticeVO" />
+    	<typeAlias type="com.anchordata.webframework.service.uploadFile.UploadFileVO" alias="UploadFileVO" />
+    	<typeAlias type="com.anchordata.webframework.service.announcement.AnnouncementVO" alias="AnnouncementVO" />
+    	<typeAlias type="com.anchordata.webframework.service.announcement.AnnouncementExtVO" alias="AnnouncementExtVO" />
+    	<typeAlias type="com.anchordata.webframework.service.announcement.AnnouncementCheckListVO" alias="AnnouncementCheckListVO" />
+    	<typeAlias type="com.anchordata.webframework.service.institution.InstitutionVO" alias="InstitutionVO" />
+    	<typeAlias type="com.anchordata.webframework.service.reception.ReceptionVO" alias="ReceptionVO" />
+    	<typeAlias type="com.anchordata.webframework.service.reception.ReceptionFileVO" alias="ReceptionFileVO" />
+    	<typeAlias type="com.anchordata.webframework.service.reception.ReceptionExpertVO" alias="ReceptionExpertVO" />
+    	<typeAlias type="com.anchordata.webframework.service.reception.ReceptionCheckListVO" alias="ReceptionCheckListVO" />
+    	<typeAlias type="com.anchordata.webframework.service.emailSMS.emailSMSVO" alias="emailSMSVO" />
+    	<typeAlias type="com.anchordata.webframework.service.evaluation.EvaluationVO" alias="EvaluationVO" />
+    	<typeAlias type="com.anchordata.webframework.service.evaluation.EvaluationCommissionerVO" alias="EvaluationCommissionerVO" />
+    	<typeAlias type="com.anchordata.webframework.service.evaluation.EvaluationItemVO" alias="EvaluationItemVO" />
+    	<typeAlias type="com.anchordata.webframework.service.agreement.AgreementVO" alias="AgreementVO" />
+    	<typeAlias type="com.anchordata.webframework.service.agreement.AgreementResearcherVO" alias="AgreementResearcherVO" />
+    	<typeAlias type="com.anchordata.webframework.service.agreement.AgreementFundDetailVO" alias="AgreementFundDetailVO" />
+    	<typeAlias type="com.anchordata.webframework.service.execution.ExecutionVO" alias="ExecutionVO" />
+    	<typeAlias type="com.anchordata.webframework.service.calculation.CalculationVO" alias="CalculationVO" />
+    	<typeAlias type="com.anchordata.webframework.service.calculation.CalculationFundDetailVO" alias="CalculationFundDetailVO" />
+    	<typeAlias type="com.anchordata.webframework.service.homeContent.HomeContentVO" alias="HomeContentVO" />
+    	<typeAlias type="com.anchordata.webframework.service.homeBoard.HomeBoardVO" alias="HomeBoardVO" />
+    	<typeAlias type="com.anchordata.webframework.service.statistics.StatisticsVO" alias="StatisticsVO" />
+    	
+    	
+    	<typeAlias type="com.anchordata.webframework.service.util.UtilAdministrativeDistrictVO" alias="UtilAdministrativeDistrictVO" />
+    </typeAliases>
+	
+    <mappers>     	
+    	<mapper resource="mapper/com.anchordata.webframework.common.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.commonCode.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.main.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.member.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.evaluation.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.expert.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.notice.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.uploadFile.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.announcement.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.institution.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.reception.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.emailSMS.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.commissioner.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.manager.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.agreement.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.execution.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.calculation.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.homeContent.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.homeBoard.xml" />
+    	<mapper resource="mapper/com.anchordata.webframework.statistics.xml" />
+    	
+    	
+    	<mapper resource="mapper/com.anchordata.webframework.util.xml" />
+
+    	
+    	
+	</mappers>
+
+</configuration>

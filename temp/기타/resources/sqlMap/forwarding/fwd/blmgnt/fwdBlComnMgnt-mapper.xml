@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.blmgnt.fwdBlComnMgnt"> 
+
+    <!-- HBL선적마감저장 -->
+    <update id="updateHblShipmtClos">
+	    /*fwd.blmgnt.fwdBlComnMgnt.updateHblShipmtClos*/
+	    UPDATE TB_FWD_BL A
+	       SET A.ONBR_CLOS_YN = #{onbrClosYn}
+	          ,A.WGT_CLOS_YN = CASE WHEN (SELECT CASE WHEN COUNT(1) = 0 THEN 'N' ELSE 'Y' END
+	                                        FROM TB_FWD_BL_CST_EXPND X
+	                                       WHERE X.BL_ID = A.BL_ID
+	                                         AND X.DEL_YN = 'N'
+	                                         AND X.POSTOFFICE_YN = 'Y') = 'Y' THEN #{onbrClosYn}
+	                                ELSE A.WGT_CLOS_YN
+	                           END        
+	          ,A.ARR_CLOS_YN = CASE WHEN (SELECT CASE WHEN COUNT(1) = 0 THEN 'N' ELSE 'Y' END
+	                                        FROM TB_SMT_ORD X
+	                                       WHERE X.SMT_NO = A.SMT_NO
+	                                         AND X.ORD_SPR_CD = '50'
+	                                         AND X.DEL_YN = 'N') = 'Y' THEN #{onbrClosYn}
+	                                ELSE A.ARR_CLOS_YN
+	                           END                  
+	          ,A.UPD_DT = NOW()
+	          ,A.UPDR_ID = #{userId}
+	     WHERE A.BL_ID = #{blId}
+    </update>
+    
+    <select id="selectStrNumFormat" parameterType="dataItem" resultType="dataItem">
+        /* fwd.blmgnt.fwdBlComnMgnt.selectStrNumFormat */
+        SELECT TRIM(FORMAT(#{num}, #{strFormat})) AS NUM_STR
+    </select>
+    
+    <!-- IBL공통관리Mgr.BL 상태 리스트 -->
+    <select id="selectBlStatInfoList" parameterType="dataItem" resultType="dataItem">
+        /* fwd.blmgnt.fwd.blmgnt.fwdBlComnMgnt.selectBlStatInfoList */
+        WITH TEMP_HBL AS (
+                SELECT  A.BL_ID 
+			        ,(SELECT IF (COUNT(1)=0, 'N', IF(A.EXCT_SPR_CD='EX', 'N', 'Y') )  
+			             FROM   TB_SMT_INTG_TASK_DEPT X
+			             WHERE  X.EO_NO = A.EO_NO
+			             AND    X.CST_BL_ID = A.BL_ID
+			             AND    X.LOCL_PTNR_YN = 'Y'
+			             AND    X.EXCT_BIZPTNR_CD = 'X100'
+			             AND    X.TASK_SPR_CD = 'EXP') AS EXP_LOCL_PTNR_YN
+			           ,B.ORD_SPR_CD 
+			    FROM    TB_FWD_BL A
+			           ,TB_SMT_ORD B
+			    WHERE   A.BL_ID = #{blId}
+			    AND     A.DEL_YN = 'N'
+			    AND     A.SMT_NO = B.SMT_NO
+			    AND     B.DEL_YN = 'N')
+			    SELECT  #{idType} AS ID_TYPE
+			           ,#{soNo} AS SO_NO
+			           ,#{eoNo} AS EO_NO
+			           ,#{blId} AS BL_ID
+			           ,#{closYn} AS CLOS_YN
+			           ,#{statusRegDt} AS STATUS_REG_DT
+			           ,#{rstrId} AS RSTR_ID
+			           ,#{linkBlNo} AS LINK_BL_NO
+			           ,CASE WHEN A.EXP_LOCL_PTNR_YN = 'Y' THEN '300'
+			                 WHEN A.ORD_SPR_CD = '50' THEN '320'
+			            END AS STAT_CD
+			           ,CASE WHEN A.EXP_LOCL_PTNR_YN = 'Y' AND #{closYn} = 'Y' THEN 1
+			                 WHEN A.EXP_LOCL_PTNR_YN = 'Y' AND #{closYn} = 'N' THEN 2
+			                 WHEN A.ORD_SPR_CD = '50' AND #{closYn} = 'Y' THEN 2
+			                 WHEN A.ORD_SPR_CD = '50' AND #{closYn} = 'N' THEN 1
+			            END AS ROW_NUM
+			    FROM    TEMP_HBL A
+			    WHERE   (A.EXP_LOCL_PTNR_YN = 'Y' OR A.ORD_SPR_CD = '50')
+			    UNION 
+			    SELECT  #{idType} AS ID_TYPE
+			           ,#{soNo} AS SO_NO
+			           ,#{eoNo} AS EO_NO
+			           ,#{blId} AS BL_ID
+			           ,#{closYn} AS CLOS_YN
+			           ,#{statusRegDt} AS STATUS_REG_DT
+			           ,#{rstrId} AS RSTR_ID
+			           ,#{linkBlNo} AS LINK_BL_NO
+			           ,#{statCd} AS STAT_CD           
+			           ,CASE WHEN EXP_LOCL_PTNR_YN = 'Y' AND #{closYn} = 'Y' THEN 2
+			                 WHEN EXP_LOCL_PTNR_YN = 'Y' AND #{closYn} = 'N' THEN 1
+			                 WHEN ORD_SPR_CD = '50' AND #{closYn} = 'Y' THEN 1
+			                 WHEN ORD_SPR_CD = '50' AND #{closYn} = 'N' THEN 2
+			                 ELSE 1
+			            END AS ROW_NUM
+			     FROM   TEMP_HBL
+			     ORDER BY ROW_NUM
+    </select>
+    
+    <!-- IBL공통관리Mgr.BL 상태 이력등록 -->
+    <insert id="insertBlStatHist" parameterType="dataItem">
+        /* fwd.blmgnt.fwdBlComnMgnt.insertBlStatHist */
+	    INSERT INTO TB_FWD_INTG_STEP_HIS
+                ( EXCT_STEP_SEQ              /* 실행단계일련번호 */
+			      , SMT_NO                      /* SO번호           */
+			      , EO_NO                      /* EO번호           */
+			      , BL_ID                      /* BLID             */
+			      , STAT_CD                    /* 상태코드         */
+			      , CLOS_YN                    /* 마감여부         */
+			      , REG_DT                     /* 등록일시         */
+			      , RSTR_ID                    /* 등록자ID         */
+			      , LINK_BL_NO                 /* 연결BL번호*/
+	            )                   
+	    VALUES
+			    ( #{exctStepSeq}
+			     ,#{soNo}
+			     ,#{eoNo}
+			     ,#{blId}
+			     ,#{statCd}
+			     ,#{closYn}
+			     ,CASE WHEN LENGTH(#{statusRegDt}) = 8 THEN DATE_FORMAT(#{statusRegDt}, '%Y%m%d')
+			           ELSE NOW() END
+			     ,#{rstrId}
+			     ,#{linkBlNo}
+			    ) 
+    </insert>
+    
+    <!-- IBL공통관리Mgr.법인약어명조회 -->
+    <select id="selectCorpAcrnNm" parameterType="dataItem" resultType="dataItem">
+        /* fwd.blmgnt.fwdBlComnMgnt.selectCorpAcrnNm */
+        SELECT CORP_ACRN_NM2 AS CORP_ACRN_NM
+        FROM   TB_COM_CORP  
+        WHERE  CORP_CD = #{corpCd}
+    </select>
+    
+    
+    <!-- IBL공통관리Mgr.EDMSMETA변경요청등록 -->
+    <insert id="insertEdmsMETAChgRqst" parameterType="dataItem">
+        /* fwd.blmgnt.fwdBlComnMgnt.insertEdmsMETAChgRqst */
+    </insert>
+    
+    
+</mapper>

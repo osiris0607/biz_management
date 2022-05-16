@@ -1,0 +1,1053 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.reception">
+
+	<resultMap id="reception" type="ReceptionVO">
+		<result property ="reception_id"							column="RECEPTION_ID"	/>
+		<result property ="reception_reg_number"					column="RECEPTION_REG_NUMBER"	/>
+		<result property ="reception_status"						column="RECEPTION_STATUS"	/>
+		<result property ="announcement_id"							column="ANNOUNCEMENT_ID"	/>
+		<result property ="announcement_title"						column="ANNOUNCEMENT_TITLE"	/>
+		<result property ="announcement_type"						column="ANNOUNCEMENT_TYPE"	/>
+		<result property ="announcement_type_name"					column="ANNOUNCEMENT_TYPE_NAME"	/>
+		<result property ="announcement_business_name"				column="ANNOUNCEMENT_BUSINESS_NAME"	/>
+		<result property ="member_id"								column="MEMBER_ID"	/>
+		<result property ="institution_reg_number"					column="INSTITUTION_REG_NUMBER"	/>
+		<result property ="institution_name"						column="INSTITUTION_NAME"	/>
+		<result property ="institution_address"						column="INSTITUTION_ADDRESS"	/>
+		<result property ="institution_address_detail"				column="INSTITUTION_ADDRESS_DETAIL"	/>
+		<result property ="institution_phone"						column="INSTITUTION_PHONE"	/>
+		<result property ="institution_owner_name"					column="INSTITUTION_OWNER_NAME"	/>
+		<result property ="institution_industry"					column="INSTITUTION_INDUSTRY"	/>
+		<result property ="institution_business"					column="INSTITUTION_BUSINESS"	/>
+		<result property ="institution_foundataion_date"			column="INSTITUTION_FOUNDATAION_DATE"	/>
+		<result property ="institution_foundataion_type"			column="INSTITUTION_FOUNDATAION_TYPE"	/>
+		<result property ="institution_classification"				column="INSTITUTION_CLASSIFICATION"	/>
+		<result property ="institution_type"						column="INSTITUTION_TYPE"	/>
+		<result property ="institution_laboratory_yn"				column="INSTITUTION_LABORATORY_YN"	/>
+		<result property ="institution_employee_count"				column="INSTITUTION_EMPLOYEE_COUNT"	/>
+		<result property ="institution_total_sales"					column="INSTITUTION_TOTAL_SALES"	/>
+		<result property ="institution_capital_1"					column="INSTITUTION_CAPITAL_1"	/>
+		<result property ="institution_capital_2"					column="INSTITUTION_CAPITAL_2"	/>
+		<result property ="institution_capital_3"					column="INSTITUTION_CAPITAL_3"	/>
+		<result property ="researcher_name"							column="RESEARCHER_NAME"	/>
+		<result property ="researcher_mobile_phone"					column="RESEARCHER_MOBILE_PHONE"	/>
+		<result property ="researcher_email"						column="RESEARCHER_EMAIL"	/>
+		<result property ="researcher_address"						column="RESEARCHER_ADDRESS"	/>
+		<result property ="researcher_address_detail"				column="RESEARCHER_ADDRESS_DETAIL"	/>
+		<result property ="researcher_institution_name"				column="RESEARCHER_INSTITUTION_NAME"	/>
+		<result property ="researcher_institution_department"		column="RESEARCHER_INSTITUTION_DEPARTMENT"	/>
+		<result property ="researcher_institution_position"			column="RESEARCHER_INSTITUTION_POSITION"	/>
+		<result property ="tech_consulting_type"					column="TECH_CONSULTING_TYPE"	/>
+		<result property ="tech_consulting_campus"					column="TECH_CONSULTING_CAMPUS"	/>
+		<result property ="tech_consulting_large"					column="TECH_CONSULTING_LARGE"	/>
+		<result property ="tech_consulting_middle"					column="TECH_CONSULTING_MIDDLE"	/>
+		<result property ="tech_consulting_small"					column="TECH_CONSULTING_SMALL"	/>
+		<result property ="tech_consulting_4th_industry"			column="TECH_CONSULTING_4TH_INDUSTRY"	/>
+		<result property ="tech_consulting_4th_industry_name"		column="TECH_CONSULTING_4TH_INDUSTRY_NAME"	/>
+		<result property ="tech_consulting_purpose"					column="TECH_CONSULTING_PURPOSE"	/>
+		<result property ="tech_consulting_purpose_etc"				column="TECH_CONSULTING_PURPOSE_ETC"	/>
+		<result property ="tech_consulting_take_yn"					column="TECH_CONSULTING_TAKE_YN"	/>
+		<result property ="tech_info_name"							column="TECH_INFO_NAME"	/>
+		<result property ="tech_info_description"					column="TECH_INFO_DESCRIPTION"	/>
+		<result property ="tech_info_problems"						column="TECH_INFO_PROBLEMS"	/>
+		<result property ="tech_info_consulting_request"			column="TECH_INFO_CONSULTING_REQUEST"	/>
+		<result property ="tech_info_rnd_description"				column="TECH_INFO_RND_DESCRIPTION"	/>
+		<result property ="tech_info_expert_request"				column="TECH_INFO_EXPERT_REQUEST"	/>
+		<result property ="tech_info_upload_file_id"				column="TECH_INFO_UPLOAD_FILE_ID"	/>
+		<result property ="tech_info_market_report"					column="TECH_INFO_MARKET_REPORT"	/>
+		<result property ="tech_info_upload_file_name"				column="TECH_INFO_UPLOAD_FILE_NAME"	/>
+		<result property ="tech_info_large"							column="TECH_INFO_LARGE"	/>
+		<result property ="tech_info_middle"						column="TECH_INFO_MIDDLE"	/>
+		<result property ="tech_info_small"							column="TECH_INFO_SMALL"	/>
+		<result property ="tech_info_feature"						column="TECH_INFO_FEATURE"	/>
+		<result property ="tech_info_effect"						column="TECH_INFO_EFFECT"	/>
+		<result property ="tech_info_area"							column="TECH_INFO_AREA"	/>
+		<result property ="tech_info_type"							column="TECH_INFO_TYPE"	/>
+		<result property ="tech_info_4th_industry"					column="TECH_INFO_4TH_INDUSTRY"	/>
+		<result property ="tech_info_4th_industry_name"				column="TECH_INFO_4TH_INDUSTRY_NAME"	/>
+		<result property ="receipt_from"							column="RECEIPT_FROM"	/>
+		<result property ="receipt_to"								column="RECEIPT_TO"	/>
+		
+		<result property ="use_yn"									column="USE_YN"	/>
+		<result property ="reg_date"								column="REG_DATE"	/>
+		<result property ="mail_send_date"							column="MAIL_SEND_DATE"	/>
+		<result property ="total_count"								column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	
+	<resultMap id="receptionExpert" type="ReceptionExpertVO">
+		<result property ="expert_id"					column="EXPERT_ID"	/>
+		<result property ="reception_id"				column="RECEPTION_ID"	/>
+		<result property ="member_id"					column="MEMBER_ID"	/>
+		<result property ="national_science"			column="NATIONAL_SCIENCE"	/>
+		<result property ="research"					column="RESEARCH"	/>
+		<result property ="name"						column="NAME"	/>
+		<result property ="institution_name"			column="INSTITUTION_NAME"	/>
+		<result property ="institution_department"		column="INSTITUTION_DEPARTMENT"	/>
+		<result property ="mobile_phone"				column="MOBILE_PHONE"	/>
+		<result property ="email"						column="EMAIL"	/>
+		<result property ="participation_type"			column="PARTICIPATION_TYPE"	/>
+		<result property ="participation_name"			column="PARTICIPATION_NAME"	/>
+		<result property ="choiced_yn"					column="CHOICED_YN"	/>
+		<result property ="priority"					column="PRIORITY"	/>
+	</resultMap>
+	
+	<resultMap id="receptionFile" type="ReceptionFileVO">
+		<result property ="relative_id"				column="RELATIVE_ID"	/>
+		<result property ="reception_id"			column="RECEPTION_ID"	/>
+		<result property ="announcement_id"			column="ANNOUNCEMENT_ID"	/>
+		<result property ="extension_id"			column="EXTENSION_ID"	/>
+		<result property ="file_id"					column="FILE_ID"	/>
+		<result property ="file_name"				column="FILE_NAME"	/>
+	</resultMap>
+	
+	 
+ 	<resultMap id="receptionCheckList" type="ReceptionCheckListVO">
+		<result property ="reception_check_id"			column="RECEPTION_CHECK_ID"	/>
+		<result property ="announcement_check_id"		column="ANNOUNCEMENT_CHECK_ID"	/>
+		<result property ="reception_id"				column="RECEPTION_ID"	/>
+		<result property ="reception_check_value"		column="RECEPTION_CHECK_VALUE"	/>
+	</resultMap>
+	
+	
+	<insert id="insertInfo" useGeneratedKeys="true" keyProperty="reception_id" parameterType="ReceptionVO">
+		INSERT INTO RECEPTION ( 
+			RECEPTION_STATUS
+			,	ANNOUNCEMENT_ID
+			,	ANNOUNCEMENT_TYPE
+			,	MEMBER_ID
+			,	INSTITUTION_REG_NUMBER
+			,	INSTITUTION_NAME
+			,	INSTITUTION_ADDRESS
+			,	INSTITUTION_ADDRESS_DETAIL
+			,	INSTITUTION_PHONE
+			,	INSTITUTION_OWNER_NAME
+			,	INSTITUTION_INDUSTRY
+			,	INSTITUTION_BUSINESS
+			,	INSTITUTION_FOUNDATAION_DATE
+			,	INSTITUTION_FOUNDATAION_TYPE
+			,	INSTITUTION_CLASSIFICATION
+			,	INSTITUTION_TYPE
+			,	INSTITUTION_LABORATORY_YN
+			,	INSTITUTION_EMPLOYEE_COUNT
+			,	INSTITUTION_TOTAL_SALES
+			,	INSTITUTION_CAPITAL_1
+			,	INSTITUTION_CAPITAL_2
+			,	INSTITUTION_CAPITAL_3
+			,	RESEARCHER_NAME
+			,	RESEARCHER_MOBILE_PHONE
+			,	RESEARCHER_EMAIL
+			,	RESEARCHER_ADDRESS
+			,	RESEARCHER_ADDRESS_DETAIL
+			,	RESEARCHER_INSTITUTION_NAME
+			,	RESEARCHER_INSTITUTION_DEPARTMENT
+			,	RESEARCHER_INSTITUTION_POSITION
+			,	TECH_CONSULTING_TYPE
+			,	TECH_CONSULTING_CAMPUS
+			,	TECH_CONSULTING_LARGE
+			,	TECH_CONSULTING_MIDDLE
+			,	TECH_CONSULTING_SMALL
+			,	TECH_CONSULTING_4TH_INDUSTRY
+			,	TECH_CONSULTING_PURPOSE
+			,	TECH_CONSULTING_PURPOSE_ETC
+			,	TECH_CONSULTING_TAKE_YN
+			,	TECH_INFO_NAME
+			,	TECH_INFO_DESCRIPTION
+			,	TECH_INFO_PROBLEMS
+			,	TECH_INFO_CONSULTING_REQUEST
+			,	TECH_INFO_RND_DESCRIPTION
+			,	TECH_INFO_EXPERT_REQUEST
+			,	TECH_INFO_MARKET_REPORT
+			,	TECH_INFO_UPLOAD_FILE_ID
+			,	TECH_INFO_LARGE
+			,	TECH_INFO_MIDDLE
+			,	TECH_INFO_SMALL
+			,	TECH_INFO_FEATURE
+			,	TECH_INFO_EFFECT
+			,	TECH_INFO_AREA
+			,	TECH_INFO_TYPE
+			,	TECH_INFO_4TH_INDUSTRY
+		) 
+		VALUES (
+			#{reception_status} 
+			,	#{announcement_id}
+			,	#{announcement_type} 
+			,	#{member_id}
+			,	#{institution_reg_number}
+			,	#{institution_name}
+			,	#{institution_address}
+			,	#{institution_address_detail}
+			,	#{institution_phone}
+			,	#{institution_owner_name}
+			,	#{institution_industry}
+			,	#{institution_business}
+			,	#{institution_foundataion_date}
+			,	#{institution_foundataion_type}
+			,	#{institution_classification}
+			,	#{institution_type}
+			,	#{institution_laboratory_yn}
+			,	#{institution_employee_count}
+			,	#{institution_total_sales}
+			,	#{institution_capital_1}
+			,	#{institution_capital_2}
+			,	#{institution_capital_3}
+			,	#{researcher_name}
+			,	#{researcher_mobile_phone}
+			,	#{researcher_email}
+			,	#{researcher_address}
+			,	#{researcher_address_detail}
+			,	#{researcher_institution_name}
+			,	#{researcher_institution_department}
+			,	#{researcher_institution_position}
+			,	#{tech_consulting_type}
+			,	#{tech_consulting_campus}
+			,	#{tech_consulting_large}
+			,	#{tech_consulting_middle}
+			,	#{tech_consulting_small}
+			,	#{tech_consulting_4th_industry}
+			,	#{tech_consulting_purpose}
+			,	#{tech_consulting_purpose_etc}
+			,	#{tech_consulting_take_yn}
+			,	#{tech_info_name}
+			,	#{tech_info_description}
+			,	#{tech_info_problems}
+			,	#{tech_info_consulting_request}
+			,	#{tech_info_rnd_description}
+			,	#{tech_info_expert_request}
+			,	#{tech_info_market_report}
+			,	#{tech_info_upload_file_id}
+			,	#{tech_info_large}
+			,	#{tech_info_middle}
+			,	#{tech_info_small}
+			,	#{tech_info_feature}
+			,	#{tech_info_effect}
+			,	#{tech_info_area}
+			,	#{tech_info_type}
+			,	#{tech_info_4th_industry}
+		);
+	</insert>
+	
+ 	<update id="updateInfo" parameterType="ReceptionVO">
+		UPDATE RECEPTION SET   
+			RECEPTION_STATUS = #{reception_status}
+			,	INSTITUTION_REG_NUMBER = #{institution_reg_number}
+			,	INSTITUTION_NAME = #{institution_name}
+			,	INSTITUTION_ADDRESS = #{institution_address}
+			,	INSTITUTION_ADDRESS_DETAIL = #{institution_address_detail}
+			,	INSTITUTION_PHONE = #{institution_phone}
+			,	INSTITUTION_OWNER_NAME = #{institution_owner_name}
+			,	INSTITUTION_INDUSTRY = #{institution_industry}
+			,	INSTITUTION_BUSINESS = #{institution_business}
+			,	INSTITUTION_FOUNDATAION_DATE = #{institution_foundataion_date}
+			,	INSTITUTION_FOUNDATAION_TYPE = #{institution_foundataion_type}
+			,	INSTITUTION_CLASSIFICATION = #{institution_classification}
+			,	INSTITUTION_TYPE = #{institution_type}
+			,	INSTITUTION_LABORATORY_YN = #{institution_laboratory_yn}
+			,	INSTITUTION_EMPLOYEE_COUNT = #{institution_employee_count}
+			,	INSTITUTION_TOTAL_SALES = #{institution_total_sales}
+			,	INSTITUTION_CAPITAL_1 = #{institution_capital_1}
+			,	INSTITUTION_CAPITAL_2 = #{institution_capital_2}
+			,	INSTITUTION_CAPITAL_3 = #{institution_capital_3}
+			,	RESEARCHER_NAME = #{researcher_name}
+			,	RESEARCHER_MOBILE_PHONE = #{researcher_mobile_phone}
+			,	RESEARCHER_EMAIL = #{researcher_email}
+			,	RESEARCHER_ADDRESS = #{researcher_address}
+			,	RESEARCHER_ADDRESS_DETAIL = #{researcher_address_detail}
+			,	RESEARCHER_INSTITUTION_NAME = #{researcher_institution_name}
+			,	RESEARCHER_INSTITUTION_DEPARTMENT = #{researcher_institution_department}
+			,	RESEARCHER_INSTITUTION_POSITION = #{researcher_institution_position}
+			,	TECH_CONSULTING_TYPE = #{tech_consulting_type}
+			,	TECH_CONSULTING_CAMPUS = #{tech_consulting_campus}
+			,	TECH_CONSULTING_LARGE = #{tech_consulting_large}
+			,	TECH_CONSULTING_MIDDLE = #{tech_consulting_middle}
+			,	TECH_CONSULTING_SMALL = #{tech_consulting_small}
+			,	TECH_CONSULTING_4TH_INDUSTRY = #{tech_consulting_4th_industry}
+			,	TECH_CONSULTING_PURPOSE = #{tech_consulting_purpose}
+			,	TECH_CONSULTING_PURPOSE_ETC = #{tech_consulting_purpose_etc}
+			,	TECH_CONSULTING_TAKE_YN = #{tech_consulting_take_yn}
+			,	TECH_INFO_NAME = #{tech_info_name}
+			,	TECH_INFO_DESCRIPTION = #{tech_info_description}
+			,	TECH_INFO_PROBLEMS = #{tech_info_problems}
+			,	TECH_INFO_CONSULTING_REQUEST = #{tech_info_consulting_request}
+			,	TECH_INFO_RND_DESCRIPTION = #{tech_info_rnd_description}
+			,	TECH_INFO_EXPERT_REQUEST = #{tech_info_expert_request}
+			,	TECH_INFO_PROBLEMS = #{tech_info_problems}
+			, 	TECH_INFO_MARKET_REPORT = #{tech_info_market_report} 
+			<if test='tech_info_upload_file_id != null and tech_info_upload_file_id != "" '>
+			,	TECH_INFO_UPLOAD_FILE_ID = #{tech_info_upload_file_id}
+			</if>
+			,	TECH_INFO_LARGE = #{tech_info_large}
+			,	TECH_INFO_MIDDLE = #{tech_info_middle}
+			,	TECH_INFO_SMALL = #{tech_info_small}
+			,	TECH_INFO_FEATURE = #{tech_info_feature}
+			,	TECH_INFO_EFFECT = #{tech_info_effect}
+			,	TECH_INFO_AREA = #{tech_info_area}
+			,	TECH_INFO_TYPE = #{tech_info_type}
+			,	TECH_INFO_4TH_INDUSTRY = #{tech_info_4th_industry}
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+	</update>	
+	
+	
+	<insert id="insertRelativeFileInfo" parameterType="ReceptionVO">
+		INSERT INTO RECEPTION_FILE_RELATIVE ( 
+			RECEPTION_ID
+			,	ANNOUNCEMENT_ID
+			,	EXTENSION_ID
+			,	FILE_ID
+			,	FILE_NAME
+		) 
+		VALUES ( 
+			#{reception_id}
+			,	#{announcement_id}
+			,	#{submit_file_ext_id}
+			,	#{submit_file_id}
+			,	#{submit_file_name}
+		);
+	</insert>
+	
+	<insert id="insertExpertInfo" parameterType="ReceptionVO">
+		INSERT INTO RECEPTION_EXPERT ( 
+			RECEPTION_ID
+			,	MEMBER_ID
+			,	NATIONAL_SCIENCE
+			,	RESEARCH
+			,	NAME
+			,	INSTITUTION_NAME
+			,	INSTITUTION_DEPARTMENT
+			,	MOBILE_PHONE
+			,	EMAIL
+		) 
+		VALUES 
+			<foreach collection="choiced_expert_list" item="item" separator=" , " >
+	        	(	
+	        		${reception_id}
+	        		,	'${item.member_id}'
+	        		,	'${item.national_science}'
+	        		,	'${item.research}'
+	        		,	'${item.name}'
+	        		,	'${item.institution_name}'
+	        		,	'${item.institution_department}'
+	        		,	'${item.mobile_phone}'
+	        		,	'${item.email}'
+        		 )
+			</foreach>
+	</insert>
+	
+	<insert id="insertCheckListInfo" parameterType="ReceptionVO">
+		INSERT INTO RECEPTION_CHECKLIST ( 
+			RECEPTION_ID
+			,	ANNOUNCEMENT_CHECK_ID
+			,	RECEPTION_CHECK_VALUE
+		) 
+		VALUES 
+			<foreach collection="self_check_list" item="item" separator=" , " >
+	        	(	
+	        		${reception_id}
+	        		,	'${item.announcement_check_id}'
+	        		,	'${item.reception_check_value}'
+        		 )
+			</foreach>
+	</insert>
+	
+	<select id="selectMemberSearchPagingList" parameterType="DataMap"  resultMap="reception">
+		<include refid="common.pagingPre"/>
+		SELECT
+			RECEPTION_ID
+			,	RECEPTION_REG_NUMBER
+			,	RECEPTION_STATUS
+			,	ANNOUNCEMENT_ID
+			,	(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_TITLE
+			,	ANNOUNCEMENT_TYPE
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.ANNOUNCEMENT_TYPE ) AS ANNOUNCEMENT_TYPE_NAME
+			,	(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	MEMBER_ID
+			,	INSTITUTION_REG_NUMBER
+			,	INSTITUTION_NAME
+			,	INSTITUTION_ADDRESS
+			,	INSTITUTION_ADDRESS_DETAIL
+			,	INSTITUTION_PHONE
+			,	INSTITUTION_OWNER_NAME
+			,	INSTITUTION_INDUSTRY
+			,	INSTITUTION_BUSINESS
+			,	INSTITUTION_FOUNDATAION_DATE
+			,	INSTITUTION_FOUNDATAION_TYPE
+			,	INSTITUTION_CLASSIFICATION
+			,	INSTITUTION_TYPE
+			,	INSTITUTION_LABORATORY_YN
+			,	INSTITUTION_EMPLOYEE_COUNT
+			,	INSTITUTION_TOTAL_SALES
+			,	INSTITUTION_CAPITAL_1
+			,	INSTITUTION_CAPITAL_2
+			,	INSTITUTION_CAPITAL_3
+			,	RESEARCHER_NAME
+			,	RESEARCHER_MOBILE_PHONE
+			,	RESEARCHER_EMAIL
+			,	RESEARCHER_ADDRESS
+			,	RESEARCHER_ADDRESS_DETAIL
+			,	RESEARCHER_INSTITUTION_NAME
+			,	RESEARCHER_INSTITUTION_DEPARTMENT
+			,	RESEARCHER_INSTITUTION_POSITION
+			,	TECH_CONSULTING_TYPE
+			,	TECH_CONSULTING_CAMPUS
+			,	TECH_CONSULTING_LARGE
+			,	TECH_CONSULTING_MIDDLE
+			,	TECH_CONSULTING_SMALL
+			,	TECH_CONSULTING_4TH_INDUSTRY
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_CONSULTING_4TH_INDUSTRY ) AS TECH_CONSULTING_4TH_INDUSTRY_NAME
+			,	TECH_CONSULTING_PURPOSE
+			,	TECH_CONSULTING_PURPOSE_ETC
+			,	TECH_CONSULTING_TAKE_YN
+			,	TECH_INFO_NAME
+			,	TECH_INFO_DESCRIPTION
+			,	TECH_INFO_PROBLEMS
+			,	TECH_INFO_CONSULTING_REQUEST
+			,	TECH_INFO_RND_DESCRIPTION
+			,	TECH_INFO_EXPERT_REQUEST
+			,	TECH_INFO_MARKET_REPORT
+			,	TECH_INFO_UPLOAD_FILE_ID
+			,	TECH_INFO_LARGE
+			,	TECH_INFO_MIDDLE
+			,	TECH_INFO_SMALL
+			,	TECH_INFO_FEATURE
+			,	TECH_INFO_EFFECT
+			, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	MAIL_SEND_DATE
+			,	TECH_INFO_AREA 
+			,	TECH_INFO_TYPE 
+			,	TECH_INFO_4TH_INDUSTRY 
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_INFO_4TH_INDUSTRY ) AS TECH_INFO_4TH_INDUSTRY_NAME
+		FROM
+			RECEPTION A
+		WHERE
+			USE_YN = 'Y'
+			AND MEMBER_ID = #{member_id}
+			<if test='announcement_type != null and announcement_type != "" '>
+				<choose>
+				    <when test='announcement_type == "D0000001" or announcement_type == "D0000002" '>
+				    	AND (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE = 'D0000002')
+				    </when>
+				    <otherwise>
+				      	AND ANNOUNCEMENT_TYPE = #{announcement_type}
+				    </otherwise>
+			  	</choose>
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<select id="selectAdminSearchPagingList" parameterType="DataMap"  resultMap="reception">
+		<include refid="common.pagingPre"/>
+		SELECT
+			RECEPTION_ID
+			,	RECEPTION_REG_NUMBER
+			,	RECEPTION_STATUS
+			,	ANNOUNCEMENT_ID
+			,	(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_TITLE
+			,	ANNOUNCEMENT_TYPE
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.ANNOUNCEMENT_TYPE ) AS ANNOUNCEMENT_TYPE_NAME
+			,	(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	MEMBER_ID
+			,	INSTITUTION_REG_NUMBER
+			,	INSTITUTION_NAME
+			,	INSTITUTION_ADDRESS
+			,	INSTITUTION_ADDRESS_DETAIL
+			,	INSTITUTION_PHONE
+			,	INSTITUTION_OWNER_NAME
+			,	INSTITUTION_INDUSTRY
+			,	INSTITUTION_BUSINESS
+			,	INSTITUTION_FOUNDATAION_DATE
+			,	INSTITUTION_FOUNDATAION_TYPE
+			,	INSTITUTION_CLASSIFICATION
+			,	INSTITUTION_TYPE
+			,	INSTITUTION_LABORATORY_YN
+			,	INSTITUTION_EMPLOYEE_COUNT
+			,	INSTITUTION_TOTAL_SALES
+			,	INSTITUTION_CAPITAL_1
+			,	INSTITUTION_CAPITAL_2
+			,	INSTITUTION_CAPITAL_3
+			,	RESEARCHER_NAME
+			,	RESEARCHER_MOBILE_PHONE
+			,	RESEARCHER_EMAIL
+			,	RESEARCHER_ADDRESS
+			,	RESEARCHER_ADDRESS_DETAIL
+			,	RESEARCHER_INSTITUTION_NAME
+			,	RESEARCHER_INSTITUTION_DEPARTMENT
+			,	RESEARCHER_INSTITUTION_POSITION
+			,	TECH_CONSULTING_TYPE
+			,	TECH_CONSULTING_CAMPUS
+			,	TECH_CONSULTING_LARGE
+			,	TECH_CONSULTING_MIDDLE
+			,	TECH_CONSULTING_SMALL
+			,	TECH_CONSULTING_4TH_INDUSTRY
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_CONSULTING_4TH_INDUSTRY ) AS TECH_CONSULTING_4TH_INDUSTRY_NAME
+			,	TECH_CONSULTING_PURPOSE
+			,	TECH_CONSULTING_PURPOSE_ETC
+			,	TECH_CONSULTING_TAKE_YN
+			,	TECH_INFO_NAME
+			,	TECH_INFO_DESCRIPTION
+			,	TECH_INFO_PROBLEMS
+			,	TECH_INFO_CONSULTING_REQUEST
+			,	TECH_INFO_RND_DESCRIPTION
+			,	TECH_INFO_EXPERT_REQUEST
+			,	TECH_INFO_MARKET_REPORT
+			,	TECH_INFO_UPLOAD_FILE_ID
+			,	TECH_INFO_LARGE
+			,	TECH_INFO_MIDDLE
+			,	TECH_INFO_SMALL
+			,	TECH_INFO_FEATURE
+			,	TECH_INFO_EFFECT
+			, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	MAIL_SEND_DATE
+			,	TECH_INFO_AREA 
+			,	TECH_INFO_TYPE 
+			,	TECH_INFO_4TH_INDUSTRY 
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_INFO_4TH_INDUSTRY ) AS TECH_INFO_4TH_INDUSTRY_NAME
+			, 	(SELECT B.RECEIPT_TO FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS RECEIPT_TO
+			, 	(SELECT B.RECEIPT_FROM FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS RECEIPT_FROM
+		FROM
+			RECEPTION A
+		WHERE
+			USE_YN = 'Y'
+			AND RECEPTION_STATUS NOT IN ( 'D0000001', 'D0000003' )
+			<if test='announcement_type != null and announcement_type != "" '>
+				<choose>
+				    <when test='announcement_type == "D0000005" '>
+				    	AND (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE = 'D0000002')
+				    </when>
+				    <otherwise>
+				      	AND ANNOUNCEMENT_TYPE = #{announcement_type}
+				    </otherwise>
+			  	</choose>
+			</if>
+			<if test='announcement_name != null and announcement_name != "" '>
+	      		AND ANNOUNCEMENT_ID IN ( SELECT B.ANNOUNCEMENT_ID FROM ANNOUNCEMENT B WHERE B.TITLE LIKE CONCAT('%',#{announcement_name},'%')  )
+			</if>
+			<if test='reception_from_date != null and reception_from_date != "" and reception_to_date != null and reception_to_date != "" '>
+	      		AND REG_DATE <![CDATA[ >= ]]>  #{reception_from_date} AND  REG_DATE <![CDATA[ <= ]]> #{reception_to_date} 
+			</if>
+			<if test='institution_name != null and institution_name != ""'>
+	      		AND INSTITUTION_NAME LIKE CONCAT('%',#{institution_name},'%')
+			</if>
+			<if test='reception_reg_number != null and reception_reg_number != ""'>
+	      		AND RECEPTION_REG_NUMBER = #{reception_reg_number}
+			</if>
+			<if test='reception_status != null and reception_status != ""'>
+	      		AND RECEPTION_STATUS = #{reception_status}
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="selectDetail" parameterType="ReceptionVO"  resultMap="reception">
+		SELECT
+			RECEPTION_ID
+			,	RECEPTION_REG_NUMBER
+			,	RECEPTION_STATUS
+			,	ANNOUNCEMENT_ID
+			,	(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_TITLE
+			,	ANNOUNCEMENT_TYPE
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.ANNOUNCEMENT_TYPE ) AS ANNOUNCEMENT_TYPE_NAME
+			,	(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	MEMBER_ID
+			,	INSTITUTION_REG_NUMBER
+			,	INSTITUTION_NAME
+			,	INSTITUTION_ADDRESS
+			,	INSTITUTION_ADDRESS_DETAIL
+			,	INSTITUTION_PHONE
+			,	INSTITUTION_OWNER_NAME
+			,	INSTITUTION_INDUSTRY
+			,	INSTITUTION_BUSINESS
+			,	INSTITUTION_FOUNDATAION_DATE
+			,	INSTITUTION_FOUNDATAION_TYPE
+			,	INSTITUTION_CLASSIFICATION
+			,	INSTITUTION_TYPE
+			,	INSTITUTION_LABORATORY_YN
+			,	INSTITUTION_EMPLOYEE_COUNT
+			,	INSTITUTION_TOTAL_SALES
+			,	INSTITUTION_CAPITAL_1
+			,	INSTITUTION_CAPITAL_2
+			,	INSTITUTION_CAPITAL_3
+			,	RESEARCHER_NAME
+			,	RESEARCHER_MOBILE_PHONE
+			,	RESEARCHER_EMAIL
+			,	RESEARCHER_ADDRESS
+			,	RESEARCHER_ADDRESS_DETAIL
+			,	RESEARCHER_INSTITUTION_NAME
+			,	RESEARCHER_INSTITUTION_DEPARTMENT
+			,	RESEARCHER_INSTITUTION_POSITION
+			,	TECH_CONSULTING_TYPE
+			,	TECH_CONSULTING_CAMPUS
+			,	TECH_CONSULTING_LARGE
+			,	TECH_CONSULTING_MIDDLE
+			,	TECH_CONSULTING_SMALL
+			,	TECH_CONSULTING_4TH_INDUSTRY
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_CONSULTING_4TH_INDUSTRY ) AS TECH_CONSULTING_4TH_INDUSTRY_NAME
+			,	TECH_CONSULTING_PURPOSE
+			,	TECH_CONSULTING_PURPOSE_ETC
+			,	TECH_CONSULTING_TAKE_YN
+			,	TECH_INFO_NAME
+			,	TECH_INFO_DESCRIPTION
+			,	TECH_INFO_PROBLEMS
+			,	TECH_INFO_CONSULTING_REQUEST
+			,	TECH_INFO_RND_DESCRIPTION
+			,	TECH_INFO_EXPERT_REQUEST
+			,	TECH_INFO_MARKET_REPORT
+			,	TECH_INFO_UPLOAD_FILE_ID
+			,	TECH_INFO_LARGE
+			,	TECH_INFO_MIDDLE
+			,	TECH_INFO_SMALL
+			,	TECH_INFO_FEATURE
+			,	TECH_INFO_EFFECT
+			,	(SELECT B.NAME FROM UPLOAD_FILE B WHERE B.FiLE_ID = A.TECH_INFO_UPLOAD_FILE_ID ) AS TECH_INFO_UPLOAD_FILE_NAME
+			, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	MAIL_SEND_DATE
+			,	TECH_INFO_AREA 
+			,	TECH_INFO_TYPE 
+			,	TECH_INFO_4TH_INDUSTRY 
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_INFO_4TH_INDUSTRY ) AS TECH_INFO_4TH_INDUSTRY_NAME
+		FROM
+			RECEPTION A
+		WHERE
+			USE_YN = 'Y'
+			AND RECEPTION_ID = #{reception_id} 
+	</select>	
+	
+	
+	<update id="updateReceptionStatus" parameterType="ReceptionVO">
+		UPDATE RECEPTION SET   
+			RECEPTION_STATUS = #{reception_status}
+			,	UPDATE_DATE = NOW()
+			<if test='reception_status == "D0000005" '>
+				,	MAIL_SEND_DATE = NOW()
+			</if>
+			
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+	</update>
+	
+	<update id="updateReceptionComplete" parameterType="ReceptionVO">
+		UPDATE RECEPTION SET   
+			RECEPTION_STATUS = #{reception_status}
+			,	UPDATE_DATE = NOW()
+			,	RECEPTION_REG_NUMBER = #{reception_reg_number}
+			
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+	</update>	
+	
+	
+
+
+	<update id="updateExpertParticipation" parameterType="ReceptionExpertVO">
+		UPDATE RECEPTION_EXPERT SET   
+			PARTICIPATION_TYPE = #{participation_type}
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+			AND MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	<update id="updateExpertPriority" parameterType="ReceptionExpertVO">
+		UPDATE RECEPTION_EXPERT SET   
+			PRIORITY = #{priority}
+		WHERE 
+			EXPERT_ID = #{expert_id}
+	</update>
+	
+	<update id="updateExpertChoice" parameterType="ReceptionExpertVO">
+		UPDATE RECEPTION_EXPERT SET   
+			CHOICED_YN = #{choiced_yn}
+		WHERE 
+			EXPERT_ID = #{expert_id}
+	</update>
+	
+	
+	<select id="selectRelativeFileInfo" parameterType="ReceptionVO" resultMap="receptionFile">
+		SELECT
+			RELATIVE_ID
+			,	RECEPTION_ID
+			,	ANNOUNCEMENT_ID
+			,	EXTENSION_ID
+			,	FILE_ID
+			,	FILE_NAME
+		FROM
+			RECEPTION_FILE_RELATIVE
+		WHERE
+			RECEPTION_ID = #{reception_id} 
+	</select>
+	
+	<select id="selectExpertInfo" parameterType="ReceptionVO" resultMap="receptionExpert">
+		SELECT
+			EXPERT_ID
+			,	RECEPTION_ID
+			,	MEMBER_ID
+			,	NATIONAL_SCIENCE
+			,	RESEARCH
+			,	NAME
+			,	INSTITUTION_NAME
+			,	INSTITUTION_DEPARTMENT
+			,	MOBILE_PHONE
+			,	EMAIL
+			,	PARTICIPATION_TYPE
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000015' AND B.DETAIL_ID = A.PARTICIPATION_TYPE ) AS PARTICIPATION_NAME
+			,	PRIORITY
+			,	CHOICED_YN
+			
+		FROM
+			RECEPTION_EXPERT A
+		WHERE
+			RECEPTION_ID = #{reception_id} 
+		ORDER BY PRIORITY
+	</select>
+
+	<select id="selectCheckListInfo" parameterType="ReceptionVO" resultMap="receptionCheckList">
+		SELECT
+			RECEPTION_CHECK_ID
+			,	ANNOUNCEMENT_CHECK_ID
+			,	RECEPTION_ID
+			,	RECEPTION_CHECK_VALUE
+		FROM
+			RECEPTION_CHECKLIST
+		WHERE
+			RECEPTION_ID = #{reception_id} 
+	</select>
+
+	<delete id="deleteInfo" parameterType="AnnouncementVO">
+		DELETE FROM RECEPTION			
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+	</delete>
+
+
+	<delete id="deleteFileRelativeInfo" parameterType="ReceptionVO">
+		DELETE FROM RECEPTION_FILE_RELATIVE			
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+	</delete>	
+	
+	<delete id="deleteExpertInfo" parameterType="ReceptionVO">
+		DELETE FROM RECEPTION_EXPERT			
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+	</delete>	
+	
+	<delete id="deleteCheckListInfo" parameterType="ReceptionVO">
+		DELETE FROM RECEPTION_CHECKLIST			
+		WHERE 
+			RECEPTION_ID = #{reception_id}
+	</delete>	
+	
+	
+	<select id="selectExpertSearchPagingList" parameterType="DataMap"  resultMap="reception">
+		<include refid="common.pagingPre"/>
+		SELECT
+			RECEPTION_ID
+			,	RECEPTION_REG_NUMBER
+			,	RECEPTION_STATUS
+			,	ANNOUNCEMENT_ID
+			,	(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_TITLE
+			,	ANNOUNCEMENT_TYPE
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.ANNOUNCEMENT_TYPE ) AS ANNOUNCEMENT_TYPE_NAME
+			,	(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	MEMBER_ID
+			,	INSTITUTION_REG_NUMBER
+			,	INSTITUTION_NAME
+			,	INSTITUTION_ADDRESS
+			,	INSTITUTION_ADDRESS_DETAIL
+			,	INSTITUTION_PHONE
+			,	INSTITUTION_OWNER_NAME
+			,	INSTITUTION_INDUSTRY
+			,	INSTITUTION_BUSINESS
+			,	INSTITUTION_FOUNDATAION_DATE
+			,	INSTITUTION_FOUNDATAION_TYPE
+			,	INSTITUTION_CLASSIFICATION
+			,	INSTITUTION_TYPE
+			,	INSTITUTION_LABORATORY_YN
+			,	INSTITUTION_EMPLOYEE_COUNT
+			,	INSTITUTION_TOTAL_SALES
+			,	INSTITUTION_CAPITAL_1
+			,	INSTITUTION_CAPITAL_2
+			,	INSTITUTION_CAPITAL_3
+			,	RESEARCHER_NAME
+			,	RESEARCHER_MOBILE_PHONE
+			,	RESEARCHER_EMAIL
+			,	RESEARCHER_ADDRESS
+			,	RESEARCHER_ADDRESS_DETAIL
+			,	RESEARCHER_INSTITUTION_NAME
+			,	RESEARCHER_INSTITUTION_DEPARTMENT
+			,	RESEARCHER_INSTITUTION_POSITION
+			,	TECH_CONSULTING_TYPE
+			,	TECH_CONSULTING_CAMPUS
+			,	TECH_CONSULTING_LARGE
+			,	TECH_CONSULTING_MIDDLE
+			,	TECH_CONSULTING_SMALL
+			,	TECH_CONSULTING_4TH_INDUSTRY
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_CONSULTING_4TH_INDUSTRY ) AS TECH_CONSULTING_4TH_INDUSTRY_NAME
+			,	TECH_CONSULTING_PURPOSE
+			,	TECH_CONSULTING_PURPOSE_ETC
+			,	TECH_CONSULTING_TAKE_YN
+			,	TECH_INFO_NAME
+			,	TECH_INFO_DESCRIPTION
+			,	TECH_INFO_PROBLEMS
+			,	TECH_INFO_CONSULTING_REQUEST
+			,	TECH_INFO_RND_DESCRIPTION
+			,	TECH_INFO_EXPERT_REQUEST
+			,	TECH_INFO_MARKET_REPORT
+			,	TECH_INFO_UPLOAD_FILE_ID
+			,	TECH_INFO_LARGE
+			,	TECH_INFO_MIDDLE
+			,	TECH_INFO_SMALL
+			,	TECH_INFO_FEATURE
+			,	TECH_INFO_EFFECT
+			, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	MAIL_SEND_DATE
+			,	TECH_INFO_AREA 
+			,	TECH_INFO_TYPE 
+			,	TECH_INFO_4TH_INDUSTRY 
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_INFO_4TH_INDUSTRY ) AS TECH_INFO_4TH_INDUSTRY_NAME
+		FROM
+			RECEPTION A
+		WHERE
+			USE_YN = 'Y'
+			AND 
+				RECEPTION_ID IN ( SELECT RECEPTION_ID FROM RECEPTION_EXPERT WHERE MEMBER_ID = #{member_id} AND PARTICIPATION_TYPE !="D0000004")
+			<if test='reception_expert_status1 != null and reception_expert_status1 != ""  and reception_expert_status1 == "1" '>
+	      		AND RECEPTION_STATUS = 'D0000005'
+			</if>
+			<if test='reception_expert_status1 != null and reception_expert_status1 != ""  and reception_expert_status1 == "2" '>
+	      		AND RECEPTION_ID IN ( SELECT RECEPTION_ID FROM EXECUTION WHERE EXECUTION_STATUS = '수행중' )
+			</if>
+			<if test='reception_expert_status1 != null and reception_expert_status1 != ""  and reception_expert_status1 == "3" '>
+	      		AND RECEPTION_ID IN ( SELECT RECEPTION_ID FROM EXECUTION WHERE EXECUTION_STATUS = '수행완료' )
+			</if>
+			<if test='search_text != null and search_text != ""'>
+	      		AND (
+      			 		(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) LIKE CONCAT('%',#{search_text},'%')
+      			 		OR 
+      			 		(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) LIKE CONCAT('%',#{search_text},'%')
+      			 	)
+			</if>
+				
+				
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="selectReportSearchPagingList" parameterType="DataMap"  resultMap="reception">
+		<include refid="common.pagingPre"/>
+		SELECT
+			RECEPTION_ID
+			,	RECEPTION_REG_NUMBER
+			,	RECEPTION_STATUS
+			,	ANNOUNCEMENT_ID
+			,	(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_TITLE
+			,	ANNOUNCEMENT_TYPE
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.ANNOUNCEMENT_TYPE ) AS ANNOUNCEMENT_TYPE_NAME
+			,	(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	MEMBER_ID
+			,	INSTITUTION_REG_NUMBER
+			,	INSTITUTION_NAME
+			,	INSTITUTION_ADDRESS
+			,	INSTITUTION_ADDRESS_DETAIL
+			,	INSTITUTION_PHONE
+			,	INSTITUTION_OWNER_NAME
+			,	INSTITUTION_INDUSTRY
+			,	INSTITUTION_BUSINESS
+			,	INSTITUTION_FOUNDATAION_DATE
+			,	INSTITUTION_FOUNDATAION_TYPE
+			,	INSTITUTION_CLASSIFICATION
+			,	INSTITUTION_TYPE
+			,	INSTITUTION_LABORATORY_YN
+			,	INSTITUTION_EMPLOYEE_COUNT
+			,	INSTITUTION_TOTAL_SALES
+			,	INSTITUTION_CAPITAL_1
+			,	INSTITUTION_CAPITAL_2
+			,	INSTITUTION_CAPITAL_3
+			,	RESEARCHER_NAME
+			,	RESEARCHER_MOBILE_PHONE
+			,	RESEARCHER_EMAIL
+			,	RESEARCHER_ADDRESS
+			,	RESEARCHER_ADDRESS_DETAIL
+			,	RESEARCHER_INSTITUTION_NAME
+			,	RESEARCHER_INSTITUTION_DEPARTMENT
+			,	RESEARCHER_INSTITUTION_POSITION
+			,	TECH_CONSULTING_TYPE
+			,	TECH_CONSULTING_CAMPUS
+			,	TECH_CONSULTING_LARGE
+			,	TECH_CONSULTING_MIDDLE
+			,	TECH_CONSULTING_SMALL
+			,	TECH_CONSULTING_4TH_INDUSTRY
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_CONSULTING_4TH_INDUSTRY ) AS TECH_CONSULTING_4TH_INDUSTRY_NAME
+			,	TECH_CONSULTING_PURPOSE
+			,	TECH_CONSULTING_PURPOSE_ETC
+			,	TECH_CONSULTING_TAKE_YN
+			,	TECH_INFO_NAME
+			,	TECH_INFO_DESCRIPTION
+			,	TECH_INFO_PROBLEMS
+			,	TECH_INFO_CONSULTING_REQUEST
+			,	TECH_INFO_RND_DESCRIPTION
+			,	TECH_INFO_EXPERT_REQUEST
+			,	TECH_INFO_MARKET_REPORT
+			,	TECH_INFO_UPLOAD_FILE_ID
+			,	TECH_INFO_LARGE
+			,	TECH_INFO_MIDDLE
+			,	TECH_INFO_SMALL
+			,	TECH_INFO_FEATURE
+			,	TECH_INFO_EFFECT
+			, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	MAIL_SEND_DATE
+			,	TECH_INFO_AREA 
+			,	TECH_INFO_TYPE 
+			,	TECH_INFO_4TH_INDUSTRY 
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_INFO_4TH_INDUSTRY ) AS TECH_INFO_4TH_INDUSTRY_NAME
+		FROM
+			RECEPTION A
+		WHERE
+			USE_YN = 'Y'
+			AND MEMBER_ID = #{member_id}
+			AND RECEPTION_STATUS = 'D0000012'
+			<if test='search_text != null and search_text != ""'>
+	      		AND (
+      			 		(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) LIKE CONCAT('%',#{search_text},'%')
+      			 		OR 
+      			 		(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) LIKE CONCAT('%',#{search_text},'%')
+      			 	)
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="searchAdminReceptionAllList" parameterType="DataMap"  resultMap="reception">
+		SELECT
+			RECEPTION_ID
+			,	RECEPTION_REG_NUMBER
+			,	RECEPTION_STATUS
+			,	ANNOUNCEMENT_ID
+			,	(SELECT B.TITLE FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_TITLE
+			,	ANNOUNCEMENT_TYPE
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.ANNOUNCEMENT_TYPE ) AS ANNOUNCEMENT_TYPE_NAME
+			,	(SELECT B.BUSINESS_NAME FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	MEMBER_ID
+			,	INSTITUTION_REG_NUMBER
+			,	INSTITUTION_NAME
+			,	INSTITUTION_ADDRESS
+			,	INSTITUTION_ADDRESS_DETAIL
+			,	INSTITUTION_PHONE
+			,	INSTITUTION_OWNER_NAME
+			,	INSTITUTION_INDUSTRY
+			,	INSTITUTION_BUSINESS
+			,	INSTITUTION_FOUNDATAION_DATE
+			,	INSTITUTION_FOUNDATAION_TYPE
+			,	INSTITUTION_CLASSIFICATION
+			,	INSTITUTION_TYPE
+			,	INSTITUTION_LABORATORY_YN
+			,	INSTITUTION_EMPLOYEE_COUNT
+			,	INSTITUTION_TOTAL_SALES
+			,	INSTITUTION_CAPITAL_1
+			,	INSTITUTION_CAPITAL_2
+			,	INSTITUTION_CAPITAL_3
+			,	RESEARCHER_NAME
+			,	RESEARCHER_MOBILE_PHONE
+			,	RESEARCHER_EMAIL
+			,	RESEARCHER_ADDRESS
+			,	RESEARCHER_ADDRESS_DETAIL
+			,	RESEARCHER_INSTITUTION_NAME
+			,	RESEARCHER_INSTITUTION_DEPARTMENT
+			,	RESEARCHER_INSTITUTION_POSITION
+			,	TECH_CONSULTING_TYPE
+			,	TECH_CONSULTING_CAMPUS
+			,	TECH_CONSULTING_LARGE
+			,	TECH_CONSULTING_MIDDLE
+			,	TECH_CONSULTING_SMALL
+			,	TECH_CONSULTING_4TH_INDUSTRY
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_CONSULTING_4TH_INDUSTRY ) AS TECH_CONSULTING_4TH_INDUSTRY_NAME
+			,	TECH_CONSULTING_PURPOSE
+			,	TECH_CONSULTING_PURPOSE_ETC
+			,	TECH_CONSULTING_TAKE_YN
+			,	TECH_INFO_NAME
+			,	TECH_INFO_DESCRIPTION
+			,	TECH_INFO_PROBLEMS
+			,	TECH_INFO_CONSULTING_REQUEST
+			,	TECH_INFO_RND_DESCRIPTION
+			,	TECH_INFO_EXPERT_REQUEST
+			,	TECH_INFO_MARKET_REPORT
+			,	TECH_INFO_UPLOAD_FILE_ID
+			,	TECH_INFO_LARGE
+			,	TECH_INFO_MIDDLE
+			,	TECH_INFO_SMALL
+			,	TECH_INFO_FEATURE
+			,	TECH_INFO_EFFECT
+			, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	MAIL_SEND_DATE
+			,	TECH_INFO_AREA 
+			,	TECH_INFO_TYPE 
+			,	TECH_INFO_4TH_INDUSTRY 
+			,	(SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000009' AND B.DETAIL_ID = A.TECH_INFO_4TH_INDUSTRY ) AS TECH_INFO_4TH_INDUSTRY_NAME
+			, 	(SELECT B.RECEIPT_TO FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS RECEIPT_TO
+			, 	(SELECT B.RECEIPT_FROM FROM ANNOUNCEMENT B WHERE B.ANNOUNCEMENT_ID = A.ANNOUNCEMENT_ID ) AS RECEIPT_FROM
+		FROM
+			RECEPTION A
+		WHERE
+			USE_YN = 'Y'
+			AND RECEPTION_STATUS NOT IN ( 'D0000001', 'D0000003' )
+			<if test='announcement_type != null and announcement_type != "" '>
+				<choose>
+				    <when test='announcement_type == "D0000005" '>
+				    	AND (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE = 'D0000002')
+				    </when>
+				    <otherwise>
+				      	AND ANNOUNCEMENT_TYPE = #{announcement_type}
+				    </otherwise>
+			  	</choose>
+			</if>
+	</select>
+	
+	<select id="selectMainState" resultType="map">
+		SELECT 
+				(SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE ='D0000002') AND (RECEPTION_STATUS = 'D0000002')  ) AS MATCH_REGISTRATION_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE ='D0000002') AND (RECEPTION_STATUS = 'D0000012')  ) AS MATCH_COMPLETE_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE ='D0000002') AND (RECEPTION_STATUS = 'D0000011')  ) AS MATCH_CANCEL_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE ='D0000002') AND (RECEPTION_STATUS = 'D0000013' OR RECEPTION_STATUS = 'D0000014')   ) AS MATCH_REJECT_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000001' OR ANNOUNCEMENT_TYPE ='D0000002') AND (RECEPTION_STATUS != 'D0000003' AND RECEPTION_STATUS != 'D0000014' AND RECEPTION_STATUS != 'D0000013' AND RECEPTION_STATUS != 'D0000011' AND RECEPTION_STATUS != 'D0000001' AND RECEPTION_STATUS != 'D0000002' AND RECEPTION_STATUS != 'D0000012')   ) AS MATCH_PROGRESS_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000003') AND (RECEPTION_STATUS = 'D0000002')  ) AS CONTEST_REGISTRATION_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000003') AND (RECEPTION_STATUS = 'D0000012')  ) AS CONTEST_COMPLETE_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000003') AND (RECEPTION_STATUS = 'D0000011')  ) AS CONTEST_CANCEL_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000003') AND (RECEPTION_STATUS = 'D0000013' OR RECEPTION_STATUS = 'D0000014')   ) AS CONTEST_REJECT_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000003') AND (RECEPTION_STATUS != 'D0000003' AND RECEPTION_STATUS != 'D0000014' AND RECEPTION_STATUS != 'D0000013' AND RECEPTION_STATUS != 'D0000011' AND RECEPTION_STATUS != 'D0000001' AND RECEPTION_STATUS != 'D0000002' AND RECEPTION_STATUS != 'D0000012')   ) AS CONTEST_PROGRESS_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000004') AND (RECEPTION_STATUS = 'D0000002')  ) AS PROPOSAL_REGISTRATION_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000004') AND (RECEPTION_STATUS = 'D0000012')  ) AS PROPOSAL_COMPLETE_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000004') AND (RECEPTION_STATUS = 'D0000011')  ) AS PROPOSAL_CANCEL_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000004') AND (RECEPTION_STATUS = 'D0000013' OR RECEPTION_STATUS = 'D0000014')   ) AS PROPOSAL_REJECT_COUNT
+				, (SELECT COUNT(*) FROM RECEPTION WHERE (ANNOUNCEMENT_TYPE = 'D0000004') AND (RECEPTION_STATUS != 'D0000003' AND RECEPTION_STATUS != 'D0000014' AND RECEPTION_STATUS != 'D0000013' AND RECEPTION_STATUS != 'D0000011' AND RECEPTION_STATUS != 'D0000001' AND RECEPTION_STATUS != 'D0000002' AND RECEPTION_STATUS != 'D0000012')   ) AS PROPOSAL_PROGRESS_COUNT
+	</select>
+
+
+	<select id="selectExpertParticipation" parameterType="DataMap"  resultType="map">
+		SELECT
+			(
+				SELECT 	COUNT(*) 
+				FROM 	RECEPTION 
+				WHERE  	USE_YN = 'Y'
+						AND RECEPTION_ID IN ( SELECT RECEPTION_ID FROM RECEPTION_EXPERT WHERE MEMBER_ID = #{member_id} AND PARTICIPATION_TYPE !="D0000004")
+						AND RECEPTION_STATUS = 'D0000005'
+			) AS COUNT_1
+			,	(
+				SELECT 	COUNT(*) 
+				FROM 	RECEPTION 
+				WHERE  	USE_YN = 'Y'
+						AND RECEPTION_ID IN ( SELECT RECEPTION_ID FROM RECEPTION_EXPERT WHERE MEMBER_ID = #{member_id} AND PARTICIPATION_TYPE !="D0000004")
+						AND RECEPTION_ID IN ( SELECT RECEPTION_ID FROM EXECUTION WHERE EXECUTION_STATUS = '수행중' )
+			) AS COUNT_2
+			,	(
+				SELECT 	COUNT(*) 
+				FROM 	RECEPTION 
+				WHERE  	USE_YN = 'Y'
+						AND RECEPTION_ID IN ( SELECT RECEPTION_ID FROM RECEPTION_EXPERT WHERE MEMBER_ID = #{member_id} AND PARTICIPATION_TYPE !="D0000004")
+						AND RECEPTION_ID IN ( SELECT RECEPTION_ID FROM EXECUTION WHERE EXECUTION_STATUS = '수행완료' )
+			) AS COUNT_3
+	</select>
+	
+	
+</mapper>

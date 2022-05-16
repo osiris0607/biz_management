@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.document.fwdBlcomnMgnt">
+
+    <select id="inqPodInfoList" parameterType="dataItem" resultType="dataItem">
+    /* fwd.document.fwdBlcomnMgnt.inqPodInfoList */
+		    SELECT POD_CD
+		          ,POD_NM
+		          ,SUBSTR(POD_CD, 1, 2) AS POD_NATN_CD
+		          ,POD_KOR_RMK
+		          ,POD_ENG_RMK
+		          ,USE_YN
+		          ,RSTR_ID
+		          ,REG_DT
+		          ,UPDR_ID
+		          ,UPD_DT
+		          ,TRN_TYPE_CD
+		          ,'' AS SAVE_TYPE
+		    FROM TB_FWD_POD_INFO
+				    WHERE 1=1
+				    <if test="podCd != null and podCd != ''">
+				        AND   POD_CD = #{podCd}
+				    </if>
+				    <if test="podNatnCd != null and podCd != ''">
+				        AND   POD_CD LIKE CONCAT(IFNULL(#{podNatnCd}, ''),'%')
+				    </if>
+				    <if test="trnTypeCd != null and trnTypeCd != ''">
+				        AND   TRN_TYPE_CD = #{trnTypeCd}
+				    </if>
+				    ORDER BY POD_CD
+    </select>
+
+    <update id="updatePodInfo" parameterType="dataItem">
+    /* fwd.document.fwdBlcomnMgnt.updatePodInfo */
+	    UPDATE TB_FWD_POD_INFO A
+		    SET  A.POD_KOR_RMK = #{podKorRmk}
+		       , A.POD_ENG_RMK = #{podEngRmk}
+		       , A.USE_YN = #{useYn}
+		       , A.RSTR_ID = #{rstrId}
+		       , A.REG_DT = SYSDATE()
+		       , A.UPDR_ID = #{updrId}
+		       , A.UPD_DT = SYSDATE()
+			    <choose>
+					<when test="'ALL'.equals(#{saveType})">
+					     WHERE SUBSTR(A.POD_CD, 1, 2) = SUBSTR(#{podCd}, 1, 2)
+					</when>
+
+					<otherwise>
+					     WHERE A.POD_CD = #{podCd}
+					</otherwise>
+				</choose>
+			    AND   A.TRN_TYPE_CD = #{trnTypeCd}
+    </update>
+
+    <insert id="createPodInfo" parameterType="dataItem">
+    /* fwd.document.fwdBlcomnMgnt.createPodInfo */
+		    INSERT INTO TB_FWD_POD_INFO
+		           (POD_CD
+		           ,POD_NM
+		           ,POD_KOR_RMK
+		           ,POD_ENG_RMK
+		           ,USE_YN
+		           ,RSTR_ID
+		           ,REG_DT
+		           ,UPDR_ID
+		           ,UPD_DT
+		           ,TRN_TYPE_CD)
+		     VALUES
+		              ( #{podCd}
+		              , #{podNm}
+		              , #{podKorRmk}
+		              , #{podEngRmk}
+		              , 'Y'
+		              , #{rstrId}
+		              , SYSDATE()
+		              , #{updrId}
+		              , SYSDATE()
+		              , #{trnTypeCd})
+    </insert>
+
+    <select id="selectDailyStatusReportList" parameterType="dataItem" resultType="dataItem">
+    /* fwd.document.fwdBlcomnMgnt.inqProjHblList */
+           SELECT   A.BL_ID
+		          , A.BL_NO
+		          , A.MBL_ID
+		          , A.MBL_NO
+		          , A.SMT_NO
+		          , A.EXCT_SPR_CD
+		          , A.RPRS_ITEM_CD
+		          , A.RPRS_ITEM_NM
+		          , A.SHPP_CD
+		          , A.SHPP_NM
+		          , A.CNEE_CD
+		          , A.CNEE_NM
+		          , A.NTPR_CD
+		          , A.NTPR_NM
+		          , A.POL_CD
+		          , A.POL_NM
+		          , A.POD_CD
+		          , A.POD_NM
+		          , A.FDEST_CD
+		          , A.FDEST_NM
+		          , A.PKG_QTY
+		          , FORMAT(A.SELL_GWT, 3) AS SELL_GWT
+		          , FORMAT(A.SELL_CWT, 3) AS SELL_CWT
+		          , FORMAT(A.SELL_CBM, 10) AS SELL_CBM
+		          , IFNULL(( SELECT SUM(S.QTY)
+				             FROM   TB_FWD_BL_ITEM_MPNG  T <!-- 품목매핑  -->
+				             INNER JOIN TB_SMT_INTG_ITEM S ON T.INTG_ITEM_NO = S.INTG_ITEM_NO <!-- 컨테이너  -->
+				             WHERE  1=1
+				             AND    T.DEL_YN = 'N' <!-- 삭제여부 -->
+				             AND    S.DEL_YN = 'N' <!-- 삭제여부 -->
+				             AND    T.BL_ID = A.BL_ID
+				             AND    S.CNTR_YN = 'Y'
+				             AND    S.CNTR_SIZE_CD <![CDATA[<=]]> 20),0) AS CNTR_QTY_20
+	             ,  IFNULL((SELECT SUM(S.QTY)
+			                FROM   TB_FWD_BL_ITEM_MPNG  T <!-- 품목매핑  -->
+			                INNER JOIN TB_SMT_INTG_ITEM S ON T.INTG_ITEM_NO = S.INTG_ITEM_NO <!-- 컨테이너  -->
+			                WHERE  1=1
+			                AND    T.DEL_YN = 'N' <!-- 삭제여부 -->
+			                AND    S.DEL_YN = 'N' <!-- 삭제여부 -->
+			                AND    T.BL_ID = A.BL_ID
+			                AND    S.CNTR_YN = 'Y'
+			                AND    S.CNTR_SIZE_CD > 20),0) AS CNTR_QTY_40
+	             ,(SELECT GROUP_CONCAT(CONCAT(X.CNTR_NO,' ', (CASE X.SEAL1
+	                                                          WHEN NULL THEN NULL
+	                                                          ELSE CONCAT('(',X.SEAL1,(CASE X.SEAL2 WHEN NULL THEN NULL ELSE CONCAT(', ',X.SEAL2) END), (CASE X.SEAL3 WHEN NULL THEN NULL ELSE CONCAT(', ',X.SEAL3) END),')') END ), ' ')
+	                      ORDER BY CNTR_NO, X.SEAL1, X.SEAL2, X.SEAL3)
+	               FROM   TB_SMT_INTG_ITEM X
+	               INNER JOIN TB_FWD_BL_ITEM_MPNG XX ON X.INTG_ITEM_NO = XX.INTG_ITEM_NO
+	               WHERE  A.BL_ID = XX.BL_ID
+	               AND    XX.MPNG_KIND_CD = 'OMI'
+	               AND    X.CNTR_YN = 'Y'
+	               AND    X.DEL_YN = 'N'
+	               AND    XX.DEL_YN = 'N'
+	             ) AS CNTR_NO
+		          , (SELECT AA.REF_NO
+		             FROM TB_FWD_INTG_REF_NO AA
+		             WHERE 1=1
+		             AND AA.INTG_KEY_ID = A.BL_ID
+		             AND AA.DEL_YN = 'N'
+		             AND AA.REF_NO_SPR_CD = 'IN'
+		             GROUP BY AA.REF_NO LIMIT 1
+		            ) AS INV_NO
+		          , (<include refid="fwd.common.fwdFuncInclude.fwdFcCmGetEtcCdNm">
+		                 <property name="clasCd" value="'0036'"/>
+		                 <property name="dtlCd" value="A.LADG_TYPE_CD"/>
+		             </include>) AS LADG_TYPE_NM <!-- PJS:: FC_CM_GET_ETC_CD_NM('0036', A.LADG_TYPE_CD) AS LADG_TYPE_NM - MySql Include로 구현-->
+		          , CONCAT(A.FLT_VSL_NM, (CASE A.FLT_VSL_NM
+		                                  WHEN NULL THEN NULL
+		                                  ELSE (CASE A.VOYAGE
+		                                        WHEN NULL THEN NULL
+		                                        ELSE '/' END) END), A.VOYAGE) AS VESSEL
+		          , E.PRE_FLT_VSL_NM
+		          , A.ETD_YMD
+		          , A.ETA_YMD
+		          , B.CARR_CD
+		          , (<include refid="air.document.hawbMgr.fcCmGetBizptnrNm2_inc">
+		                     <property name="colNm" value="B.CARR_CD"/>
+		                </include>) AS CARR_NM
+		          , (SELECT (<include refid="air.document.hawbMgr.fcCmGetBizptnrNm2_inc">
+		                     <property name="colNm" value="B.CARR_CD"/>
+		                </include>)
+		             FROM   TB_SMT_INTG_TASK_DEPT BB
+		             WHERE  BB.EO_NO = A.EO_NO
+		             AND    BB.CST_BL_ID = A.BL_ID
+		             AND    BB.TASK_SPR_CD = 'EXP'
+		            ) AS DEPT_CARR_NM
+		          , A.ONBR_YMD
+		          , A.INCOT_CD
+		          , C.PRT_KIND_CD
+		          , (<include refid="fwd.common.fwdFuncInclude.fwdFcCmGetEtcCdNm">
+		                 <property name="clasCd" value="'0245'"/>
+		                 <property name="dtlCd" value="C.PRT_KIND_CD"/>
+		             </include>) AS PRT_KIND_NM
+		          , IFNULL( E.DO_SEND_YMD, D.PRNT_CONT5 ) DO_SEND_YMD
+		          , D.PRNT_CONT1
+		          , D.PRNT_CONT2
+		          , D.PRNT_CONT3
+		          , D.PRNT_CONT4
+		          , D.PRNT_CONT5
+		          , D.PRNT_CONT6
+		          , D.PRNT_CONT7
+		          , D.PRNT_CONT8
+		          , D.PRNT_CONT9
+		          , D.PRNT_CONT10
+		          , D.PRNT_CONT11
+		          , D.PRNT_CONT12
+		          , D.PRNT_CONT13
+		          , D.PRNT_CONT14
+		          , D.PRNT_CONT15
+		          , D.PRNT_CONT16
+		          , D.PRNT_CONT17
+		          , D.PRNT_CONT18
+		          , D.PRNT_CONT19
+		          , D.PRNT_CONT20
+		          , D.RMK
+		          , B.INTG_TASK_NO
+		          , (SELECT BB.INTG_TASK_NO
+		             FROM TB_FWD_BL AA
+		             INNER JOIN TB_SMT_INTG_TASK_DEPT BB ON AA.BL_ID = BB.CST_BL_ID AND AA.EO_NO = BB.EO_NO
+		             WHERE AA.BL_ID = A.MBL_ID
+		             AND IFNULL(AA.DEL_YN, 'N') = 'N'
+		             AND IFNULL(BB.DEL_YN, 'N') = 'N'
+		             AND BB.TASK_SPR_CD = 'IMP'
+		             LIMIT 1 ) MBL_INTG_TASK_NO
+           FROM    TB_FWD_BL             A
+           LEFT JOIN TB_FWD_BL_PRT_EXPND   C ON A.BL_ID = C.BL_ID
+           LEFT JOIN TB_FWD_DSR_CONT       D ON A.BL_ID = D.BL_ID
+		   LEFT JOIN TB_FWD_BL_EXPND       E ON A.BL_ID = E.BL_ID
+		   INNER JOIN TB_SMT_INTG_TASK_DEPT B ON A.EO_NO = B.EO_NO AND A.BL_ID = B.CST_BL_ID
+		   WHERE 1=1
+		   AND A.EXCT_SPR_CD = #{exctSprCd}
+		   AND B.EXCT_BIZPTNR_CD = #{corpCd}
+		   AND B.TASK_SPR_CD = 'IMP'
+		   AND A.BL_SPR_CD IN ('H', 'D')
+		   AND A.BL_NO IS NOT NULL
+
+	    <if test="'OC'.equals(exctSprCd)">
+           AND A.ONBR_YMD BETWEEN #{frDate} AND #{toDate}
+	    </if>
+	    <if test="'AR'.equals(exctSprCd)">
+           AND A.ARR_YMD BETWEEN #{frDate} AND #{toDate}
+	    </if>
+	    <if test="shprCd != null and shprCd != ''">
+           AND A.SHPP_CD = #{shprCd}
+	    </if>
+	    <if test="cneeCd != null and cneeCd != ''">
+           AND A.CNEE_CD = #{cneeCd}
+	    </if>
+	    <if test="polCd != null and polCd != ''">
+           AND A.POL_CD = #{polCd}
+	    </if>
+	    <if test="podCd != null and podCd != ''">
+           AND A.POD_CD = #{podCd}
+	    </if>
+	    <if test="vessel != null and vessel != ''">
+           AND A.FLT_VSL_NM like '%' || #{vessel} || '%'
+	    </if>
+           ORDER BY A.ETA_YMD
+    </select>
+
+    <insert id="insertDailyStatusReport" parameterType="dataItem" >
+    /*  .insertDailyStatusReport */
+           INSERT INTO TB_FWD_DSR_CONT (
+             BL_ID
+            ,PRNT_CONT1
+            ,PRNT_CONT2
+            ,PRNT_CONT3
+            ,PRNT_CONT4
+            ,PRNT_CONT5
+            ,PRNT_CONT6
+            ,PRNT_CONT7
+            ,PRNT_CONT8
+            ,PRNT_CONT9
+            ,PRNT_CONT10
+            ,PRNT_CONT11
+            ,PRNT_CONT12
+            ,PRNT_CONT13
+            ,PRNT_CONT14
+            ,PRNT_CONT15
+            ,PRNT_CONT16
+            ,PRNT_CONT17
+            ,PRNT_CONT18
+            ,PRNT_CONT19
+            ,PRNT_CONT20
+            ,RMK
+            ,REG_DT
+            ,RSTR_ID
+            ,UPD_DT
+            ,UPDR_ID
+           ) VALUE (
+            #{blId}
+            ,#{prntCont1}
+            ,#{prntCont2}
+            ,#{prntCont3}
+            ,#{prntCont4}
+            <choose>
+                <when test="'OC'.equals(exctSprCd)">,#{doSendYmd}</when>
+                <otherwise>,#{prntCont5}</otherwise>
+            </choose>
+            ,#{prntCont6}
+            ,#{prntCont7}
+            ,#{prntCont8}
+            ,#{prntCont9}
+            ,#{prntCont10}
+            ,#{prntCont11}
+            ,#{prntCont12}
+            ,#{prntCont13}
+            ,#{prntCont14}
+            ,#{prntCont15}
+            ,#{prntCont16}
+            ,#{prntCont17}
+            ,#{prntCont18}
+            ,#{prntCont19}
+            ,#{prntCont20}
+            ,#{rmk}
+            ,NOW()
+            ,#{userId}
+            ,NOW()
+            ,#{userId}
+           )ON DUPLICATE KEY
+            UPDATE PRNT_CONT1 = #{prntCont1}
+            ,PRNT_CONT2 = #{prntCont2}
+            ,PRNT_CONT3 = #{prntCont3}
+            ,PRNT_CONT4 = #{prntCont4}
+            <choose>
+                <when test="'OC'.equals(exctSprCd)">,PRNT_CONT5 = #{doSendYmd}</when>
+                <otherwise>,PRNT_CONT5 = #{prntCont5}</otherwise>
+            </choose>
+            ,PRNT_CONT6 = #{prntCont6}
+            ,PRNT_CONT7 = #{prntCont7}
+            ,PRNT_CONT8 = #{prntCont8}
+            ,PRNT_CONT9 = #{prntCont9}
+            ,PRNT_CONT10 = #{prntCont10}
+            ,PRNT_CONT11 = #{prntCont11}
+            ,PRNT_CONT12 = #{prntCont12}
+            ,PRNT_CONT13 = #{prntCont13}
+            ,PRNT_CONT14 = #{prntCont14}
+            ,PRNT_CONT15 = #{prntCont15}
+            ,PRNT_CONT16 = #{prntCont16}
+            ,PRNT_CONT17 = #{prntCont17}
+            ,PRNT_CONT18 = #{prntCont18}
+            ,PRNT_CONT19 = #{prntCont19}
+            ,PRNT_CONT20 = #{prntCont20}
+            ,RMK = #{rmk}
+            ,UPD_DT = NOW()
+            ,UPDR_ID = #{userId}
+    </insert>
+
+    <!-- 부가서비스 목록 조회 -->
+    <select id="selectAddSvcList" parameterType="dataItem" resultType="dataItem">
+        <![CDATA[
+        /* fwd.document.blcomnMgnt.selectAddSvcList */
+		SELECT DISTINCT C.ONBR_YMD
+		     , C.ARR_YMD
+		     , C.BL_ID
+		     , C.BL_NO
+		     , E.INTG_TASK_NO 
+		     , C.MBL_ID      
+		     , C.MBL_NO      
+		     , F.INTG_TASK_NO MBL_INTG_TASK_NO
+		     , C.SMT_NO 
+		     , C.EXCT_SPR_CD
+		     , (SELECT DTL_CD_NM
+		          FROM TB_COM_ETC_CD
+		         WHERE CLAS_CD = '0320'
+		           AND DTL_CD = C.EXCT_SPR_CD
+		           AND USE_YN = 'Y'
+		     ) AS EXCT_SPR_NM 
+		     , E.TASK_SPR_CD
+		     , (SELECT DTL_CD_NM
+		          FROM TB_COM_ETC_CD
+		         WHERE CLAS_CD = '0031'
+		           AND DTL_CD = E.TASK_SPR_CD
+		           AND USE_YN = 'Y'
+		     ) AS TASK_SPR_NM 
+		     , A.ADD_SVC_TYPE_CD
+		     , (SELECT DTL_CD_NM
+		          FROM TB_COM_ETC_CD
+		         WHERE CLAS_CD = '0049'
+		           AND DTL_CD = A.ADD_SVC_TYPE_CD
+		           AND USE_YN = 'Y'
+		     ) AS ADD_SVC_TYPE_NM 
+		     , H.BILG_BIZPTNR_CD                                         /* 청구처 */
+		     , (SELECT BIZPTNR_ENG_NM
+		          FROM TB_COM_BIZPTNR
+		         WHERE BIZPTNR_CD = H.BILG_BIZPTNR_CD
+		       ) AS BILG_BIZPTNR_NM                                      /* 청구처 명    */
+		     , C.SHPP_CD
+		     , C.SHPP_NM
+		     , C.CNEE_CD
+		     , C.CNEE_NM
+		     , C.NTPR_CD
+		     , C.NTPR_NM       
+		     , A.ENTP_CD                                                 /* Supplier Code */
+		     , A.ENTP_NM                                                 /* Supplier Name */    
+		     , A.SELL_YN
+		     , A.BUY_YN          
+		     , A.CUR_CD          
+		     , A.LOCL_FRGH_AMT  
+		     , E.OFCR_EMPNO                                              /* OPERATOR 담당자번호(ROLE별) */
+		     , (SELECT ENG_EMP_NM
+		          FROM TB_COM_EMP
+		         WHERE EMPNO = E.OFCR_EMPNO
+		       ) AS OFCR_EMPNM                                           /* OPERATOR 담당자명(ROLE별)     */   
+		     , H.BUY_ADJ_OFCR_EMPNO                                      /* 매입정산담당자 번호 */
+		     , (SELECT ENG_EMP_NM
+		          FROM TB_COM_EMP
+		         WHERE EMPNO = H.BUY_ADJ_OFCR_EMPNO
+		       ) AS BUY_ADJ_OFCR_EMPNM                                  /* 매입정산담당자 명 */
+		     , G.SALES_OFCR_EMPNO                                        /* 영업사원 */
+		     , (SELECT ENG_EMP_NM
+		          FROM TB_COM_EMP
+		         WHERE EMPNO = G.SALES_OFCR_EMPNO
+		       ) AS SALES_OFCR_EMPNM                                    /* 영업사원 명         */
+		     , G.ORD_OFCR_DEPT_CD                                        /* OP DEPT CODE( 오더 담당자 코드 ) */
+		     , (SELECT S.ACCTG_DEPT_ENG_NM
+		          FROM TB_COM_ACCTG_DEPT S
+		         WHERE S.ACCTG_DEPT_CD = G.ORD_OFCR_DEPT_CD
+		           AND S.USE_YN = 'Y'
+		       ) AS ORD_OFCR_DEPT_NM                                     /* OP DEPT NAME ( 오더 담당자 부서명 ) */
+		     , E.RSLT_DEPT_CD                                            /* 실적부서 코드 */
+		     , (SELECT S.ACCTG_DEPT_ENG_NM
+		          FROM TB_COM_ACCTG_DEPT S
+		         WHERE S.ACCTG_DEPT_CD = E.RSLT_DEPT_CD
+		           AND S.USE_YN = 'Y'
+		       ) AS RSLT_DEPT_NM                                         /* 실적부서명 */
+		     , I.ACCTG_DEPT_CD AS BUY_ADJ_OFCR_DEPT_CD                                 /* ADJ DEPT(Buy)*/
+		     , I.ACCTG_DEPT_NM AS BUY_ADJ_OFCR_DEPT_NM                                 /* ADJ DEPT Name(Buy)*/
+		     /*************************/
+		     , A.CONF_YN
+		     , C.POL_CD
+		     , C.POL_NM
+		     , C.POD_CD
+		     , C.POD_NM
+		     , C.PDEL_CD
+		     , C.PDEL_NM    
+		     , G.SALES_EMP_DEPT_CD                                       /* 영업사원 부서 코드 */
+		     , (SELECT ACCTG_DEPT_ENG_NM
+		          FROM TB_COM_ACCTG_DEPT
+		         WHERE ACCTG_DEPT_CD = G.SALES_EMP_DEPT_CD
+		       ) AS SALES_EMP_DEPT_NM                                    /* 영업사원 부서명 */
+		     , G.ORD_OFCR_EMPNO                                          /* 오더담당자 사번 */
+		     , (SELECT ENG_EMP_NM
+		          FROM TB_COM_EMP
+		         WHERE EMPNO = G.ORD_OFCR_EMPNO
+		       ) AS ORD_OFCR_EMPNONM                                    /* 오더담당자 명 */    
+		     , A.FRGH_CD                                                 /* 운임 코드 */
+		     , ( SELECT FRGH_NM 
+		           FROM TB_COM_FRGH 
+		          WHERE FRGH_CD = A.FRGH_CD
+		       ) AS FRGH_NM
+		     , G.SALES_CNTRB_DEPT_CD
+		     , (SELECT ACCTG_DEPT_ENG_NM
+		          FROM TB_COM_ACCTG_DEPT
+		         WHERE ACCTG_DEPT_CD = SALES_CNTRB_DEPT_CD
+		       ) AS SALES_CNTRB_DEPT_NM                                  /* PERF DEPT Name ( 영업기여 부서명)*/
+		     , A.EXCT_CORP_CD
+		     , (SELECT CORP_ACRN_NM5
+		          FROM TB_COM_CORP
+		         WHERE CORP_CD = A.EXCT_CORP_CD
+		       ) AS EXCT_CORP_NM
+		     , A.RMK 
+		     , (CASE WHEN C.BL_ID = A.INTG_KEY_ID  THEN 'FW' 
+		             WHEN C.SMT_NO = A.INTG_KEY_ID THEN 'OM' 
+		                                           ELSE '' 
+		        END) AS SYS_CD
+		  FROM TB_FWD_INTG_ADD_SVC A
+		 INNER JOIN TB_FWD_BL C                         /* HBL */
+		    ON (C.BL_ID = A.INTG_KEY_ID
+		        OR C.SMT_NO = A.INTG_KEY_ID )
+		   AND C.DEL_YN = 'N' 
+		]]>     
+		<if test="exctSprCdCon != null and exctSprCdCon != ''">   
+		   AND C.EXCT_SPR_CD = #{exctSprCdCon}
+		</if>
+		<if test='dateTypeCon == "ARR" and frDateCon != null and frDateCon != "" and toDateCon != null and toDateCon != ""'>
+		   AND C.ARR_YMD BETWEEN #{frDateCon} AND #{toDateCon}
+		</if>
+		<if test='dateTypeCon == "OBD" and frDateCon != null and frDateCon != "" and toDateCon != null and toDateCon != ""'>        
+		   AND C.ONBR_YMD BETWEEN #{frDateCon} AND #{toDateCon}
+		</if>
+		<if test="shppCdCon != null and shppCdCon != ''">
+		   AND C.SHPP_CD = #{shppCdCon}
+		</if>
+		<if test="cneeCdCon != null and cneeCdCon != ''">
+		   AND C.CNEE_CD = #{cneeCdCon}
+		</if>
+		<if test="ntprCdCon != null and ntprCdCon != ''">
+		   AND C.NTPR_CD = #{ntprCdCon}
+		</if>
+		<if test='noCon != null and noCon != "" and noTypeCon == "HBL"'>
+		   AND C.BL_NO IN 
+		    <foreach collection="noCons" item="blId" index="index" separator="," open="(" close=")">
+		          #{blId}
+		    </foreach>         
+		</if>
+		<if test='directSearchNo != null and directSearchNo != "" and directSearchType == "HBL"'>
+		/* direct search */
+		   AND C.BL_NO IN 
+		    <foreach collection="directSearchNos" item="blId" index="index" separator="," open="(" close=")">
+		          #{blId}
+		    </foreach>
+		/* direct search */
+		</if>
+		<if test="polCdCon != null and polCdCon != ''">
+		    <choose>
+		        <when test='polTypeCon == "NA"'>
+		   AND SUBSTR(C.POL_CD,1,2) = SUBSTR(#{polCdCon},1,2)
+		        </when>
+		        <when test='polTypeCon == "RG"'>
+		   AND EXISTS (SELECT 1
+		                 FROM TB_COM_LOC X
+		                WHERE X.USE_YN = 'Y'
+		                  AND X.LOC_CD = SUBSTR(C.POL_CD, 1, 2)
+		                  AND X.REGN_CD = #{polCdCon})
+		        </when>
+		        <otherwise>
+		   AND C.POL_CD = #{polCdCon}
+		        </otherwise>
+		    </choose>                   
+		</if>
+		<if test="podCdCon != null and podCdCon != ''">
+		    <choose>
+		        <when test='podTypeCon == "NA"'>
+		   AND SUBSTR(C.POD_CD,1,2) = SUBSTR(#{podCdCon},1,2)
+		        </when>
+		        <when test='podTypeCon == "RG"'>
+		   AND EXISTS (SELECT 1
+		                 FROM TB_COM_LOC X
+		                WHERE X.USE_YN = 'Y'
+		                  AND X.LOC_CD = SUBSTR(C.POD_CD, 1, 2)
+		                  AND X.REGN_CD = #{podCdCon})
+		        </when>
+		        <otherwise>
+		   AND C.POD_CD = #{podCdCon}
+		        </otherwise>
+		    </choose>
+		</if>
+		<if test="pdelCdCon != null and pdelCdCon != ''">
+		    <choose>
+		        <when test='pdelTypeCon == "NA"'>
+		   AND SUBSTR(C.PDEL_CD,1,2) = SUBSTR(#{pdelCdCon},1,2)           
+		        </when>
+		        <when test='pdelTypeCon == "RG"'>
+		   AND EXISTS (SELECT 1
+		                 FROM TB_COM_LOC X
+		                WHERE X.USE_YN = 'Y'
+		                  AND X.LOC_CD = SUBSTR(C.PDEL_CD, 1, 2)
+		                  AND X.REGN_CD = #{pdelCdCon})
+		        </when>
+		        <otherwise>
+		   AND C.PDEL_CD = #{pdelCdCon} 
+		        </otherwise>
+		    </choose>
+		</if>
+		 INNER JOIN TB_SMT_INTG_TASK_DEPT E
+		    ON E.EO_NO = C.EO_NO
+		   AND E.CST_BL_ID = C.BL_ID
+		   AND E.EXCT_BIZPTNR_CD = #{corpCd} 
+		<if test="taskSprCdCon != null and taskSprCdCon != ''">
+		   AND E.TASK_SPR_CD = #{taskSprCdCon}  
+		</if>
+		<if test="ofcrEmpnoCon != null and ofcrEmpnoCon != ''">
+		   AND E.OFCR_EMPNO = #{ofcrEmpnoCon}
+		</if>
+		<if test="rsltDeptCdCon != null and rsltDeptCdCon != ''">
+		   AND E.RSLT_DEPT_CD = #{rsltDeptCdCon}
+		</if>
+		  LEFT OUTER JOIN TB_SMT_ORD G
+		    ON G.SMT_NO = C.SMT_NO
+		  LEFT OUTER JOIN TB_SMT_ORD_SELL_BILG H                                    /* SO매출청구 */
+		    ON H.SMT_NO = C.SMT_NO
+		   AND H.SELL_BIZPTNR_CD = #{corpCd}
+		  LEFT OUTER JOIN TB_FWD_BL D                   /* MBL */
+		    ON D.BL_ID = C.MBL_ID
+		  LEFT OUTER JOIN TB_SMT_INTG_TASK_DEPT F
+		    ON F.EO_NO = D.EO_NO
+		   AND F.EXCT_BIZPTNR_CD = #{corpCd}
+		  LEFT OUTER JOIN TB_COM_EMP I 
+		    ON I.EMPNO = H.BUY_ADJ_OFCR_EMPNO
+		 WHERE 1=1
+		<if test="addSvcTypeCdCon != null and addSvcTypeCdCon != ''">
+		   AND A.ADD_SVC_TYPE_CD IN (#{addSvcTypeCdCon})
+		</if>
+		<if test="entpCdCon != null and entpCdCon != ''">
+		   AND A.ENTP_CD = #{entpCdCon}
+		</if>
+		<if test="confYnCon != null and confYnCon != ''">
+		   AND A.CONF_YN = #{confYnCon}
+		</if>
+		<if test="sellYnCon != null and sellYnCon != ''">
+		   AND A.SELL_YN = #{sellYnCon} 
+		</if>
+		<if test="buyYnCon != null and buyYnCon != ''">
+		   AND A.BUY_YN = #{buyYnCon}  
+		</if>
+		<if test='noCon != null and noCon != "" and noTypeCon == "MBL"'>
+		   AND D.BL_NO IN 
+		    <foreach collection="noCons" item="blId" index="index" separator="," open="(" close=")">
+		          #{blId}
+		    </foreach>
+		</if>
+		<if test='directSearchNo != null and directSearchNo != "" and directSearchType == "MBL"'>
+		/* direct search */
+		   AND D.BL_NO IN 
+		    <foreach collection="directSearchNos" item="blId" index="index" separator="," open="(" close=")">
+		          #{blId}
+		    </foreach>
+		/* direct search */            
+		</if>
+		<if test="ordOfcrDeptCdCon != null and ordOfcrDeptCdCon != ''">
+		   AND G.ORD_OFCR_DEPT_CD = #{ordOfcrDeptCdCon}
+		</if> 
+		<if test="buyAdjOfcrEmpnoCon != null and buyAdjOfcrEmpnoCon != ''">
+		   AND H.BUY_ADJ_OFCR_EMPNO = #{buyAdjOfcrEmpnoCon}
+		</if>
+		<if test="bilgBizptnrCdCon != null and bilgBizptnrCdCon != ''">
+		   AND H.BILG_BIZPTNR_CD = #{bilgBizptnrCdCon}
+		</if>
+		<if test="taskSprCdCon != null and taskSprCdCon != ''">
+		   AND F.TASK_SPR_CD = #{taskSprCdCon}
+		</if>
+		<if test="buyAdjOfcrDeptCdCon != null and buyAdjOfcrDeptCdCon != ''">    
+		   AND I.ACCTG_DEPT_CD = #{buyAdjOfcrDeptCdCon}
+		</if>
+		<![CDATA[          
+		 ORDER BY C.ONBR_YMD      
+        ]]>
+    </select>
+</mapper>

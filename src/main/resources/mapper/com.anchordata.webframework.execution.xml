@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.execution">
+
+	<resultMap id="execution" type="ExecutionVO">
+		<result property ="execution_id"							column="EXECUTION_ID"	/>
+		<result property ="reception_id"							column="RECEPTION_ID"	/>
+		<result property ="agreement_id"							column="AGREEMENT_ID"	/>
+		<result property ="execution_status"						column="EXECUTION_STATUS"	/>
+		<result property ="middle_report_file_id"					column="MIDDLE_REPORT_FILE_ID"	/>
+		<result property ="middle_report_file_name"					column="MIDDLE_REPORT_FILE_NAME"	/>
+		<result property ="middle_report_date"						column="MIDDLE_REPORT_DATE"	/>
+		<result property ="final_report_file_id"					column="FINAL_REPORT_FILE_ID"	/>
+		<result property ="final_report_file_name"					column="FINAL_REPORT_FILE_NAME"	/>
+		<result property ="final_report_date"						column="FINAL_REPORT_DATE"	/>
+		<result property ="research_date"							column="RESEARCH_DATE"	/>
+		<result property ="research_funds"							column="RESEARCH_FUNDS"	/>
+		<result property ="agreement_reg_number"					column="AGREEMENT_REG_NUMBER"	/>
+		<result property ="reception_reg_number"					column="RECEPTION_REG_NUMBER"	/>
+		<result property ="announcement_business_name"				column="ANNOUNCEMENT_BUSINESS_NAME"	/>
+		<result property ="announcement_title"						column="ANNOUNCEMENT_TITLE"	/>
+		<result property ="tech_info_name"							column="TECH_INFO_NAME"	/>
+		<result property ="institution_name"						column="INSTITUTION_NAME"	/>
+		<result property ="researcher_name"							column="RESEARCHER_NAME"	/>
+		<result property ="use_yn"									column="USE_YN"	/>
+		<result property ="reg_date"								column="REG_DATE"	/>
+		<result property ="changes_count"							column="CHANGES_COUNT"	/>
+		<result property ="total_count"								column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	
+	
+	<!-- 수행 등록 --> 
+	<insert id="insertInfo" parameterType="ExecutionVO">
+	/* com.anchordata.webframework.execution.insertInfo */
+		INSERT INTO EXECUTION ( 
+			RECEPTION_ID
+			,	AGREEMENT_ID
+			,	EXECUTION_STATUS
+		) 
+		VALUES ( 
+			#{reception_id}
+			,	#{agreement_id} 
+			,	#{execution_status}
+		)
+	</insert>
+	
+	<!-- 수행 리스트 검색 -->
+	<select id="selectSearchPagingList" parameterType="DataMap" resultMap="execution">
+		<include refid="common.pagingPre"/>
+		/* com.anchordata.webframework.execution.selectSearchPagingList */
+		SELECT
+			A.EXECUTION_ID
+			, 	A.RECEPTION_ID
+			, 	A.AGREEMENT_ID
+			, 	A.EXECUTION_STATUS
+			,	A.MIDDLE_REPORT_FILE_ID
+			,	A.MIDDLE_REPORT_DATE
+			,	A.FINAL_REPORT_FILE_ID
+			,	A.FINAL_REPORT_DATE
+			, 	B.AGREEMENT_REG_NUMBER
+			,	C.RECEPTION_REG_NUMBER
+			,	(SELECT D.BUSINESS_NAME FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT D.TITLE FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	C.TECH_INFO_NAME
+			,	C.INSTITUTION_NAME
+			,	C.RESEARCHER_NAME
+			,	B.RESEARCH_DATE
+			,	B.RESEARCH_FUNDS
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	( SELECT COUNT(*) FROM EXECUTION_CHAGNE_HISTORY D WHERE D.EXECUTION_ID = A.EXECUTION_ID ) AS CHANGES_COUNT
+		FROM
+			EXECUTION A
+			LEFT JOIN AGREEMENT B ON B.AGREEMENT_ID = A.AGREEMENT_ID
+			LEFT JOIN RECEPTION C ON C.RECEPTION_ID = A.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			
+			<if test='member_id != null and member_id != "" '>
+				AND C.MEMBER_ID = #{member_id}
+			</if>
+			<if test='execution_status != null and execution_status != "" '>
+				AND A.EXECUTION_STATUS = #{execution_status}
+			</if>
+			<if test='research_date != null and research_date != "" '>
+				AND B.RESEARCH_DATE = #{research_date}
+			</if>
+			<if test='search_text != null and search_text != "" '>
+				AND ( 
+				      C.TECH_INFO_NAME LIKE CONCAT('%',#{search_text},'%')
+				       OR C.INSTITUTION_NAME LIKE CONCAT('%',#{search_text},'%')
+				    )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+				AND ( C.ANNOUNCEMENT_TYPE = "D0000001" OR C.ANNOUNCEMENT_TYPE = "D0000002" )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+				AND C.ANNOUNCEMENT_TYPE = #{announcement_type}
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<select id="selectDetail" parameterType="ExecutionVO"  resultMap="execution">
+		/* com.anchordata.webframework.execution.selectDetail */
+		SELECT
+				A.EXECUTION_ID
+				, 	A.RECEPTION_ID
+				, 	A.AGREEMENT_ID
+				, 	A.EXECUTION_STATUS
+				,	A.MIDDLE_REPORT_FILE_ID
+				,	A.MIDDLE_REPORT_DATE
+				,	IFNULL((SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.MIDDLE_REPORT_FILE_ID), "") AS MIDDLE_REPORT_FILE_NAME
+				,	A.FINAL_REPORT_FILE_ID
+				,	A.FINAL_REPORT_DATE
+				,	IFNULL((SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = A.FINAL_REPORT_FILE_ID), "") AS FINAL_REPORT_FILE_NAME
+				, 	B.AGREEMENT_REG_NUMBER
+				,	C.RECEPTION_REG_NUMBER
+				,	(SELECT D.BUSINESS_NAME FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+				,	(SELECT D.TITLE FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+				,	C.TECH_INFO_NAME
+				,	C.INSTITUTION_NAME
+				,	C.RESEARCHER_NAME
+				,	B.RESEARCH_DATE
+				,	B.RESEARCH_FUNDS
+				, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+				, 	( SELECT COUNT(*) FROM EXECUTION_CHAGNE_HISTORY D WHERE D.EXECUTION_ID = A.EXECUTION_ID ) AS CHANGES_COUNT
+		FROM
+				EXECUTION A
+				LEFT JOIN AGREEMENT B ON B.AGREEMENT_ID = A.AGREEMENT_ID
+				LEFT JOIN RECEPTION C ON C.RECEPTION_ID = A.RECEPTION_ID
+		WHERE 
+				A.EXECUTION_ID = #{execution_id}
+				<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+					AND ( C.ANNOUNCEMENT_TYPE = "D0000001" OR C.ANNOUNCEMENT_TYPE = "D0000002" )
+				</if>
+				<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+					AND C.ANNOUNCEMENT_TYPE = #{announcement_type}
+				</if>
+	</select>	
+	
+	
+	<update id="updateInfo" parameterType="ExecutionVO">
+		/* com.anchordata.webframework.execution.updateInfo */
+		UPDATE EXECUTION SET   
+			UPDATE_DATE = NOW()
+			<if test='execution_status != null and execution_status != "" '>
+			,	EXECUTION_STATUS = #{execution_status}
+			</if>
+			<if test='middle_report_file_id != null and middle_report_file_id != "" '>
+			,	MIDDLE_REPORT_FILE_ID = #{middle_report_file_id}
+			</if>
+			<if test='middle_report_date != null and middle_report_date != "" '>
+			,	MIDDLE_REPORT_DATE = #{middle_report_date}
+			</if>
+			<if test='final_report_file_id != null and final_report_file_id != "" '>
+			,	FINAL_REPORT_FILE_ID = #{final_report_file_id}
+			</if>
+			<if test='final_report_date != null and final_report_date != "" '>
+			,	FINAL_REPORT_DATE = #{final_report_date}
+			</if>
+		WHERE 
+			EXECUTION_ID = #{execution_id}
+	</update>
+	
+	
+	<!-- 수행에 연관된 파일 저장 -->	
+	<insert id="insertFileInfo" parameterType="ExecutionVO">
+		/* com.anchordata.webframework.execution.insertFileInfo */
+		INSERT INTO EXECUTION_FILE ( 
+			EXECUTION_ID
+			,	FILE_ID
+		) 
+		VALUES ( 
+			#{execution_id}
+			,	#{file_id}
+		)
+	</insert>
+	
+	
+	<!-- 수행에 연관된 파일 검색 -->	
+	<select id="selectFileInfo" parameterType="ExecutionVO" resultType="int">
+		/* com.anchordata.webframework.execution.selectFileInfo */
+		SELECT
+			FILE_ID
+		FROM
+			EXECUTION_FILE
+		WHERE
+			EXECUTION_ID = #{execution_id}
+	</select>
+	
+	
+	<!-- 수행에 연관된 파일 삭제 -->	
+	<delete id="deleteFileWithIds" parameterType="ExecutionVO">
+		* com.anchordata.webframework.execution.deleteFileWithIds */
+		SELECT
+		DELETE FROM EXECUTION_FILE			
+		WHERE 
+			FILE_ID IN
+			<foreach collection="delete_file_list" item="file_id" separator="," open="(" close=")" >
+				#{file_id}
+			</foreach>
+	</delete>
+	
+	
+	<!-- 수행에 연관된 파일 검색 -->	
+	<select id="selectChanges" parameterType="ExecutionVO" resultType="map">
+		/* com.anchordata.webframework.execution.selectChanges */
+		SELECT
+				HISTORY_ID
+				, EXECUTION_ID
+				, CHANGES
+				, DATE_FORMAT(CHANGE_DATE, '%Y-%m-%d') AS CHANGE_DATE
+				, OFFICIAL_NOTICE_FILE_ID
+				, IFNULL((SELECT NAME FROM UPLOAD_FILE C WHERE C.FILE_ID = OFFICIAL_NOTICE_FILE_ID), "") AS OFFICIAL_NOTICE_FILE_NAME
+		FROM
+			EXECUTION_CHAGNE_HISTORY
+		WHERE
+			EXECUTION_ID = #{execution_id}
+	</select>
+	
+	<!-- 변경 이력 저장 -->	
+	<insert id="insertChangeHistoryInfo" parameterType="ExecutionVO">
+		/* com.anchordata.webframework.execution.insertChangeHistoryInfo */
+		INSERT INTO EXECUTION_CHAGNE_HISTORY ( 
+			EXECUTION_ID
+			,	CHANGES
+			,	OFFICIAL_NOTICE_FILE_ID
+		) 
+		VALUES ( 
+			#{execution_id}
+			,	#{changes}
+			,	#{file_id}
+		)
+	</insert>
+	
+	
+	<select id="searchExcelDownload" parameterType="DataMap"  resultMap="execution">
+		/* com.anchordata.webframework.execution.searchExcelDownload */
+		SELECT
+			A.EXECUTION_ID
+			, 	A.RECEPTION_ID
+			, 	A.AGREEMENT_ID
+			, 	A.EXECUTION_STATUS
+			,	A.MIDDLE_REPORT_FILE_ID
+			,	A.MIDDLE_REPORT_DATE
+			,	A.FINAL_REPORT_FILE_ID
+			,	A.FINAL_REPORT_DATE
+			, 	B.AGREEMENT_REG_NUMBER
+			,	C.RECEPTION_REG_NUMBER
+			,	(SELECT D.BUSINESS_NAME FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_BUSINESS_NAME
+			,	(SELECT D.TITLE FROM ANNOUNCEMENT D WHERE D.ANNOUNCEMENT_ID = C.ANNOUNCEMENT_ID) AS ANNOUNCEMENT_TITLE
+			,	C.TECH_INFO_NAME
+			,	C.INSTITUTION_NAME
+			,	C.RESEARCHER_NAME
+			,	B.RESEARCH_DATE
+			,	B.RESEARCH_FUNDS
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	( SELECT COUNT(*) FROM EXECUTION_CHAGNE_HISTORY D WHERE D.EXECUTION_ID = A.EXECUTION_ID ) AS CHANGES_COUNT
+		FROM
+			EXECUTION A
+			LEFT JOIN AGREEMENT B ON B.AGREEMENT_ID = A.AGREEMENT_ID
+			LEFT JOIN RECEPTION C ON C.RECEPTION_ID = A.RECEPTION_ID
+		WHERE
+			A.USE_YN = 'Y'
+			<if test='announcement_type != null and announcement_type != "" and announcement_type == "D0000005" '>
+				AND ( C.ANNOUNCEMENT_TYPE = "D0000001" OR C.ANNOUNCEMENT_TYPE = "D0000002" )
+			</if>
+			<if test='announcement_type != null and announcement_type != "" and announcement_type != "D0000005" '>
+				AND C.ANNOUNCEMENT_TYPE = #{announcement_type}
+			</if>
+			
+	</select>
+	
+	
+</mapper>

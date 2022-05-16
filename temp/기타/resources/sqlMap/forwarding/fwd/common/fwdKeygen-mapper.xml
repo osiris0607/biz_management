@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.common.fwdKeygen">
+    
+    <!-- key 채번 -->
+    <insert id="mergeFwdKeygenNo" parameterType="dataItem" >
+        /* fwd.common.fwdKeygen.mergeFwdKeygenNo */
+        <selectKey keyProperty="keySeq" resultType="int" order="BEFORE" >
+            SELECT (CASE WHEN LENGTH(IFNULL(MAX(KEYGEN_SEQ),0) + 1) > #{keygenSeq} THEN 1
+                         ELSE (IFNULL(MAX(KEYGEN_SEQ),0) + 1)  END) AS KEYGEN_SEQ
+              FROM TB_FWD_KEYGEN X 
+             WHERE X.EXCT_SPR_CD = #{exctSprCd}
+               AND X.KEYGEN_CD = #{keygenCd}
+               AND X.KEYGEN_TYPE_NO = #{keygenTypeNo} FOR UPDATE
+        </selectKey>   
+	    INSERT INTO TB_FWD_KEYGEN (  
+               EXCT_SPR_CD
+	         , KEYGEN_CD
+	         , KEYGEN_TYPE_NO
+	         , KEYGEN_SEQ
+	         , REG_DT
+	         , RSTR_ID
+	         , UPD_DT
+	         , UPDR_ID 
+        ) VALUES (  
+	           #{exctSprCd}
+	         , #{keygenCd}
+	         , #{keygenTypeNo}
+	         , #{keySeq}
+             , NOW()	               
+	         , #{userId}
+             , NOW()	         
+	         , #{userId}  
+	    )ON DUPLICATE KEY
+            UPDATE KEYGEN_SEQ = #{keySeq}
+                 , UPD_DT = NOW()
+                 , UPDR_ID = #{userId}
+    </insert>
+    
+    <select id="selectFwdCorpDept" parameterType="dataItem" resultType="dataItem">
+        /* fwd.common.fwdKeygen.selectFwdCorpDeptCd */
+		WITH TMP_DEPT_ABBR AS (
+		    SELECT CORP_CD
+		         , BOFF_ABBR_CD
+		      FROM TB_COM_ACCTG_DEPT
+		     WHERE ACCTG_DEPT_CD = #{acctgDeptCd}
+		),
+		TMP_YEAR_ABBR AS (
+		    SELECT CHAR(64+(DATE_FORMAT(NOW(),'%y')-18)) AS YEAR_YM
+		),
+		TMP_CORP_PREFIX AS (
+		  SELECT (CASE WHEN 'A100' IN ('E100','E200','E300') THEN  'FNS'
+                       ELSE 'PLI' END) AS CORP_PREFIX
+               , #{exctSprCd} AS EXCT_SPR_CD
+               , #{userId} AS USER_ID        
+		)
+		    SELECT A.CORP_CD
+		         , (CASE WHEN C.BOFF_ABBR_CD IS NULL THEN A.CORP_ACRN_NM2
+		                 ELSE A.CORP_ACRN_NM2 END) AS CORP_DEPT
+		         , B.NATN_CD  AS NATN_CD
+		         , CAST(D.YEAR_YM AS CHAR) AS YEAR_YM
+		         , E.CORP_PREFIX
+		         , E.EXCT_SPR_CD
+		         , E.USER_ID
+		      FROM TB_COM_CORP A
+		INNER JOIN TB_COM_BIZPTNR B ON B.BIZPTNR_CD = A.CORP_CD
+		LEFT OUTER JOIN TMP_DEPT_ABBR C ON C.CORP_CD = A.CORP_CD
+		CROSS JOIN TMP_YEAR_ABBR D
+		CROSS JOIN TMP_CORP_PREFIX E
+		     WHERE A.CORP_CD = #{corpCd}
+    </select>
+    
+    <insert id="mergeFwdHblNo" parameterType="dataItem" >
+        /* fwd.common.fwdKeygen.mergeFwdHblNo */
+        <selectKey keyColumn="MARK_CD,HBL_SEQ" keyProperty="markCd,hblSeq" resultType="dataItem" order="BEFORE" >
+            SELECT (CASE WHEN #{exctSprCd} = 'OC' THEN
+                             (CASE WHEN X.MARK_CD = '4' THEN '5'
+                                   WHEN X.MARK_CD = '5' THEN '6'
+                                   WHEN X.MARK_CD = '6' THEN '7'
+                                   WHEN X.MARK_CD = '7' THEN 'S' 
+                                   ELSE '4' END)
+                         WHEN #{exctSprCd} = 'AR' THEN
+                             (CASE WHEN X.MARK_CD = '0' THEN '1'
+                                   WHEN X.MARK_CD = '1' THEN '2'
+                                   WHEN X.MARK_CD = '2' THEN '3'
+                                   WHEN X.MARK_CD = '3' THEN 'A'
+                                   WHEN X.MARK_CD = 'A' THEN 'B'
+                                   WHEN X.MARK_CD = 'B' THEN 'C' 
+                                   ELSE '2' END)
+                         WHEN #{exctSprCd} = 'RL' THEN
+                             (CASE WHEN X.MARK_CD = '9' THEN 'R'
+                                   WHEN X.MARK_CD = 'R' THEN 'L'
+                                   ELSE '9' END)          
+                         END) AS MARK_CD     
+                 , (CASE WHEN LENGTH(IFNULL(MAX(HBL_SEQ),0) + 1) > #{keygenSeq} THEN 1
+                         ELSE (IFNULL(MAX(HBL_SEQ),0) + 1)  END) AS HBL_SEQ 
+              FROM TB_FWD_HBL_NO_GEN X
+             WHERE X.CORP_CD = #{corpDept}
+               AND X.EXCT_SPR_CD = #{exctSprCd}
+               AND X.YM = #{yearYm} FOR UPDATE
+        </selectKey>   
+        INSERT INTO TB_FWD_HBL_NO_GEN (  
+               CORP_CD
+             , EXCT_SPR_CD
+             , YM
+             , MARK_CD
+             , HBL_SEQ
+             , REG_DT
+             , RSTR_ID
+             , UPD_DT
+             , UPDR_ID 
+        ) VALUES (  
+               #{corpDept}
+             , #{exctSprCd}
+             , #{yearYm}
+             , #{markCd}
+             , #{hblSeq}
+             , NOW()                   
+             , #{userId}
+             , NOW()             
+             , #{userId}  
+        )ON DUPLICATE KEY
+            UPDATE MARK_CD = #{markCd}
+                 , HBL_SEQ = #{hblSeq}
+                 , UPD_DT = NOW()
+                 , UPDR_ID = #{userId}
+    </insert>
+
+    <insert id="mergeFwdMsrNo" parameterType="dataItem" >
+        /* fwd.common.fwdKeygen.mergeFwdMsrNo */
+        <selectKey keyColumn="SR_SEQ,SR_TYPE" keyProperty="msrSeq,srType" resultType="dataItem" order="BEFORE" >
+            SELECT (CASE WHEN LENGTH(IFNULL(MAX(X.SR_SEQ),0) + 1) > #{keygenSeq} THEN 1
+                         ELSE (IFNULL(MAX(X.SR_SEQ),0) + 1)  END) AS SR_SEQ
+                 , (CASE WHEN #{blSprCd} = 'D' THEN 'D'
+                         WHEN #{blSprCd} = 'H' THEN ''
+                         ELSE '' END) AS SR_TYPE
+              FROM TB_FWD_SR_NO_GEN X 
+             WHERE X.CORP_CD = #{corpCd}
+               AND X.KEYGEN_YMD = #{keygenYmd} FOR UPDATE
+        </selectKey>   
+        INSERT INTO TB_FWD_SR_NO_GEN (  
+               CORP_CD
+             , KEYGEN_YMD
+             , SR_SEQ
+             , REG_DT
+             , RSTR_ID
+             , UPD_DT
+             , UPDR_ID 
+        ) VALUES (  
+               #{corpCd}
+             , #{keygenYmd}
+             , #{msrSeq}
+             , NOW()                   
+             , #{userId}
+             , NOW()             
+             , #{userId}
+        )ON DUPLICATE KEY
+            UPDATE SR_SEQ = #{msrSeq}
+                 , UPD_DT = NOW()
+                 , UPDR_ID = #{userId}
+    </insert>
+
+
+</mapper>

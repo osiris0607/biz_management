@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.manager">
+
+	<resultMap id="manager" type="ManagerVO">
+		<!-- Member Table -->
+		<result property ="member_id"						column="MEMBER_ID"	/>
+		<result property ="name"							column="NAME"	/>
+		<result property ="pwd"								column="PWD"	/>
+		<result property ="mobile_phone"					column="MOBILE_PHONE"	/>
+		<result property ="email"							column="EMAIL"	/>
+		<result property ="department"						column="DEPARTMENT"	/>
+		<result property ="position"						column="POSITION"	/>
+		<result property ="auth_level_admin"				column="AUTH_LEVEL_ADMIN"	/>
+		<result property ="auth_level_manager"				column="AUTH_LEVEL_MANAGER"	/>
+		<result property ="institution_type"				column="INSTITUTION_TYPE"	/>
+		
+		
+		
+		<!-- Manager Table -->
+		<result property ="research_manager_yn"		    	column="RESEARCH_MANAGER_YN"	/>
+		<result property ="evaluation_manager_yn"			column="EVALUATION_MANAGER_YN"	/>
+		<result property ="auth_announcement_menu_yn"		column="AUTH_ANNOUNCEMENT_MENU_YN"	/>
+		<result property ="auth_reception_menu_yn"			column="AUTH_RECEPTION_MENU_YN"	/>
+		<result property ="auth_evaluation_menu_yn"			column="AUTH_EVALUATION_MENU_YN"	/>
+		<result property ="auth_execution_menu_yn"			column="AUTH_EXECUTION_MENU_YN"	/>
+		<result property ="auth_agreement_menu_yn"			column="AUTH_AGREEMENT_MENU_YN"	/>
+		<result property ="auth_calculate_menu_yn"			column="AUTH_CALCULATE_MENU_YN"	/>
+		<result property ="auth_notice_menu_yn"				column="AUTH_NOTICE_MENU_YN"	/>
+		
+		<result property ="reg_date"						column="REG_DATE"	/>
+		<result property ="login_date"						column="LOGIN_DATE"	/>
+		<result property ="total_count"						column="TOTAL_COUNT"	/>
+		
+	</resultMap>
+
+
+	<insert id="insertMemberInfo" parameterType="ManagerVO">
+		INSERT INTO MEMBER ( 
+			MEMBER_ID
+			,	name
+			,	PWD
+			,	MOBILE_PHONE
+			,	EMAIL
+			,	DEPARTMENT
+			,	POSITION
+			,	AUTH_LEVEL_ADMIN
+			,	AUTH_LEVEL_MANAGER
+			,	INSTITUTION_TYPE
+		) 
+		VALUES ( 
+			#{member_id}
+			,	#{name} 
+			,	#{pwd}
+			,	#{mobile_phone}
+			,	#{email}
+			,	#{department}
+			,	#{position}
+			,	#{auth_level_admin}
+			,	#{auth_level_manager}
+			,	#{institution_type}
+		)
+	</insert>
+	
+	<insert id="insertManagerInfo" parameterType="ManagerVO">
+		INSERT INTO MANAGER ( 
+			MEMBER_ID
+			,	RESEARCH_MANAGER_YN
+			,	EVALUATION_MANAGER_YN
+			,	AUTH_ANNOUNCEMENT_MENU_YN
+			,	AUTH_RECEPTION_MENU_YN
+			,	AUTH_EVALUATION_MENU_YN
+			,	AUTH_EXECUTION_MENU_YN
+			,	AUTH_AGREEMENT_MENU_YN
+			,	AUTH_CALCULATE_MENU_YN
+			,	AUTH_NOtICE_MENU_YN
+		) 
+		VALUES ( 
+			#{member_id}
+			,	#{research_manager_yn} 
+			,	#{evaluation_manager_yn}
+			,	#{auth_announcement_menu_yn}
+			,	#{auth_reception_menu_yn}
+			,	#{auth_evaluation_menu_yn}
+			,	#{auth_execution_menu_yn}
+			,	#{auth_agreement_menu_yn}
+			,	#{auth_calculate_menu_yn}
+			,	#{auth_notice_menu_yn}
+		)
+	</insert>
+	
+	<update id="updateMemberInfo" parameterType="ManagerVO">
+		UPDATE MEMBER SET   
+			NAME = #{name}
+			<if test='pwd != null and pwd != "" '>
+				, PWD = #{pwd}
+			</if>
+			,	MOBILE_PHONE = #{mobile_phone}
+			,	EMAIL = #{email}
+			,	DEPARTMENT = #{department}
+			,	POSITION = #{position}
+			,	AUTH_LEVEL_ADMIN = #{auth_level_admin}
+			,	AUTH_LEVEL_MANAGER = #{auth_level_manager}
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>
+	
+	<update id="updateManagerInfo" parameterType="ManagerVO">
+		UPDATE MANAGER SET   
+			RESEARCH_MANAGER_YN = #{research_manager_yn}
+			,	EVALUATION_MANAGER_YN = #{evaluation_manager_yn}
+			,	AUTH_ANNOUNCEMENT_MENU_YN = #{auth_announcement_menu_yn}
+			,	AUTH_RECEPTION_MENU_YN = #{auth_reception_menu_yn}
+			,	AUTH_EVALUATION_MENU_YN = #{auth_evaluation_menu_yn}
+			,	AUTH_EXECUTION_MENU_YN = #{auth_execution_menu_yn}
+			,	AUTH_AGREEMENT_MENU_YN = #{auth_agreement_menu_yn}
+			,	AUTH_CALCULATE_MENU_YN = #{auth_calculate_menu_yn}
+			,	AUTH_NOTICE_MENU_YN = #{auth_notice_menu_yn}
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	<select id="selectSearchPagingList" parameterType="DataMap" resultMap="manager">
+		<include refid="common.pagingPre"/>
+		SELECT
+			A.MEMBER_ID
+			, 	A.NAME
+			, 	A.MOBILE_PHONE
+			, 	A.EMAIL
+			, 	A.DEPARTMENT
+			, 	A.POSITION
+			, 	DATE_FORMAT(A.LOGIN_DATE,'%Y-%m-%d') AS LOGIN_DATE
+			,	A.AUTH_LEVEL_ADMIN
+			,	A.AUTH_LEVEL_MANAGER
+			,	B.RESEARCH_MANAGER_YN
+			,	B.EVALUATION_MANAGER_YN
+			,	B.AUTH_ANNOUNCEMENT_MENU_YN
+			,	B.AUTH_RECEPTION_MENU_YN
+			,	B.AUTH_EVALUATION_MENU_YN
+			,	B.AUTH_EXECUTION_MENU_YN
+			,	B.AUTH_AGREEMENT_MENU_YN
+			,	B.AUTH_CALCULATE_MENU_YN
+			,	B.AUTH_NOtICE_MENU_YN
+		FROM
+			MEMBER A
+		LEFT JOIN
+			MANAGER B
+		ON	A.MEMBER_ID = B.MEMBER_ID
+		WHERE
+			1=1
+			<choose>
+			    <when test='auth_level_admin != null and auth_level_admin != "" and auth_level_admin == "Y" '>
+			    	AND AUTH_LEVEL_ADMIN = 'Y'
+			    </when>
+			    <when test='auth_level_manager != null and auth_level_manager != "" and auth_level_manager == "Y" '>
+				    <if test='evaluation_manager_yn == "Y" and research_manager_yn == "Y" '>
+						AND B.EVALUATION_MANAGER_YN = 'Y' or B.RESEARCH_MANAGER_YN = 'Y'
+					</if>
+					<if test='evaluation_manager_yn == "Y" and research_manager_yn == "N" '>
+						AND B.EVALUATION_MANAGER_YN = 'Y'
+					</if>
+					<if test='evaluation_manager_yn == "N" and research_manager_yn == "Y" '>
+						AND B.RESEARCH_MANAGER_YN = 'Y'
+					</if>
+			    </when>
+			    <otherwise>
+			      	AND (A.AUTH_LEVEL_ADMIN = 'Y' OR A.AUTH_LEVEL_MANAGER = 'Y')
+			    </otherwise>
+		  	</choose>
+			
+			<if test='department != null and department != "" '>
+				AND A.DEPARTMENT LIKE CONCAT('%',#{department},'%')
+			</if>
+			
+			<if test='name != null and name != "" '>
+				AND A.NAME LIKE CONCAT('%',#{name},'%')
+			</if>
+			
+			<if test='member_id != null and member_id != "" '>
+				AND A.MEMBER_ID LIKE CONCAT('%',#{member_id},'%')
+			</if>
+			
+			
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<select id="selectDetail" parameterType="ManagerVO"  resultMap="manager">
+		SELECT
+			A.MEMBER_ID
+			, 	A.NAME
+			, 	A.MOBILE_PHONE
+			, 	A.EMAIL
+			, 	A.DEPARTMENT
+			, 	A.POSITION
+			, 	DATE_FORMAT(A.LOGIN_DATE,'%Y-%m-%d') AS LOGIN_DATE
+			,	A.AUTH_LEVEL_ADMIN
+			,	A.AUTH_LEVEL_MANAGER
+			,	B.RESEARCH_MANAGER_YN
+			,	B.EVALUATION_MANAGER_YN
+			,	B.AUTH_ANNOUNCEMENT_MENU_YN
+			,	B.AUTH_RECEPTION_MENU_YN
+			,	B.AUTH_EVALUATION_MENU_YN
+			,	B.AUTH_EXECUTION_MENU_YN
+			,	B.AUTH_AGREEMENT_MENU_YN
+			,	B.AUTH_CALCULATE_MENU_YN
+			,	B.AUTH_NOtICE_MENU_YN
+		FROM
+			MEMBER A
+		LEFT JOIN
+			MANAGER B
+		ON	A.MEMBER_ID = B.MEMBER_ID
+		WHERE 
+			A.MEMBER_ID = #{member_id}
+	</select>
+	
+	
+	<update id="updateMenuAuth" parameterType="ManagerVO">
+		<foreach collection="manager_auth_list" item="item" separator=";">
+			UPDATE MANAGER SET   
+				AUTH_ANNOUNCEMENT_MENU_YN = #{item.auth_announcement_menu_yn}
+				,	AUTH_RECEPTION_MENU_YN = #{item.auth_reception_menu_yn}
+				,	AUTH_EVALUATION_MENU_YN = #{item.auth_evaluation_menu_yn}
+				,	AUTH_EXECUTION_MENU_YN = #{item.auth_execution_menu_yn}
+				,	AUTH_AGREEMENT_MENU_YN = #{item.auth_agreement_menu_yn}
+				,	AUTH_CALCULATE_MENU_YN = #{item.auth_calculate_menu_yn}
+				,	AUTH_NOTICE_MENU_YN = #{item.auth_notice_menu_yn}
+			WHERE 
+				MEMBER_ID = #{item.member_id}
+		</foreach>
+	</update>
+	
+	
+	<delete id="deleteManagerInfo" parameterType="ManagerVO">
+		DELETE FROM MANAGER			
+		WHERE
+			MEMBER_ID = #{member_id}
+	</delete>
+	
+	
+	
+	<!-- 
+	<update id="updateCommissionerStatus" parameterType="CommissionerVO">
+		UPDATE COMMISSIONER SET   
+			COMMISSIONER_STATUS = #{commissioner_status}
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>  -->
+	
+</mapper>

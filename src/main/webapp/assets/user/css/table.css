@@ -1,0 +1,290 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* common */
+table.fixed {table-layout: fixed;}
+table th, table td {margin: 0; padding: 0;}
+.editor_area {overflow: hidden;}
+.editor_area.view {padding: 10px 12px 100px; border-bottom: 1px solid #d1d1d1;}
+
+
+/* table list */
+table.list {width: 100%; border: 1px solid #d1d1d1; border-bottom: 1px solid #d1d1d1; font-family: "Noto Sans KR", sans-serif;}
+	table.list thead th,
+	table.list tfoot th,
+	table.list tfoot td,
+	table.list tbody th {font-family: "Noto Sans KR", sans-serif;}
+	table.list thead th.first,
+	table.list tbody th.first,
+	table.list tbody td.first {border-left: 0;}
+	table.list thead th.last,
+	table.list tbody th.last
+	table.list tbody td.last {border-right: 0;}
+	
+	table.list thead th {padding: 13px 0px 11px; border: 1px solid #d1d1d1;font-size: 16px; font-weight: 500; color: #4d4d4d; text-align: center; vertical-align: middle; line-height: 1.4em; background-color: #eee;}
+	table.depthline thead th {padding: 8px 0px 6px; border: 1px solid #d1d1d1; font-size: 16px; font-weight: 500; color: #4d4d4d; text-align: center;line-height: 1.4em; vertical-align: middle; background-image: none; background-color: #f5f5f5;}
+
+
+	table.list tbody th {font-size: 13px; font-weight: 500; color: #4d4d4d; text-align: center; background-color: #fcfcfc;}
+	table.list tbody td {padding: 9px 8px; border: 1px solid #d1d1d1; border-top: 0; font-size: 15px; color: #4d4d4d; text-align: center; line-height: 1.4em; vertical-align: middle;}
+	table.list tbody td.nopadding {padding: 0px;}
+	table.list tbody td.bg_gray {background-color: #f7f7f7;}
+	table.list tbody td.bg_blue {background-color: #bfe8ff;}
+	
+	table.list tfoot th {padding: 9px 0; border-top: 1px solid #b2b2b2; border-bottom: 1px solid #b2b2b2; border-right: 3px double #b2b2b2; font-size: 1.05em; color: #333333; text-align: center; background-color: #f6fcff;}
+	table.list tfoot td {padding: 9px 8px; border-top: 1px solid #b2b2b2; border-bottom: 1px solid #b2b2b2; border-left: 0; border-right: 0; font-size: 1.05em; font-weight: bold; color: #333333; text-align: center; background-color: #f6fcff;}
+	table.list tfoot td.bg {background-color: #ffffff;}
+	
+	table.list tbody td.subject {overflow: hidden; table-layout: fixed; text-align: left; text-overflow: ellipsis; white-space: nowrap;}
+	table.list tbody th.alignl,
+	table.list tbody td.alignl {text-align: left;}
+	table.list tbody th.alignr,
+	table.list tbody td.alignr {text-align: right;}
+	table.list tbody td a {margin-right: 5px; color: #045d9b; line-height: 1.5em; text-decoration: underline;}
+	table.list tbody td img {display: inline; display: inline-block; margin-right: 2px; vertical-align: top;}
+	table.list tbody td a img {margin-right: 0;}
+	table.list tbody td span.re_count > strong {font-weight: bold; color: #ff0000;}
+	
+	table.list tbody td.reply {padding-left: 44px; background: url("../images/icon/icon_reply.png") no-repeat 12px 12px;}
+	table.list tbody td.re_depth1 {padding-left: 25px; background: url("../images/icon/icon_replys.png") no-repeat 12px 12px;}
+	table.list tbody td.re_depth2 {padding-left: 35px; background: url("../images/icon/icon_replys.png") no-repeat 20px 12px;}
+	table.list tbody td.re_depth3 {padding-left: 45px; background: url("../images/icon/icon_replys.png") no-repeat 28px 12px;}
+	table.list tbody td.re_depth4 {padding-left: 55px; background: url("../images/icon/icon_replys.png") no-repeat 36px 12px;}
+	
+	ul.mtable_info {overflow: hidden; margin-bottom: 5px;}
+		ul.mtable_info li {float: left; list-style: none; vertical-align: middle;}
+		ul.mtable_info li:before {padding: 0 8px; content:"|"; vertical-align: middle;}
+		ul.mtable_info li:first-child:before {padding: 0 0; content:"";}
+		ul.mtable_info li > strong {font-weight: bold; color: #4d4d4d;}
+	.table_title {overflow: hidden; line-height: 1.5em;}
+
+
+
+/* 앨범형 */
+.album_list_area {overflow: hidden; margin: 0 0 20px; padding-top: 20px; border-top: 2px solid #6f6f6f; border-bottom: 3px double #dddddd;}
+	ul.album_list {overflow: hidden; padding: 0 10px;}
+	ul.album_list > li {float: left; margin: 0 10px 40px;}
+	ul.album_list li {list-style: none;}
+	ul.album_list li .album {overflow: hidden; width: 190px; height: 240px; font-size: 12px;}
+	ul.album_list li .album .album_img_area {overflow: hidden; width: 188px; height: 138px; border:1px solid #cecece;}
+	ul.album_list li .album .album_img_area img {width: 188px; height: 138px; vertical-align: top;}
+	ul.album_list li .album .album_txt_area {overflow: hidden; padding: 10px 5px;}
+	ul.album_list li .album .album_txt_area .album_title_area {overflow: hidden; height: 33px; margin-bottom: 15px; font-size: 13px; color: #333333;}
+	ul.album_list li .album .album_txt_area .album_title_area .album_title {font-size: 13px; font-weight: bold; color: #4d4d4d;}
+	ul.album_list li .album .album_txt_area .album_register_area { font-size: 12px; height: 40px;}
+	ul.album_list li .album .album_txt_area .album_register_area ul li {color: #333333; list-style: none;}
+	ul.album_list li .album .album_txt_area .album_register_area ul li + li {margin-top: 5px;}
+	ul.album_list li .album .album_txt_area .album_register_area ul li span.register_name {padding-right: 7px; font-size: 12px; color: #626262; background: url('../images/common/bg_view_vdt2.png') no-repeat right 2px;}
+	ul.album_list li .album .album_txt_area .album_register_area ul li span {font-family: '돋움', Dotum, Helvetica, 'Apple SD Gothic Neo', Sans-serif;}
+	
+	ul.album_list li .album .album_txt_area .album_register_area ul li span.album_file {float: right;}
+	
+	ul.album_list_hor {overflow: hidden; padding-bottom: 20px;}
+		ul.album_list_hor li {overflow: hidden; margin-top: 15px; padding: 15px 10px 1px; border-top: 1px dotted #dddddd; list-style: none;}
+		ul.album_list_hor li:first-child {margin-top: 0; padding-top: 0; border-top: none;}
+		ul.album_list_hor li img.info_img {float: left; width: 150px; height: 110px; margin-right: 20px;}
+		
+		.list_info {overflow: hidden; margin-top: 9px; font-family: "Noto Sans KR", sans-serif; font-size: 0.98em;}
+			.list_info strong.title {overflow: hidden; display: block; width: 100%; margin-bottom: 10px; font-size: 1.1em; color: #333333; text-align: left; text-overflow: ellipsis; white-space: nowrap;}
+			.list_info p.memo {overflow: hidden; height: 36px; font-size: 0.96em; line-height: 1.5em;}
+			.list_info dl.view {margin-top: 10px; padding: 0; border-bottom: 0;}
+
+
+
+/* dl view */
+.view_area {overflow: hidden; font-family: "Noto Sans KR", sans-serif;}
+	.view_title {overflow: hidden; padding: 11px 14px 10px; border-top: 2px solid #6f6f6f; border-bottom: 3px double #dddddd; font-weight: bold; font-size: 1.1em; line-height: 1.4em;}
+	.dl_view {overflow: hidden; font-family: "Noto Sans KR", sans-serif; font-size: 0.98em;}
+	dl.view {overflow: hidden; padding: 10px 14px 8px; border-bottom: 1px solid #dcdcdc; color: #333333; color: #4d4d4d;}
+		dl.view.top_line {border-top: 1px solid #dcdcdc;}
+		dl.view > dt.vdt {float: left; display: inline-block; padding-left: 9px; font-weight: bold; line-height: 1.5em;}
+		dl.view > dt.vdt:first-child {padding-left: 0px; background: none;}
+		dl.view > dt.vdt span {display: block; padding-right: 7px; margin-right: 5px; }
+		dl.view > dd.vdd {float: left; display: inline-block; margin-right: 8px; font-weight: normal; line-height: 1.5em;}
+		dl.view > dd.vdd input[type="file"] {display: inline-block; height: 22px;}
+		dl.view > dd.vdd a {color: #333333; text-decoration: none;}
+		dl.view > dd.vdd a:hover {color: #1f3662; text-decoration: underline;}
+		dl.view > dd.vdd a.download {display: inline-block; padding: 2px 5px; margin: 2px; border: 1px solid #dcdcdc; font-size: 0.89em; letter-spacing: -0.03em;}
+		dl.view > dd.vdd a.download:hover {color: #333333; text-decoration: none;}
+		dl.view > dd.vdd a.download img {display: block; float: left; margin-top: 2px; margin-right: 5px; vertical-align: top;}
+	
+	/* answer_area */
+	.answer_area {overflow: hidden; position: relative; margin-bottom: 20px; padding: 16px 20px; border: 5px solid #eaeaea; font-family: "Noto Sans KR", sans-serif;}
+		.answer_title {overflow: hidden; padding: 11px 14px 10px; border-top: 2px solid #137dbf; border-bottom: 3px double #dddddd; font-weight: bold; font-size: 1.1em; line-height: 1.4em;}
+		dl.answer {overflow: hidden; padding: 10px 14px 8px; border-bottom: 1px solid #dddddd; font-family: "Noto Sans KR", sans-serif; font-size: 0.98em; color: #333;}
+		
+		dl.answer > dt.adt {float: left; display: inline-block; padding-left: 9px; font-weight: 500;}
+		dl.answer > dt.adt:first-child {padding-left: 0px; background: none;}
+		dl.answer > dt.adt span {display: block; padding-right: 7px; margin-right: 5px;}
+		dl.answer > dd.add {float: left; display: inline-block; margin-right: 8px; font-weight: normal;}
+		dl.answer > dd.add input[type="file"] {display: inline-block; height: 22px;}
+		dl.answer > dd.add a {color: #333333; text-decoration: none;}
+		dl.answer > dd.add a:hover {color: #1f3662; text-decoration: underline;}
+		dl.answer > dd.add a.download {display: inline-block; padding: 2px 5px; margin: 2px; border: 1px solid #dcdcdc; font-size: 0.89em; letter-spacing: -0.03em;}
+		dl.answer > dd.add a.download:hover {color: #333333; text-decoration: none;}
+		dl.answer > dd.add a.download img {display: block; float: left; margin-top: 2px; margin-right: 5px; vertical-align: top;}
+		
+		div.question_mark {position: absolute; top: 25px; right: 20px;}
+
+
+
+/* table write */
+table.write {width: 100%; border: 0; font-family: '돋움', Dotum, Helvetica, 'Apple SD Gothic Neo', Sans-serif;}
+	table.write tbody th.first,
+	table.write tbody td.first {}
+	table.write tbody th.last
+	table.write tbody td.last {}
+	table.write tbody th.alignc,
+	table.write tbody td.alignc {text-align: center;}
+	table.write tbody th.top_line,
+	table.write tbody td.top_line {border-top: 2px solid #6f6f6f;}
+	table.write tbody td ul.view_list {overflow: hidden;}
+	table.write tbody td ul.view_list li {padding-left: 10px; list-style: none; background: url('../images/common/bg_tab_underline.png') no-repeat 0px 6px;}
+	table.write tbody td ul.view_list li + li {margin-top: 5px;}
+	table.write tbody th {padding: 7px 12px 8px 10px; font-family: "Noto Sans KR", sans-serif; border: 1px solid #d1d1d1;font-size: 16px; font-weight: 500; color: #333; text-align: right; line-height: 1.5em; vertical-align: middle; background-color: #f9f9f9;}
+	table.write tbody td {padding: 8px 10px; border: 1px solid #d1d1d1; font-size: 15px; color: #626262; line-height: 1.4em; text-align: left; vertical-align: middle; word-break: break-all;}
+	table.write tbody td input {display: inline-block; height: 25px;}
+	table.write tbody td select {position: relative; cursor: pointer; -webkit-appearance: none; -moz-appearance: none; appearance: none; height: 2rem; padding-left: 0.5rem;
+    border: 1px solid #d1d1d1; border-radius: 3px; background-color: #fff; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(
+135deg, currentColor 50%, transparent 50%), linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-position: calc(100% - 1.125rem - 0.5px) center, calc(100% - 0.75rem - 0.5px) center, calc(100% - 2.25rem) center; background-size: 0.375rem 0.375rem, 0.375rem 0.375rem, 1px 1.5rem; background-repeat: no-repeat; font-size: 0.9375rem;}
+
+table.write tbody td select:focus {outline: none;border: 1px solid #f59942;}
+table.write tbody td select:focus {
+    background-position: calc(100% - 1.125rem - 0.5px) center, calc(100% - 0.75rem - 0.5px) center, calc(100% - 2.25rem) center;
+    background-size: 0.375rem 0.375rem, 0.375rem 0.375rem, 1px 1.5rem;
+    background-repeat: no-repeat;
+    font-size: 0.9375rem;}
+	table.write tbody td a {color: #626262; text-decoration: none;}
+	table.write tbody td img {display: inline-block; margin-left: 1px; margin-right: 1px; vertical-align: middle;}
+	table.write tbody td .point_txt {display: inline-block; margin-top: 5px; color: #ff0000;}
+	
+	ul.search_file_list {overflow: hidden;}
+		ul.search_file_list li {overflow: hidden; margin-top: 7px; list-style: none;}
+		ul.search_file_list li:first-child {margin-top: 0;}
+		ul.search_file_list li input.file {display: inline-block; width: 60%; height: 25px;}
+
+
+
+/* 테이블 설명 박스 */
+.explain_box {overflow: hidden; margin-bottom: 20px; padding: 20px 24px; border: 1px solid #c9c9c9; font-family: '돋움', Dotum, Helvetica, 'Apple SD Gothic Neo', Sans-serif; background-color: #fcfcfc;}
+	.explain_box ul {overflow: hidden;}
+	.explain_box ul li {padding-left: 10px; font-size: 13px; color: #4d4d4d; line-height: 1.5em; list-style: none; background: url('../images/common/bullet_info1.png') no-repeat 0px 7px;}
+	.explain_box ul li + li {margin-top: 15px;}
+
+
+/* paging */
+.paging_area {overflow: hidden; width: 100%; margin: 30px 0; padding: 0; font-size: 0.88em; font-weight: 400; text-align: center;}
+    .paging_area strong {display: inline-block; height: 22px; padding: 0 8px; border: 1px solid #137dbf; font-weight: bold; color: #fff; line-height: 23px; vertical-align: top; background-color: #0f4ba1;font-size: 15px;}
+    .paging_area a {display: inline-block; height: 24px; padding: 0 6px 0; line-height: 24px; color: #454545;font-size: 15px;}  
+    .paging_area a:hover {text-decoration: underline;}
+    .paging_area a.stimg {display: inline-block; padding: 0; border: 0; text-decoration: none;}
+    .paging_area a.stimg img {display: inline-block; height: 24px; border: 0; text-decoration: none; vertical-align: top;}
+    .paging_area a.stimg:hover {text-decoration: none;}
+
+
+
+/* table search */
+.search_area {overflow: hidden; position: relative; padding: 30px; margin-bottom: 30px; border: 1px solid #d1d1d1;background-color: #eee !important;}
+	.search_txt_box {overflow: hidden; margin-bottom: 10px;}
+	.search_txt_box input[type=text] {width: 98.4%; border: 1px solid #8a8a8a;}
+	
+	.secrch_btnarea {position:absolute; float: right; width: 71px; bottom: 18px; right: 20px; margin-left: 15px; vertical-align: bottom;}
+		.secrch_btnarea .btn.sch {width: 71px; height: 27px; font-family: "Noto Sans KR", sans-serif; font-size: 13px; font-weight: bold; text-align: center; line-height: 27px; color: #ffffff;}
+		.secrch_btnarea .btn.sch {background-color: #6f6f6f;}
+
+	dl.search_box {overflow: hidden; font-family: "Noto Sans KR", sans-serif; font-size: 13px; vertical-align: top;}
+		dl.search_box + dl.search_box {margin-top: 6px;}
+		dl.search_box > dt.title {float: left; width: 80px; margin-right: 10px; padding: 4px 0 0 9px; font-weight: bold; vertical-align: top; background: url('../images/common/bullet_search.png') no-repeat 0 11px;}
+		dl.search_box > dd.box {overflow: hidden; min-height: 27px; font-weight: normal; vertical-align: top;}
+		dl.search_box > dd.box input {margin-top: 15px;outline: none;box-sizing: border-box; -webkit-appearance: none;  -moz-appearance: none; appearance: none;border: 0;padding-left: 12px; }
+        dl.search_box > dd.box input:focus{border: 1px solid #f59942;}
+
+	    .input_search_box{height: 64px; font-size: 14px; border: 1px solid #d1d1d1; background-color: #fff; background-size: 30px; box-sizing: border-box; -webkit-appearance: none;
+    -moz-appearance: none; appearance: none;}
+
+		dl.search_box > dd.box input[type="text"] {height: 40px; color: #454545;}
+		dl.search_box > dd.box input.input_day {width: 20%;}
+		dl.search_box > dd.box input.input_txt1 {width: 50%;}
+		dl.search_box > dd.box input.input_txt2 {width: 60%;}
+		dl.search_box > dd.box span.txt {display: inline-block; font-weight: normal; font-size: 0.98em; color: #4d4d4d; letter-spacing: -0.04em; vertical-align: middle;}
+		dl.search_box > dd.box select {height:64px; padding: 12px 22px 10px 10px; margin-right: 10px; color: #333333; font-size: 16px; border: 1px solid #d1d1d1; background: url('../images/icon/arrow_down.png') no-repeat 92% 50%;background-color: #fff; box-sizing: border-box; -webkit-appearance: none;
+    -moz-appearance: none; appearance: none;}
+	    dl.search_box > dd.box select:focus{border: 1px solid #f59942;outline: none;}
+		dl.search_box > dd.box select.selectbox1 {width: 16%;}
+
+	.table_count_area {overflow: hidden; margin-bottom: 7px; vertical-align: bottom;}
+		.count_area {font-family: "Noto Sans KR", sans-serif; font-size: 1em; text-align: left;}
+		.count_area > strong {display: inline-block; margin: 0 4px 0 1px; font-weight: bold; color: #045d9b; line-height: 1.5em;}
+
+
+
+/* comment_area */
+.comment_area { margin-top: 80px}
+	.comment_title_area {overflow: hidden;}
+		.comment_title_area h5.comment_title {float: left; margin: 0 5px 0 11px; font-family: "Noto Sans KR", sans-serif; font-size: 15px; font-weight: bold; color: #686868;}
+		.comment_title_area strong.number {display: inline; display: inline-block; float: left; padding-left: 5px; background: url('../images/common/bg_comment_count.png') no-repeat 0 0;}
+		.comment_title_area strong.number span {display: block; height: 17px; padding: 0 7px; border: 1px solid #929292; border-left: 0; font-family: '돋움', Dotum, Helvetica, 'Apple SD Gothic Neo', Sans-serif; font-size: 11px; font-weight: normal; line-height: 19px; color: #1289cb;}
+
+	.commentbox_area {overflow: hidden; margin-top: 5px; padding: 22px; border-top: 1px solid #c9c9c9; background-color: #f9f9f9;}
+	    .txtinput_area {overflow: hidden; position: relative; padding-bottom: 20px; background: url('../images/common/bg_comment_underline.png') repeat-x 0 bottom;}
+	    	.txtbox {overflow: hidden; margin-right: 104px;}
+	    	.txtbox .count_number {float: right; margin-top: 7px; font-family: "Noto Sans KR", sans-serif; font-size: 13px; color: #5b5b5b;}
+		    .txtbox .count_number strong {color: #424242;}
+		    .txtinput_area textarea.txtinput {width: 99.8%; height: 60px; border: 1px solid #dcdcdc;}
+		    .txtinput_area button.btn_comment_save {position: absolute; right: 0; top: 0;}
+	    
+	    .commentbox {overflow: hidden; margin-top: 20px; padding: 13px 15px; background-color: #ffffff;}
+	    	ul.comment_list {overflow: hidden;}
+		    	ul.comment_list li {overflow: hidden; position: relative; padding: 27px 10px 25px; border-top: 1px dotted #c8c8c8; font-family: "Noto Sans KR", sans-serif; font-size: 13px;}
+		    	ul.comment_list li:first-child {border-top: 0;}
+		    	ul.comment_list li .info_arae {overflow: hidden; margin-right: 25px;}
+		    	ul.comment_list li .info_arae strong.name {display: inline-block; display: inline; font-weight: bold; color: #444444;}
+		    	ul.comment_list li .info_arae span {display: inline-block; display: inline; margin-left: 10px; color: #a09f9f;}
+		    	ul.comment_list li .button_area {position: absolute; top: 25px; right: 10px;}
+		    	ul.comment_list li .button_area button {display: inline-block; float: left; margin-left: 1px;}
+		    	
+		    	.txt_area {overflow: hidden; padding: 1px; margin-top: 20px; font-family: '돋움', Dotum, Helvetica, 'Apple SD Gothic Neo', Sans-serif; font-size: 12px; line-height: 1.5em; color: #686868;}
+		    	.txt_area p {font-size: 12px; line-height: 1.5em; color: #686868;}
+		    	
+		    .recommentbox {overflow: hidden; margin-top: 10px; padding: 15px 15px 10px 10px; border: 1px solid #e1dfdf; background-color: #ffffff;}
+			    .recommentbox ul.comment_list {overflow: hidden;}
+			    	.recommentbox ul.comment_list li {overflow: hidden; position: relative; padding: 12px 0 0 17px; margin-top: 12px; border-top: 1px dotted #c8c8c8; font-family: "Noto Sans KR", sans-serif; font-size: 13px; background: url('../images/common/bullet_comment_reply.png') no-repeat 3px 14px;}
+			    	.recommentbox ul.comment_list li:first-child {border-top: 0; padding-top: 0; margin-top: 0; background: url('../images/common/bullet_comment_reply.png') no-repeat 3px 2px;}
+			    	.recommentbox ul.comment_list li .info_arae {overflow: hidden; margin-right: 25px;}
+			    	.recommentbox ul.comment_list li .info_arae strong.name {display: inline-block; display: inline; font-weight: bold; color: #444444;}
+			    	.recommentbox ul.comment_list li .info_arae span {display: inline-block; display: inline; margin-left: 10px; color: #a09f9f;}
+			    	.recommentbox ul.comment_list li .button_area {position: absolute; top: 12px; right: 0;}
+			    	.recommentbox ul.comment_list li:first-child .button_area {position: absolute; top: 0; right: 0;}
+			    	.recommentbox ul.comment_list li .button_area button {display: inline-block; float: left; margin-left: 1px;}
+			    	
+			ul.comment_list li .txtinput_area {padding-bottom: 0; margin-top: 15px; background: none;}
+
+/* table list */
+table.contents_table {width: 100%; border-top: 1px solid #c9c9c9; border-bottom: 1px solid #c9c9c9; font-family: '돋움', Dotum, Helvetica, 'Apple SD Gothic Neo', Sans-serif;}
+	table.contents_table thead th,
+	table.contents_table tfoot th,
+	table.contents_table tfoot td,
+	table.contents_table tbody th {font-family: "Noto Sans KR", sans-serif;}
+
+	table.contents_table thead th {padding: 13px 0px 11px; border: 1px solid #c9c9c9; border-bottom: 3px double #c9c9c9; font-size: 14px; font-weight: bold; color: #4d4d4d; text-align: center; vertical-align: middle; line-height: 1.4em; background: #f8f8f8;}
+	
+	table.contents_table tbody th {font-size: 13px; font-weight: bold; color: #4d4d4d; text-align: center; background-color: #fcfcfc;}
+	table.contents_table tbody td {padding: 9px 8px; border: 1px solid #c9c9c9; border-top: 0; font-size: 12px; color: #4d4d4d; text-align: center; line-height: 1.4em; vertical-align: middle; word-break: break-all;}
+	table.contents_table tbody td.nopadding {padding: 0px;}
+	table.contents_table tbody td.bg_blue {background-color: #edfcff; border-right: 3px double #c9c9c9; }
+	
+	table.contents_table tfoot th {padding: 9px 0; border-top: 1px solid #b2b2b2; border-bottom: 1px solid #b2b2b2; border-right: 3px double #b2b2b2; font-size: 1.05em; color: #333333; text-align: center; background-color: #f6fcff;}
+	table.contents_table tfoot td {padding: 9px 8px; border-top: 1px solid #b2b2b2; border-bottom: 1px solid #b2b2b2; border-left: 0; border-right: 0; font-size: 1.05em; font-weight: bold; color: #333333; text-align: center; background-color: #f6fcff;}
+	table.contents_table tfoot td.bg {background-color: #ffffff;}
+	
+	table.contents_table tbody th.alignl,
+	table.contents_table tbody td.alignl {text-align: left;}
+	table.contents_table tbody th.alignr,
+	table.contents_table tbody td.alignr {text-align: right;}
+	table.contents_table tbody td a {margin-right: 5px; color: #045d9b; line-height: 1.5em; text-decoration: underline;}
+	table.contents_table tbody td img {display: inline; display: inline-block; margin-right: 2px; vertical-align: top;}
+	table.contents_table tbody td a img {margin-right: 0;}
+	
+	.table_view td p{font-family: 'Arial, Helvetica', 'Apple SD Gothic Neo', '돋움', 'Dotum', Sans-serif;}

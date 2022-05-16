@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.commissioner">
+
+	<resultMap id="commissioner" type="CommissionerVO">
+		<result property ="commissioner_id"					column="COMMISSIONER_ID"	/>
+		<result property ="member_id"						column="MEMBER_ID"	/>
+		<result property ="private_info_yn"					column="PRIVATE_INFO_YN"	/>
+		<result property ="info_terms_yn"					column="INFO_TERMS_YN"	/>
+		<result property ="security_yn"						column="SECURITY_YN"	/>
+		<result property ="commissioner_status"				column="COMMISSIONER_STATUS"	/>
+		<result property ="bank_name"						column="BANK_NAME"	/>
+		<result property ="bank_account"					column="BANK_ACCOUNT"	/>
+		<result property ="national_skill_large"			column="NATIONAL_SKILL_LARGE"	/>
+		<result property ="national_skill_middle"		    column="NATIONAL_SKILL_MIDDLE"	/>
+		<result property ="national_skill_small"			column="NATIONAL_SKILL_SMALL"	/>
+		<result property ="four_industry"					column="FOUR_INDUSTRY"	/>
+		<result property ="rnd_class"						column="RND_CLASS"	/>
+		<!-- 학력 -->
+		<result property ="degree_01"						column="DEGREE_01"	/>
+		<result property ="degree_school_01"				column="DEGREE_SCHOOL_01"	/>
+		<result property ="degree_major_01"					column="DEGREE_MAJOR_01"	/>
+		<result property ="degree_date_01"					column="DEGREE_DATE_01"	/>
+		<result property ="degree_certificate_file_id_01"	column="DEGREE_CERTIFICATE_FILE_ID_01"	/>
+		<result property ="degree_02"						column="DEGREE_02"	/>
+		<result property ="degree_school_02"				column="DEGREE_SCHOOL_02"	/>
+		<result property ="degree_major_02"					column="DEGREE_MAJOR_02"	/>
+		<result property ="degree_date_02"					column="DEGREE_DATE_02"	/>
+		<result property ="degree_certificate_file_id_02"	column="DEGREE_CERTIFICATE_FILE_ID_02"	/>
+		<!-- 경력 -->
+		<result property ="career_company_01"				column="CAREER_COMPANY_01"	/>
+		<result property ="career_depart_01"				column="CAREER_DEPART_01"	/>
+		<result property ="career_position_01"				column="CAREER_POSITION_01"	/>
+		<result property ="career_start_date_01"			column="CAREER_START_DATE_01"	/>
+		<result property ="career_retire_date_01"			column="CAREER_RETIRE_DATE_01"	/>
+		<result property ="career_description_01"			column="CAREER_DESCRIPTION_01"	/>
+		<result property ="career_company_02"				column="CAREER_COMPANY_02"	/>
+		<result property ="career_depart_02"				column="CAREER_DEPART_02"	/>
+		<result property ="career_position_02"				column="CAREER_POSITION_02"	/>
+		<result property ="career_start_date_02"			column="CAREER_START_DATE_02"	/>
+		<result property ="career_retire_date_02"			column="CAREER_RETIRE_DATE_02"	/>
+		<result property ="career_description_02"			column="CAREER_DESCRIPTION_02"	/>
+		<result property ="career_company_03"				column="CAREER_COMPANY_03"	/>
+		<result property ="career_depart_03"				column="CAREER_DEPART_03"	/>
+		<result property ="career_position_03"				column="CAREER_POSITION_03"	/>
+		<result property ="career_start_date_03"			column="CAREER_START_DATE_03"	/>
+		<result property ="career_retire_date_03"			column="CAREER_RETIRE_DATE_03"	/>
+		<result property ="career_description_03"			column="CAREER_DESCRIPTION_03"	/>
+		<result property ="career_company_04"				column="CAREER_COMPANY_04"	/>
+		<result property ="career_depart_04"				column="CAREER_DEPART_04"	/>
+		<result property ="career_position_04"				column="CAREER_POSITION_04"	/>
+		<result property ="career_start_date_04"			column="CAREER_START_DATE_04"	/>
+		<result property ="career_retire_date_04"			column="CAREER_RETIRE_DATE_04"	/>
+		<result property ="career_description_04"			column="CAREER_DESCRIPTION_04"	/>
+		<!-- 논문 -->
+		<result property ="thesis_sci_yn_01"				column="THESIS_SCI_YN_01"	/>
+		<result property ="thesis_title_01"					column="THESIS_TITLE_01"	/>
+		<result property ="thesis_writer_01"				column="THESIS_WRITER_01"	/>
+		<result property ="thesis_journal_01"				column="THESIS_JOURNAL_01"	/>
+		<result property ="thesis_nationality_01"			column="THESIS_NATIONALITY_01"	/>
+		<result property ="thesis_date_01"					column="THESIS_DATE_01"	/>
+		<result property ="thesis_sci_yn_02"				column="THESIS_SCI_YN_02"	/>
+		<result property ="thesis_title_02"					column="THESIS_TITLE_02"	/>
+		<result property ="thesis_writer_02"				column="THESIS_WRITER_02"	/>
+		<result property ="thesis_journal_02"				column="THESIS_JOURNAL_02"	/>
+		<result property ="thesis_nationality_02"			column="THESIS_NATIONALITY_02"	/>
+		<result property ="thesis_date_02"					column="THESIS_DATE_02"	/>
+		<result property ="thesis_sci_yn_03"				column="THESIS_SCI_YN_03"	/>
+		<result property ="thesis_title_03"					column="THESIS_TITLE_03"	/>
+		<result property ="thesis_writer_03"				column="THESIS_WRITER_03"	/>
+		<result property ="thesis_journal_03"				column="THESIS_JOURNAL_03"	/>
+		<result property ="thesis_nationality_03"			column="THESIS_NATIONALITY_03"	/>
+		<result property ="thesis_date_03"					column="THESIS_DATE_03"	/>
+		<!--  지적재산권 -->
+		<result property ="iprs_name_01"					column="IPRS_NAME_01"	/>
+		<result property ="iprs_enroll_01"					column="IPRS_ENROLL_01"	/>
+		<result property ="iprs_reg_no_01"					column="IPRS_REG_NO_01"	/>
+		<result property ="iprs_date_01"					column="IPRS_DATE_01"	/>
+		<result property ="iprs_nationality_01"				column="IPRS_NATIONALITY_01"	/>
+		<result property ="iprs_writer_01"					column="IPRS_WRITER_01"	/>
+		<result property ="iprs_name_02"					column="IPRS_NAME_02"	/>
+		<result property ="iprs_enroll_02"					column="IPRS_ENROLL_02"	/>
+		<result property ="iprs_reg_no_02"					column="IPRS_REG_NO_02"	/>
+		<result property ="iprs_date_02"					column="IPRS_DATE_02"	/>
+		<result property ="iprs_nationality_02"				column="IPRS_NATIONALITY_02"	/>
+		<result property ="iprs_writer_02"					column="IPRS_WRITER_02"	/>
+		<result property ="iprs_name_03"					column="IPRS_NAME_03"	/>
+		<result property ="iprs_enroll_03"					column="IPRS_ENROLL_03"	/>
+		<result property ="iprs_reg_no_03"					column="IPRS_REG_NO_03"	/>
+		<result property ="iprs_date_03"					column="IPRS_DATE_03"	/>
+		<result property ="iprs_nationality_03"				column="IPRS_NATIONALITY_03"	/>
+		<result property ="iprs_writer_03"					column="IPRS_WRITER_03"	/>
+		
+		<result property ="self_description"				column="SELF_DESCRIPTION"	/>
+		<result property ="remark"							column="REMARK"	/>
+		<result property ="reg_date"						column="REG_DATE"	/>
+		<result property ="update_date"						column="UPDATE_DATE"	/>
+		<result property ="total_count"						column="TOTAL_COUNT"	/>
+		
+		<result property ="name"							column="NAME"	/>
+		<result property ="mobile_phone"					column="MOBILE_PHONE"	/>
+		<result property ="email"							column="EMAIL"	/>
+		<result property ="address"							column="ADDRESS"	/>
+		<result property ="institution_type"				column="INSTITUTION_TYPE"	/>
+		<result property ="institution_type_name"			column="INSTITUTION_TYPE_NAME"	/>
+		<result property ="institution_name"				column="INSTITUTION_NAME"	/>
+		<result property ="commissioner_status_name"		column="COMMISSIONER_STATUS_NAME"	/>
+		<result property ="four_industry_name"				column="FOUR_INDUSTRY_NAME"	/>
+		<result property ="degree_certificate_file_name_01"	column="DEGREE_CERTIFICATE_FILE_NAME_01"/>
+		<result property ="degree_certificate_file_name_02"	column="DEGREE_CERTIFICATE_FILE_NAME_02"/>
+		
+		<result property ="institution_type_personal_count"		column="INSTITUTION_TYPE_PERSONAL_COUNT"/>
+		<result property ="institution_type_company_count"		column="INSTITUTION_TYPE_COMPANY_COUNT"/>
+		<result property ="institution_type_school_count"		column="INSTITUTION_TYPE_SCHOOL_COUNT"/>
+		<result property ="institution_type_commissioner_count"	column="INSTITUTION_TYPE_COMMISSIONER_COUNT"/>
+		<result property ="institution_type_department_count"	column="INSTITUTION_TYPE_DEPARTMENT_COUNT"/>
+		<result property ="institution_type_etc_count"			column="INSTITUTION_TYPE_ETC_COUNT"/>
+		<result property ="institution_type_manager_count"		column="INSTITUTION_TYPE_MANAGER_COUNT"/>
+		
+	</resultMap>
+	
+	
+	<resultMap id="commissionerEvaluationItem" type="CommissionerEvaluationItemVO">
+		<result property ="member_id"			column="MEMBER_ID"/>
+		<result property ="evaluation_id"		column="EVALUATION_ID"/>
+		<result property ="item_type"			column="ITEM_TYPE"/>
+	
+	</resultMap>
+
+
+	<insert id="insertInfo" parameterType="CommissionerVO">
+		INSERT INTO COMMISSIONER ( 
+			MEMBER_ID
+			,	COMMISSIONER_STATUS
+			,	BANK_NAME
+			,	BANK_ACCOUNT
+			,	NATIONAL_SKILL_LARGE
+			,	NATIONAL_SKILL_MIDDLE
+			,	NATIONAL_SKILL_SMALL
+			,	FOUR_INDUSTRY
+			,	RND_CLASS
+			,	DEGREE_01
+			,	DEGREE_SCHOOL_01
+			,	DEGREE_MAJOR_01
+			,	DEGREE_DATE_01
+			,	DEGREE_CERTIFICATE_FILE_ID_01
+			,	DEGREE_02
+			,	DEGREE_SCHOOL_02
+			,	DEGREE_MAJOR_02
+			,	DEGREE_DATE_02
+			,	DEGREE_CERTIFICATE_FILE_ID_02
+			,	CAREER_COMPANY_01
+			,	CAREER_DEPART_01
+			,	CAREER_POSITION_01
+			,	CAREER_START_DATE_01
+			,	CAREER_RETIRE_DATE_01
+			,	CAREER_DESCRIPTION_01
+			,	CAREER_COMPANY_02
+			,	CAREER_DEPART_02
+			,	CAREER_POSITION_02
+			,	CAREER_START_DATE_02
+			,	CAREER_RETIRE_DATE_02
+			,	CAREER_DESCRIPTION_02
+			,	CAREER_COMPANY_03
+			,	CAREER_DEPART_03
+			,	CAREER_POSITION_03
+			,	CAREER_START_DATE_03
+			,	CAREER_RETIRE_DATE_03
+			,	CAREER_DESCRIPTION_03
+			,	CAREER_COMPANY_04
+			,	CAREER_DEPART_04
+			,	CAREER_POSITION_04
+			,	CAREER_START_DATE_04
+			,	CAREER_RETIRE_DATE_04
+			,	CAREER_DESCRIPTION_04
+			,	THESIS_SCI_YN_01
+			,	THESIS_TiTLE_01
+			,	THESIS_WRITER_01
+			,	THESIS_JOURNAL_01
+			,	THESIS_NATIONALITY_01
+			,	THESIS_DATE_01
+			,	THESIS_SCI_YN_02
+			,	THESIS_TiTLE_02
+			,	THESIS_WRITER_02
+			,	THESIS_JOURNAL_02
+			,	THESIS_NATIONALITY_02
+			,	THESIS_DATE_02
+			,	THESIS_SCI_YN_03
+			,	THESIS_TiTLE_03
+			,	THESIS_WRITER_03
+			,	THESIS_JOURNAL_03
+			,	THESIS_NATIONALITY_03
+			,	THESIS_DATE_03
+			,	IPRS_NAME_01
+			,	IPRS_ENROLL_01
+			,	IPRS_REG_NO_01
+			,	IPRS_DATE_01
+			,	IPRS_NATIONALITY_01
+			,	IPRS_WRITER_01
+			,	IPRS_NAME_02
+			,	IPRS_ENROLL_02
+			,	IPRS_REG_NO_02
+			,	IPRS_DATE_02
+			,	IPRS_NATIONALITY_02
+			,	IPRS_WRITER_02
+			,	IPRS_NAME_03
+			,	IPRS_ENROLL_03
+			,	IPRS_REG_NO_03
+			,	IPRS_DATE_03
+			,	IPRS_NATIONALITY_03
+			,	IPRS_WRITER_03
+			,	SELF_DESCRIPTION
+			
+		) 
+		VALUES ( 
+			#{member_id}
+			,	#{commissioner_status} 
+			,	#{bank_name}
+			,	#{bank_account}
+			,	#{national_skill_large}
+			,	#{national_skill_middle}
+			,	#{national_skill_small}
+			,	#{four_industry}
+			,	#{rnd_class}
+			,	#{degree_01}
+			,	#{degree_school_01}
+			,	#{degree_major_01}
+			,	#{degree_date_01}
+			,	#{degree_certificate_file_id_01}
+			,	#{degree_02}
+			,	#{degree_school_02}
+			,	#{degree_major_02}
+			,	#{degree_date_02}
+			,	#{degree_certificate_file_id_02}
+			,	#{career_company_01}
+			,	#{career_depart_01}
+			,	#{career_position_01}
+			,	#{career_start_date_01}
+			,	#{career_retire_date_01}
+			,	#{career_description_01}
+			,	#{career_company_02}
+			,	#{career_depart_02}
+			,	#{career_position_02}
+			,	#{career_start_date_02}
+			,	#{career_retire_date_02}
+			,	#{career_description_02}
+			,	#{career_company_03}
+			,	#{career_depart_03}
+			,	#{career_position_03}
+			,	#{career_start_date_03}
+			,	#{career_retire_date_03}
+			,	#{career_description_03}
+			,	#{career_company_04}
+			,	#{career_depart_04}
+			,	#{career_position_04}
+			,	#{career_start_date_04}
+			,	#{career_retire_date_04}
+			,	#{career_description_04}
+			,	#{thesis_sci_yn_01}
+			,	#{thesis_title_01}
+			,	#{thesis_writer_01}
+			,	#{thesis_journal_01}
+			,	#{thesis_nationality_01}
+			,	#{thesis_date_01}
+			,	#{thesis_sci_yn_02}
+			,	#{thesis_title_02}
+			,	#{thesis_writer_02}
+			,	#{thesis_journal_02}
+			,	#{thesis_nationality_02}
+			,	#{thesis_date_02}
+			,	#{thesis_sci_yn_03}
+			,	#{thesis_title_03}
+			,	#{thesis_writer_03}
+			,	#{thesis_journal_03}
+			,	#{thesis_nationality_03}
+			,	#{thesis_date_03}
+			,	#{iprs_name_01}
+			,	#{iprs_enroll_01}
+			,	#{iprs_reg_no_01}
+			,	#{iprs_date_01}
+			,	#{iprs_nationality_01}
+			,	#{iprs_writer_01}
+			,	#{iprs_name_02}
+			,	#{iprs_enroll_02}
+			,	#{iprs_reg_no_02}
+			,	#{iprs_date_02}
+			,	#{iprs_nationality_02}
+			,	#{iprs_writer_02}
+			,	#{iprs_name_01}
+			,	#{iprs_enroll_03}
+			,	#{iprs_reg_no_03}
+			,	#{iprs_date_03}
+			,	#{iprs_nationality_03}
+			,	#{iprs_writer_03}
+			,	#{self_description}
+		)
+	</insert>
+	
+	<update id="updateInfo" parameterType="CommissionerVO">
+		UPDATE COMMISSIONER SET   
+			BANK_NAME = #{bank_name}
+			,	BANK_ACCOUNT = #{bank_account}
+			,	NATIONAL_SKILL_LARGE = #{national_skill_large}
+			,	NATIONAL_SKILL_MIDDLE = #{national_skill_middle}
+			,	NATIONAL_SKILL_SMALL = #{national_skill_small}
+			,	FOUR_INDUSTRY = #{four_industry}
+			,	RND_CLASS = #{rnd_class}
+			,	DEGREE_01 = #{degree_01}
+			,	DEGREE_SCHOOL_01 = #{degree_school_01}
+			,	DEGREE_MAJOR_01 = #{degree_major_01}
+			,	DEGREE_DATE_01 = #{degree_date_01}
+			<if test='degree_certificate_file_id_01 != null and degree_certificate_file_id_01 != "" '>
+				, DEGREE_CERTIFICATE_FILE_ID_01 = #{degree_certificate_file_id_01}
+			</if>
+			,	DEGREE_02 = #{degree_02}
+			,	DEGREE_SCHOOL_02 = #{degree_school_02}
+			,	DEGREE_MAJOR_02 = #{degree_major_02}
+			,	DEGREE_DATE_02 = #{degree_date_02}
+			<if test='degree_certificate_file_id_02 != null and degree_certificate_file_id_02 != "" '>
+				, DEGREE_CERTIFICATE_FILE_ID_02 = #{degree_certificate_file_id_02}
+			</if>
+			,	CAREER_COMPANY_01 = #{career_company_01}
+			,	CAREER_DEPART_01 = #{career_depart_01}
+			,	CAREER_POSITION_01 = #{career_position_01}
+			,	CAREER_START_DATE_01 = #{career_start_date_01}
+			,	CAREER_RETIRE_DATE_01 = #{career_retire_date_01}
+			,	CAREER_DESCRIPTION_01 = #{career_description_01}
+			,	CAREER_COMPANY_02 = #{career_company_02}
+			,	CAREER_DEPART_02 = #{career_depart_02}
+			,	CAREER_POSITION_02 = #{career_position_02}
+			,	CAREER_START_DATE_02 = #{career_start_date_02}
+			,	CAREER_RETIRE_DATE_02 = #{career_retire_date_02}
+			,	CAREER_DESCRIPTION_02 = #{career_description_02}
+			,	CAREER_COMPANY_03 = #{career_company_03}
+			,	CAREER_DEPART_03 = #{career_depart_03}
+			,	CAREER_POSITION_03 = #{career_position_03}
+			,	CAREER_START_DATE_03 = #{career_start_date_03}
+			,	CAREER_RETIRE_DATE_03 = #{career_retire_date_03}
+			,	CAREER_DESCRIPTION_03 = #{career_description_03}
+			,	CAREER_COMPANY_04 = #{career_company_04}
+			,	CAREER_DEPART_04 = #{career_depart_04}
+			,	CAREER_POSITION_04 = #{career_position_04}
+			,	CAREER_START_DATE_04 = #{career_start_date_04}
+			,	CAREER_RETIRE_DATE_04 = #{career_retire_date_04}
+			,	CAREER_DESCRIPTION_04 = #{career_description_04}
+			,	THESIS_SCI_YN_01 = #{thesis_sci_yn_01}
+			,	THESIS_TITLE_01 = #{thesis_title_01}
+			,	THESIS_WRITER_01 = #{thesis_writer_01}
+			,	THESIS_JOURNAL_01 = #{thesis_journal_01}
+			,	THESIS_NATIONALITY_01 = #{thesis_nationality_01}
+			,	THESIS_DATE_01 = #{thesis_date_01}
+			,	THESIS_SCI_YN_02 = #{thesis_sci_yn_02}
+			,	THESIS_TITLE_02 = #{thesis_title_02}
+			,	THESIS_WRITER_02 = #{thesis_writer_02}
+			,	THESIS_JOURNAL_02 = #{thesis_journal_02}
+			,	THESIS_NATIONALITY_02 = #{thesis_nationality_02}
+			,	THESIS_DATE_02 = #{thesis_date_02}
+			,	THESIS_SCI_YN_03 = #{thesis_sci_yn_03}
+			,	THESIS_TITLE_03 = #{thesis_title_03}
+			,	THESIS_WRITER_03 = #{thesis_writer_03}
+			,	THESIS_JOURNAL_03 = #{thesis_journal_03}
+			,	THESIS_NATIONALITY_03 = #{thesis_nationality_03}
+			,	THESIS_DATE_03 = #{thesis_date_03}
+			,	IPRS_NAME_01 = #{iprs_name_01}
+			,	IPRS_ENROLL_01 = #{iprs_enroll_01}
+			,	IPRS_REG_NO_01 = #{iprs_reg_no_01}
+			,	IPRS_DATE_01 = #{iprs_date_01}
+			,	IPRS_NATIONALITY_01 = #{iprs_nationality_01}
+			,	IPRS_WRITER_01 = #{iprs_writer_01}
+			,	IPRS_NAME_02 = #{iprs_name_02}
+			,	IPRS_ENROLL_02 = #{iprs_enroll_02}
+			,	IPRS_REG_NO_02 = #{iprs_reg_no_02}
+			,	IPRS_DATE_02 = #{iprs_date_02}
+			,	IPRS_NATIONALITY_02 = #{iprs_nationality_02}
+			,	IPRS_WRITER_02 = #{iprs_writer_02}
+			,	IPRS_NAME_03 = #{iprs_name_03}
+			,	IPRS_ENROLL_03 = #{iprs_enroll_03}
+			,	IPRS_REG_NO_03 = #{iprs_reg_no_03}
+			,	IPRS_DATE_03 = #{iprs_date_03}
+			,	IPRS_NATIONALITY_03 = #{iprs_nationality_03}
+			,	IPRS_WRITER_03 = #{iprs_writer_03}
+			,	SELF_DESCRIPTION = #{self_description}
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	
+	<delete id="deleteInfo" parameterType="CommissionerVO">
+		DELETE FROM COMMISSIONER			
+		WHERE 
+			MEMBER_ID = #{member_id} 
+	</delete>
+	
+
+	<select id="selectSearchPagingList" parameterType="DataMap" resultMap="commissioner">
+		<include refid="common.pagingPre"/>
+		SELECT
+			A.COMMISSIONER_ID
+			,	A.MEMBER_ID
+			, 	B.NAME
+			, 	B.MOBILE_PHONE
+			, 	B.EMAIL
+			, 	B.ADDRESS
+			, 	A.RND_CLASS
+			,	A.NATIONAL_SKILL_LARGE
+			,	B.INSTITUTION_TYPE
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000004' AND D.DETAIL_ID = B.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+			,	IFNULL((SELECT NAME FROM INSTITUTION C WHERE B.INSTITUTION_ID = C.REG_NO), "") AS INSTITUTION_NAME
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	DATE_FORMAT(A.UPDATE_DATE,'%Y-%m-%d') AS UPDATE_DATE
+			,	A.COMMISSIONER_STATUS
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000020' AND D.DETAIL_ID = A.COMMISSIONER_STATUS) AS COMMISSIONER_STATUS_NAME
+			,	A.REMARK
+		FROM
+			COMMISSIONER A
+		LEFT JOIN
+			MEMBER B
+		ON	B.MEMBER_ID = A.MEMBER_ID
+		WHERE
+			1=1
+			<if test='commissioner_status != null and commissioner_status != "" '>
+				AND A.COMMISSIONER_STATUS = #{commissioner_status}
+			</if>
+			<if test='name != null and name != "" '>
+				AND B.NAME LIKE CONCAT('%',#{name},'%')
+			</if> 
+			<if test='update_date != null and update_date != "" '>
+				AND A.UPDATE_DATE = #{update_date}
+			</if>
+			<if test='institution_type != null and institution_type != "" '>
+				AND B.INSTITUTION_TYPE = #{institution_type}
+			</if>
+			<if test='institution_name != null and institution_name != "" '>
+				AND (SELECT NAME FROM INSTITUTION C WHERE B.INSTITUTION_ID = C.REG_NO ) LIKE CONCAT('%',#{institution_name},'%')
+			</if>
+			<if test='rnd_class != null and rnd_class != "" '>
+				AND A.RND_CLASS LIKE CONCAT('%',#{rnd_class},'%')
+			</if>
+			<if test='national_skill_large != null and national_skill_large != "" '>
+				AND A.NATIONAL_SKILL_LARGE LIKE CONCAT('%',#{national_skill_large},'%')
+			</if>
+			
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<select id="selectDetail" parameterType="CommissionerVO"  resultMap="commissioner">
+		SELECT
+			COMMISSIONER_ID
+			,	MEMBER_ID
+			,	COMMISSIONER_STATUS
+			,	BANK_NAME
+			,	BANK_ACCOUNT
+			,	NATIONAL_SKILL_LARGE
+			,	NATIONAL_SKILL_MIDDLE
+			,	NATIONAL_SKILL_SMALL
+			,	FOUR_INDUSTRY
+			,	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000009' AND D.DETAIL_ID = A.FOUR_INDUSTRY) AS FOUR_INDUSTRY_NAME
+			,	RND_CLASS
+			,	DEGREE_01
+			,	DEGREE_SCHOOL_01
+			,	DEGREE_MAJOR_01
+			,	DEGREE_DATE_01
+			,	DEGREE_CERTIFICATE_FILE_ID_01
+			, 	(SELECT B.NAME FROM UPLOAD_FILE B WHERE B.FIlE_ID = A.DEGREE_CERTIFICATE_FILE_ID_01 ) AS DEGREE_CERTIFICATE_FILE_NAME_01
+			,	DEGREE_02
+			,	DEGREE_SCHOOL_02
+			,	DEGREE_MAJOR_02
+			,	DEGREE_DATE_02
+			,	DEGREE_CERTIFICATE_FILE_ID_02
+			, 	(SELECT B.NAME FROM UPLOAD_FILE B WHERE B.FIlE_ID = A.DEGREE_CERTIFICATE_FILE_ID_02 ) AS DEGREE_CERTIFICATE_FILE_NAME_02
+			,	CAREER_COMPANY_01
+			,	CAREER_DEPART_01
+			,	CAREER_POSITION_01
+			,	CAREER_START_DATE_01
+			,	CAREER_RETIRE_DATE_01
+			,	CAREER_DESCRIPTION_01
+			,	CAREER_COMPANY_02
+			,	CAREER_DEPART_02
+			,	CAREER_POSITION_02
+			,	CAREER_START_DATE_02
+			,	CAREER_RETIRE_DATE_02
+			,	CAREER_DESCRIPTION_02
+			,	CAREER_COMPANY_03
+			,	CAREER_DEPART_03
+			,	CAREER_POSITION_03
+			,	CAREER_START_DATE_03
+			,	CAREER_RETIRE_DATE_03
+			,	CAREER_DESCRIPTION_03
+			,	CAREER_COMPANY_04
+			,	CAREER_DEPART_04
+			,	CAREER_POSITION_04
+			,	CAREER_START_DATE_04
+			,	CAREER_RETIRE_DATE_04
+			,	CAREER_DESCRIPTION_04
+			,	THESIS_SCI_YN_01
+			,	THESIS_TiTLE_01
+			,	THESIS_WRITER_01
+			,	THESIS_JOURNAL_01
+			,	THESIS_NATIONALITY_01
+			,	THESIS_DATE_01
+			,	THESIS_SCI_YN_02
+			,	THESIS_TiTLE_02
+			,	THESIS_WRITER_02
+			,	THESIS_JOURNAL_02
+			,	THESIS_NATIONALITY_02
+			,	THESIS_DATE_02
+			,	THESIS_SCI_YN_03
+			,	THESIS_TiTLE_03
+			,	THESIS_WRITER_03
+			,	THESIS_JOURNAL_03
+			,	THESIS_NATIONALITY_03
+			,	THESIS_DATE_03
+			,	IPRS_NAME_01
+			,	IPRS_ENROLL_01
+			,	IPRS_REG_NO_01
+			,	IPRS_DATE_01
+			,	IPRS_NATIONALITY_01
+			,	IPRS_WRITER_01
+			,	IPRS_NAME_02
+			,	IPRS_ENROLL_02
+			,	IPRS_REG_NO_02
+			,	IPRS_DATE_02
+			,	IPRS_NATIONALITY_02
+			,	IPRS_WRITER_02
+			,	IPRS_NAME_03
+			,	IPRS_ENROLL_03
+			,	IPRS_REG_NO_03
+			,	IPRS_DATE_03
+			,	IPRS_NATIONALITY_03
+			,	IPRS_WRITER_03
+			,	SELF_DESCRIPTION
+			,	REMARK
+		FROM COMMISSIONER A
+		WHERE 
+			A.MEMBER_ID = #{member_id}
+			<if test='commissioner_id != null and commissioner_id != "" '>
+				AND A.commissioner_id = #{commissioner_id}
+			</if>
+	</select>
+	
+	
+	
+	<update id="updateCommissionerStatus" parameterType="CommissionerVO">
+		UPDATE COMMISSIONER SET   
+			COMMISSIONER_STATUS = #{commissioner_status}
+		WHERE 
+			MEMBER_ID = #{member_id}
+			<if test='commissioner_id != null and commissioner_id != "" '>
+				AND A.commissioner_id = #{commissioner_id}
+			</if>
+	</update>
+	
+	<update id="updateCommissionerRemark" parameterType="CommissionerVO">
+		UPDATE COMMISSIONER SET   
+			REMARK = #{remark}
+		WHERE 
+			MEMBER_ID = #{member_id}
+			<if test='commissioner_id != null and commissioner_id != "" '>
+				AND A.commissioner_id = #{commissioner_id}
+			</if>
+	</update>
+	
+	
+	<delete id="deleteCommissionerInfo" parameterType="CommissionerVO">
+		DELETE FROM COMMISSIONER			
+		WHERE
+			MEMBER_ID = #{member_id}
+	</delete>
+	
+	<select id="selectInstitutionTypeCount" resultMap="commissioner">
+		SELECT 
+			(SELECT COUNT(*) FROM commissioner WHERE COMMISSIONER_STATUS = 'D0000004' AND MEMBER_ID IN (SELECT MEMBER_ID FROM member WHERE INSTITUTION_TYPE= 'D0000001')) AS INSTITUTION_TYPE_PERSONAL_COUNT
+			,	(SELECT COUNT(*) FROM commissioner WHERE COMMISSIONER_STATUS = 'D0000004' AND MEMBER_ID IN (SELECT MEMBER_ID FROM member WHERE INSTITUTION_TYPE= 'D0000002')) AS INSTITUTION_TYPE_COMPANY_COUNT
+			,	(SELECT COUNT(*) FROM commissioner WHERE COMMISSIONER_STATUS = 'D0000004' AND MEMBER_ID IN (SELECT MEMBER_ID FROM member WHERE INSTITUTION_TYPE= 'D0000003')) AS INSTITUTION_TYPE_SCHOOL_COUNT
+			,	(SELECT COUNT(*) FROM commissioner WHERE COMMISSIONER_STATUS = 'D0000004' AND MEMBER_ID IN (SELECT MEMBER_ID FROM member WHERE INSTITUTION_TYPE= 'D0000004')) AS INSTITUTION_TYPE_COMMISSIONER_COUNT
+			,	(SELECT COUNT(*) FROM commissioner WHERE COMMISSIONER_STATUS = 'D0000004' AND MEMBER_ID IN (SELECT MEMBER_ID FROM member WHERE INSTITUTION_TYPE= 'D0000005')) AS INSTITUTION_TYPE_DEPARTMENT_COUNT
+			,	(SELECT COUNT(*) FROM commissioner WHERE COMMISSIONER_STATUS = 'D0000004' AND MEMBER_ID IN (SELECT MEMBER_ID FROM member WHERE INSTITUTION_TYPE= 'D0000006')) AS INSTITUTION_TYPE_ETC_COUNT
+			,	(SELECT COUNT(*) FROM commissioner WHERE COMMISSIONER_STATUS = 'D0000004' AND MEMBER_ID IN (SELECT MEMBER_ID FROM member WHERE INSTITUTION_TYPE= 'D0000007')) AS INSTITUTION_TYPE_MANAGER_COUNT
+	</select>
+	
+	
+	<select id="selecteCommissionerWithCountWithRandom" parameterType="CommissionerVO" resultMap="commissioner">
+		SELECT
+			A.MEMBER_ID
+			, 	B.NAME
+			, 	B.MOBILE_PHONE
+			, 	B.EMAIL
+			, 	B.ADDRESS
+			, 	A.RND_CLASS
+			,	A.NATIONAL_SKILL_LARGE
+			,	B.INSTITUTION_TYPE
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000004' AND D.DETAIL_ID = B.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+			,	IFNULL((SELECT NAME FROM INSTITUTION C WHERE B.INSTITUTION_ID = C.REG_NO), "") AS INSTITUTION_NAME
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	DATE_FORMAT(A.UPDATE_DATE,'%Y-%m-%d') AS UPDATE_DATE
+			,	A.COMMISSIONER_STATUS
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000020' AND D.DETAIL_ID = A.COMMISSIONER_STATUS) AS COMMISSIONER_STATUS_NAME
+			,	A.REMARK
+		FROM
+			COMMISSIONER A
+		LEFT JOIN
+			MEMBER B
+		ON	B.MEMBER_ID = A.MEMBER_ID
+		WHERE
+			1=1
+			<if test='commissioner_status != null and commissioner_status != "" '>
+				AND A.COMMISSIONER_STATUS = #{commissioner_status}
+			</if>
+			<if test='name != null and name != "" '>
+				AND B.NAME LIKE CONCAT('%',#{name},'%')
+			</if> 
+			<if test='update_date != null and update_date != "" '>
+				AND A.UPDATE_DATE = #{update_date}
+			</if>
+			<if test='institution_type != null and institution_type != "" '>
+				AND B.INSTITUTION_TYPE = #{institution_type}
+			</if>
+			<if test='institution_name != null and institution_name != "" '>
+				AND (SELECT NAME FROM INSTITUTION C WHERE B.INSTITUTION_ID = C.REG_NO ) LIKE CONCAT('%',#{institution_name},'%')
+			</if>
+			<if test='rnd_class != null and rnd_class != "" '>
+				AND A.RND_CLASS LIKE CONCAT('%',#{rnd_class},'%')
+			</if>
+			<if test='national_skill_large != null and national_skill_large != "" '>
+				AND A.NATIONAL_SKILL_LARGE LIKE CONCAT('%',#{national_skill_large},'%')
+			</if>
+			<if test='institution_type_count_limit != null and institution_type_count_limit != "" '>
+				ORDER BY RAND() LIMIT #{institution_type_count_limit}
+			</if>
+	</select>
+	
+	
+	
+	<update id="updateBankInfo" parameterType="CommissionerVO">
+		UPDATE COMMISSIONER SET
+			UPDATE_DATE = NOW()
+		   	<if test='bank_name != null and bank_name != "" '>
+				,	BANK_NAME = #{bank_name}
+			</if>
+  		 	<if test='bank_name != null and bank_name != "" '>
+				,	BANK_ACCOUNT = #{bank_account}
+			</if>
+			
+		WHERE 
+			MEMBER_ID = #{member_id}
+	</update>
+	
+	
+	<delete id="deleteCommissionerEvaluationItemInfo" parameterType="CommissionerEvaluationItemVO">
+		DELETE FROM COMMISSIONER_EVALUATION_ITEM			
+		WHERE
+			MEMBER_ID = #{member_id}
+			AND EVALUATION_ID = #{evaluation_id}
+	</delete>
+	
+	<update id="insertCommissionerEvaluationItemInfo" parameterType="CommissionerEvaluationItemVO">
+		INSERT INTO COMMISSIONER_EVALUATION_ITEM ( 
+				MEMBER_ID
+				,	EVALUATION_ID
+				,	ITEM_TYPE
+				,	ITEM_ID
+				,	ITEM_RESULT
+			) 
+			VALUES 
+			<foreach collection="item_result_info_list" item="item" separator=" , ">
+        	(	
+        		#{member_id}
+        		,	#{evaluation_id}
+        		,	#{item_type}
+        		,	'${item.item_id}'
+        		,	'${item.item_result}'
+       		 )
+			</foreach>
+	</update>
+	
+	<select id="selectEvaluationResultItemDetail" parameterType="CommissionerEvaluationItemVO"  resultType="map">
+		SELECT
+			MEMBER_ID
+				,	EVALUATION_ID
+				,	ITEM_ID
+				,	ITEM_TYPE
+				,	ITEM_RESULT
+		FROM
+			COMMISSIONER_EVALUATION_ITEM A
+		WHERE
+			A.USE_YN = 'Y'
+			AND MEMBER_ID = #{member_id}
+			AND EVALUATION_ID = #{evaluation_id}
+	</select>
+	
+	
+	<select id="searchExcelDownload" resultMap="commissioner">
+		SELECT
+			A.COMMISSIONER_ID
+			,	A.MEMBER_ID
+			, 	B.NAME
+			, 	B.MOBILE_PHONE
+			, 	B.EMAIL
+			, 	B.ADDRESS
+			, 	A.RND_CLASS
+			,	A.NATIONAL_SKILL_LARGE
+			,	B.INSTITUTION_TYPE
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000004' AND D.DETAIL_ID = B.INSTITUTION_TYPE ) AS INSTITUTION_TYPE_NAME
+			,	IFNULL((SELECT NAME FROM INSTITUTION C WHERE B.INSTITUTION_ID = C.REG_NO), "") AS INSTITUTION_NAME
+			, 	DATE_FORMAT(A.REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, 	DATE_FORMAT(A.UPDATE_DATE,'%Y-%m-%d') AS UPDATE_DATE
+			,	A.COMMISSIONER_STATUS
+			, 	(SELECT D.NAME FROM COMMON_CODE_DETAIL D WHERE D.MASTER_ID = 'M0000020' AND D.DETAIL_ID = A.COMMISSIONER_STATUS) AS COMMISSIONER_STATUS_NAME
+			,	A.REMARK
+		FROM
+			COMMISSIONER A
+		LEFT JOIN
+			MEMBER B
+		ON	B.MEMBER_ID = A.MEMBER_ID
+	</select>
+	
+	
+		
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.homeContent">
+
+	<resultMap id="homeContent" type="HomeContentVO">
+		<result property ="content_id"				column="CONTENT_ID"	/>
+		<result property ="content_title"			column="CONTENT_TITLE"	/>
+		<result property ="content_type"			column="CONTENT_TYPE"	/>
+		<result property ="content_description"		column="CONTENT_DESCRIPTION"	/>
+		<result property ="image_file_id"			column="IMAGE_FILE_ID"	/>
+		<result property ="use_yn"					column="USE_YN"	/>
+		<result property ="reg_date"				column="REG_DATE"	/>
+		<result property ="total_count"				column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	<!-- PJS 생성  -->
+	<!-- 2020-03-25 -->
+	<insert id="insertInfo" parameterType="HomeContentVO">
+		/* com.anchordata.webframework.homeContent.insertInfo */
+		INSERT INTO HOME_CONTENT ( 
+			CONTENT_TITLE
+			,	CONTENT_TYPE
+			,	CONTENT_DESCRIPTION
+			,	IMAGE_FILE_ID
+		) 
+		VALUES (
+			#{content_title} 
+			,	#{content_type} 
+			,	#{content_description}
+			,	#{image_file_id}
+		);
+	</insert>
+	
+	<select id="selectSearchPagingList" parameterType="DataMap"  resultMap="homeContent">
+		/* com.anchordata.webframework.homeContent.selectSearchPagingList */
+		<include refid="common.pagingPre"/>
+		SELECT
+			CONTENT_ID
+			, CONTENT_TITLE
+			, CONTENT_TYPE
+			, CONTENT_DESCRIPTION
+			, IMAGE_FILE_ID
+			, REG_DATE
+		FROM
+			HOME_CONTENT A
+		WHERE
+			1 = 1
+			AND USE_YN = 'Y'
+			AND CONTENT_TYPE = #{content_type}
+			<if test='keyword != null and keyword != "" '>
+				AND ( CONTENT_TITLE LIKE CONCAT('%',#{keyword},'%') OR CONTENT_DESCRIPTION LIKE CONCAT('%',#{keyword},'%') )
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<update id="updateInfo" parameterType="HomeContentVO">
+		/* com.anchordata.webframework.homeContent.updateInfo */
+		UPDATE HOME_CONTENT SET   
+			CONTENT_TITLE = #{content_title}
+			, CONTENT_DESCRIPTION = #{content_description}
+			, IMAGE_FILE_ID = #{image_file_id}
+			, REG_DATE = NOW()
+		WHERE CONTENT_ID = #{content_id}
+	</update>
+	
+	
+	<delete id="deleteInfo" parameterType="HomeContentVO">
+		/* com.anchordata.webframework.homeContent.deleteInfo */
+		DELETE FROM HOME_CONTENT
+		WHERE CONTENT_ID = #{content_id}
+	</delete>
+	
+	
+</mapper>

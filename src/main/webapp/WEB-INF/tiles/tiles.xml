@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	
+	<definition name="user" template="/WEB-INF/layout/user/template.jsp">
+		<put-attribute name="header"		value="/WEB-INF/layout/user/header.jsp" />
+		<put-attribute name="headerSide"	value="/WEB-INF/layout/user/headerSide.jsp" />
+		<put-attribute name="body" 			value="" />
+		<put-attribute name="footer"		value="/WEB-INF/layout/user/footer.jsp" />
+	</definition>
+	
+	<definition name="userHome" template="/WEB-INF/layout/userHome/template.jsp">
+		<put-attribute name="header"		value="/WEB-INF/layout/userHome/header.jsp" />
+		<put-attribute name="headerSide"	value="/WEB-INF/layout/userHome/headerSide.jsp" />
+		<put-attribute name="body" 			value="" />
+		<put-attribute name="footer"		value="/WEB-INF/layout/userHome/footer.jsp" />
+	</definition>
+	
+	<definition name="admin" template="/WEB-INF/layout/admin/template.jsp">
+		<put-attribute name="header"		value="/WEB-INF/layout/admin/header.jsp" />
+		<put-attribute name="headerSide"	value="/WEB-INF/layout/admin/headerSide.jsp" />
+		<put-attribute name="body" 			value="" />
+		<put-attribute name="footer"		value="/WEB-INF/layout/admin/footer.jsp" />
+	</definition>
+	
+	<definition name="adminHome" template="/WEB-INF/layout/adminHome/template.jsp">
+		<put-attribute name="header"		value="/WEB-INF/layout/adminHome/header.jsp" />
+		<put-attribute name="headerSide"	value="/WEB-INF/layout/adminHome/headerSide.jsp" />
+		<put-attribute name="body" 			value="" />
+		<put-attribute name="footer"		value="/WEB-INF/layout/adminHome/footer.jsp" />
+	</definition>
+	
+	
+	<definition name="member" template="/WEB-INF/layout/member/template.jsp">
+		<put-attribute name="header"		value="/WEB-INF/layout/member/header.jsp" />
+		<put-attribute name="headerSide"	value="/WEB-INF/layout/member/headerSide.jsp" />
+		<put-attribute name="body" 			value="" />
+		<put-attribute name="footer"		value="/WEB-INF/layout/member/footer.jsp" />
+	</definition>
+	
+	<definition name="commissioner" template="/WEB-INF/layout/commissioner/template.jsp">
+		<put-attribute name="header"		value="/WEB-INF/layout/commissioner/header.jsp" />
+		<put-attribute name="headerSide"	value="/WEB-INF/layout/commissioner/headerSide.jsp" />
+		<put-attribute name="body" 			value="" />
+		<put-attribute name="footer"		value="/WEB-INF/layout/commissioner/footer.jsp" />
+	</definition>
+	
+	<definition name="manager" template="/WEB-INF/layout/manager/template.jsp">
+		<put-attribute name="header"		value="/WEB-INF/layout/manager/header.jsp" />
+		<put-attribute name="headerSide"	value="/WEB-INF/layout/manager/headerSide.jsp" />
+		<put-attribute name="body" 			value="" />
+		<put-attribute name="footer"		value="/WEB-INF/layout/manager/footer.jsp" />
+	</definition>
+	
+	<definition name="*/*.user" extends="user">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/user/{1}/{2}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*/*.user" extends="user">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/user/{1}/{2}/{3}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*.member" extends="member">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/member/{1}/{2}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*/*.member" extends="member">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/member/{1}/{2}/{3}.jsp"/>
+    </definition>
+    
+     <definition name="*/*.commissioner" extends="commissioner">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/commissioner/{1}/{2}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*/*.commissioner" extends="commissioner">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/commissioner/{1}/{2}/{3}.jsp"/>
+    </definition>
+    
+    <definition name="*/*.manager" extends="manager">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/manager/{1}/{2}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*/*.manager" extends="manager">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/manager/{1}/{2}/{3}.jsp"/>
+    </definition>
+    
+	<definition name="*/*.admin" extends="admin">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/admin/{1}/{2}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*/*.admin" extends="admin">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/admin/{1}/{2}/{3}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*.adminHome" extends="adminHome">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/adminHome/{1}/{2}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*/*.adminHome" extends="adminHome">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/adminHome/{1}/{2}/{3}.jsp"/>
+    </definition>
+    
+  	<definition name="*/*.userHome" extends="userHome">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/userHome/{1}/{2}.jsp"/>
+    </definition>
+    
+   	<definition name="*/*/*.userHome" extends="userHome">
+        <put-attribute name="body" 			value="/WEB-INF/jsp/userHome/{1}/{2}/{3}.jsp"/>
+    </definition>
+    
+    
+	<definition name="error/error" template="/WEB-INF/jsp/error/error.jsp"></definition>
+	<definition name="error/loginError" template="/WEB-INF/jsp/error/loginError.jsp"></definition>	
+	
+	<definition name="login/adminLogin" template="/WEB-INF/jsp/user/login/adminLogin.jsp"></definition>
+	<definition name="login/adminHomeLogin" template="/WEB-INF/jsp/user/login/adminHomeLogin.jsp"></definition>	
+	<definition name="login/memberLogin" template="/WEB-INF/jsp/user/login/memberLogin.jsp"></definition>
+	
+	<definition name="login/signup" template="/WEB-INF/jsp/user/login/signup.jsp"></definition>
+	<definition name="login/pcc_V3_sample_seed_v2" template="/WEB-INF/jsp/user/login/pcc_V3_sample_seed_v2.jsp"></definition>
+	<definition name="login/pcc_V3_result_seed_v2" template="/WEB-INF/jsp/user/login/pcc_V3_result_seed_v2.jsp"></definition>
+
+	<definition name="signup/main" template="/WEB-INF/jsp/user/signup/main.jsp"></definition>
+	
+	<definition name="expert/signup1st" template="/WEB-INF/jsp/user/expert/signup1st.jsp"></definition>
+	<definition name="expert/signup2nd" template="/WEB-INF/jsp/user/expert/signup2nd.jsp"></definition>
+	<definition name="expert/signup3rd" template="/WEB-INF/jsp/user/expert/signup3rd.jsp"></definition>
+	
+	<definition name="login/findID" template="/WEB-INF/jsp/user/login/findID.jsp"></definition>
+	<definition name="login/findPWD" template="/WEB-INF/jsp/user/login/findPWD.jsp"></definition>
+	
+	<definition name="commissioner/registration" template="/WEB-INF/jsp/member/home/commissionerRegistration.jsp"></definition>
+	
+	<definition name="evaluation/match/commissionerDetail" template="/WEB-INF/jsp/admin/evaluation/match/commissionerDetail.jsp"></definition>
+	<definition name="evaluation/match/reportSecurity" template="/WEB-INF/jsp/admin/evaluation/match/reportSecurity.jsp"></definition>
+	<definition name="evaluation/match/reportPayment" template="/WEB-INF/jsp/admin/evaluation/match/reportPayment.jsp"></definition>
+	<definition name="evaluation/match/reportEstimation" template="/WEB-INF/jsp/admin/evaluation/match/reportEstimation.jsp"></definition>
+	<definition name="evaluation/match/reportFinalEstimation" template="/WEB-INF/jsp/admin/evaluation/match/reportFinalEstimation.jsp"></definition>
+	
+	<definition name="commissioner/evaluation/signSecurity" template="/WEB-INF/jsp/commissioner/evaluation/signSecurity.jsp"></definition>
+	<definition name="commissioner/evaluation/signPayment" template="/WEB-INF/jsp/commissioner/evaluation/signPayment.jsp"></definition>
+	<definition name="commissioner/evaluation/signEvaluation" template="/WEB-INF/jsp/commissioner/evaluation/signEvaluation.jsp"></definition>
+	<definition name="commissioner/evaluation/signChairmanEvaluation" template="/WEB-INF/jsp/commissioner/evaluation/signChairmanEvaluation.jsp"></definition>
+	<definition name="manager/evaluation/signEvaluation" template="/WEB-INF/jsp/manager/evaluation/signEvaluation.jsp"></definition>
+	<definition name="manager/evaluation/signChairmanEvaluation" template="/WEB-INF/jsp/manager/evaluation/signChairmanEvaluation.jsp"></definition>
+	
+	
+	
+	
+</tiles-definitions>

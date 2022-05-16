@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.main">
+
+
+
+	<resultMap id="main" type="MainVO">
+		<result property ="main_id"				column="MAIN_ID"	/>
+		<result property ="board_name"			column="BOARD_NAME"	/>
+		<result property ="borad_id"			column="BORAD_ID"	/>
+		<result property ="pds_type"			column="PDS_TYPE"	/>
+		<result property ="title"				column="TITLE"	/>
+		<result property ="hits"				column="HITS"	/>
+		<result property ="reg_date"			column="REG_DATE"	/>
+		
+		<result property ="total_count"			column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	
+	<select id="selectSearchPagingList" parameterType="DataMap"  resultMap="main">
+		<include refid="common.pagingPre"/>
+			WITH MAIN_SEARCH_LIST AS
+			(
+				SELECT
+					POLICY_ID AS MAIN_ID
+					, 	TITLE
+					,	HITS
+					, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+					,	'정책제안' AS BOARD_NAME
+					,	'C00002' AS BORAD_ID
+					,	'정책제안' AS PDS_TYPE
+		 		FROM
+					POLICY
+				WHERE
+					1 = 1
+					AND USE_YN = 'Y'
+					
+					<if test='title != null and title != "" '>
+						AND TITLE LIKE CONCAT('%',#{title},'%')
+					</if>
+				
+			 	UNION ALL
+			 	
+				SELECT
+					NOTICE_ID AS MAIN_ID
+					, 	TITLE
+					,	HITS
+					, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+					,	'공지사항' AS BOARD_NAME
+					,	'C00001' AS BORAD_ID
+					,	'공지사항' AS PDS_TYPE
+		 		FROM
+					NOTICE
+				WHERE
+					1 = 1
+					AND USE_YN = 'Y'
+					
+					<if test='title != null and title != "" '>
+						AND TITLE LIKE CONCAT('%',#{title},'%')
+					</if>
+					
+				UNION ALL
+					
+				SELECT
+					PDS_ID AS MAIN_ID
+					, 	TITLE
+					,	HITS
+					, 	DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+					,	'자료실' AS BOARD_NAME
+					,	'C00003' AS BORAD_ID
+					,  	PDS_TYPE
+		 		FROM
+					PDS
+				WHERE
+					1 = 1
+					AND USE_YN = 'Y'
+					
+					<if test='title != null and title != "" '>
+						AND TITLE LIKE CONCAT('%',#{title},'%')
+					</if>
+	         )
+			
+	  		SELECT *
+	  		FROM MAIN_SEARCH_LIST
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<update id="updateVisitCounter">
+		INSERT INTO VISIT 
+					(TODAY_COUNT, TODAY_DATE) 
+			 VALUES (1, date_format(current_timestamp(),'%Y-%m-%d')) 
+	 	ON DUPLICATE KEY UPDATE 
+	 				TODAY_COUNT=TODAY_COUNT+1
+	</update>
+	
+	
+	<update id="updateVisitstatistics" parameterType="DataMap">
+		INSERT INTO VISIT_STATISTICS 
+					(TODAY_COUNT, TODAY_DATE, TODAY_TIME) 
+			 VALUES (1, DATE_FORMAT(NOW(),'%Y-%m-%d'), DATE_FORMAT(NOW(),'%H:00:00')) 
+	 	ON DUPLICATE KEY UPDATE 
+	 				TODAY_COUNT=TODAY_COUNT+1
+	</update>
+	
+	
+	
+	
+</mapper>

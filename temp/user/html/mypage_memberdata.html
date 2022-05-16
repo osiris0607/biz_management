@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />		
+		<link rel="stylesheet" href="../css/lib/jquery-ui.min.css" />
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+		<script src="../js/lib/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<a href="#nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a>
+				<a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+			
+			<!--팝업-->
+			<!--로그아웃 팝업-->
+			<div class="logout_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="logout_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">로그 아웃</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">						
+						<p tabindex="0"><span class="font_blue">로그아웃</span> 하시겠습니까?</p>
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn mr5" onclick="location.href='./login.html'">예</button>
+							<button type="button" class="gray_btn lastClose layerClose">아니요</button>
+						</div>					
+					</div>									
+				</div> 
+			</div>
+			<!--//로그아웃 팝업-->
+
+			<!--개인정보 수정 팝업-->
+			<div class="member_info_popup_box">
+				<div class="popup_bg"></div>
+				<div class="member_info_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">개인정보 수정</h4>
+						<a href="javascript:void(0)" title="닫기" class="white_font close_btn company_signup_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<div class="popup_txt_areabg">
+							<p tabindex="0">비밀번호를 한번 더 입력해주세요.</p>
+							<input type="password" class="login_form_input w40" id="member_info_popup_pw" placeholder="비밀번호를 입력해주세요." maxlength="20" />	
+							<label for="member_info_popup_pw" class="hidden">비밀번호 입력</label>
+						</div>
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn company_signup_popup_close_btn popup_close_btn">확인</button>
+						</div>
+					</div>						
+				</div> 
+			</div>
+			<!--//개인정보수정 팝업-->
+			
+			<!--비밀번호 변경 팝업-->
+			<div class="pw_change_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="pw_change_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">비밀번호 변경</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">						
+						<div class="table_area">
+							<table class="write fixed">
+								<caption>비밀번호 변경</caption>
+								<colgroup>
+									<col style="width: 40%;">																		
+									<col style="width: 60%;">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row"><label for="pw_validation1">비밀번호</label></th>
+										<td>
+											<input type="password" id="pw_validation1" class="w100" />								
+										</td>	
+									</tr>									  
+									<tr>
+										<th scope="row"><label for="pw_validation2">비밀번호 확인</label></th>
+										<td>
+											<input type="password" id="pw_validation2" class="w100" />								
+										</td>	
+									</tr>									
+								</tbody>
+							</table>
+						</div>	
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn company_signup_popup_close_btn popup_close_btn">확인</button>
+						</div>
+					</div>									
+				</div> 
+			</div>
+			<!--//비밀번호 변경 팝업-->
+
+			<!-- header -->
+			<div id="header">
+				<header>			
+					<!-- hsection -->
+					<div class="hsection">
+						<div class="clearfix">
+							<ul class="fl member_class clearfix">
+								<li><a href="./" title="연구자">연구자</a></li>
+								<!--<li><a href="./member_signup_agreement.html" title="평가위원 등록">평가위원 등록</a></li>-->
+								<li class="active"><a href="./estimation_list.html" title="평가위원">평가위원</a></li>
+								<!--<li><a href="#">전문가</a></li>-->
+							</ul>
+							<ul class="fr top_area">
+								<li>
+									<!--a href="./login.html" title="기업 로그인" class="clearfix">
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="기업 로그인" /><span class="fl">기업 로그인</span>
+									</a-->
+								</li>
+								<li class="login_area">						
+									<a href="" title="로그아웃" class="openLayer logout_pop_open">
+										<img src="../images/icon/icon_logout.png" class="fl top_img" alt="로그아웃"><span class="fl">로그아웃</span>
+									</a>
+									<!--로그인-->
+									<!--<a href="./login.html" title="로그인" class="clearfix">-->
+										<!--최초 로그인팝업-->
+										<!--a href="./login.html" title="로그인" class="clearfix login_first_popup_open"-->
+										<!--<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="로그인" /><span class="fl">로그인</span>
+									</a>-->									
+								</li>
+								<li>
+									<a href="./mypage_company.html" title="마이페이지" class="clearfix">
+										<img src="../images/icon/icon_mypage.png" class="fl top_img" alt="마이페이지" /><span class="fl">마이페이지</span>
+									</a>
+								</li>
+								<!--<li>
+									<a href="./member_signup.html" title="회원가입" class="clearfix">
+										<img src="../images/icon/icon_member_sign.png" class="fl top_img" alt="회원가입" /><span class="fl">회원가입</span>
+									</a>
+								</li>-->
+								<!--li>
+									<a href="" title="전체메뉴" class="clearfix">
+										<img src="../images/icon/icon_menu.png" class="fl top_img" alt="전체메뉴" /><span class="fl">전체메뉴</span>
+									</a>
+								</li-->
+							</ul>
+						</div>
+					</div>
+					<!--// hsection -->
+					
+					<!-- nav -->
+					<div id="nav">
+						<div class="gnb clearfix">
+							<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="fl logo">
+								<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템" /></h1>
+							</a>
+							<nav>
+								<ul class="menu fl">
+									<li><a href="./announcement.html" title="공고"><span>공고</span></a></li>
+									<li><a href="./reception.html" title="접수"><span>접수</span></a></li>
+									<li><a href="./agreement.html" title="협약"><span>협약</span></a></li>
+									<li><a href="./execute.html" title="수행"><span>수행</span></a></li>
+									<li><a href="./estimation.html" title="평가"><span>평가</span></a></li>
+									<li><a href="./compute.html" title="정산"><span>정산</span></a></li>
+									<li><a href="./information.html" title="알림·정보"><span>알림·정보</span></a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--// nav -->
+				</header>
+			</div>
+			<!--// header -->			
+			<!-- container -->
+			<div id="container" class="mb50">
+				<h2 class="hidden">서브 컨텐츠 화면</h2>	
+				
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area clearfix">
+							<h3 class="hidden">기관정보관리</h3>
+							<div class="route hidden">
+								<ul class="clearfix">
+									<li><i class="fas fa-home">홈</i></li>
+									<li>마이페이지</li>
+									<li>기관정보관리</li>
+								</ul>
+							</div>
+							<div id="lnb" class="fl">
+								<!-- lnb_area -->	
+								<div class="lnb_area">
+									<!-- lnb_title_area -->	
+									<div class="lnb_title_area">
+										<h2 class="title">마이페이지</h2>
+									</div>
+									<!--// lnb_title_area -->
+									<!-- lnb_menu_area -->
+									<div class="lnb_menu_area">
+										<!-- lnb_menu -->	
+										<ul class="lnb_menu">
+											<li>
+												<a href="./mypage_company.html" title="기관정보관리"><span>기관정보관리</span></a>									
+											</li>
+											<li>
+												<a href="./mypage_memberdata.html" title="개인정보관리 페이지로 이동" class="active"><span>개인정보관리</span></a>									
+											</li>
+											<li>
+												<a href="./mypage_agreementdata.html" title="평가위원정보관리 페이지로 이동"><span>평가위원정보관리</span></a>									
+											</li>
+											<li>
+												<a href="./mypage_mission_list.html" title="나의 수행과제 현황 관리 페이지로 이동"><span>나의 수행과제 현황 관리</span></a>									
+											</li>
+											<!--li>
+												<a href="./expertrequest_list.html" title="전문가 참여 현황 페이지로 이동"><span>전문가 참여 현황</span></a>			
+											</li-->
+										</ul>
+										<!--// lnb_menu -->
+									</div><!--//lnb_menu_area-->
+								</div><!--//lnb_area-->
+							</div>
+							<!--//lnb-->
+							<div class="sub_right_contents fl">
+								<h3>개인정보관리</h3>								
+								<!--개인정보-->
+								<h4>개인 정보</h4>
+								<div class="table_area member_area_table">
+									<table class="write fixed">
+										<caption>대표자 등록</caption>
+										<colgroup>
+											<col style="width: 20%;">																		
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>
+											<tr>
+												<th scope="row">성명</th>
+												<td><span>홍길동</span></td>	
+											</tr>									  
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
+													소속기관 유형</span></th>
+												<td>
+													<input type="radio" id="mypage_company_type_radio5" class="mypage_company_type_radio5_check d_input" name="mypage_company_g" value="0" disabled checked />
+													<label for="mypage_company_type_radio5">개인</label>
+													<input type="radio" id="mypage_company_type_radio1" name="mypage_company_g" value="1" disabled class="d_input" />
+													<label for="mypage_company_type_radio1">기업</label>
+													<input type="radio" id="mypage_company_type_radio2" name="mypage_company_g" value="1" disabled class="d_input" />
+													<label for="mypage_company_type_radio2">학교</label>
+													<input type="radio" id="mypage_company_type_radio3" name="mypage_company_g" value="1" disabled class="d_input" />
+													<label for="mypage_company_type_radio3">연구원</label>
+													<input type="radio" id="mypage_company_type_radio4" name="mypage_company_g" value="1" disabled class="d_input" />
+													<label for="mypage_company_type_radio4">공공기관</label>													
+													<input type="radio" id="mypage_company_type_radio6" name="mypage_company_g" value="1" disabled class="d_input" />
+													<label for="mypage_company_type_radio6">기타(협/단체 등)</label>
+												</td>													
+											</tr>
+											<tr>
+												<th scope="row">아이디</th>
+												<td class="ls"><span>abc123</span></td>	
+											</tr>
+											<tr>
+												<th scope="row"><label for="pw_check">비밀번호</label></th>
+												<td>
+													<input type="password" id="pw_check" class="w_20 fl d_input2" placeholder="*********" disabled />
+													<!--input type="checkbox" id="mypage_company_name_check" class="fl" />
+													<label for="mypage_company_name_check" class="fl mr5 mt10">&nbsp;</label-->
+													<button type="button" class="gray_btn2 fl ml5 pw_change_popup_open d_input" title="변경" style="display:none">변경</button>		
+												</td>	
+											</tr>
+											<!--tr>
+												<th scope="row">비밀번호 확인</th>
+												<td>
+													<input type="text" id="pw_check2" class="w40 fl" />													
+													<label for="pw_check2" class="fl mr5 mt10">&nbsp;</label>													
+												</td>	
+											</tr-->
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>휴대전화</span></th>
+												<td class="clearfix">
+													<select name="reception_charge_tel" id="reception_charge_tel" class="w_8 fl d_input" disabled>
+														<option value="010">010</option>
+													</select>
+													<span style="display:block;" class="fl mc8">-</span>
+													<label for="reception_charge_tel2" class="hidden">전화</label>
+													<input type="tel" id="reception_charge_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls" disabled placeholder="1234" />
+													<span style="display:block;" class="fl mc8">-</span>
+													<label for="reception_charge_tel3" class="hidden">전화</label>
+													<input type="tel" id="reception_charge_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls" disabled placeholder="1234" />
+												</td>	
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>이메일</span></th>
+												<td>
+													<input type="text" name="str_email" id="str_email" class="form-control w_20 fl d_input" disabled placeholder="abc123" />
+													<span class="fl ml1 mr1 pt10 mail_f">@</span>
+													<label for="str_email2" class="hidden">이메일</label>
+													<input type="text" name="str_email2" id="str_email2" class="form-control w_18 fl" disabled placeholder="naver.com" />
+													<label for="selectEmail" class="hidden">이메일 선택</label>
+													<select name="selectEmail" id="selectEmail" class="fl ml5 in_wp200 ace-select d_input" disabled> 
+													   <option value="0">------선택------</option> 
+													   <option value="1">직접입력</option> 
+													   <option value="naver.com">naver.com</option> 
+													   <option value="hanmail.net">hanmail.net</option> 
+													   <option value="hotmail.com">hotmail.com</option> 
+													   <option value="nate.com">nate.com</option> 
+													   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+													   <option value="empas.com">empas.com</option> 
+													   <option value="dreamwiz.com">dreamwiz.com</option> 
+													   <option value="freechal.com">freechal.com</option> 
+													   <option value="lycos.co.kr">lycos.co.kr</option> 
+													   <option value="korea.com">korea.com</option> 
+													   <option value="gmail.com">gmail.com</option> 
+													   <option value="hanmir.com">hanmir.com</option> 
+													   <option value="paran.com">paran.com</option> 
+													</select>
+												</td>	
+											</tr>
+											<tr>
+												<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="mypage_company_member_address">주소</label></span></th>
+												<td>
+													<input type="text" id="mypage_company_member_address" class="form-control w60 fl mr5" placeholder="경기도 화성시 어쩌면 135-85길" disabled />
+													<label for="mypage_company_member_address2" class="hidden">주소</label>
+													<input type="text" id="mypage_company_member_address2" class="form-control w30 fl mr5" placeholder="명성빌라 501호" disabled />
+													<button type="button" class="gray_btn2 fl d_input" title="검색" style="display:none">검색</button>												
+												</td>
+											</tr>
+											<tr>
+												<th scope="row"><label for="mypage_company_name">기관명</label></th>
+												<td>
+													<input type="text" id="mypage_company_name" class="form-control w60 fl d_input" placeholder="abc주식회사" disabled />																	
+												</td>	
+											</tr>
+											<tr>
+												<th scope="row"><label for="mypage_company_company_address">기관 주소</label></th>
+												<td>
+													<input type="text" id="mypage_company_company_address" class="form-control w60 fl mr5" placeholder="경기도 화성시 어쩌면 135-85길" disabled />
+													<label for="mypage_company_company_address2" class="hidden">주소</label>
+													<input type="text" id="mypage_company_company_address2" class="form-control w30 fl mr5" placeholder="abc빌딩 7층 비젼전무실" disabled />		
+													<button type="button" class="gray_btn2 fl d_input" title="검색" style="display:none">검색</button>
+												</td>	
+											</tr>
+											<tr>
+												<th scope="row">전화</th>
+												<td>
+													<label for="mypage_company_company_tel1" class="hidden">전화</label>
+													<select name="mypage_company_company_tel1" id="mypage_company_company_tel1" class="w_8 fl d_input" disabled>
+														<option value="031">031</option>
+														<option value="02">02</option>
+													</select>
+													<span style="display:block;" class="fl mc8">-</span>
+													<label for="mypage_company_company_tel2" class="hidden">전화</label>
+													<input type="tel" id="mypage_company_company_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls"  disabled />
+													<span style="display:block;" class="fl mc8 ls">-</span>
+													<label for="mypage_company_company_tel3" class="hidden">전화</label>
+													<input type="tel" id="mypage_company_company_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls d_input" disabled />
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">부서</th>
+												<td>
+													<input type="text" id="mypage_company_partment" class="form-control w34 fl d_input" disabled placeholder="abc부서" />
+													<label for="mypage_company_partment" class="hidden">부서</label>														
+												</td>	
+											</tr>
+											<tr>
+												<th scope="row">직책</th>
+												<td>
+													<input type="text" id="mypage_company_rank" class="form-control w34 fl d_input" disabled placeholder="부장" />
+													<label for="mypage_company_rank" class="hidden">직책</label>															
+												</td>	
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<button type="button" title="개인정보 수정" class="blue_btn fr mt10 mb5 member_info_popup_open2">개인정보 수정</button>
+								<button type="button" title="저장" class="blue_btn fr mt10 mb5 member_info_save" style="display:none">저장</button>
+								<!--//개인정보-->	
+							
+											
+							</div><!--//sub_right_contents-->
+						</div><!--//content_area-->
+					</div><!--//sub_contents-->
+	
+				</section><!--//content-->
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->	
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	</body>
+</html>

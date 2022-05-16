@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<!--a href="#nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a-->
+				<a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+			
+						
+			<!-- container -->
+			<div id="container" class="mb50">
+				<div class="content_area login_area_box">
+					<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="logo">
+						<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템"></h1>
+					</a>
+				</div>
+				<p class="ta_c header_logo_p">사업평가 · 관리시스템입니다.</p>
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area login_box_area">
+							<h2><span class="font_blue">신기술 접수소 홈페이지</span>에 오신 것을 환영합니다.</h2>
+							<!--<p class="login_info">해당 아이디로 로그인 후 홈페이지를 이용하시기 바랍니다.</p>-->
+							<ul class="login_class clearfix">
+								<!-- 로그인-->
+								<li class="member_login_box">
+									<div class="member_login">
+										<img src="../images/sub/member_login_img.png" alt="개인회원 로그인 이미지" />
+										<h3 style="width:100%;text-align:center">로그인</h3>
+										<ul class="login_form">
+											<li><label for="login_id"></label><input type="text" id="login_id" class="login_form_input text1" placeholder="아이디를 입력해주세요 (아이디는 영문+숫자)" />									
+											</li>
+											<li><label for="login_pw"></label><input type="password" id="login_pw" class="login_form_input" placeholder="비밀번호를 입력해주세요 (6자 이상 ~ 20자 이하)" maxlength="20"></li>
+											<li class="ta_l"><input type="checkbox" id="id_save" /><label for="id_save">아이디 저장</label></li>
+										</ul>
+										<ul class="login_button_box clearfix">
+											<li><button type="button" class="btn btn_blue2 login_btn">로그인</button></li>
+											<li><button type="button" class="btn btn_blue member_btn" onclick="location.href='member_signup.html'">회원가입</button></li>
+										</ul>
+										<ul class="login_search_button_box clearfix">
+											<li><button type="button" class="white_btn id_search_btn" onclick="location.href='id_search.html'">아이디 찾기</button></li>
+											<li><button type="button" class="white_btn pw_search_btn" onclick="location.href='password_search.html'">비밀번호 찾기</button></li>
+										</ul>
+									</div>
+								</li>
+								<!--//개인회원 로그인-->
+								
+							</ul>
+						</div>
+					</div>								
+				</section>
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->		
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.common.fwdSdblBtchMgt"> 
+
+    <select id="selectFwdSdblBtchMgtUploadDblList" parameterType="dataItem" resultType="dataItem">
+        /* fwd.common.fwdSdblBtchMgt.mergeFwdMsrNo */
+		  SELECT   'N' AS CHK 
+		           , BL_ID /*  BLID  */
+	                , SMT_NO /*  SO번호  */
+	                , HBL_NO  /*  HBL번호 */
+	                , MBL_NO  /*  MBL번호 */
+	                , BL_SPR_CD /*  BL구분코드  */
+	                , TASK_SPR_CD /*  역할구분코드  */
+	                , EXCT_SPR_CD /*  실행구분코드  */
+	                , BILG_BIZPTNR_CD /*  청구거래처코드 */
+	                -- , FC_CM_GET_BIZPTNR_NM2(A.BILG_BIZPTNR_CD, 'EF')  AS BILG_BIZPTNR_NM
+	                ,( SELECT X1.BIZPTNR_ENG_NM
+	                     FROM TB_COM_BIZPTNR X1 
+	                    WHERE X1.BIZPTNR_CD = A.BILG_BIZPTNR_CD )   AS BILG_BIZPTNR_NM
+	                , ORD_SPR_CD  /*  오더구분코드  */
+	                , TRN_TYPE_CD /*  운송유형코드  */
+	                , SHPP_CD /*  송화주코드 */
+	                , SHPP_NM /*  송화주명  */
+	                , CNEE_CD /*  수화주코드 */
+	                , CNEE_NM /*  수화주명  */
+	                , NTPR_CD /*  통지처코드 */
+	                , NTPR_NM /*  통지처명  */
+	                , CARR_CD /*  운송사코드 */
+	                -- , FC_CM_GET_BIZPTNR_NM2(A.CARR_CD, 'EF')  AS CARR_NM /*  운송사코드 */
+	                ,( SELECT X1.BIZPTNR_ENG_NM
+	                         FROM TB_COM_BIZPTNR X1 
+	                        WHERE X1.BIZPTNR_CD = A.CARR_CD ) AS CARR_NM
+	                , AGNT_CD /*  대리점코드 */
+	                -- , FC_CM_GET_BIZPTNR_NM2(AGNT_CD, 'EF')  AS AGNT_NM 
+	                ,( SELECT X1.BIZPTNR_ENG_NM
+	                         FROM TB_COM_BIZPTNR X1 
+	                        WHERE X1.BIZPTNR_CD = A.AGNT_CD ) AS AGNT_NM
+	                , FLT_VSL_NM  /*  편기선명  */
+	                , VOYAGE  /*  항차  */
+	                , RPRS_ITEM_CD  /*  대표품목코드  */
+	                , RPRS_ITEM_NM  /*  대표품목명 */
+	                , POR_CD  /*  POR코드 */
+	                , POR_NM  /*  POR명  */
+	                , POL_CD  /*  POL코드 */
+	                , POL_NM  /*  POL명  */
+	                , POD_CD  /*  POD코드 */
+	                , POD_NM  /*  POD명  */
+	                , PDEL_CD /*  PDEL코드  */
+	                , PDEL_NM /*  PDEL명 */
+	                , FDEST_CD  /*  FDEST코드 */
+	                , FDEST_NM  /*  FDEST명  */
+	                , ONBR_YMD  /*  출항일자  */
+	                , ARR_YMD /*  입항일자  */
+	                , ETA_YMD /*  예정도착일자  */
+	                , SELL_GWT  /*  매출총중량 */
+	                , SELL_WGT_UNIT_CD  /*  매출중량단위코드  */
+	                , SELL_LB_GWT /*  매출파운드총중량  */
+	                , SELL_CWT  /*  매출CWT */
+	                , SELL_LB_CWT /*  매출파운드CWT  */
+	                , SELL_VOL_WGT  /*  매출부피중량  */
+	                , SELL_CFT  /*  매출CFT */
+	                , BUY_GWT /*  매입총중량 */
+	                , BUY_WGT_UNIT_CD /*  매입중량단위코드  */
+	                , BUY_LB_GWT  /*  매입파운드총중량  */
+	                , BUY_CWT /*  매입CWT */
+	                , BUY_LB_CWT  /*  매입파운드CWT  */
+	                , BUY_VOL_WGT /*  매입부피중량  */
+	                , BUY_CFT /*  매입CFT */
+	                , PKG_QTY /*  패키지수량 */
+	                , PKG_UNIT_CD /*  패키지단위코드 */
+	                , INCOT_CD  /*  INCOT코드 */
+	                , FRGTTERM_CD /*  운임지급조건코드  */
+	                , LADG_TYPE_CD  /*  적재유형코드  */
+	                , CARGO_TYPE_CD /*  화물유형코드  */
+	                , BL_CRT_TYPE_CD  /*  BL생성유형코드  */
+	                , BL_KIND_CD  /*  BL종류코드  */
+	                , ARR_CLOS_AUTO_APLY_YN /*  입항마감자동적용여부  */
+	                , CUR_CD  /*  통화코드  */
+	                , ORIGN_PRNT_YN /*  원본출력여부  */
+	                , LDNG_COND_CD  /*  적하조건코드  */
+	                , DSCR_COND_CD  /*  양하조건코드  */
+	                , SALES_OFCR_EMPNO  /*  영업담당자사번 */
+	                -- , FC_CM_GET_EMP_NM(A.SALES_OFCR_EMPNO) AS SALES_OFCR_EMPNM  /*  영업담당자사번 */               
+	                ,(    SELECT X1.ENG_EMP_NM 
+	                     FROM  TB_COM_EMP X1 
+	                    WHERE  X1.EMPNO = A.SALES_OFCR_EMPNO ) AS SALES_OFCR_EMPNM
+	                , SALES_CNTRB_DEPT_CD /*  영업기여부서코드  */
+	                -- , FC_CM_GET_ACCTG_DEPT_NM(A.SALES_CNTRB_DEPT_CD) AS SALES_CNTRB_DEPT_NM
+	                ,(    SELECT X1.ACCTG_DEPT_ENG_NM 
+	                 FROM TB_COM_ACCTG_DEPT  X1
+	                WHERE X1.ACCTG_DEPT_CD = A.SALES_CNTRB_DEPT_CD ) AS SALES_CNTRB_DEPT_NM
+	                , ACCTG_DEPT_CD /*  회계부서코드  */
+	                -- , FC_CM_GET_ACCTG_DEPT_NM(A.ACCTG_DEPT_CD) AS ACCTG_DEPT_NM /*  회계부서코드  */
+	                ,(    SELECT X1.ACCTG_DEPT_ENG_NM 
+	                     FROM TB_COM_ACCTG_DEPT  X1
+	                    WHERE X1.ACCTG_DEPT_CD = A.ACCTG_DEPT_CD ) AS ACCTG_DEPT_NM
+	                , OFCR_EMPNO  /*  담당자사번 */
+	                -- , FC_CM_GET_EMP_NM(A.OFCR_EMPNO) AS OFCR_EMPNM
+	                ,(    SELECT X1.ENG_EMP_NM 
+	                     FROM  TB_COM_EMP X1 
+	                    WHERE  X1.EMPNO = A.OFCR_EMPNO ) AS OFCR_EMPNM
+	                , RSLT_DEPT_CD  /*  실적부서코드  */
+	                -- , FC_CM_GET_ACCTG_DEPT_NM(A.RSLT_DEPT_CD) AS RSLT_DEPT_NM  /*  실적부서코드  */
+	                ,(    SELECT X1.ACCTG_DEPT_ENG_NM 
+	                        FROM TB_COM_ACCTG_DEPT  X1
+	                       WHERE X1.ACCTG_DEPT_CD = A.RSLT_DEPT_CD ) AS RSLT_DEPT_NM 
+	                , RMK /*  적요  */
+	                , DSCR_THC_YN /*  양하THC여부 */
+	                , NON_EXCT_BL_YN  /*  비실행BL여부 */
+	                , CTRT_TYPE_CD  /*  계약유형코드  */
+	                , CO_PROJ_SPR_CD  /*  CO프로젝트구분코드  */
+	                , STAT_CD /*  상태코드  */
+	                , ERR_RMK /*  오류비고  */
+	                , REF_NO_SPR_CD /*  참조번호구분코드  */
+	                , RPRS_REF_NO /*  대표참조번호  */
+	                , RPRS_YN /*  대표여부  */
+	                , PTNR_CD /*  파트너코드 */
+	                , STG2_REVN_RCGN_DEPT_CD  /*  2구간수익인식부서코드 */
+	                , STG2_REVN_RCGN_EMPNO  /*  2구간수익인식사번 */
+	                , CNTR_20DR_QTY /*  컨테이너20일반수량  */
+	                , CNTR_40DR_QTY /*  컨테이너40일반수량  */
+	                , CNTR_40HC_QTY /*  컨테이너40높음수량  */
+	                , ROUT_SPR_CD
+	                , PROS_YN /*  처리여부  */
+	                , REG_DT  /*  등록일시  */
+	                , RSTR_ID /*  등록자ID */
+	                , UPD_DT  /*  수정일시  */
+	                , UPDR_ID /*  수정자ID */
+	                , SEQ
+	            FROM TB_FWD_DBL_BTCH_CRT_TARGET A
+	            WHERE 1=1 
+	            
+	                <if test="frDate != null and frDate != '' and toDate != null and toDate != ''">
+                          -- AND   A.ONBR_YMD BETWEEN {frDate} AND {toDate} 
+                     </if>  
+                     <if test="prosYn != null and prosYn != ''">
+                         AND A.PROS_YN = #{prosYn}
+                     </if>    
+                     <if test="exctSprCd != null and exctSprCd != ''">
+                         AND A.EXCT_SPR_CD = #{exctSprCd} 
+                     </if>   
+                     <if test="exctSprCd != null and exctSprCd != ''">
+                         AND A.EXCT_SPR_CD = #{exctSprCd} 
+                     </if>   
+                     <if test="rstrId != null and rstrId != ''">
+                         AND A.RSTR_ID = #{rstrId} 
+                     </if>   
+                     <if test="ofcrEmpno != null and ofcrEmpno != ''">
+                         AND A.OFCR_EMPNO = #{ofcrEmpno} 
+                     </if>   
+                     
+	            ORDER BY SEQ     
+ </select>
+
+
+    <insert id="insertFwdSdblBtchMgtUploadDblList"  parameterType="dataItem" >  
+     INSERT INTO TB_FWD_DBL_BTCH_CRT_TARGET 
+       ( SEQ /*  일련번호  */
+            , BL_ID /*  BLID  */
+            , SMT_NO /*  SO번호  */
+            , HBL_NO  /*  HBL번호 */
+            , MBL_NO  /*  MBL번호 */
+            , BL_SPR_CD /*  BL구분코드  */
+            , TASK_SPR_CD /*  역할구분코드  */
+            , EXCT_SPR_CD /*  실행구분코드  */
+            , BILG_BIZPTNR_CD /*  청구거래처코드 */
+            , ORD_SPR_CD  /*  오더구분코드  */
+            , TRN_TYPE_CD /*  운송유형코드  */
+            , SHPP_CD /*  송화주코드 */
+            , SHPP_NM /*  송화주명  */
+            , CNEE_CD /*  수화주코드 */
+            , CNEE_NM /*  수화주명  */
+            , NTPR_CD /*  통지처코드 */
+            , NTPR_NM /*  통지처명  */
+            , CARR_CD /*  운송사코드 */
+            , AGNT_CD /*  대리점코드 */
+            , FLT_VSL_NM  /*  편기선명  */
+            , VOYAGE  /*  항차  */
+            , RPRS_ITEM_CD  /*  대표품목코드  */
+            , RPRS_ITEM_NM  /*  대표품목명 */
+            , POR_CD  /*  POR코드 */
+            , POR_NM  /*  POR명  */
+            , POL_CD  /*  POL코드 */
+            , POL_NM  /*  POL명  */
+            , POD_CD  /*  POD코드 */
+            , POD_NM  /*  POD명  */
+            , PDEL_CD /*  PDEL코드  */
+            , PDEL_NM /*  PDEL명 */
+            , FDEST_CD  /*  FDEST코드 */
+            , FDEST_NM  /*  FDEST명  */
+            , ONBR_YMD  /*  출항일자  */
+            , ARR_YMD /*  입항일자  */
+            , ETA_YMD /*  예정도착일자  */
+            , SELL_GWT  /*  매출총중량 */
+            , SELL_WGT_UNIT_CD  /*  매출중량단위코드  */
+            , SELL_LB_GWT /*  매출파운드총중량  */
+            , SELL_CWT  /*  매출CWT */
+            , SELL_LB_CWT /*  매출파운드CWT  */
+            , SELL_VOL_WGT  /*  매출부피중량  */
+            , SELL_CFT  /*  매출CFT */
+            , BUY_GWT /*  매입총중량 */
+            , BUY_WGT_UNIT_CD /*  매입중량단위코드  */
+            , BUY_LB_GWT  /*  매입파운드총중량  */
+            , BUY_CWT /*  매입CWT */
+            , BUY_LB_CWT  /*  매입파운드CWT  */
+            , BUY_VOL_WGT /*  매입부피중량  */
+            , BUY_CFT /*  매입CFT */
+            , PKG_QTY /*  패키지수량 */
+            , PKG_UNIT_CD /*  패키지단위코드 */
+            , INCOT_CD  /*  INCOT코드 */
+            , FRGTTERM_CD /*  운임지급조건코드  */
+            , LADG_TYPE_CD  /*  적재유형코드  */
+            , CARGO_TYPE_CD /*  화물유형코드  */
+            , BL_CRT_TYPE_CD  /*  BL생성유형코드  */
+            , BL_KIND_CD  /*  BL종류코드  */
+            , ARR_CLOS_AUTO_APLY_YN /*  입항마감자동적용여부  */
+            , CUR_CD  /*  통화코드  */
+            , ORIGN_PRNT_YN /*  원본출력여부  */
+            , LDNG_COND_CD  /*  적하조건코드  */
+            , DSCR_COND_CD  /*  양하조건코드  */
+            , SALES_OFCR_EMPNO  /*  영업담당자사번 */
+            , SALES_CNTRB_DEPT_CD /*  영업기여부서코드  */
+            , ACCTG_DEPT_CD /*  회계부서코드  */
+            , OFCR_EMPNO  /*  담당자사번 */
+            , RSLT_DEPT_CD  /*  실적부서코드  */
+            , RMK /*  적요  */
+            , DSCR_THC_YN /*  양하THC여부 */
+            , NON_EXCT_BL_YN  /*  비실행BL여부 */
+            , CTRT_TYPE_CD  /*  계약유형코드  */
+            , CO_PROJ_SPR_CD  /*  CO프로젝트구분코드  */
+            , STAT_CD /*  상태코드  */
+            , ERR_RMK /*  오류비고  */
+            , REF_NO_SPR_CD /*  참조번호구분코드  */
+            , RPRS_REF_NO /*  대표참조번호  */
+            , RPRS_YN /*  대표여부  */
+            , PTNR_CD /*  파트너코드 */
+            , STG2_REVN_RCGN_DEPT_CD  /*  2구간수익인식부서코드 */
+            , STG2_REVN_RCGN_EMPNO  /*  2구간수익인식사번 */
+            , CNTR_20DR_QTY /*  컨테이너20일반수량  */
+            , CNTR_40DR_QTY /*  컨테이너40일반수량  */
+            , CNTR_40HC_QTY /*  컨테이너40높음수량  */
+            , PROS_YN /*  처리여부  */
+            , REG_DT  /*  등록일시  */
+            , RSTR_ID /*  등록자ID */
+            , UPD_DT  /*  수정일시  */
+            , UPDR_ID /*  수정자ID */
+            , ROUT_SPR_CD)
+          SELECT (SELECT IFNULL(MAX(B.SEQ), 0)+1 FROM TB_FWD_DBL_BTCH_CRT_TARGET B) /*  일련번호  */
+            , #{blId} /*  BLID  */
+            , #{smtNo}/*  SO번호  */
+            , #{hblNo}  /*  HBL번호 */
+            , #{mblNo} /*  MBL번호 */
+            , #{blSprCd} /*  BL구분코드  */
+            , #{taskSprCd} /*  역할구분코드  */
+            , #{exctSprCd} /*  실행구분코드  */
+            , #{bilgBizptnrCd} /*  청구거래처코드 */
+            , #{ordSprCd} /*  오더구분코드  */
+            , #{trnTypeCd} /*  운송유형코드  */
+            , #{shppCd} /*  송화주코드 */
+            , ( SELECT X1.BIZPTNR_ENG_NM
+                     FROM TB_COM_BIZPTNR X1 
+                    WHERE X1.BIZPTNR_CD = #{shppCd} ) /*  송화주명  */
+            , #{cneeCd} /*  수화주코드 */
+            , ( SELECT X1.BIZPTNR_ENG_NM
+                         FROM TB_COM_BIZPTNR X1 
+                        WHERE X1.BIZPTNR_CD = #{cneeCd} ) /*  수화주명  */
+            , #{ntprCd}/*  통지처코드 */
+            , ( SELECT X1.BIZPTNR_ENG_NM
+                     FROM TB_COM_BIZPTNR X1 
+                    WHERE X1.BIZPTNR_CD = #{ntprCd} ) /*  통지처명  */
+            , #{carrCd} /*  운송사코드 */
+            , #{agntCd} /*  대리점코드 */
+            , #{fltVslNm}  /*  편기선명  */
+            , #{voyage} /*  항차  */
+            , #{rprsITemCd} /*  대표품목코드  */
+            , #{rprsITemNm}  /*  대표품목명 */
+            , #{porCd}  /*  POR코드 */
+            , (    SELECT X1.ENG_LOC_NM 
+                        FROM TB_COM_LOC X1 
+                       WHERE X1.LOC_CD = TRIM(#{porCd}) )  /*  POR명  */
+            , #{polCd} /*  POL코드 */
+            , (    SELECT X1.ENG_LOC_NM 
+                        FROM TB_COM_LOC X1 
+                       WHERE X1.LOC_CD = TRIM(#{polCd}) )  /*  POL명  */
+            , #{podCd} /*  POD코드 */
+            , (    SELECT X1.ENG_LOC_NM 
+                        FROM TB_COM_LOC X1 
+                       WHERE X1.LOC_CD = TRIM(#{podCd}) ) /*  POD명  */
+            , #{pdelCd} /*  PDEL코드  */
+            , (    SELECT X1.ENG_LOC_NM 
+                        FROM TB_COM_LOC X1 
+                       WHERE X1.LOC_CD = TRIM(#{pdelCd}) ) /*  PDEL명 */
+            , #{fdestCd}  /*  FDEST코드 */
+            , (    SELECT X1.ENG_LOC_NM 
+                        FROM TB_COM_LOC X1 
+                       WHERE X1.LOC_CD = TRIM(#{fdestCd}) )  /*  FDEST명  */
+            , #{onbrYmd}  /*  출항일자  */
+            , #{arrYmd} /*  입항일자  */
+            , #{arrYmd} /*  예정도착일자  */
+            , #{sellGwt}  /*  매출총중량 */
+            , #{sellWgtUnitCd} /*  매출중량단위코드  */
+            ,0 -- , FC_FW_CONVERT_UNIT('KG2LB', {exctSprCd}, {sellGwt}) /*  매출파운드총중량  */ 임시주석
+            , #{sellCwt} /*  매출CWT */
+            ,0 -- , FC_FW_CONVERT_UNIT('KG2LB', {exctSprCd}, {sellCwt})   /*  매출파운드CWT  */
+            , #{sellVolWgt} /*  매출부피중량  */
+            ,0 -- , FC_FW_CONVERT_UNIT('M32CF', {exctSprCd}, {sellVolWgt})  /*  매출CFT */
+            , #{sellGwt} /*  매입총중량 */
+            , #{sellWgtUnitCd} /*  매입중량단위코드  */
+            ,0 -- , FC_FW_CONVERT_UNIT('KG2LB', {exctSprCd}, {sellCwt}) /*  매입파운드총중량  */
+            , #{sellCwt} /*  매입CWT */
+            , #{sellLbCwt} /*  매입파운드CWT  */
+            , #{sellVolWgt} /*  매입부피중량  */
+            ,0 -- , FC_FW_CONVERT_UNIT('M32CF', {exctSprCd}, {sellVolWgt})  /*  매입CFT */
+            , #{pkgQty} /*  패키지수량 */
+            , #{pkgUnitCd} /*  패키지단위코드 */
+            , #{incotCd} /*  INCOT코드 */
+            , #{frgttermCd} /*  운임지급조건코드  */
+            , #{ladgTypeCd} /*  적재유형코드  */
+            , #{cargoTypeCd} /*  화물유형코드  */
+            , #{blCrtTypeCd}  /*  BL생성유형코드  */
+            , 'N' /*  BL종류코드  */
+            , #{arrClosAutoAplyYn} /*  입항마감자동적용여부  */
+            , #{curCd} /*  통화코드  */
+            , #{orignPrntYn} /*  원본출력여부  */
+            , #{ldngCondCd} /*  적하조건코드  */
+            , #{dscrCondCd}  /*  양하조건코드  */
+            , #{salesOfcrEmpno}  /*  영업담당자사번 */
+            , (SELECT ACCTG_DEPT_CD FROM TB_COM_EMP 
+               WHERE EMPNO = #{salesOfcrEmpno} 
+                LIMIT 1)    /*  영업기여부서코드  */
+            , (SELECT ACCTG_DEPT_CD FROM TB_COM_EMP 
+               WHERE EMPNO = #{ofcrEmpno} 
+                LIMIT 1)   /*  회계부서코드  */
+            , #{ofcrEmpno} /*  담당자사번 */
+            , (SELECT ACCTG_DEPT_CD FROM TB_COM_EMP 
+               WHERE EMPNO = #{salesOfcrEmpno} 
+                LIMIT 1)   /*  실적부서코드  */
+            , #{rmk} /*  적요  */
+            , #{dscrThcYn}  /*  양하THC여부 */
+            , 'Y' AS  NON_EXCT_BL_YN  /*  비실행BL여부 */
+            , #{ctrtTypeCd} CTRT_TYPE_CD  /*  계약유형코드  */
+            , #{coProjSprCd} CO_PROJ_SPR_CD  /*  CO프로젝트구분코드  */
+            , #{statCd} STAT_CD /*  상태코드  */
+            , #{errRmk} ERR_RMK /*  오류비고  */
+            , #{refNoSprCd} REF_NO_SPR_CD /*  참조번호구분코드  */
+            , #{rprsRefNo} RPRS_REF_NO /*  대표참조번호  */
+            , #{rprsYn} RPRS_YN /*  대표여부  */
+            , #{ptnrCd} PTNR_CD /*  파트너코드 */
+           -- , {stg2RevnRcgnDeptCd} STG2_REVN_RCGN_DEPT_CD  /*  2구간수익인식부서코드 */
+            , (SELECT ACCTG_DEPT_CD FROM TB_COM_EMP 
+               WHERE EMPNO = #{ofcrEmpno} 
+                LIMIT 1) AS  STG2_REVN_RCGN_DEPT_CD           
+           -- , {stg2RevnRcgnEmpno} AS STG2_REVN_RCGN_EMPNO  /*  2구간수익인식사번 */
+            , #{ofcrEmpno} AS STG2_REVN_RCGN_EMPNO  /*  2구간수익인식사번 */ 
+            , #{cntr20drQty} AS  CNTR_20DR_QTY /*  컨테이너20일반수량  */
+            , #{cntr40drQty} AS  CNTR_40DR_QTY /*  컨테이너40일반수량  */
+            , #{cntr40hcQty} AS CNTR_40HC_QTY /*  컨테이너40높음수량  */
+            , 'N' AS PROS_YN /*  처리여부  */
+            , NOW() REG_DT  /*  등록일시  */
+            , #{rstrId} RSTR_ID /*  등록자ID */
+            , NOW() UPD_DT  /*  수정일시  */
+            , #{rstrId} UPDR_ID /*  수정자ID */
+            , #{routSprCd}
+            FROM DUAL 
+   </insert>
+     <update id="updateFwdSdblBtchMgtUploadDblList"  parameterType="dataItem" >
+          
+   UPDATE TB_FWD_DBL_BTCH_CRT_TARGET 
+          SET HBL_NO = #{hblNo} /*  hbl번호 */
+            , MBL_NO = #{mblNo} /*  mbl번호 */
+            , BL_SPR_CD = #{blSprCd}  /*  bl구분코드  */
+            , TASK_SPR_CD = #{taskSprCd}  /*  역할구분코드  */
+            , EXCT_SPR_CD = #{exctSprCd}  /*  실행구분코드  */
+            , BILG_BIZPTNR_CD = #{bilgBizptnrCd}  /*  청구거래처코드 */
+            , ORD_SPR_CD = #{ordSprCd}  /*  오더구분코드  */
+            , TRN_TYPE_CD = #{trnTypeCd}  /*  운송유형코드  */
+            , SHPP_CD = #{shppCd} /*  송화주코드 */
+            , SHPP_NM = ( SELECT X1.BIZPTNR_ENG_NM
+                                 FROM TB_COM_BIZPTNR X1 
+                                WHERE X1.BIZPTNR_CD = #{shppCd} )   /*  송화주명  */
+            , CNEE_CD = #{cneeCd} /*  수화주코드 */
+            , CNEE_NM = ( SELECT X1.BIZPTNR_ENG_NM
+                                     FROM TB_COM_BIZPTNR X1 
+                                    WHERE X1.BIZPTNR_CD = #{cneeCd} ) /*  수화주명  */
+            , NTPR_CD = #{ntprCd} /*  통지처코드 */
+            , NTPR_NM = ( SELECT X1.BIZPTNR_ENG_NM
+                                     FROM TB_COM_BIZPTNR X1 
+                                    WHERE X1.BIZPTNR_CD = #{ntprCd} ) /*  통지처명  */
+            , CARR_CD = #{carrCd} /*  운송사코드 */
+            , AGNT_CD = #{agntCd} /*  대리점코드 */
+            , FLT_VSL_NM = #{fltVslNm} /*  편기선명  */
+            , VOYAGE = #{voyage} /*  항차  */
+            , RPRS_ITEM_CD = #{rprsItemCd} /*  대표품목코드  */
+            , RPRS_ITEM_NM = #{rprsItemNm} /*  대표품목명 */
+            , POR_CD = #{porCd} /*  por코드 */
+            , POR_NM = (    SELECT X1.ENG_LOC_NM 
+                                    FROM TB_COM_LOC X1 
+                                   WHERE X1.LOC_CD = TRIM(#{porCd}) ) /*  por명  */
+            , POL_CD = #{polCd} /*  pol코드 */
+            , POL_NM = (    SELECT X1.ENG_LOC_NM 
+                                        FROM TB_COM_LOC X1 
+                                       WHERE X1.LOC_CD = TRIM(#{polCd}) ) /*  pol명  */
+            , POD_CD = #{podCd} /*  pod코드 */
+            , POD_NM = (    SELECT X1.ENG_LOC_NM 
+                                        FROM TB_COM_LOC X1 
+                                       WHERE X1.LOC_CD = TRIM(#{podCd}) ) /*  pod명  */
+            , PDEL_CD = #{pdelCd} /*  pdel코드  */
+            , PDEL_NM = (    SELECT X1.ENG_LOC_NM 
+                                        FROM TB_COM_LOC X1 
+                                       WHERE X1.LOC_CD = TRIM(#{pdelCd}) ) /*  pdel명 */
+            , FDEST_CD = #{fdestCd} /*  fdest코드 */
+            , FDEST_NM = (    SELECT X1.ENG_LOC_NM 
+                                        FROM TB_COM_LOC X1 
+                                       WHERE X1.LOC_CD = TRIM(#{fdestCd}) ) /*  fdest명  */
+            , ONBR_YMD = #{onbrYmd} /*  출항일자  */
+            , ARR_YMD = #{arrYmd} /*  입항일자  */
+            , ETA_YMD = #{arrYmd} /*  예정도착일자  */
+            , SELL_GWT = #{sellGwt} /*  매출총중량 */
+            , SELL_WGT_UNIT_cd = #{sellWgtUnitCd} /*  매출중량단위코드  */
+            , SELL_LB_GWT = #{sellLbGwt} /*  매출파운드총중량  */
+            , SELL_CWT = #{sellCwt} /*  매출cwt */
+            , SELL_LB_CWT = #{sellLbCwt} /*  매출파운드cwt  */
+            , SELL_VOL_WGT = #{sellVolWgt} /*  매출부피중량  */
+            , SELL_CFT = #{sellCft} /*  매출cft */
+            , BUY_GWT = #{sellGwt} /*  매입총중량 */
+            , BUY_WGT_UNIT_CD = #{sellWgtUnitCd} /*  매입중량단위코드  */
+            , BUY_LB_GWT = #{sellLbGwt} /*  매입파운드총중량  */
+            , BUY_CWT = #{sellCwt} /*  매입cwt */
+            , BUY_LB_CWT = #{sellLbCwt} /*  매입파운드cwt  */
+            , BUY_VOL_WGT = #{sellVolWgt} /*  매입부피중량  */
+            , BUY_CFT = #{sellCft} /*  매입cft */
+            , PKG_QTY = #{pkgQty} /*  패키지수량 */
+            , PKG_UNIT_CD = #{pkgUnitCd} /*  패키지단위코드 */
+            , INCOT_CD = #{incotCd} /*  incot코드 */
+            , FRGTTERM_CD = #{frgttermCd} /*  운임지급조건코드  */
+            , LADG_TYPE_CD = #{ladgTypeCd} /*  적재유형코드  */
+            , CARGO_TYPE_CD = #{cargoTypeCd} /*  화물유형코드  */
+            , BL_CRT_TYPE_Cd  = #{blCrtTypeCd} /*  bl생성유형코드  */   
+            , ARR_CLOS_AUTO_APLY_YN = #{arrClosAutoAplyYn} /*  입항마감자동적용여부  */
+            , CUR_CD  = #{curCd} /*  통화코드  */
+            , ORIGN_PRNT_YN = #{orignPrntYn} /*  원본출력여부  */
+            , LDNG_COND_CD = #{ldngCondCd} /*  적하조건코드  */
+            , DSCR_COND_CD = #{dscrCondCd} /*  양하조건코드  */
+            , SALES_OFCR_EMPNO = #{salesOfcrEmpno} /*  영업담당자사번 */
+            , SALES_CNTRB_DEPT_CD =(SELECT ACCTG_DEPT_CD 
+                                    FROM TB_COM_EMP 
+                                    WHERE EMPNO = #{salesOfcrEmpno} 
+                                     LIMIT 1)   /*  영업기여부서코드  */
+            , ACCTG_DEPT_CD = (SELECT ACCTG_DEPT_CD 
+                               FROM TB_COM_EMP 
+                               WHERE EMPNO = #{ofcrEmpno} 
+                                LIMIT 1) /*  회계부서코드  */
+            , OFCR_EMPNO = #{ofcrEmpno} /*  담당자사번 */
+            , RSLT_DEPT_CD = (SELECT ACCTG_DEPT_CD 
+                              FROM TB_COM_EMP 
+                              WHERE EMPNO = #{salesOfcrEmpno} 
+                               LIMIT 1) /*  실적부서코드  */
+            , RMK = #{rmk} /*  적요  */
+            , DSCR_THC_YN = #{dscrThcYn} /*  양하thc여부 */
+            , NON_EXCT_BL_Yn = #{nonExctBlYn} /*  비실행bl여부 */
+            , CTRT_TYPE_CD  = #{ctrtTypeCd} /*  계약유형코드  */
+            , CO_PROJ_SPR_Cd  = #{coProjSprCd} /*  co프로젝트구분코드  */
+            , REF_NO_SPR_CD = #{refNoSprCd} /*  참조번호구분코드  */
+            , RPRS_REF_NO = #{rprsRefNo} /*  대표참조번호  */
+            , RPRS_YN = #{rprsYn} /*  대표여부  */
+            , PTNR_CD = #{ptnrCd} /*  파트너코드 */
+            , STG2_REVN_RCGN_DEPT_CD  = (SELECT ACCTG_DEPT_CD 
+                                         FROM TB_COM_EMP 
+                                         WHERE EMPNO = #{ofcrEmpno} 
+                                          LIMIT 1) /*  2구간수익인식부서코드 */ 
+            , STG2_REVN_RCGN_EMPNO  =  #{ofcrEmpno}  /*  2구간수익인식사번 */
+            , CNTR_20DR_QTY = #{cntr20drQty} /*  컨테이너20일반수량  */
+            , CNTR_40DR_QTY = #{cntr40drQty} /*  컨테이너40일반수량  */
+            , CNTR_40HC_QTY = #{cntr40hcQty} /*  컨테이너40높음수량  */
+            , UPD_DT  = NOW() /*  수정일시  */
+            , UPDR_ID = #{updrId} /*  수정자id */
+            , ROUT_SPR_CD = #{routSprCd} 
+         WHERE SEQ = #{seq}    
+   </update>
+     <delete id="deleteFwdSdblBtchMgtUploadDblList"  parameterType="dataItem" > 
+        
+		   UPDATE TB_FWD_DBL_BTCH_CRT_TARGET 
+		          SET PROS_YN = 'D' 
+		            , UPD_DT  = now() /*  수정일시  */
+		            , UPDR_ID = #{updrId} /*  수정자id */
+		      WHERE SEQ = #{seq} 
+     </delete> 
+        
+        
+         
+</mapper>

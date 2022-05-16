@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.linkup.fwdExctOrdCommon">
+
+     <select id="selectEoExctSprCd" parameterType="dataItem" resultType="dataItem">
+        /* fwd.linkup.fwdExctOrdCommon.selectEoExctSprCd */
+        SELECT A.EXCT_SPR_CD
+              ,B.INTG_TASK_NO AS EXP_INTG_TASK_NO
+              ,B.EXCT_BIZPTNR_CD AS EXP_CORP_CD
+              ,C.INTG_TASK_NO AS IMP_INTG_TASK_NO
+              ,C.EXCT_BIZPTNR_CD AS IMP_CORP_CD
+              ,(SELECT IFNULL(X.IFLD_CUR_CD, 'USD')
+                  FROM TB_COM_CORP X
+                 WHERE X.CORP_CD = B.EXCT_BIZPTNR_CD
+                   AND X.USE_YN = 'Y'
+                 LIMIT 1) AS CUR_CD
+              ,(SELECT ACCTG_DEPT_CD
+                  FROM TB_COM_EMP X
+                 WHERE X.EMPNO = #{userId}
+                   AND X.USE_YN = 'Y'
+                 LIMIT 1) AS ACCTG_DEPT_CD
+          FROM TB_SMT_EO A
+    LEFT OUTER JOIN TB_SMT_INTG_TASK_DEPT B ON B.EO_NO = A.EO_NO
+           AND B.TASK_SPR_CD = 'EXP'
+           AND B.DEL_YN = 'N'
+    LEFT OUTER JOIN TB_SMT_INTG_TASK_DEPT C ON C.EO_NO = A.EO_NO
+           AND C.TASK_SPR_CD = 'IMP'
+           AND C.DEL_YN = 'N'
+         WHERE A.DEL_YN = 'N'
+           AND A.SMT_NO = #{smtNo}
+           AND A.EO_NO = #{eoNo}
+         LIMIT 1
+    </select>
+
+
+    <select id="selectSmtSvcTypeEstSchd" parameterType="dataItem" resultType="dataItem">
+        /* fwd.linkup.fwdExctOrdCommon.selectSmtSvcTypeEstSchd */
+        SELECT DPT_RQST_YMD AS ETD_YMD
+              ,ARRV_RQST_YMD AS ETA_YMD
+              ,DPT_ND_CD
+              ,ARRV_ND_CD
+              ,(SELECT IFNULL(FDEST.ARRV_RQST_YMD, FDEST.DPT_RQST_YMD)
+               FROM TB_SMT_ORD_SVC_TYPE FDEST
+               WHERE FDEST.SMT_NO = #{smtNo}
+               AND FDEST.SVC_TYPE_SEQ = (SELECT MAX(B.SVC_TYPE_SEQ)
+                                         FROM TB_SMT_ORD_SVC_TYPE B
+                                         WHERE B.SMT_NO = #{smtNo}
+                                         AND B.DEL_YN = 'N')
+               LIMIT 1)  AS FDEST_ETA_YMD
+          FROM TB_SMT_ORD_SVC_TYPE
+         WHERE SMT_NO = #{smtNo}
+           AND EO_NO = #{eoNo}
+           AND SVC_STEP_SEQ > 0
+         LIMIT 1
+    </select>
+
+     <insert id="saveHblItemMpng" parameterType="dataItem" >
+        /* fwd.linkup.fwdExctOrdCommon.saveHblItemMpng */
+        INSERT INTO TB_FWD_BL_ITEM_MPNG(
+             BL_ID
+            ,INTG_ITEM_NO
+            ,MPNG_KIND_CD
+            ,DEL_YN
+            ,REG_DT
+            ,RSTR_ID
+            ,UPD_DT
+            ,UPDR_ID)
+      SELECT #{blId}
+            ,INTG_ITEM_NO
+            ,'OMI'
+            ,'N'
+            ,NOW()
+            ,RSTR_ID
+            ,NOW()
+            ,UPDR_ID
+        FROM TB_SMT_INTG_ITEM
+       WHERE SMT_NO  = #{smtNo}
+         AND DEL_YN = 'N'
+    </insert>
+
+    <insert id="saveHblItemDtlMpng" parameterType="dataItem" >
+        /* fwd.linkup.fwdExctOrdCommon.saveHblItemDtlMpng */
+        INSERT INTO TB_FWD_BL_ITEM_MPNG(
+             BL_ID
+            ,INTG_ITEM_NO
+            ,MPNG_KIND_CD
+            ,DEL_YN
+            ,REG_DT
+            ,RSTR_ID
+            ,UPD_DT
+            ,UPDR_ID)
+      SELECT #{blId}
+            ,INTG_ITEM_NO
+            ,'OMD'
+            ,'N'
+            ,NOW()
+            ,RSTR_ID
+            ,NOW()
+            ,UPDR_ID
+        FROM TB_SMT_INTG_ITEM_DTL
+       WHERE SMT_NO = #{smtNo}
+         AND DEL_YN = 'N'
+    </insert>
+
+   <!-- CO면장번호조회 -->
+    <select id="selectCoLiceNo" parameterType="dataItem" resultType="dataItem">
+        /* fwd.linkup.fwdExctOrdCommon.selectCoLiceNo (TB_OM_SO_EXP_LICE : 미사용, TB_OM_SO_LICE_NO : 미사용) */
+        SELECT A.CO_LICE_NO  AS EXP_LICE_NO
+              ,SUBSTR(A.CO_DECL_YMD,0,8)  AS LICE_YMD
+              ,A.CO_PACKG_QTY      AS QTY
+              ,A.CO_PACKG_TYPE_CD AS QTY_UNIT_CD
+              ,A.CO_GWT            AS WGT
+              ,A.CO_SMTM_PACKG_QTY   AS  SMTM_PACKG_PKG_QTY
+              ,A.CO_SMTM_PACKG_TYPE_CD  AS SMTM_PACKG_PKG_UNIT_CD
+              ,A.CO_PART_SHIPMT_YN AS SPLIT_SHIPMT_YN
+              ,CAST(A.CO_PART_SHIPMT_DGRCNT AS UNSIGNED) AS SPLIT_SHIPMT_DGRCNT
+              ,#{blId}         AS BL_ID
+              ,#{rstrId}       AS RSTR_ID
+              ,#{updrId}       AS UPDR_ID
+          FROM TB_SMT_CO_LICE A
+    INNER JOIN TB_SMT_ORD_CO_RELT B
+            ON A.CO_RECV_NO = B.CO_RECV_NO
+         WHERE B.SMT_NO  = #{smtNo}
+           AND B.DEL_YN ='N'
+           AND IFNULL(#{copyYn}, 'N') = 'N'
+    </select>
+
+
+</mapper>

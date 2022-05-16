@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<a href="#nav">메인메뉴 바로가기</a>
+				<a href="#content">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+			
+			<!-- header -->
+			<div id="header">
+				<header>			
+					<!-- hsection -->
+					<div class="hsection">
+						<div class="clearfix">
+							<ul class="fl member_class clearfix">
+								<!--<li class="active">연구자</li>
+								<li><a href="./member_signup.html" title="평가위원 등록">평가위원 등록</a></li>
+								<li class="active">평가위원</li>
+								<li class="active">전문가</li>-->
+							</ul>
+							<ul class="fr top_area">
+								<li>
+									<!--a href="./login.html" title="기업 로그인" class="clearfix">
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="기업 로그인" /><span class="fl">기업 로그인</span>
+									</a-->
+								</li>
+								<li class="login_area">						
+									<!--a href="" title="로그아웃" class="openLayer logout_pop_open">
+										<img src="../images/icon/icon_logout.png" class="fl top_img" alt="로그아웃"><span class="fl">로그아웃</span>
+									</a-->
+									<!--로그인-->
+									<a href="./login.html" title="로그아웃" class="clearfix">
+										<!--최초 로그인팝업-->
+										<!--a href="./login.html" title="로그아웃" class="clearfix login_first_popup_open"-->
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="로그인" /><span class="fl">로그인</span>
+									</a>									
+								</li>
+								<!--li>
+									<a href="./mypage_company.html" title="마이페이지" class="clearfix">
+										<img src="../images/icon/icon_mypage.png" class="fl top_img" alt="마이페이지" /><span class="fl">마이페이지</span>
+									</a>
+								</li-->
+								<li>
+									<a href="./member_signup.html" title="회원가입" class="clearfix">
+										<img src="../images/icon/icon_member_sign.png" class="fl top_img" alt="회원가입" /><span class="fl">회원가입</span>
+									</a>
+								</li>
+								<!--li>
+									<a href="" title="전체메뉴" class="clearfix">
+										<img src="../images/icon/icon_menu.png" class="fl top_img" alt="전체메뉴" /><span class="fl">전체메뉴</span>
+									</a>
+								</li-->
+							</ul>
+						</div>
+					</div>
+					<!--// hsection -->
+					
+					<!-- nav -->
+					<div id="nav">
+						<div class="gnb clearfix">
+							<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="fl logo">
+								<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템" /></h1>
+							</a>
+							<nav>
+								<ul class="menu fl">
+									<li><a href="./announcement.html" title="공고"><span>공고</span></a></li>
+									<li><a href="./reception.html" title="접수"><span>접수</span></a></li>
+									<li><a href="./estimation.html" title="협약"><span>협약</span></a></li>
+									<li><a href="./execute.html" title="수행"><span>수행</span></a></li>
+									<li><a href="./agreement.html" title="평가"><span>평가</span></a></li>
+									<li><a href="./compute.html" title="정산"><span>정산</span></a></li>
+									<li><a href="./information.html" title="알림·정보"><span>알림·정보</span></a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--// nav -->
+				</header>
+			</div>
+			<!--// header -->			
+			<!-- container -->
+			<div id="container" class="mb50">
+				<h2 class="hidden">서브 컨텐츠 화면</h2>	
+				
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area">
+							<h3>접수</h3>
+							<div class="route hidden">
+								<ul class="clearfix">
+									<li><i class="fas fa-home">홈</i></li>
+									<li>접수</li>
+									<li>접수</li>
+								</ul>
+							</div>
+							<div class="content_area">
+								<h4>접수 중인 과제 목록</h4>
+								<!--search_area-->
+								<div class="search_area">
+									<dl class="search_box">
+										<dt class="hidden">검색대상</dt>
+										<dd class="box">
+											<label for="select_choice" class="hidden">검색구분</label>
+											<select id="select_choice" class="selectbox1 fl ace-select">
+												<option value="전체">전체</option>
+												<option value="기술매칭">기술매칭</option>
+												<option value="기술공모">기술공모</option>
+												<option value="기술제안">기술제안</option>
+											</select>
+											<div class="input_search_box fl in_w74">
+												<label for="input_txt2" class="hidden">검색어 입력</label>
+												<input id="input_txt2" class="in_w85 fl" name="input_txt" type="text" value="" placeholder="검색어를 입력하세요." />
+												<div class="fr clearfix">
+													<button class="search_txt_del fl" title="검색어 삭제"><img src="../images/icon/search_txt_del.png" alt="검색어 삭제 버튼" /></button>	
+													<button type="submit" class="serch_btn blue_btn fl mr20" title="검색">검색</button>	
+												</div>	
+											</div>
+										</dd>
+									</dl>							
+								</div>
+								<!--//search_area-->
+
+								<!--table_count_area-->
+								<div class="table_count_area">
+									<div class="count_area">
+										[총<strong>100</strong>건]
+									</div>
+								</div>
+								<!--//table_count_area-->
+								
+								<!--table_area-->
+								<div class="table_area">
+									<table class="list fixed">
+										<caption>리스트 화면</caption>
+										<colgroup>
+											<col style="width: 5%;">
+											<col style="width: 15%;">
+											<col style="width: *;">
+											<col style="width: 16%;">
+											<col style="width: 20%;">
+											<col style="width: 15%;">
+										</colgroup>
+										<thead>
+										<tr>
+											<th scope="col" class="first">번호</th>
+											<th scope="col">사업명</th>
+											<th scope="col">공고명</th>
+											<th scope="col">공고일</th>
+											<th scope="col">접수기간</th>
+											<th scope="col" class="last">신청</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td class="first">1</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td>2021-02-22</td>
+											<td>2021-01-18 ~ 2021-02-18</td>
+											<td class="last"><button type="button" class="btn_blue">접수하기</button></td>
+										</tr>
+										<tr>
+											<td class="first">2</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td>2021-02-22</td>
+											<td>2021-01-18 ~ 2021-02-18</td>	
+											<td class="last"><button type="button" class="btn_blue">접수하기</button></td>
+										</tr>
+										<tr>
+											<td class="first">3</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td>2021-02-22</td>
+											<td>2021-01-18 ~ 2021-02-18</td>	
+											<td class="last"><button type="button" class="btn_blue">접수하기</button></td>
+										</tr>		
+										<tr>
+											<td class="first">4</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td>2021-02-22</td>
+											<td>2021-01-18 ~ 2021-02-18</td>	
+											<td class="last"><button type="button" class="btn_blue">접수하기</button></td>
+										</tr>
+										<tr>
+											<td class="first">5</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td>2021-02-22</td>
+											<td>2021-01-18 ~ 2021-02-18</td>	
+											<td class="last"><button type="button" class="btn_blue">접수하기</button></td>
+										</tr>			
+										<tr>
+											<td class="first">6</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td>2021-02-22</td>
+											<td>2021-01-18 ~ 2021-02-18</td>	
+											<td class="last"><button type="button" class="btn_blue">접수하기</button></td>
+										</tr>
+										<tr>
+											<td class="first">7</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td>2021-02-22</td>
+											<td>2021-01-18 ~ 2021-02-18</td>	
+											<td class="last"><button type="button" class="btn_blue">접수하기</button></td>
+										</tr>			
+										</tbody>
+									</table>
+									<!--div class="data_null ta_c">조회된 내용이 없습니다.</div-->
+									<div class="paging_area">
+										<a href="javascript:void(0)" class="stimg" title="맨처음 페이지로 이동"><img src="../images/icon/btn_paging_first.png" alt="맨처음 페이지로 이동"></a>
+										<a href="javascript:void(0)" class="stimg" title="전 페이지로 이동"><img src="../images/icon/btn_paging_prev.png" alt="전 페이지로 이동"></a>
+										<strong>1</strong>
+										<a href="javascript:void(0)">2</a>
+										<a href="javascript:void(0)">3</a>
+										<a href="javascript:void(0)">4</a>
+										<a href="javascript:void(0)">5</a>
+										<a href="javascript:void(0)">6</a>
+										<a href="javascript:void(0)">7</a>
+										<a href="javascript:void(0)">8</a>
+										<a href="javascript:void(0)">9</a>
+										<a href="javascript:void(0)">10</a>
+										<a href="javascript:void(0)" class="stimg" title="다음 페이지로 이동"><img src="../images/icon/btn_paging_next.png" alt="다음 페이지로 이동"></a>
+										<a href="javascript:void(0)" class="stimg" title="맨마지막 페이지로 이동"><img src="../images/icon/btn_paging_last.png" alt="맨마지막 페이지로 이동"></a>
+									</div>
+								</div>
+								<!--//table_area-->
+
+								<h4>나의 접수 과제 목록</h4>
+								<p class="receptionmylist_txt"><span class="necessary_icon">*</span>내가 접수한 과제 목록을 확인합니다. 접수가 완료된 과제는 접수번호가 부여되며, <strong>‘나의 수행 과제 현황’</strong> 에서 확인할 수 있습니다. </p>
+
+								<!--table_area-->
+								<div class="table_area">
+									<table class="list fixed">
+										<caption>나의 접수 과제 목록</caption>
+										<colgroup>
+											<col style="width: 5%;">
+											<col style="width: 15%;">
+											<col style="width: *;">
+											<col style="width: 22%;">
+											<col style="width: 10%;">
+											<col style="width: 10%;">
+											<col style="width: 15%;">
+										</colgroup>
+										<thead>
+										<tr>
+											<th scope="col" class="first">번호</th>
+											<th scope="col">사업명</th>
+											<th scope="col">공고명</th>
+											<th scope="col">기술명</th>
+											<th scope="col">접수일</th>
+											<th scope="col">접수번호</th>
+											<th scope="col" class="last">접수상태</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td class="first">1</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">앞차량 거리 측정 기술<br />(IOT 융합 기술)</a></td>
+											<td>2021-02-22</td>
+											<td>A2021001</td>
+											<td class="last"><span class="font_red">반려</span><button type="button" class="btn_blue2 ml10">재접수하기</button></td>									
+										</tr>
+										<tr>
+											<td class="first">2</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">앞차량 거리 측정 기술<br />(IOT 융합 기술)</a></td>
+											<td>2021-02-22</td>
+											<td>A2021001</td>	
+											<td class="last"><span class="font_blue">접수완료</span><button type="button" class="btn_gray ml10">접수 취소</button></td>
+										</tr>
+										<tr>
+											<td class="first">3</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">앞차량 거리 측정 기술<br />(IOT 융합 기술)</a></td>
+											<td>2021-02-22</td>
+											<td>A2021001</td>
+											<td class="last"><span class="font_red">반려</span><button type="button" class="btn_blue2 ml10">재접수하기</button></td>									
+										</tr>
+										<tr>
+											<td class="first">4</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">앞차량 거리 측정 기술<br />(IOT 융합 기술)</a></td>
+											<td>2021-02-22</td>
+											<td>A2021001</td>	
+											<td class="last"><span class="font_blue">접수완료</span><button type="button" class="btn_gray ml10">접수 취소</button></td>
+										</tr>
+										<tr>
+											<td class="first">5</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">앞차량 거리 측정 기술<br />(IOT 융합 기술)</a></td>
+											<td>2021-02-22</td>
+											<td>A2021001</td>
+											<td class="last"><span class="font_red">반려</span><button type="button" class="btn_blue2 ml10">재접수하기</button></td>									
+										</tr>
+										<tr>
+											<td class="first">6</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭<br />(기술연구개발)</a></td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">앞차량 거리 측정 기술<br />(IOT 융합 기술)</a></td>
+											<td>2021-02-22</td>
+											<td>A2021001</td>	
+											<td class="last"><span class="font_blue">접수완료</span><button type="button" class="btn_gray ml10">접수 취소</button></td>
+										</tr>
+										<tr>
+											<td class="first">7</td>
+											<td>기술매칭</td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)">2021년 기술매칭</span><span>(기술연구개발)</span></a></td>
+											<td><a href="#" title="2021년 기술매칭(기술연구개발)"><span>앞차량 거리 측정 기술</span>(IOT 융합 기술)</a></td>
+											<td>2021-02-22</td>
+											<td>A2021001</td>
+											<td class="last"><span class="font_red">반려</span><button type="button" class="btn_blue2 ml10">재접수하기</button></td>									
+										</tr>
+										</tbody>
+									</table>
+									<!--div class="data_null ta_c">조회된 내용이 없습니다.</div-->
+									<div class="paging_area">
+										<a href="" class="stimg" title="맨처음 페이지로 이동"><img src="../images/icon/btn_paging_first.png" alt="맨처음 페이지로 이동"></a>
+										<a href="" class="stimg" title="전 페이지로 이동"><img src="../images/icon/btn_paging_prev.png" alt="전 페이지로 이동"></a>
+										<strong>1</strong>
+										<a href="">2</a>
+										<a href="">3</a>
+										<a href="j">4</a>
+										<a href="">5</a>
+										<a href="">6</a>
+										<a href="">7</a>
+										<a href="">8</a>
+										<a href="">9</a>
+										<a href="">10</a>
+										<a href="" class="stimg" title="다음 페이지로 이동"><img src="../images/icon/btn_paging_next.png" alt="다음 페이지로 이동"></a>
+										<a href="" class="stimg" title="맨마지막 페이지로 이동"><img src="../images/icon/btn_paging_last.png" alt="맨마지막 페이지로 이동"></a>
+									</div>
+								</div>
+								<!--//table_area-->
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->	
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	</body>
+</html>

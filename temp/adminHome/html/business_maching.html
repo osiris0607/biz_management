@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소" />
+		<meta name="keywords" content="신기술 접수소" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 관리자사이트" />
+		<meta property="og:description" content="신기술접수소  관리자사이트" />
+		<title>신기술접수소</title>		
+		<link rel="stylesheet" href="../css/lib/solid.min.css" />
+		<link rel="stylesheet" href="../css/lib/jquery-ui.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<script src="../js/lib/jquery-3.6.0.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>	
+		<script src="../js/lib/jquery-ui.js"></script>	
+	</head>
+	<body>
+		<!-- skip_nav --> 
+		<div id="skip_nav">  
+           <a href="#top_nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a>
+           <a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+		</div>
+		<!-- //skip_nav --> 
+
+		<!--popup-->
+	    <!-- 로그아웃 팝업 -->
+	    <div class="logout_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="logout_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">로그 아웃</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">로그아웃</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="blue_btn popup_close_btn" onclick="location.href='./login.html'">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //로그아웃 팝업 -->
+
+		<!-- 게시물 삭제 팝업 -->
+	    <div class="board_list_del_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_del_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">삭제 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>해당 게시물을 <span class="font_blue">삭제</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="submit" class="blue_btn popup_close_btn complete">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //게시물 삭제 팝업 -->
+
+		<!-- 게시물 삭제 완료 팝업 -->
+	    <div class="board_list_del_complete_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_del_complete_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">삭제 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">삭제 완료</span> 되었습니다.</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="gray_btn popup_close_btn complate_del">닫기</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- 게시물 삭제 완료 팝업 -->
+
+		<!-- 게시물 수정 팝업 -->
+	    <div class="board_list_modify_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_modify_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">수정 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>해당 게시물을 <span class="font_blue">수정</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="submit" class="blue_btn popup_close_btn complete">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //게시물 수정 팝업 -->
+
+		<!-- 게시물 수정 완료 팝업 -->
+	    <div class="board_list_modify_complete_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_modify_complete_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">수정 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">수정 완료</span> 되었습니다.</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="gray_btn popup_close_btn complate_del">닫기</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- 게시물 수정 완료 팝업 -->
+
+		<!-- 게시물 등록 팝업 -->
+	    <div class="board_write_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_write_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">등록 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>해당 게시물을 <span class="font_blue">등록</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="submit" class="blue_btn popup_close_btn complete">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //게시물 등록 팝업 -->
+
+		<!-- 게시물 등록 완료 팝업 -->
+	    <div class="board_write_complete_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_write_complete_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">등록 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">등록 완료</span> 되었습니다.</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="gray_btn popup_close_btn">닫기</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- 게시물 등록 완료 팝업 -->
+
+		<div class="wrap">
+			
+			<!-- header -->
+			<header class="header">
+				<div class="header_top clearfix">
+					<div class="fl logo_box clearfix">
+					   <h1 class="header_site-logo fl">
+						   <a href="./index.html" title="신기술접수소 홈 이동" class="home_logo clearfix ir">
+							   <img class="fl" src="../images/admin_logo.png" alt="신기술접수소">
+							   신기술 접수소
+						   </a>
+					   </h1>                        
+					</div>
+					<div class="class_select_box fr clearfix pc_show">
+					   <span class="fl mt10 mr10 pt5"><span class="header_name">관리자</span>님 반갑습니다.</span>                     
+					   <a href="javascript:void(0)" title="로그아웃" class="login_icon logout fl mt10 ir"><span>로그아웃</span></a>                    
+					   <!--a href="#" title="로그인"  class="login_icon logout fl margint10 ir"><span>로그인</span></a-->                        
+					</div>
+				</div>
+				<!--pc 상단 메뉴-->
+				<nav class="nav pc_show" id="top_nav">
+					<ul class="clearfix">
+						<li><a href="./business_proposition.html" title="콘텐츠관리"><i class="far fa-folder-open"></i>콘텐츠관리</a></li>
+						<li><a href="./board_notice.html" title="게시판관리"><i class="far fa-list-alt"></i>게시판관리</a></li>
+						<li><a href="./statistics_time.html" title="통계관리"><i class="fas fa-chart-bar"></i>통계관리</a></li>
+					</ul>                
+				</nav>
+				<!--//pc 상단 메뉴-->
+			</header>
+			<!--// header -->
+			<hr class="hidden">		
+			
+			
+			<!-- section -->
+			<section id="content">	
+				<h2 class="hidden">본문시작</h2>
+				<!-- left_menu -->
+				<nav id="left_menu">
+					<h2 class="left_menu_title"><i class="far fa-folder-open"></i>콘텐츠관리</h2>
+					<ul class="left_menu_link">
+						<li class="on"><a href="./business_proposition.html">주요사업소개</a>
+							<ul>
+								<li><a href="./business_proposition.html">기술제안</a></li>
+								<li class="on"><a href="./business_maching.html">기술매칭</a></li>
+								<li><a href="./business_announcement.html">기술공모</a></li>
+							</ul>
+						</li>
+					</ul>	
+				</nav>
+				<!-- //left_menu -->
+				
+				<!-- 서브컨텐츠 -->
+				<article class="contents sub_content">
+					<h3 class="sub_title">기술매칭</h3>
+					<!-- list 검색 상단 -->
+					<div class="list_search_top_area">							   
+						<ul class="clearfix board_list_searchbox">							
+							<li class="clearfix">
+								<span class="title">키워드</span>								
+								<span class="input_search"><label for="board_list_searchbox_search" class="fl list_search_title hidden">검색어</label>
+								<input type="text" id="board_list_searchbox_search" class="form-control" />   
+								<button type="button" class="search_txt_del" title="검색어 삭제"><i class="fas fa-times"></i></button></span>
+								<button type="submit" class="blue_btn2">조회</button>
+							</li>
+						</ul>						
+					</div>		 
+					<!-- //list 검색 상단 -->
+
+					<!-- list 검색 결과 -->
+					<div class="list_search_table">
+						<div class="table_count_area">
+							<div class="count_area clearfix mb10">
+								<div class="fl mt20">								   
+								[총 <span class="font_blue">100</span>건]
+								</div>
+								<div class="fr clearfix">									
+									<button type="button" class="blue_btn poster_list_add fl mr5">추가</button>										
+								</div>
+							</div>
+						</div>
+
+						<div class="business_area">							
+							<ul class="business_area_contents">								
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title1" class="hidden">제목</label>
+										<input type="text" id="business_poster_title1" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+										
+											<label for="poster_input-image">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image" class="hidden poster_input-image">	
+											<label for="poster_upload-name" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name" value="첨부파일" placeholder="첨부파일" />				
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text1" class="hidden">사업 주요 내용 텍스트</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text1" class="business_poster_text">&nbsp;</textarea>												
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title2" class="hidden">제목</label>
+										<input type="text" id="business_poster_title2" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image2">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image2" class="hidden poster_input-image">	
+											<label for="poster_upload-name2" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name2" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c2" class="hidden">사업 주요 내용</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">&nbsp;</textarea>																				
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title3" class="hidden">제목</label>
+										<input type="text" id="business_poster_title3" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image3">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image3" class="hidden poster_input-image">
+											<label for="poster_upload-name3" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name3" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c3" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text1" class="business_poster_text">&nbsp;</textarea>											
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>								
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title4" class="hidden">제목</label>
+										<input type="text" id="business_poster_title4" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image4">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image4" class="hidden poster_input-image">
+											<label for="poster_upload-name4" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name4" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c4" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">&nbsp;</textarea>																					
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title5" class="hidden">제목</label>
+										<input type="text" id="business_poster_title5" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image5">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image5" class="hidden poster_input-image">
+											<label for="poster_upload-name5" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name5" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c5" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text1" class="business_poster_text">&nbsp;</textarea>											
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title6" class="hidden">제목</label>
+										<input type="text" id="business_poster_title6" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image6">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image6" class="hidden poster_input-image">
+											<label for="poster_upload-name6" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name6" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c6" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">&nbsp;</textarea>																					
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title7" class="hidden">제목</label>
+										<input type="text" id="business_poster_title7" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image7">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image7" class="hidden poster_input-image">
+											<label for="poster_upload-name7" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name7" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c7" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text1" class="business_poster_text">&nbsp;</textarea>											
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title8" class="hidden">제목</label>
+										<input type="text" id="business_poster_title8" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image8">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image8" class="hidden poster_input-image">
+											<label for="poster_upload-name8" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name8" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c8" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">&nbsp;</textarea>																					
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title9" class="hidden">제목</label>
+										<input type="text" id="business_poster_title9" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image9">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image9" class="hidden poster_input-image">
+											<label for="poster_upload-name9" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name9" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c9" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text1" class="business_poster_text">&nbsp;</textarea>											
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>								
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title10" class="hidden">제목</label>
+										<input type="text" id="business_poster_title10" class="form-control business_poster_title" value="캠퍼스타운 기술매칭사업" />
+										<div class="poster_image-container">											
+											<a href="../images/business_maching_img_1.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_maching_img_1.jpg" alt="캠퍼스타운 기술매칭사업" /></a>
+											<label for="poster_input-image10">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image10" class="hidden poster_input-image">
+											<label for="poster_upload-name10" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name10" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c10" class="hidden">사업목적</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">&nbsp;</textarea>																				
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>								
+									</div>
+								</li>
+								<!--<li class="ta_c">등록된 게시물이 없습니다.</li>-->
+							</ul>
+						</div>
+
+						<div class="page">				
+						   <ul class="pagination">
+							   <li><a href="javascript:void(0)" class="first" title="처음 페이지">처음 페이지</a></li>
+							   <li><a href="javascript:void(0)" class="arrow left" title="앞페이지로 이동"><i class="fas fa-angle-left"></i></a></li> 
+							   <li><a href="javascript:void(0)" class="active num">1</a></li>
+							   <li><a href="javascript:void(0)" class="num">2</a></li>
+							   <li><a href="javascript:void(0)" class="num">3</a></li>
+							   <li><a href="javascript:void(0)" class="num">4</a></li>
+							   <li><a href="javascript:void(0)" class="num">5</a></li>				
+							   <li><a href="javascript:void(0)" class="arrow right" title="뒤페이지로 이동"><i class="fas fa-angle-right"></i></a></li>
+							   <li><a href="javascript:void(0)" class="last">끝 페이지</a></li>
+						   </ul>
+						</div> 
+					</div>
+					<!-- //list 검색 결과 -->
+					
+				</article>	
+				<!-- //서브컨텐츠 -->
+			</section>
+			<!--// section -->
+		</div>
+
+		<script src="../js/script.js"></script>
+	</body>
+</html>

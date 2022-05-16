@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lib/tip-yellowsimple.css" />
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+		<script src="../js/lib/jquery.poshytip.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<!--a href="#nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a-->
+				<a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+			
+			<!--아이디 중복 팝업-->
+			<div class="id_check_info_popup_box">
+				<div class="popup_bg"></div>
+				<div class="id_check_info_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">아이디 중복 안내</h4>
+						<a href="javascript:void(0)" title="닫기" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<div class="popup_txt_areabg">
+							<p tabindex="0">입력하신 <span class="font_blue">000</span> 아이디가 중복 됩니다.<br />
+							다른 아이디로 다시 입력해 주시기 바랍니다.</p>	
+							<!--p tabindex="0">입력하신 <span class="font_blue">000</span> 아이디는 사용이 가능합니다.</p-->
+						</div>
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn popup_close_btn">확인</button>
+						</div>
+					</div>						
+				</div> 
+			</div>
+			<!--//아이디 중복 팝업-->
+						
+			<!-- container -->
+			<div id="container" class="mb50">
+				<div class="content_area login_area_box">
+					<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="logo">
+						<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템"></h1>
+					</a>
+				</div>
+				<p class="ta_c header_logo_p">사업평가 · 관리시스템 이용자 사이트입니다.</p>
+				<section id="content">
+					<div id="sub_contents">
+						<div class="content_area">
+							<div class="member_sign_box">
+								<h2>통합 회원가입</h2>
+								<div class="member_sign_top_step clearfix">
+									<ul>
+										<li class="active member_info_step1"><span>01</span><span>회원유형 선택</span></li>
+										<li class="member_info_step2"><span>02</span><span>약관동의</span></li>
+										<li class="member_info_step3"><span>03</span><span>본인인증</span></li>
+										<li class="member_info_step4"><span>04</span><span>정보입력</span></li>
+										<li class="member_info_step5"><span>05</span><span>가입완료</span></li>
+									</ul>
+								</div>
+							
+
+								<div class="step1_box step_box">
+									<h3 class="hidden">회원가입 유형</h3>
+									<!--내국인, 외국인-->
+									<ul class="txt_list clearfix foreigner_not_box">
+										<li>											
+											<a href="javascript:void(0);" title="내국인" class="next_btn_2step">
+												<span class="check_icon"></span>
+												<img src="../images/sub/signup_step1_memberclass1.png" alt="내국인 이미지" title="내국인" />
+												<span class="gray_btn2">내국인</span>
+											</a>
+										</li>
+										<li>											
+											<a href="javascript:void(0);" title="외국인" class="foreigner_box_click">
+												<span class="check_icon"></span>
+												<img src="../images/sub/signup_step1_memberclass1_1.png" alt="외국인 이미지" title="외국인" />
+												<span class="gray_btn2">외국인</span>
+											</a>
+										</li>
+									</ul>
+									
+									<!--거소증 확인-->
+									<ul class="txt_list clearfix foreigner_box">
+										<li>
+											<a href="javascript:void(0);" class="next_btn_2step">
+												<img src="../images/sub/signup_step2_memberclass1.png" alt="거소증 소지 외국인 이미지" title="거소증 소지 외국인">
+												<span class="gray_btn2">거소증 소지 외국인</span>
+											</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);" class="foreigner_notcertification">
+												<img src="../images/sub/signup_step2_memberclass1_1.png" alt="거소증 미소지 외국인 이미지" title="거소증 미소지 외국인">
+												<span class="gray_btn2">거소증 미소지 외국인</span>
+											</a>
+										</li>
+									</ul>	
+									<!--//거소증 확인-->									
+									<div class="btn_box">
+										<button type="button" class="gray_btn2" title="이전">이전</button>
+									</div>
+								</div>
+
+								<div class="step2_box step_box">
+									<!--이용약관-->
+									<h3 class="hidden">회원가입 이용약관</h3>
+									<h4>이용약관<span class="font_red">(필수)</span></h4>
+									<div class="member_info_terms_of_service">
+										<p>서울기술연구원은 신기술접수소의 업무 수행을 위하여 다음과 같이 회원 가입시 개인정보를 수집 및 이용합니다.<br />수집된 개인정보는 개인정보 보호법 제30조에 따라 정보주체의 개인정보를 보호하고 있으며 이와 관련한 세부사항은 우리 연구원 개인정보처리방침을 참고하시기 바랍니다.<br />수집한 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다.</p>
+										<p>개인정보의 수집 및 이용 목적(개인정보 보호법 제15조) </p>
+										<p>회원가입 시 수집한 개인정보는 신기술접수소의 서비스를 제공하기 위해 다음과 같은 업무처리에 사용합니다.<br />가. 기술제안, 아이디어제안, 기술공모, 평가, 혁신기술등록 등을 전자적으로 처리하기 위한 목적으로 사용합니다.<br />나. 회원가입자, 대표자, 업무담당자의 제안사항 확인 및 사실조사를 위한 연락/통지, 처리결과 통보 등의 목적으로 개인정보를 사용합니다.</p>
+										<p>개인정보의 보유 및 이용기간<br />신기술접수소의 회원 개인정보는 회원가입 이후부터 보유 및 이용하며 회원탈퇴 시 지체없이 파기 합니다.</p>
+									</div>
+									<div class="check_box clearfix">
+										<span class="fr mt10"><input type="checkbox" id="member_info_terms_of_service" name="member_info_terms_of_service" value="동의" /><label for="member_info_terms_of_service">위 약관에 동의합니다.</label></span>
+									</div>
+									<!--//이용약관-->	
+									<!--개인정보 수집 이용 동의-->
+									<h4>개인정보 수집 이용 동의<span class="font_red">(필수)</span></h4>
+									<div class="member_info_usageagreement_service">
+										<p>서울기술연구원은 신기술접수소의 원활한 업무처리를 위해 아래와 같이 최소한의 개인정보를 필수항목으로 수집하고 있습니다.</p>
+										<p>수집하는 개인정보의 항목(개인정보 보호법 제15조, 제16조)<br />가. 개인회원가입인 경우 : 성명, 휴대전화, 이메일, ID<br />나. 기업회원가입인 경우 : 담당자 성명, 담당자 전화, 이메일, ID<br />※ 개인정보 수집목적이 업무적인 처리를 위함이므로 소속 회사에서 제공하는 전화번호(휴대전화번호)나, 이메일이 있을시 해당정보로 작성바랍니다.</p>
+										<p>회원가입 시 수집하는 필요한 최소한의 정보 외의 개인정보 수집에 동의를 거부할 권리가 있으나 최소한의 개인정보(필수항목) 수집동의 거부 시, 신기술접수소 이용이 제한됩니다.</p>
+									</div>
+									<div class="check_box clearfix">
+										<span class="fr mt10"><input type="checkbox" id="member_info_usageagreement_service" name="member_info_usageagreement_service" value="동의" /><label for="member_info_usageagreement_service">개인정보 수집 및 이용에 동의합니다.</label></span>
+									</div>
+									<!--//개인정보 수집 이용 동의-->
+									<div class="btn_box clearfix mt20 mb20">
+										<button type="button" class="gray_btn2 fl mr10 prv_btn">이전</button><button type="button" class="blue_btn fl next_btn">다음</button>
+									</div>
+								</div>
+								
+								<div class="step3_box step_box">
+									<h3 class="hidden">휴대폰 본인인증</h3>
+									<h4>휴대폰 본인인증</h4>									
+									<div class="phone_certification">
+										<h5>휴대폰 본인인증</h5>
+										<p>본인 명의로 등록된 휴대폰으로 본인인증 해주시기 바랍니다.</p>
+										<button type="button" class="blue_btn3" title="휴대폰 인증하기">휴대폰 인증하기</button>
+										<!--button type="button" class="blue_btn3" title="휴대폰 인증하기">인증 완료</button-->
+									</div>
+									<div class="btn_box clearfix mt20 mb20">
+										<button type="button" class="gray_btn2 fl mr10 prv_btn">이전</button>
+										<button type="button" class="blue_btn fl next_btn">다음</button>									
+									</div>
+								</div>
+
+								<div class="step4_box step_box">
+									<h3 class="hidden">기본 정보</h3>
+									<h4>기본 정보</h4>
+									<div class="table_area">
+										<table class="write fixed">
+										<caption>기본 정보</caption>
+											<colgroup>
+												<col style="width: 30%;">																		
+												<col style="width: 70%;">
+											</colgroup>
+											<tbody>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="member_sign_name">성명</label></span></th>
+													<td><input type="text" class="form-control w40" id="member_sign_name" /></td>	
+												</tr>									  
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>소속기관 유형</span></th>
+													<td>
+														<span>
+															<input type="radio" id="member_signup_company_class5" name="member_signup_company_class" value="개인" checked />
+															<label for="member_signup_company_class5">개인</label>
+															<input type="radio" id="member_signup_company_class" name="member_signup_company_class" value="기업" />
+															<label for="member_signup_company_class">기업</label>
+															<input type="radio" id="member_signup_company_class2" name="member_signup_company_class" value="학교" />
+															<label for="member_signup_company_class2">학교</label>
+															<input type="radio" id="member_signup_company_class3" name="member_signup_company_class" value="연구원" />
+															<label for="member_signup_company_class3">연구원</label>
+															<input type="radio" id="member_signup_company_class4" name="member_signup_company_class" value="공공기관" />
+															<label for="member_signup_company_class4">공공기관</label>															
+															<input type="radio" id="member_signup_company_class6" name="member_signup_company_class" value="기타(협/단체 등)" />
+															<label for="member_signup_company_class6">기타 (협/단체 등)</label>
+														</span>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="member_sign_id">아이디</label></span></th>
+													<td>
+														<input type="text" class="form-control input-sm mr5 fl w40" name="member_id" id="member_sign_id" />
+														<button type="button" class="gray_btn2 fl mr10 id_check_info_popup_open" title="중복확인">중복확인</button>
+														<span class="fl mt10"><span class="font_blue">영문, 숫자, 특수문자</span> 조합하여 <span class="font_blue">9자리 이상</span></span>
+													</td>
+												</tr>	
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="pw_check">비밀번호</label></span></th>
+													<td>
+														<input type="password" id="pw_check" class="w40 fl" />
+													</td>
+												</tr>	
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="pw_check2">비밀번호 확인</label></span></th>
+													<td>
+														<input type="password" id="pw_check2" class="w40 fl" />
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><span><label for="str_email">휴대전화</label></span></th>
+													<td>
+													    <select name="reception_charge_tel" id="reception_charge_tel" class="w_8 fl d_input">
+															<option value="010">010</option>
+														</select>
+														<span style="display:block;" class="fl mc8">-</span>
+														<label for="reception_charge_tel2" class="hidden">전화</label>
+														<input type="tel" id="reception_charge_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls" />
+														<span style="display:block;" class="fl mc8">-</span>
+														<label for="reception_charge_tel3" class="hidden">전화</label>
+														<input type="tel" id="reception_charge_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls" />
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="str_email">이메일</label></span></th>
+													<td>
+														<input type="text" name="str_email" id="str_email" class="form-control w_20 fl" />
+														<span class="fl ml1 mr1 pt10 mail_f">@</span>
+														<input type="text" name="str_email2" id="str_email2" class="form-control w_18 fl" disabled />
+														<label for="str_email2" class="hidden">이메일</label>
+														<label for="selectEmail" class="hidden">이메일 선택</label>
+														<select name="selectEmail" id="selectEmail" class="fl ml5 in_wp200 ace-select"> 
+														   <option value="0" selected="">------선택------</option> 
+														   <option value="1">직접입력</option> 
+														   <option value="naver.com">naver.com</option> 
+														   <option value="hanmail.net">hanmail.net</option> 
+														   <option value="hotmail.com">hotmail.com</option> 
+														   <option value="nate.com">nate.com</option> 
+														   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+														   <option value="empas.com">empas.com</option> 
+														   <option value="dreamwiz.com">dreamwiz.com</option> 
+														   <option value="freechal.com">freechal.com</option> 
+														   <option value="lycos.co.kr">lycos.co.kr</option> 
+														   <option value="korea.com">korea.com</option> 
+														   <option value="gmail.com">gmail.com</option> 
+														   <option value="hanmir.com">hanmir.com</option> 
+														   <option value="paran.com">paran.com</option> 
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="address_member_sign">주소</label></span></th>
+													<td>
+														<input type="text" id="address_member_sign" class="form-control w60 fl mr5 d_input" disabled />
+														<label for="address_member_sign2" class="hidden">주소</label>
+														<input type="text" id="address_member_sign2" class="form-control w30 fl mr5 d_input" disabled />		
+														<button type="button" class="gray_btn2 fl d_input" title="검색" style="display: block;">검색</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>																										
+									</div>
+									<div class="btn_box clearfix mt20 mb20">
+										<button type="button" class="gray_btn2 fl mr10 prv_btn">이전</button><button type="button" class="blue_btn fl complete_btn">완료</button>
+									</div>
+								</div>
+
+								<div class="step4_box_2 step_box">
+									<h3 class="hidden">기본 정보</h3>
+									<h4>기본 정보</h4>
+									<div class="table_area">
+										<table class="write fixed">
+										<caption>기본 정보</caption>
+											<colgroup>
+												<col style="width: 30%;">																		
+												<col style="width: 70%;">
+											</colgroup>
+											<tbody>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="notcertification_member_sign_name">성명</label></span></th>
+													<td><input type="text" class="form-control w40" id="notcertification_member_sign_name" /></td>	
+												</tr>									  
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>소속기관 유형</span></th>
+													<td>
+														<span>
+														    <input type="radio" id="member_signup_company_class_2_5" name="member_signup_company_class_2" value="개인" checked />
+															<label for="member_signup_company_class_2_5">개인</label>
+															<input type="radio" id="member_signup_company_class_2" name="member_signup_company_class_2" value="기업" />
+															<label for="member_signup_company_class_2">기업</label>
+															<input type="radio" id="member_signup_company_class_2_2" name="member_signup_company_class_2" value="학교" />
+															<label for="member_signup_company_class_2_2">학교</label>
+															<input type="radio" id="member_signup_company_class_2_3" name="member_signup_company_class_2" value="연구원" />
+															<label for="member_signup_company_class_2_3">연구원</label>
+															<input type="radio" id="member_signup_company_class_2_4" name="member_signup_company_class_2" value="공공기관" />
+															<label for="member_signup_company_class_2_4">공공기관</label>														
+															<input type="radio" id="member_signup_company_class_2_6" name="member_signup_company_class_2" value="기타(협/단체 등)" />
+															<label for="member_signup_company_class_2_6">기타 (협/단체 등)</label>
+														</span>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="member_sign_id_2">아이디</label></span></th>
+													<td>
+														<input type="text" class="form-control input-sm mr5 fl" name="member_id" id="member_sign_id_2" />
+														<button type="button" class="gray_btn2 fl mr10 id_check_info_popup_open" title="중복확인">중복확인</button>
+														<span class="fl mt10"><span class="font_blue">영문, 숫자, 특수문자</span> 조합하여 <span class="font_blue">9자리 이상</span></span>
+													</td>
+												</tr>	
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="pw_check_2">비밀번호</label></span></th>
+													<td>
+														<input type="password" id="pw_check_2" class="w40 fl" />
+													</td>
+												</tr>	
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="pw_check2_2">비밀번호 확인</label></span></th>
+													<td>
+														<input type="password" id="pw_check2_2" class="w40 fl" />
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="notcertification_str_email_2">휴대전화</label></span></th>
+													<td>
+													    <select name="reception_charge_tel" id="notcertification_reception_charge_tel" class="w_8 fl d_input">
+															<option value="010">010</option>
+														</select>
+														<span style="display:block;" class="fl mc8">-</span>
+														<label for="notcertification_reception_charge_tel2" class="hidden">전화</label>
+														<input type="tel" id="rnotcertification_eception_charge_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls">
+														<span style="display:block;" class="fl mc8">-</span>
+														<label for="notcertification_reception_charge_tel3" class="hidden">전화</label>
+														<input type="tel" id="notcertification_reception_charge_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl d_input ls">
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="str_email">이메일</label></span></th>
+													<td>
+														<input type="text" name="str_email" id="str_email" class="form-control w_20 fl" />
+														<span class="fl ml1 mr1 pt10 mail_f">@</span>
+														<input type="text" name="str_email3" id="str_email3" class="form-control w_18 fl" disabled />
+														<label for="str_email3" class="hidden">이메일</label>
+														<label for="selectEmail2" class="hidden">이메일 선택</label>
+														<select name="selectEmail2" id="selectEmail2" class="fl ml5 in_wp200 ace-select"> 
+														   <option value="0" selected=>------선택------</option> 
+														   <option value="1">직접입력</option> 
+														   <option value="naver.com">naver.com</option> 
+														   <option value="hanmail.net">hanmail.net</option> 
+														   <option value="hotmail.com">hotmail.com</option> 
+														   <option value="nate.com">nate.com</option> 
+														   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+														   <option value="empas.com">empas.com</option> 
+														   <option value="dreamwiz.com">dreamwiz.com</option> 
+														   <option value="freechal.com">freechal.com</option> 
+														   <option value="lycos.co.kr">lycos.co.kr</option> 
+														   <option value="korea.com">korea.com</option> 
+														   <option value="gmail.com">gmail.com</option> 
+														   <option value="hanmir.com">hanmir.com</option> 
+														   <option value="paran.com">paran.com</option> 
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="notcertification_address_member_sign_2">주소</label></span></th>
+													<td>
+														<input type="text" id="notcertification_address_member_sign" class="form-control w60 fl mr5 d_input" disabled>
+														<label for="notcertification_address_member_sign2" class="hidden">주소</label>
+														<input type="text" id="notcertification_address_member_sign2" class="form-control w30 fl mr5 d_input" disabled>		
+														<button type="button" class="gray_btn2 fl d_input" title="검색" style="display: block;">검색</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>																										
+									</div>
+									<div class="btn_box clearfix mt20 mb20">
+										<button type="button" class="gray_btn2 fl mr10 prv_btn">이전</button><button type="button" class="blue_btn fl complete_btn">완료</button>
+									</div>
+								</div>
+
+								<div class="step5_box step_box">
+									<h3 class="hidden">회원가입 완료</h3>
+									<div class="member_sign_end">
+										<p class="member_sign_end_txt1"><span class="font_blue">회원가입</span>이 완료되었습니다!</p>
+										<p class="member_sign_end_txt2">모든 회원가입절차가 완료되었습니다.<br /><span class="font_blue">로그인 후 </span>서비스 이용이 가능합니다.</p>
+									</div>
+								
+
+									<div class="table_area">
+										<table class="write fixed">
+										<caption>회원가입 완료 정보</caption>
+											<colgroup>
+												<col style="width: 50%;">																		
+												<col style="width: 50%;">
+											</colgroup>
+											<tbody>
+												<tr>
+													<th scope="row" class="first"><span>성명</span></th>
+													<td class="last"></td>	
+												</tr>									  
+												<tr>
+													<th scope="row" class="first"><span>아이디</span></th>
+													<td class="last"><span>abc123</span>
+													</td>
+												</tr>											
+											</tbody>
+										</table>																										
+									</div>
+									
+									<div class="btn_box clearfix mt20 mb20">
+										<button type="button" class="blue_btn fl" onclick="location.href='./login.html'" title="로그인화면 바로가기">로그인 화면</button><button type="button" class="gray_btn2 fl" onclick="location.href='./index.html'" title="메인페이지 바로가기">메인페이지</button>
+									</div>
+								</div>
+
+							</div>							
+						</div>
+					</div>
+				</section>
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->		
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소" />
+		<meta name="keywords" content="신기술 접수소" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 관리자사이트" />
+		<meta property="og:description" content="신기술접수소  관리자사이트" />
+		<title>신기술접수소</title>		
+		<link rel="stylesheet" href="../css/lib/solid.min.css" />
+		<link rel="stylesheet" href="../css/lib/jquery-ui.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<script src="../js/lib/jquery-3.6.0.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>	
+		<script src="../js/lib/jquery-ui.js"></script>	
+	</head>
+	<body>
+		<!-- skip_nav --> 
+		<div id="skip_nav">  
+           <a href="#top_nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a>
+           <a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+		</div>
+		<!-- //skip_nav --> 
+
+		<!--popup-->
+	    <!-- 로그아웃 팝업 -->
+	    <div class="logout_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="logout_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">로그 아웃</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">로그아웃</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="blue_btn popup_close_btn" onclick="location.href='./login.html'">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //로그아웃 팝업 -->
+
+		<!-- 게시물 삭제 팝업 -->
+	    <div class="board_list_del_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_del_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">삭제 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>해당 게시물을 <span class="font_blue">삭제</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="submit" class="blue_btn popup_close_btn complete">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //게시물 삭제 팝업 -->
+
+		<!-- 게시물 삭제 완료 팝업 -->
+	    <div class="board_list_del_complete_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_del_complete_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">삭제 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">삭제 완료</span> 되었습니다.</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="gray_btn popup_close_btn complate_del">닫기</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- 게시물 삭제 완료 팝업 -->
+
+		<!-- 게시물 수정 팝업 -->
+	    <div class="board_list_modify_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_modify_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">수정 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>해당 게시물을 <span class="font_blue">수정</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="submit" class="blue_btn popup_close_btn complete">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //게시물 수정 팝업 -->
+
+		<!-- 게시물 수정 완료 팝업 -->
+	    <div class="board_list_modify_complete_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_list_modify_complete_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">수정 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">수정 완료</span> 되었습니다.</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="gray_btn popup_close_btn complate_del">닫기</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- 게시물 수정 완료 팝업 -->
+
+		<!-- 게시물 등록 팝업 -->
+	    <div class="board_write_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_write_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">등록 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p>해당 게시물을 <span class="font_blue">등록</span> 하시겠습니까?</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="submit" class="blue_btn popup_close_btn complete">예</button>
+				   <button type="button" class="gray_btn logout_popup_close_btn popup_close_btn">아니요</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- //게시물 등록 팝업 -->
+
+		<!-- 게시물 등록 완료 팝업 -->
+	    <div class="board_write_complete_popup_box popup_box">
+		   <div class="popup_bg"></div>
+		   <div class="board_write_complete_popup popup_contents">
+		       <div class="popup_titlebox clearfix">
+			       <h4 class="fl">등록 안내</h4>
+			       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+			   </div>
+			   <div class="popup_txt_area">
+				   <p><span class="font_blue">등록 완료</span> 되었습니다.</p>				   
+			   </div>
+			   <div class="popup_button_area_center">
+				   <button type="button" class="gray_btn popup_close_btn">닫기</button>
+			   </div>
+		   </div>
+	    </div>
+	    <!-- 게시물 등록 완료 팝업 -->
+
+		<div class="wrap">
+			
+			<!-- header -->
+			<header class="header">
+				<div class="header_top clearfix">
+					<div class="fl logo_box clearfix">
+					   <h1 class="header_site-logo fl">
+						   <a href="./index.html" title="신기술접수소 홈 이동" class="home_logo clearfix ir">
+							   <img class="fl" src="../images/admin_logo.png" alt="신기술접수소">
+							   신기술 접수소
+						   </a>
+					   </h1>                        
+					</div>
+					<div class="class_select_box fr clearfix pc_show">
+					   <span class="fl mt10 mr10 pt5"><span class="header_name">관리자</span>님 반갑습니다.</span>                     
+					   <a href="javascript:void(0)" title="로그아웃" class="login_icon logout fl mt10 ir"><span>로그아웃</span></a>                    
+					   <!--a href="#" title="로그인"  class="login_icon logout fl margint10 ir"><span>로그인</span></a-->                        
+					</div>
+				</div>
+				<!--pc 상단 메뉴-->
+				<nav class="nav pc_show" id="top_nav">
+					<ul class="clearfix">
+						<li><a href="./business_proposition.html" title="콘텐츠관리"><i class="far fa-folder-open"></i>콘텐츠관리</a></li>
+						<li><a href="./board_notice.html" title="게시판관리"><i class="far fa-list-alt"></i>게시판관리</a></li>
+						<li><a href="./statistics_time.html" title="통계관리"><i class="fas fa-chart-bar"></i>통계관리</a></li>
+					</ul>                 
+				</nav>
+				<!--//pc 상단 메뉴-->
+			</header>
+			<!--// header -->
+			<hr class="hidden">		
+			
+			
+			<!-- section -->
+			<section id="content">
+				<h2 class="hidden">본문시작</h2>
+				<!-- left_menu -->
+				<nav id="left_menu">
+					<h2 class="left_menu_title"><i class="far fa-folder-open"></i>콘텐츠관리</h2>
+					<ul class="left_menu_link">
+						<li class="on"><a href="./business_proposition.html">주요사업소개</a>
+							<ul>
+								<li><a href="./business_proposition.html">기술제안</a></li>
+								<li class="on"><a href="./business_announcement.html">기술공모</a></li>
+							</ul>
+						</li>
+					</ul>	
+				</nav>
+				<!-- //left_menu -->
+				
+				<!-- 서브컨텐츠 -->
+				<article class="contents sub_content">
+					<h3 class="sub_title">기술공모</h3>
+					<!-- list 검색 상단 -->
+					<div class="list_search_top_area">							   
+						<ul class="clearfix board_list_searchbox">							
+							<li class="clearfix">
+								<span class="title">키워드</span>								
+								<span class="input_search"><label for="board_list_searchbox_search" class="fl list_search_title hidden">검색어</label>	
+								<input type="text" id="board_list_searchbox_search" class="form-control" />   
+								<button type="button" class="search_txt_del" title="검색어 삭제"><i class="fas fa-times"></i></button></span>
+								<button type="submit" class="blue_btn2">조회</button>
+							</li>
+						</ul>						
+					</div>		 
+					<!-- //list 검색 상단 -->
+
+					<!-- list 검색 결과 -->
+					<div class="list_search_table">
+						<div class="table_count_area">
+							<div class="count_area clearfix mb10">
+								<div class="fl mt20">								   
+								[총 <span class="font_blue">100</span>건]
+								</div>
+								<div class="fr clearfix">									
+									<button type="button" class="blue_btn poster_list_add fl mr5">추가</button>										
+								</div>
+							</div>
+						</div>
+
+						<div class="business_area">							
+							<ul class="business_area_contents">								
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title1" class="hidden">제목</label>
+										<input type="text" id="business_poster_title1" class="form-control business_poster_title" value="2021 그라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_21.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_21.jpg" alt="2021 그라우드소싱 기술공모 이미지" /></a>					
+											<label for="poster_input-image">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image" class="hidden poster_input-image">
+											<label for="poster_upload-name" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c1" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text_title_outline_c1" class="business_poster_text">[사업 주요 내용]
+
+총 4개의 도전과제를 공모하여 3개 해결기술 선정.
+
+- 도전과제: 친환경 제설제 제조 기술
+  ∙ 해결 기술 (염화물에 첨가하여 사용하는 친환경 제설제 제조용 첨가제의 조성물 및 그 제조 방법)
+
+- 도전과제: AI 기반 실시간 도로위험정보 알림 솔루션 공모
+  ∙ 해결 기술 (인공지능 영상질감분석기술 및 객체검지·측위기술기반 복합검지시스템)
+
+- 도전과제: 투수기능과 지지력 기능을 겸비한 투수기층재 또는 투수기층 처리공법의 발굴/실증
+  ∙ 해결 기술 (팽이형 블록을 이용한 투수기층 보강방법)</textarea>																					
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title2" class="hidden">제목</label>
+										<input type="text" id="business_poster_title2" class="form-control business_poster_title" value="22020 크라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_20.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_20.jpg" alt="2020 크라우드소싱 기술공모" /></a>
+											<label for="poster_input-image2">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image2" class="hidden poster_input-image">	
+											<label for="poster_upload-name2" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name2" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c2" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">[사업 주요 내용]
+
+- 도전과제1: MB필터 대체 가능한 보건용 마스크 필터
+  ∙ PTFE섬유 기반 대체 필터 기술 발굴
+
+- 도전과제2: 마스크 기능을 대체 할 신개념의 마스크 또는 기술
+  ∙ 총 6건의 국내외 해결기술 선정					</textarea>																				
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>								
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title3" class="hidden">제목</label>
+										<input type="text" id="business_poster_title3" class="form-control business_poster_title" value="2019 크라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_19.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_19.jpg" alt="2019 크라우드소싱 기술공모 이미지" /></a>
+											<label for="poster_input-image3">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image3" class="hidden poster_input-image">	
+											<label for="poster_upload-name3" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name3" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c3" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c3" id="business_poster_text_title_outline_c3" class="business_poster_text">[사업 주요 내용]
+
+총 3개의 도전과제를 공모하여 2개 해결기술 선정
+
+- 도전과제: 한강교량상 자살시도자의 투신방지를 위한 물리적이고 안전한 시설 또는 기술 
+  ∙ 해결 기술 [추락방지 및 투신자살 방어 회전체 시스템(Rollinder System)]
+
+- 도전과제: 지하도로 내 위치 추적 기술 
+  ∙ 해결 기술 (GPS 신호 생성을 통한 GPS음영 지역 해결)
+											</textarea>																									
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>											
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title1" class="hidden">제목</label>
+										<input type="text" id="business_poster_title1" class="form-control business_poster_title" value="2021 그라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_21.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_21.jpg" alt="2021 그라우드소싱 기술공모 이미지" /></a>					
+											<label for="poster_input-image">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image" class="hidden poster_input-image">
+											<label for="poster_upload-name" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c1" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text_title_outline_c1" class="business_poster_text">[사업 주요 내용]
+
+총 4개의 도전과제를 공모하여 3개 해결기술 선정.
+
+- 도전과제: 친환경 제설제 제조 기술
+  ∙ 해결 기술 (염화물에 첨가하여 사용하는 친환경 제설제 제조용 첨가제의 조성물 및 그 제조 방법)
+
+- 도전과제: AI 기반 실시간 도로위험정보 알림 솔루션 공모
+  ∙ 해결 기술 (인공지능 영상질감분석기술 및 객체검지·측위기술기반 복합검지시스템)
+
+- 도전과제: 투수기능과 지지력 기능을 겸비한 투수기층재 또는 투수기층 처리공법의 발굴/실증
+  ∙ 해결 기술 (팽이형 블록을 이용한 투수기층 보강방법)</textarea>																					
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title2" class="hidden">제목</label>
+										<input type="text" id="business_poster_title2" class="form-control business_poster_title" value="22020 크라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_20.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_20.jpg" alt="2020 크라우드소싱 기술공모" /></a>
+											<label for="poster_input-image2">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image2" class="hidden poster_input-image">	
+											<label for="poster_upload-name2" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name2" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c2" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">[사업 주요 내용]
+
+- 도전과제1: MB필터 대체 가능한 보건용 마스크 필터
+  ∙ PTFE섬유 기반 대체 필터 기술 발굴
+
+- 도전과제2: 마스크 기능을 대체 할 신개념의 마스크 또는 기술
+  ∙ 총 6건의 국내외 해결기술 선정					</textarea>																				
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>								
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title3" class="hidden">제목</label>
+										<input type="text" id="business_poster_title3" class="form-control business_poster_title" value="2019 크라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_19.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_19.jpg" alt="2019 크라우드소싱 기술공모 이미지" /></a>
+											<label for="poster_input-image3">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image3" class="hidden poster_input-image">	
+											<label for="poster_upload-name3" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name3" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c3" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c3" id="business_poster_text_title_outline_c3" class="business_poster_text">[사업 주요 내용]
+
+총 3개의 도전과제를 공모하여 2개 해결기술 선정
+
+- 도전과제: 한강교량상 자살시도자의 투신방지를 위한 물리적이고 안전한 시설 또는 기술 
+  ∙ 해결 기술 [추락방지 및 투신자살 방어 회전체 시스템(Rollinder System)]
+
+- 도전과제: 지하도로 내 위치 추적 기술 
+  ∙ 해결 기술 (GPS 신호 생성을 통한 GPS음영 지역 해결)
+											</textarea>																									
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>											
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title1" class="hidden">제목</label>
+										<input type="text" id="business_poster_title1" class="form-control business_poster_title" value="2021 그라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_21.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_21.jpg" alt="2021 그라우드소싱 기술공모 이미지" /></a>					
+											<label for="poster_input-image">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image" class="hidden poster_input-image">
+											<label for="poster_upload-name" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c1" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text_title_outline_c1" class="business_poster_text">[사업 주요 내용]
+
+총 4개의 도전과제를 공모하여 3개 해결기술 선정.
+
+- 도전과제: 친환경 제설제 제조 기술
+  ∙ 해결 기술 (염화물에 첨가하여 사용하는 친환경 제설제 제조용 첨가제의 조성물 및 그 제조 방법)
+
+- 도전과제: AI 기반 실시간 도로위험정보 알림 솔루션 공모
+  ∙ 해결 기술 (인공지능 영상질감분석기술 및 객체검지·측위기술기반 복합검지시스템)
+
+- 도전과제: 투수기능과 지지력 기능을 겸비한 투수기층재 또는 투수기층 처리공법의 발굴/실증
+  ∙ 해결 기술 (팽이형 블록을 이용한 투수기층 보강방법)</textarea>																					
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title2" class="hidden">제목</label>
+										<input type="text" id="business_poster_title2" class="form-control business_poster_title" value="22020 크라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_20.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_20.jpg" alt="2020 크라우드소싱 기술공모" /></a>
+											<label for="poster_input-image2">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image2" class="hidden poster_input-image">	
+											<label for="poster_upload-name2" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name2" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c2" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c2" id="business_poster_text_title_outline_c2" class="business_poster_text">[사업 주요 내용]
+
+- 도전과제1: MB필터 대체 가능한 보건용 마스크 필터
+  ∙ PTFE섬유 기반 대체 필터 기술 발굴
+
+- 도전과제2: 마스크 기능을 대체 할 신개념의 마스크 또는 기술
+  ∙ 총 6건의 국내외 해결기술 선정					</textarea>																				
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>								
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title3" class="hidden">제목</label>
+										<input type="text" id="business_poster_title3" class="form-control business_poster_title" value="2019 크라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_19.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_19.jpg" alt="2019 크라우드소싱 기술공모 이미지" /></a>
+											<label for="poster_input-image3">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image3" class="hidden poster_input-image">	
+											<label for="poster_upload-name3" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name3" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c3" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c3" id="business_poster_text_title_outline_c3" class="business_poster_text">[사업 주요 내용]
+
+총 3개의 도전과제를 공모하여 2개 해결기술 선정
+
+- 도전과제: 한강교량상 자살시도자의 투신방지를 위한 물리적이고 안전한 시설 또는 기술 
+  ∙ 해결 기술 [추락방지 및 투신자살 방어 회전체 시스템(Rollinder System)]
+
+- 도전과제: 지하도로 내 위치 추적 기술 
+  ∙ 해결 기술 (GPS 신호 생성을 통한 GPS음영 지역 해결)
+											</textarea>																									
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>											
+									</div>
+								</li>
+								<li class="clearfix">									
+									<div class="business_poster_area clearfix">
+										<label for="business_poster_title1" class="hidden">제목</label>
+										<input type="text" id="business_poster_title1" class="form-control business_poster_title" value="2021 그라우드소싱 기술공모" />
+										<div class="poster_image-container">											
+											<a href="../images/business_announcement_img_21.jpg" target="_blank"><img class="poster_preview-image" src="../images/business_announcement_img_21.jpg" alt="2021 그라우드소싱 기술공모 이미지" /></a>					
+											<label for="poster_input-image">파일 선택</label>
+											<input style="display: block;" type="file" id="poster_input-image" class="hidden poster_input-image">
+											<label for="poster_upload-name" class="hidden">첨부파일</label>
+											<input class="poster_upload-name" id="poster_upload-name" value="첨부파일" placeholder="첨부파일">
+										</div>									
+										<div class="business_poster_text_area fr">														
+											<label for="business_poster_text_title_outline_c1" class="hidden">첨부파일</label>
+											<textarea name="business_poster_text_title_outline_c1" id="business_poster_text_title_outline_c1" class="business_poster_text">[사업 주요 내용]
+
+총 4개의 도전과제를 공모하여 3개 해결기술 선정.
+
+- 도전과제: 친환경 제설제 제조 기술
+  ∙ 해결 기술 (염화물에 첨가하여 사용하는 친환경 제설제 제조용 첨가제의 조성물 및 그 제조 방법)
+
+- 도전과제: AI 기반 실시간 도로위험정보 알림 솔루션 공모
+  ∙ 해결 기술 (인공지능 영상질감분석기술 및 객체검지·측위기술기반 복합검지시스템)
+
+- 도전과제: 투수기능과 지지력 기능을 겸비한 투수기층재 또는 투수기층 처리공법의 발굴/실증
+  ∙ 해결 기술 (팽이형 블록을 이용한 투수기층 보강방법)</textarea>																					
+										</div>
+									</div>
+
+									<div class="buttonarea fr">
+										<button type="button" class="blue_btn modify_btn">수정</button>
+										<button type="button" class="gray_btn2 poster_list_cancel">취소</button>
+										<button type="button" class="gray_btn poster_list_del">삭제</button>										
+									</div>
+								</li>
+								<!--<li class="ta_c">등록된 게시물이 없습니다.</li>-->
+							</ul>
+						</div>
+
+						<div class="page">				
+						   <ul class="pagination">
+							   <li><a href="javascript:void(0)" class="first">처음 페이지</a></li>
+							   <li><a href="javascript:void(0)" class="arrow left"><i class="fas fa-angle-left"></i></a></li> 
+							   <li><a href="javascript:void(0)" class="active num">1</a></li>
+							   <li><a href="javascript:void(0)" class="num">2</a></li>
+							   <li><a href="javascript:void(0)" class="num">3</a></li>
+							   <li><a href="javascript:void(0)" class="num">4</a></li>
+							   <li><a href="javascript:void(0)" class="num">5</a></li>				
+							   <li><a href="javascript:void(0)" class="arrow right"><i class="fas fa-angle-right"></i></a></li>
+							   <li><a href="javascript:void(0)" class="last">끝 페이지</a></li>
+						   </ul>
+						</div> 
+					</div>
+					<!-- //list 검색 결과 -->
+					
+				</article>		
+				<!-- //서브컨텐츠 -->
+			</section>
+			<!--// section -->
+		</div>
+
+		<script src="../js/script.js"></script>
+	</body>
+</html>

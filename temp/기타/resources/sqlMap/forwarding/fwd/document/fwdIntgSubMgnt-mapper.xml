@@ -1,0 +1,1517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.document.fwdIntgSubMgnt">
+    <!-- 통합비고조회 -->
+    <select id="selectIntgRmk" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgRmk */
+        SELECT A.INTG_KEY_ID              /*통합키ID    */
+             , A.INTG_KEY_SEQ
+              ,A.RMK_SPR_CD               /*적요구분코드   */
+              ,(SELECT C.DTL_CD_NM
+                  FROM TB_COM_ETC_CD C
+                 WHERE C.CLAS_CD = '0050'
+                   AND A.RMK_SPR_CD = C.DTL_CD) AS RMK_SPR_NM  /*적요구분명   */
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,'N' CHK
+              ,A.BLCK_YN
+              ,A.RIDR_YN
+              ,A.CONF_YN
+              ,A.FRM_CONT         AS FRM_CONT
+              ,SUBSTR(A.FRM_CONT, 1, 4000) AS RMK1
+              ,SUBSTR(A.FRM_CONT, 4001, 4000) AS RMK2
+              ,SUBSTR(A.FRM_CONT, 8001, 4000) AS RMK3
+              ,SUBSTR(A.FRM_CONT, 12001, 4000) AS RMK4
+              ,SUBSTR(A.FRM_CONT, 16001, 4000) AS RMK5
+          FROM TB_FWD_INTG_RMK A
+         WHERE A.DEL_YN      = 'N'
+        <choose>
+            <when test='rmkSprCds != null'>
+           AND A.RMK_SPR_CD IN
+                <foreach collection="rmkSprCds" item="rmkSprCd" index="index" separator="," open="(" close=")">
+                               #{rmkSprCd}
+                </foreach>
+            </when>
+            <otherwise>
+            <if test="_parameter.containsKey('rmkSprCd')">
+           AND A.RMK_SPR_CD  = #{rmkSprCd}
+            </if>
+            </otherwise>
+        </choose>
+           AND A.INTG_KEY_ID = #{intgKeyId}
+    </select>
+
+    <!-- 통합PIC조회 -->
+    <select id="selectIntgPic" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgPic */
+        SELECT A.INTG_KEY_ID              /*통합키ID    */
+              ,A.INTG_KEY_SEQ
+              ,A.OFCR_SPR_CD              /*담당자구분코드    */
+              ,(SELECT C.DTL_CD_NM
+                  FROM TB_COM_ETC_CD C
+                 WHERE C.CLAS_CD = '0047'
+                   AND A.OFCR_SPR_CD = C.DTL_CD) AS OFCR_SPR_NM  /*담당자구분명   */
+              ,A.RPRS_OFCR_YN             /*대표담당자여부    */
+              ,A.BIZPTNR_OFCR_NM          /*거래처담당자명    */
+              ,A.TEL_NO                   /*전화번호    */
+              ,A.FAXNO                    /*팩스번호    */
+              ,A.FAX_SEND_DT              /*팩스전송일시    */
+              ,A.EMAIL_ADDR               /*이메일주소    */
+              ,A.EMAIL_SEND_DT            /*이메일전송일시    */
+              ,A.EMAIL_SEND_STAT_CD       /*이메일전송상태코드    */
+              ,A.OFCR_COM_NM              /*담당자회사명    */
+              ,A.MBPNO                    /*휴대전화번호    */
+              ,A.OFCR_ENG_NM              /*담당자영문명    */
+              ,A.RMK                      /*적요   */
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,#{chkAll} AS CHK
+              ,'' SMT_NO
+          FROM TB_FWD_INTG_PIC A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+         ORDER BY A.INTG_KEY_SEQ
+    </select>
+
+    <!-- 통합주소조회 -->
+    <select id="selectIntgAddr" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgAddr */
+        SELECT A.INTG_KEY_ID                        AS INTG_KEY_ID              /*통합키ID    */
+             , A.INTG_KEY_SEQ                       AS INTG_KEY_SEQ
+             , A.ADDR_SPR_CD                        AS ADDR_SPR_CD              /*주소구분코드   */
+             ,(SELECT C.DTL_CD_NM
+                 FROM TB_COM_ETC_CD C
+                WHERE C.CLAS_CD = '0046'
+                  AND A.ADDR_SPR_CD = C.DTL_CD)     AS ADDR_SPR_NM              /*주소구분명   */
+              ,TRIM(TRAILING '\n' FROM A.INTG_ADDR) AS INTG_ADDR                /*통합주소   */
+              ,A.ZIPCD                              AS ZIPCD                    /*우편번호   */
+              ,A.CTY_NM                             AS CTY_NM                  /*도시명   */
+              ,A.STATE_NM                           AS STATE_NM                 /*STATE명   */
+              ,A.REG_DT                             AS REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                            AS RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                             AS UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                            AS UPDR_ID                  /*수정자ID     */
+              ,'N'                                  AS CHK
+              ,A.PORT_CD                            AS PORT_CD
+              ,A.STATE_CD                           AS STATE_CD
+              ,A.NATN_CD                            AS NATN_CD
+          FROM TB_FWD_INTG_ADDR A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+           <if test="_parameter.containsKey('addrSprCds')">
+           AND A.ADDR_SPR_CD IN
+               <foreach collection="addrSprCds" item="addrSprCd" index="index" separator="," open="(" close=")">
+                #{addrSprCd}
+               </foreach>
+           </if>
+      ORDER BY A.INTG_KEY_SEQ
+    </select>
+
+    <!-- 통합부가서비스조회 -->
+    <select id="selectIntgAddSvc" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgAddSvc */
+        SELECT  A.INTG_KEY_ID
+              , A.INTG_KEY_SEQ
+              , A.ADD_SVC_TYPE_CD          /*부가서비스유형코드   */
+              ,(SELECT C.DTL_CD_NM
+                  FROM TB_COM_ETC_CD C
+                 WHERE C.CLAS_CD = '0049'
+                   AND A.ADD_SVC_TYPE_CD = C.DTL_CD) AS ADD_SVC_TYPE_NM  /*부가서비스유형명   */
+              ,A.OFCR_NM                  /*담당자명   */
+              ,A.ENTP_CD                  /*업체코드   */
+              ,A.ENTP_NM                  /*업체명   */
+              ,A.TEL_NO                   /*전화번호   */
+              ,A.FAXNO                    /*팩스번호   */
+              ,A.EMAIL_ADDR               /*이메일주소   */
+              ,A.RMK                      /*적요   */
+              ,IFNULL(A.CONF_YN, 'N') AS CONF_YN                  /*확정여부   */
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,A.SELL_YN
+              ,A.BUY_YN
+              ,'N' CHK
+              ,'' SMT_NO
+              ,A.EXCT_CORP_CD
+              ,(SELECT X1.CORP_ACRN_NM5
+                  FROM TB_COM_CORP X1
+                 WHERE X1.CORP_CD = A.EXCT_CORP_CD) AS EXCT_CORP_NM
+              /*,FC_CM_GET_CORP_NM(A.EXCT_CORP_CD, 5) AS EXCT_CORP_NM*/
+              ,A.FRGH_CD
+              ,A.CUR_CD
+              ,A.LOCL_FRGH_AMT
+          FROM TB_FWD_INTG_ADD_SVC A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+    </select>
+
+    <!-- 통합참조번호조회 -->
+    <select id="selectIntgRefNo" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgRefNo */
+        SELECT A.INTG_KEY_ID
+              ,A.INTG_KEY_SEQ
+              ,A.REF_NO_SPR_CD            /*참조번호구분코드   */
+              ,(SELECT C.DTL_CD_NM
+                  FROM TB_COM_ETC_CD C
+                 WHERE 1=1
+                   AND C.CLAS_CD = '0048'
+                   AND A.REF_NO_SPR_CD = C.DTL_CD) AS REF_NO_SPR_NM  /*참조번호구분명   */
+              ,A.REF_NO                   /*참조번호   */
+              ,A.RPRS_YN                  /*   */
+              ,A.REF_DOC_TYPE_CD
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,'N' CHK
+              ,'' SMT_NO
+              ,A.PRT_YN AS PRT_YN
+              ,CONCAT(A.REF_NO_SPR_CD, A.REF_NO) AS DUPLICATION
+          FROM TB_FWD_INTG_REF_NO A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+    </select>
+
+    <!-- 통합DIM조회 -->
+    <select id="selectIntgDIM" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgDIM */
+        SELECT 'N'                              AS CHK
+             , A.INTG_KEY_ID                    AS INTG_KEY_ID              /*통합키ID */
+             , A.INTG_KEY_SEQ                   AS INTG_KEY_SEQ
+             , A.DIM_SPR_CD                     AS DIM_SPR_CD               /*DIMENSION구분코드   */
+             , (SELECT C.DTL_CD_NM
+                  FROM TB_COM_ETC_CD C
+                 WHERE C.CLAS_CD = '0051'
+                   AND A.DIM_SPR_CD = C.DTL_CD) AS DIM_SPR_NM               /*DIMENSION구분명   */
+             , A.LEN_UNIT_CD                    AS LEN_UNIT_CD              /*길이단위코드   */
+             , A.VERT_LEN                       AS VERT_LEN                 /*세로길이   */
+             , A.WTH_LEN                        AS WTH_LEN                  /*가로길이   */
+             , A.HGT                            AS HGT                      /*높이   */
+             , A.PKG_QTY                        AS PKG_QTY                  /*패키지수량   */
+             , A.PKG_UNIT_CD                    AS PKG_UNIT_CD              /*패키지단위코드   */
+             , A.VOL_WGT                        AS VOL_WGT                  /*부피중량   */
+             , A.WGT_UNIT_CD                    AS WGT_UNIT_CD              /*중량단위코드   */
+             , A.RMK                            AS RMK                      /*적요   */
+             , A.REG_DT                         AS REG_DT                   /*등록일시     */
+             , A.RSTR_ID                        AS RSTR_ID                  /*등록자ID     */
+             , A.UPD_DT                         AS UPD_DT                   /*수정일시     */
+             , A.UPDR_ID                        AS UPDR_ID                  /*수정자ID     */
+             , A.PACKG_BOX_ID                   AS PACKG_BOX_ID             /*포장박스ID */
+             , A.GWT                            AS GWT                      /*총중량*/
+             , A.RTON                           AS RTON                     /*RTON*/
+             , A.BULK_TYPE_CD                   AS BULK_TYPE_CD             /*벌크유형코드*/
+             , A.CBM                            AS CBM                      /*CBM*/
+             , IFNULL((SELECT X.PACKG_BOX_NM
+                         FROM TB_FWD_PACKG_BOX X
+                        WHERE A.PACKG_BOX_ID = X.PACKG_BOX_ID
+                          AND X.USE_YN = 'Y'),A.PACKG_BOX_ID)
+                                                AS PACKG_BOX_NM
+             , A.ITEM_SEQ                       AS ITEM_SEQ                 /*품목일련번호*/
+             , A.BULK_YN                        AS BULK_YN                  /*벌크여부*/
+             , A.CARR_VOL_WGT                   AS CARR_VOL_WGT             /*운송사부피중량*/
+             , A.ADD_SVC_TYPE_CD                AS ADD_SVC_TYPE_CD          /*부가서비스유형코드*/
+             , IF(A.WTH_LEN > 300 OR A.HGT > 160, 'Y', 'N') AS OVERSIZE_YN  /* OVERSIZE YN */
+             , IF(A.WTH_LEN > 300 , 'Y', 'N')   AS OVERSIZE_YN_W            /* WIDTH OVERSIZE YN */
+             , IF(A.HGT > 160, 'Y', 'N')        AS OVERSIZE_YN_H            /* HEIGHT OVERSIZE YN */
+          FROM TB_FWD_INTG_DIM A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+      ORDER BY A.INTG_KEY_SEQ
+    </select>
+
+    <!-- 통합품목조회 -->
+    <select id="selectIntgItem" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgItem */
+        SELECT A.INTG_KEY_ID              /*통합키ID */
+              ,A.INTG_KEY_SEQ
+              ,A.ITEM_SPR_CD              /*품목구분코드   */
+              ,A.RPRS_ITEM_YN             /*대표품목여부   */
+              ,A.ITEM_GRP_NM              /*품목그룹명    */
+              ,A.ITEM_CD                  /*품목코드     */
+              ,A.ITEM_NM                  /*품목명       */
+              ,A.ITEM_QTY                 /*품목수량     */
+              ,DATE_FORMAT(A.REG_DT, '%Y%m%d%H%i%s') AS REG_DT
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,DATE_FORMAT(A.UPD_DT, '%Y%m%d%H%i%s') AS UPD_DT
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,'N' CHK
+              ,A.HTS_CD
+          FROM TB_FWD_INTG_ITEM A
+        WHERE A.DEL_YN      = 'N'
+          AND A.INTG_KEY_ID = #{intgKeyId}
+        ORDER BY A.INTG_KEY_SEQ
+    </select>
+
+    <!-- BL통합참조BL번호조회 -->
+    <select id="selectIntgRefBlNo" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgRefBlNo */
+        SELECT A.INTG_KEY_ID              /*통합키ID */
+              ,A.INTG_KEY_SEQ
+              ,A.REF_BL_NO            /*참조BL번호   */
+              ,A.RPRS_YN
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,A.SCAN_STAT_CD
+              ,A.SCAN_MSG_CONT
+              ,A.WGT_MSRM_STAT_CD
+              ,A.WGT_MSRM_MSG_CONT
+              ,A.SRTNG_SPR_CD
+              ,A.CLAS_MACH_NO
+              ,A.CLAS_STAT_CD
+              ,A.CLAS_MSG_CONT
+              ,A.SCAN_DT
+              ,A.WGT_MSRM_DT
+              ,A.MSRM_WGT
+              ,A.SRTNG_DT
+              ,DATE_FORMAT(A.REG_DT, '%Y%m%d%H%i%s') AS REG_YMD
+              ,DATE_FORMAT(A.UPD_DT, '%Y%m%d%H%i%s') AS UPD_YMD
+          FROM TB_FWD_INTG_REF_BL_NO A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+    </select>
+
+    <select id="selectIntgBizkpi" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgBizkpi */
+        SELECT A.INTG_KEY_ID      /*통합키ID */
+              ,A.INTG_KEY_SEQ
+              ,A.BIZ_KPI_SPR_CD
+              ,A.BIZ_KPI_TYPE_CD
+              ,A.DESC_CONT
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,DATE_FORMAT(A.REG_DT, '%Y%m%d%H%i%s') AS REG_YMD
+              ,DATE_FORMAT(A.UPD_DT, '%Y%m%d%H%i%s') AS UPD_YMD
+          FROM TB_FWD_INTG_BIZKPI A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+    </select>
+
+    <!--
+    [CSR ID:4296720] 시스템 업무자동화 과제 - 3. 보험가입 메일 시스템화
+         보험 요청 메일 수신자(공통코드) 조회
+     -->
+    <select id="selectIncMailRecv" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIncMailRecv */
+        SELECT A.ETC_CONT1 AS EMAIL_ADDR
+          FROM TB_COM_ETC_CD A
+         WHERE A.CLAS_CD = '2551'
+           AND A.USE_YN  = 'Y'
+    </select>
+
+    <!-- IntgRefNo  -->
+    <insert id="insertIntgRefNo" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.insertIntgRefNo */
+        INSERT INTO TB_FWD_INTG_REF_NO(
+             INTG_KEY_ID
+            ,INTG_KEY_SEQ
+            ,REF_NO_SPR_CD
+            ,REF_NO
+            ,RPRS_YN
+            ,REG_DT
+            ,RSTR_ID
+            ,UPD_DT
+            ,UPDR_ID
+            ,PRT_YN
+            ,REF_DOC_TYPE_CD
+            )
+        SELECT
+             #{intgKeyId}
+            ,(SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                FROM TB_FWD_INTG_REF_NO
+               WHERE INTG_KEY_ID = #{intgKeyId})
+            ,#{refNoSprCd}
+            ,TRIM(#{refNo})
+            ,IFNULL(#{rprsYn},'N')
+            ,now()
+            ,#{session.userId}
+            ,now()
+            ,#{session.userId}
+            ,IFNULL(#{prtYn}, 'Y')
+            ,#{refDocTypeCd}
+    </insert>
+
+    <update id="updateIntgRefNo" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.updateIntgRefNo */
+        UPDATE TB_FWD_INTG_REF_NO
+        SET    UPD_DT             = NOW()
+              ,UPDR_ID            = #{session.userId}
+              ,REF_NO_SPR_CD      = #{refNoSprCd}
+              ,REF_NO             = TRIM(#{refNo})
+              ,RPRS_YN            = #{rprsYn}
+              ,PRT_YN             = IFNULL(#{prtYn}, 'Y')
+              ,REF_DOC_TYPE_CD    = #{refDocTypeCd}
+        WHERE INTG_KEY_ID  = #{intgKeyId}
+          AND INTG_KEY_SEQ = #{intgKeySeq}
+    </update>
+
+    <update id="saveIntgRefNo" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.saveIntgRefNo */
+        INSERT INTO TB_FWD_INTG_REF_NO
+             ( INTG_KEY_ID
+             , INTG_KEY_SEQ
+             , REF_NO_SPR_CD
+             , REF_NO
+             , RPRS_YN
+             , REG_DT
+             , RSTR_ID
+             , UPD_DT
+             , UPDR_ID
+             , PRT_YN
+             , REF_DOC_TYPE_CD
+             ) SELECT #{intgKeyId}
+		            , #{intgKeySeq}
+		            , #{refNoSprCd}
+		            , TRIM(IFNULL(#{refNo},''))
+		            , IFNULL(#{rprsYn},'N')
+		            , NOW()
+		            , #{session.userId}
+		            , NOW()
+		            , #{session.userId}
+		            , IFNULL(#{prtYn}, 'Y')
+		            , #{refDocTypeCd}
+                   ON DUPLICATE KEY
+               UPDATE UPD_DT            = NOW()
+                    , UPDR_ID           = #{session.userId}
+                <if test="_parameter.containsKey('refNoSprCd')">
+                    , REF_NO_SPR_CD     = #{refNoSprCd}
+                </if>
+                <if test="_parameter.containsKey('refNo')">
+                    , REF_NO            = IFNULL(#{refNo}, '')
+                </if>
+                <if test="_parameter.containsKey('rprsYn')">
+                    , RPRS_YN           = #{rprsYn}
+                </if>
+                <if test="_parameter.containsKey('prtYn')">
+                    , PRT_YN            = #{prtYn}
+                </if>
+                <if test="_parameter.containsKey('refDocTypeCd')">
+                    , REF_DOC_TYPE_CD   = #{refDocTypeCd}
+                </if>
+    </update>
+
+    <update id="deleteIntgRefNo" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteIntgRefNo */
+        UPDATE TB_FWD_INTG_REF_NO
+           SET DEL_YN = 'Y'
+             , UPD_DT              = NOW()
+             , UPDR_ID             = #{session.userId}
+         WHERE INTG_KEY_ID         = #{intgKeyId}
+           <if test="_parameter.containsKey('intgKeySeq')">
+              AND INTG_KEY_SEQ        = #{intgKeySeq}
+           </if>
+    </update>
+
+    <!-- IntgPic  통합PIC생성  -->
+    <insert id="insertIntgPic" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.insertIntgPic */
+        INSERT INTO TB_FWD_INTG_PIC(
+                 INTG_KEY_ID
+                ,INTG_KEY_SEQ
+                ,OFCR_SPR_CD
+                ,RPRS_OFCR_YN
+                ,BIZPTNR_OFCR_NM
+                ,TEL_NO
+                ,FAXNO
+                ,FAX_SEND_DT
+                ,EMAIL_ADDR
+                ,EMAIL_SEND_DT
+                ,EMAIL_SEND_STAT_CD
+                ,OFCR_COM_NM
+                ,MBPNO
+                ,OFCR_ENG_NM
+                ,RMK
+                ,REG_DT
+                ,RSTR_ID
+                ,UPD_DT
+                ,UPDR_ID
+                )
+           SELECT
+                 #{intgKeyId}
+                ,(SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                    FROM TB_FWD_INTG_PIC
+                   WHERE INTG_KEY_ID = #{intgKeyId})
+                ,#{ofcrSprCd}
+                ,IFNULL(#{rprsOfcrYn},'N')
+                ,#{bizptnrOfcrNm}
+                ,#{telNo}
+                ,#{faxno}
+                ,CASE WHEN LENGTH( #{faxSendDt} ) != 8 THEN NULL
+                      ELSE STR_TO_DATE( #{faxSendDt} , '%Y%m%d')
+                 END
+                ,#{emailAddr}
+                ,CASE WHEN LENGTH(#{emailSendDt}) != 8 THEN NULL
+                      ELSE STR_TO_DATE(#{emailSendDt}, '%Y%m%d')
+                 END
+                ,#{emailSendStatCd}
+                ,#{ofcrComNm}
+                ,#{mbpno}
+                ,#{ofcrEngNm}
+                ,#{rmk}
+                ,NOW()
+                ,#{session.userId}
+                ,NOW()
+                ,#{session.userId}
+    </insert>
+
+    <update id="updateIntgPic" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.updateIntgPic */
+
+        UPDATE TB_FWD_INTG_PIC
+        SET    UPD_DT = NOW()
+              ,UPDR_ID = #{session.userId}
+            <if test="_parameter.containsKey('ofcrSprCd')">
+               ,OFCR_SPR_CD = #{ofcrSprCd}
+            </if>
+            <if test="_parameter.containsKey('rprsOfcrYn')">
+               ,RPRS_OFCR_YN = #{rprsOfcrYn}
+            </if>
+            <if test="_parameter.containsKey('bizptnrOfcrNm')">
+               ,BIZPTNR_OFCR_NM = #{bizptnrOfcrNm}
+            </if>
+            <if test="_parameter.containsKey('telNo')">
+               ,TEL_NO = #{telNo}
+            </if>
+            <if test="_parameter.containsKey('faxno')">
+               ,FAXNO = #{faxno}
+            </if>
+            <if test="_parameter.containsKey('faxSendDt')">
+               ,FAX_SEND_DT = CASE WHEN LENGTH( #{faxSendDt} ) != 8 THEN NULL
+                                  ELSE STR_TO_DATE( #{faxSendDt} , '%Y%m%d')
+                                   END
+            </if>
+            <if test="_parameter.containsKey('emailAddr')">
+               ,EMAIL_ADDR = #{emailAddr}
+            </if>
+            <if test="_parameter.containsKey('emailSendDt')">
+               ,EMAIL_SEND_DT = CASE WHEN LENGTH( #{emailSendDt} ) != 8 THEN NULL
+                                  ELSE STR_TO_DATE( #{emailSendDt} , '%Y%m%d')
+                                   END
+            </if>
+            <if test="_parameter.containsKey('emailSendStatCd')">
+               ,EMAIL_SEND_STAT_CD = #{emailSendStatCd}
+            </if>
+            <if test="_parameter.containsKey('ofcrComNm')">
+               ,OFCR_COM_NM = #{ofcrComNm}
+            </if>
+            <if test="_parameter.containsKey('mbpno')">
+               ,MBPNO = #{mbpno}
+            </if>
+            <if test="_parameter.containsKey('ofcrEngNm')">
+               ,OFCR_ENG_NM = #{ofcrEngNm}
+            </if>
+            <if test="_parameter.containsKey('rmk')">
+               ,RMK = #{rmk}
+            </if>
+        WHERE INTG_KEY_ID = #{intgKeyId}
+          AND INTG_KEY_SEQ = #{intgKeySeq}
+    </update>
+
+  <update id="deleteIntgPic" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteIntgPic */
+        UPDATE TB_FWD_INTG_PIC
+           SET DEL_YN = 'Y'
+              ,UPD_DT              = NOW()
+              ,UPDR_ID             = #{session.userId}
+         WHERE INTG_KEY_ID         = #{intgKeyId}
+           <if test="_parameter.containsKey('intgKeySeq')">
+              AND INTG_KEY_SEQ        = #{intgKeySeq}
+           </if>
+    </update>
+
+
+    <insert id="mergeIntgAddr" parameterType="dataItem">
+        INSERT INTO TB_FWD_INTG_ADDR (
+               INTG_KEY_ID
+             , INTG_KEY_SEQ
+             , ADDR_SPR_CD
+             , INTG_ADDR
+             , ZIPCD
+             , CTY_NM
+             , STATE_NM
+             , REG_DT
+             , RSTR_ID
+             , UPD_DT
+             , UPDR_ID
+             , PORT_CD
+             , STATE_CD
+             , NATN_CD
+             , DEL_YN
+        )
+        SELECT
+               #{intgKeyId}
+             , (SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                    FROM TB_FWD_INTG_ADDR
+                   WHERE INTG_KEY_ID = #{intgKeyId})
+             , #{addrSprCd}
+             , #{intgAddr}
+             , #{zipcd}
+             , #{ctyNm}
+             , #{stateNm}
+             , NOW()
+             , #{session.userId}
+             , NOW()
+             , #{session.userId}
+             , #{portCd}
+             , #{stateCd}
+             , #{natnCd}
+             , 'N'
+            ON DUPLICATE KEY
+               UPDATE UPD_DT      = NOW()
+                    , UPDR_ID     = #{session.userId}
+               <if test="_parameter.containsKey('intgAddr')">
+                    , INTG_ADDR   = #{intgAddr}
+               </if>
+               <if test="_parameter.containsKey('zipcd')">
+                    , ZIPCD       = #{zipcd}
+               </if>
+               <if test="_parameter.containsKey('ctyNm')">
+                    , CTY_NM      = #{ctyNm}
+               </if>
+               <if test="_parameter.containsKey('stateNm')">
+                    , STATE_NM    = #{stateNm}
+               </if>
+               <if test="_parameter.containsKey('portCd')">
+                    , PORT_CD     = #{portCd}
+               </if>
+               <if test="_parameter.containsKey('stateCd')">
+                    , STATE_CD    = #{stateCd}
+               </if>
+               <if test="_parameter.containsKey('natnCd')">
+                    , NATN_CD     = #{natnCd}
+               </if>
+    </insert>
+
+    <insert id="mergeIntgRmk" parameterType="dataItem">
+        INSERT INTO TB_FWD_INTG_RMK (
+               INTG_KEY_ID
+             , INTG_KEY_SEQ
+             , RMK_SPR_CD
+             , REG_DT
+             , RSTR_ID
+             , UPD_DT
+             , UPDR_ID
+             , BLCK_YN
+             , RIDR_YN
+             , CONF_YN
+             , FRM_CONT
+             , DEL_YN
+        )
+        SELECT
+               #{intgKeyId}
+             ,(SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                    FROM TB_FWD_INTG_RMK
+                   WHERE INTG_KEY_ID = #{intgKeyId})
+             , #{rmkSprCd}
+             , NOW()
+             , #{session.userId}
+             , NOW()
+             , #{session.userId}
+             , IFNULL(#{blckYn},'N')
+             , IFNULL(#{ridrYn},'N')
+             , IFNULL(#{confYn},'N')
+             , #{frmCont,jdbcType=CLOB}
+             , 'N'
+            ON DUPLICATE KEY
+               UPDATE UPD_DT      = NOW()
+                    , UPDR_ID     = #{session.userId}
+                <if test="_parameter.containsKey('blckYn')">
+                    , BLCK_YN     = #{blckYn}
+                </if>
+                <if test="_parameter.containsKey('ridrYn')">
+                    , RIDR_YN     = #{ridrYn}
+                </if>
+                <if test="_parameter.containsKey('confYn')">
+                    , CONF_YN     = #{confYn}
+                </if>
+                <if test="_parameter.containsKey('frmCont')">
+                    , FRM_CONT    = #{frmCont,jdbcType=CLOB}
+                </if>
+    </insert>
+
+
+    <!-- IntgItem  -->
+    <insert id="insertIntgItem" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.insertIntgItem */
+        INSERT INTO TB_FWD_INTG_ITEM(
+             INTG_KEY_ID
+            ,INTG_KEY_SEQ
+            ,ITEM_SPR_CD
+            ,RPRS_ITEM_YN
+            ,ITEM_GRP_NM
+            ,ITEM_CD
+            ,ITEM_NM
+            ,ITEM_QTY
+            ,HTS_CD
+            ,DEL_YN
+            ,REG_DT
+            ,RSTR_ID
+            )
+        SELECT
+             #{intgKeyId}
+            ,(SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                FROM TB_FWD_INTG_ITEM
+               WHERE INTG_KEY_ID = #{intgKeyId})
+            ,#{itemSprCd}
+            ,#{rprsItemYn}
+            ,#{itemGrpNm}
+            ,#{itemCd}
+            ,#{itemNm}
+            ,#{itemQty}
+            ,#{htsCd}
+            ,'N'
+            ,NOW()
+            ,#{session.userId}
+    </insert>
+
+    <update id="updateIntgItem" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.updateIntgItem */
+        UPDATE TB_FWD_INTG_ITEM
+        SET    UPD_DT       = NOW()
+              ,UPDR_ID      = #{session.userId}
+              ,ITEM_SPR_CD  = #{itemSprCd}
+              ,RPRS_ITEM_YN = #{rprsItemYn}
+              ,ITEM_GRP_NM  = #{itemGrpNm}
+              ,ITEM_CD      = #{itemCd}
+              ,ITEM_NM      = #{itemNm}
+              ,ITEM_QTY     = #{itemQty}
+              ,HTS_CD       = #{htsCd}
+        WHERE INTG_KEY_ID   = #{intgKeyId}
+          AND INTG_KEY_SEQ  = #{intgKeySeq}
+    </update>
+
+    <update id="deleteIntgItem" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteIntgItem */
+        UPDATE TB_FWD_INTG_ITEM
+           SET DEL_YN = 'Y'
+             , UPD_DT              = NOW()
+             , UPDR_ID             = #{session.userId}
+         WHERE INTG_KEY_ID         = #{intgKeyId}
+         <if test="_parameter.containsKey('intgKeySeq')">
+           AND INTG_KEY_SEQ        = #{intgKeySeq}
+         </if>
+
+    </update>
+
+   <!-- IntgRefNo  -->
+    <insert id="insertIntgAddSvc" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.insertIntgAddSvc */
+        INSERT INTO TB_FWD_INTG_ADD_SVC(
+             INTG_KEY_ID
+			,INTG_KEY_SEQ
+			,ADD_SVC_TYPE_CD
+			,OFCR_NM
+			,ENTP_CD
+			,ENTP_NM
+			,TEL_NO
+			,FAXNO
+			,EMAIL_ADDR
+			,EXCT_CORP_CD
+			,RMK
+			,CONF_YN
+			,SELL_YN
+			,BUY_YN
+			,DEL_YN
+			,REG_DT
+			,RSTR_ID
+			,FRGH_CD
+			,CUR_CD
+			,LOCL_FRGH_AMT
+            )
+        SELECT
+             #{intgKeyId}
+            ,(SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                FROM TB_FWD_INTG_ADD_SVC
+               WHERE INTG_KEY_ID = #{intgKeyId})
+            ,#{addSvcTypeCd}
+            ,#{ofcrNm}
+            ,#{entpCd}
+            ,#{entpNm}
+            ,#{telNo}
+            ,#{faxno}
+            ,#{emailAddr}
+            ,#{exctCorpCd}
+            ,#{rmk}
+            ,IFNULL(#{confYn}, 'Y')
+            ,IFNULL(#{sellYn}, 'N')
+            ,IFNULL(#{buyYn}, 'N')
+            ,'N'
+            ,NOW()
+            ,#{session.userId}
+            ,#{frghCd}
+            ,#{curCd}
+            ,#{loclFrghAmt}
+    </insert>
+
+    <update id="updateIntgAddSvc" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt."updateIntgAddSvc" */
+        UPDATE TB_FWD_INTG_ADD_SVC
+           SET ADD_SVC_TYPE_CD = IFNULL(#{addSvcTypeCd}, ADD_SVC_TYPE_CD)
+              ,OFCR_NM         = IFNULL(#{ofcrNm}, OFCR_NM)
+              ,ENTP_CD         = IFNULL(#{entpCd}, ENTP_CD)
+              ,ENTP_NM         = IFNULL(#{entpNm}, ENTP_NM)
+              ,TEL_NO          = IFNULL(#{telNo}, TEL_NO)
+              ,FAXNO           = IFNULL(#{faxno}, FAXNO)
+              ,EMAIL_ADDR      = IFNULL(#{emailAddr}, EMAIL_ADDR)
+              ,EXCT_CORP_CD    = IFNULL(#{exctCorpCd}, EXCT_CORP_CD)
+              ,RMK             = IFNULL(#{rmk}, RMK)
+              ,CONF_YN         = IFNULL(#{confYn}, CONF_YN)
+              ,SELL_YN         = IFNULL(#{sellYn}, SELL_YN)
+              ,BUY_YN          = IFNULL(#{buyYn}, BUY_YN)
+              ,REG_DT          = NOW()
+              ,RSTR_ID         = #{session.userId}
+              ,FRGH_CD         = #{frghCd}
+              ,CUR_CD          = #{curCd}
+              ,LOCL_FRGH_AMT   = #{loclFrghAmt}
+        WHERE INTG_KEY_ID      = #{intgKeyId}
+          AND INTG_KEY_SEQ     = #{intgKeySeq}
+    </update>
+
+    <update id="deleteIntgAddSvc" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteIntgAddSvc */
+        UPDATE TB_FWD_INTG_ADD_SVC
+           SET DEL_YN = 'Y'
+             , UPD_DT              = NOW()
+             , UPDR_ID             = #{session.userId}
+         WHERE INTG_KEY_ID         = #{intgKeyId}
+        <if test="_parameter.containsKey('intgKeySeq')">
+           AND INTG_KEY_SEQ        = #{intgKeySeq}
+        </if>
+    </update>
+
+    <select id="selectIntgPicList" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgPicList */
+        SELECT A.INTG_KEY_ID              /*통합SUBID    */
+              ,A.OFCR_SPR_CD              /*담당자구분코드    */
+              ,(SELECT C.DTL_CD_NM
+                  FROM TB_COM_ETC_CD C
+                 WHERE 1=1
+                   AND C.CLAS_CD = '0047'
+                   AND A.OFCR_SPR_CD = C.DTL_CD) AS OFCR_SPR_NM  /*담당자구분명   */
+              ,A.RPRS_OFCR_YN             /*대표담당자여부    */
+              ,A.BIZPTNR_OFCR_NM          /*거래처담당자명    */
+              ,A.TEL_NO                   /*전화번호    */
+              ,A.FAXNO                    /*팩스번호    */
+              ,A.FAX_SEND_DT              /*팩스전송일시    */
+              ,A.EMAIL_ADDR               /*이메일주소    */
+              ,A.EMAIL_SEND_DT            /*이메일전송일시    */
+              ,A.EMAIL_SEND_STAT_CD       /*이메일전송상태코드    */
+              ,A.OFCR_COM_NM              /*담당자회사명    */
+              ,A.MBPNO                    /*휴대전화번호    */
+              ,A.OFCR_ENG_NM              /*담당자영문명    */
+              ,A.RMK                      /*적요   */
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,#{chkAll} AS CHK
+              ,'' SMT_NO
+          FROM TB_FWD_INTG_PIC A
+         WHERE A.DEL_YN      = 'N'
+           AND A.INTG_KEY_ID = #{intgKeyId}
+         ORDER BY A.INTG_KEY_SEQ
+    </select>
+
+    <!-- Additional Service -->
+    <insert id="insertAddSvc" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.insertAddSvc */
+        INSERT INTO TB_FWD_INTG_ADD_SVC(
+             INTG_KEY_ID
+            ,INTG_KEY_SEQ
+            ,ADD_SVC_TYPE_CD
+            ,OFCR_NM
+            ,ENTP_CD
+            ,ENTP_NM
+            ,TEL_NO
+            ,FAXNO
+            ,EMAIL_ADDR
+            ,RMK
+            ,CONF_YN
+            ,SELL_YN
+            ,BUY_YN
+            ,EXCT_CORP_CD
+            ,DEL_YN
+            ,REG_DT
+            ,RSTR_ID
+            ,FRGH_CD
+            ,CUR_CD
+            ,LOCL_FRGH_AMT)
+        SELECT #{intgKeyId}
+            ,(SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                FROM TB_FWD_INTG_ADD_SVC
+               WHERE INTG_KEY_ID = #{intgKeyId})
+            ,#{addSvcTypeCd}
+            ,#{ofcrNm}
+            ,#{entpCd}
+            ,#{entpNm}
+            ,#{telNo}
+            ,#{faxno}
+            ,#{emailAddr}
+            ,#{rmk}
+            ,IFNULL(#{confYn},'N')
+            ,IFNULL(#{sellYn},'N')
+            ,IFNULL(#{buyYn},'N')
+            ,#{exctCorpCd}
+            ,'N'
+            ,NOW()
+            ,#{session.userId}
+            ,#{frghCd}
+            ,#{curCd}
+            ,#{loclFrghAmt}
+    </insert>
+
+    <update id="updateAddSvc" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.updateAddSvc */
+        UPDATE TB_FWD_INTG_ADD_SVC
+        SET    ADD_SVC_TYPE_CD  = #{addSvcTypeCd}
+              ,OFCR_NM          = #{ofcrNm}
+              ,ENTP_CD          = #{entpCd}
+              ,ENTP_NM          = #{entpNm}
+              ,TEL_NO           = #{telNo}
+              ,FAXNO            = #{faxno}
+              ,EMAIL_ADDR       = #{emailAddr}
+              ,EXCT_CORP_CD     = #{exctCorpCd}
+              ,RMK              = #{rmk}
+              ,CONF_YN          = IFNULL(#{confYn}, 'N')
+              ,SELL_YN          = IFNULL(#{sellYn}, 'N')
+              ,BUY_YN           = IFNULL(#{buyYn}, 'N')
+              ,UPD_DT           = NOW()
+              ,UPDR_ID          = #{userId}
+              ,FRGH_CD          = #{frghCd}
+              ,CUR_CD           = #{curCd}
+              ,LOCL_FRGH_AMT    = #{loclFrghAmt}
+        WHERE INTG_KEY_ID       = #{intgKeyId}
+          AND INTG_KEY_SEQ      = #{intgKeySeq}
+    </update>
+
+    <update id="deleteAddSvc" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteAddSvc */
+        UPDATE TB_FWD_INTG_ADD_SVC
+           SET DEL_YN = 'Y'
+             , UPD_DT              = NOW()
+             , UPDR_ID             = #{session.userId}
+         WHERE INTG_KEY_ID         = #{intgKeyId}
+           AND INTG_KEY_SEQ        = #{intgKeySeq}
+    </update>
+
+      <!-- Dimension  -->
+    <insert id="insertIntgDim" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.insertIntgDim */
+            INSERT INTO TB_FWD_INTG_DIM(
+             INTG_KEY_ID
+            ,INTG_KEY_SEQ
+            ,DIM_SPR_CD
+            ,LEN_UNIT_CD
+            ,VERT_LEN
+            ,WTH_LEN
+            ,HGT
+            ,PKG_QTY
+            ,PKG_UNIT_CD
+            ,VOL_WGT
+            ,WGT_UNIT_CD
+            ,RMK
+            ,PACKG_BOX_ID
+            ,GWT
+            ,RTON
+            ,BULK_TYPE_CD
+            ,CBM
+            ,ITEM_SEQ
+            ,BULK_YN
+            ,CARR_VOL_WGT
+            ,ADD_SVC_TYPE_CD
+            ,DEL_YN
+            ,REG_DT
+            ,RSTR_ID
+            ,UPD_DT
+            ,UPDR_ID
+            )
+            SELECT
+             #{intgKeyId}
+            ,(SELECT IFNULL(MAX(INTG_KEY_SEQ),0) + 1
+                FROM TB_FWD_INTG_DIM
+               WHERE INTG_KEY_ID = #{intgKeyId})
+            ,#{dimSprCd}
+            ,#{lenUnitCd}
+            ,#{vertLen}
+            ,#{wthLen}
+            ,#{hgt}
+            ,#{pkgQty}
+            ,#{pkgUnitCd}
+            ,#{volWgt}
+            ,#{wgtUnitCd}
+            ,#{rmk}
+            ,#{packgBoxId}
+            ,#{gwt}
+            ,#{rton}
+            ,#{bulkTypeCd}
+            ,#{cbm}
+            ,#{itemSeq}
+            ,#{bulkYn}
+            ,#{carrVolWgt}
+            ,#{addSvcTypeCd}
+            ,'N'
+            ,NOW()
+            ,#{session.userId}
+            ,NOW()
+            ,#{session.userId}
+    </insert>
+
+    <update id="updateIntgDim" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.updateIntgDim */
+        UPDATE TB_FWD_INTG_DIM
+        SET  UPD_DT           = NOW()
+            ,UPDR_ID          = #{session.userId}
+            ,DIM_SPR_CD       = #{dimSprCd}
+            ,LEN_UNIT_CD      = #{lenUnitCd}
+            ,VERT_LEN         = #{vertLen}
+            ,WTH_LEN          = #{wthLen}
+            ,HGT              = #{hgt}
+            ,PKG_QTY          = #{pkgQty}
+            ,PKG_UNIT_CD      = #{pkgUnitCd}
+            ,VOL_WGT          = #{volWgt}
+            ,WGT_UNIT_CD      = #{wgtUnitCd}
+            ,RMK              = #{rmk}
+            ,PACKG_BOX_ID     = #{packgBoxId}
+            ,GWT              = #{gwt}
+            ,RTON             = #{rton}
+            ,BULK_TYPE_CD     = #{bulkTypeCd}
+            ,CBM              = #{cbm}
+            ,ITEM_SEQ         = #{itemSeq}
+            ,BULK_YN          = #{bulkYn}
+            ,CARR_VOL_WGT     = #{carrVolWgt}
+            ,ADD_SVC_TYPE_CD  = #{addSvcTypeCd}
+        WHERE INTG_KEY_ID     = #{intgKeyId}
+          AND INTG_KEY_SEQ    = #{intgKeySeq}
+    </update>
+
+    <update id="deleteIntgDim" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteIntgDim */
+        UPDATE TB_FWD_INTG_DIM
+           SET DEL_YN       = 'Y'
+              ,UPD_DT       = NOW()
+              ,UPDR_ID      = #{session.userId}
+         WHERE INTG_KEY_ID  = #{intgKeyId}
+           AND INTG_KEY_SEQ = #{intgKeySeq}
+    </update>
+
+    <update id="deleteIntgDims" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteIntgDims */
+        UPDATE TB_FWD_INTG_DIM
+           SET DEL_YN      = 'Y'
+              ,UPD_DT      = NOW()
+              ,UPDR_ID     = #{session.userId}
+         WHERE INTG_KEY_ID = #{intgKeyId}
+    </update>
+
+    <delete id="deleteIntgDimsReal" parameterType="dataItem" >
+        /* fwd.document.fwdIntgSubMgnt.deleteIntgDimsReal */
+        DELETE
+          FROM TB_FWD_INTG_DIM
+         WHERE INTG_KEY_ID = #{intgKeyId}
+    </delete>
+
+   <!-- ItemMpng  -->
+    <insert id="insertIntgItemMpng" parameterType="dataItem" >
+    /* fwd.document.fwdIntgSubMgnt.insertIntgItemMpng*/
+		    INSERT INTO TB_FWD_BL_ITEM_MPNG(
+		     BL_ID
+		    ,INTG_ITEM_NO
+		    ,MPNG_KIND_CD
+		    ,DEL_YN
+		    ,REG_DT
+		    ,RSTR_ID
+		    ,UPD_DT
+		    ,UPDR_ID
+		    )
+		    VALUES
+		    (
+		     #{blId}
+		    ,#{intgItemNo}
+		    ,#{mpngKindCd}
+		    ,'N'
+		    ,NOW()
+		    ,#{userId}
+		    ,NOW()
+		    ,#{userId}
+		    )
+    </insert>
+
+    <!-- ItemMpng  -->
+    <update id="updateIntgItemMpng" parameterType="dataItem" >
+    /* fwd.document.fwdIntgSubMgnt.updateIntgItemMpng*/
+	    UPDATE TB_FWD_BL_ITEM_MPNG
+	       SET UPD_DT                = NOW()
+	          ,UPDR_ID               = #{userId}
+	     WHERE BL_ID                 = #{blId}
+	       AND INTG_ITEM_NO          = #{intgItemNo}
+    </update>
+
+    <!-- ItemMpng  -->
+    <update id="deleteIntgItemMpng" parameterType="dataItem" >
+    /* fwd.document.fwdIntgSubMgnt.deleteIntgItemMpng*/
+		    UPDATE TB_FWD_BL_ITEM_MPNG
+		       SET DEL_YN                = 'Y'
+		          ,UPD_DT                = NOW()
+		          ,UPDR_ID               = #{userId}
+		     WHERE BL_ID                 = #{blId}
+		     <if test="_parameter.containsKey('intgItemNo')">
+		       AND INTG_ITEM_NO          = #{intgItemNo}
+		     </if>
+		     <if test="_parameter.containsKey('mpngKindCd')">
+		       AND MPNG_KIND_CD          = #{mpngKindCd}
+		     </if>
+    </update>
+
+    <!-- 통합주소구분코드Cnt조회 -->
+    <select id="selectIntgAddrSprCdCnt" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgAddrSprCdCnt */
+        SELECT COUNT(S.ADDR_SPR_CD) ADDR_CNT
+          FROM TB_FWD_INTG_ADDR S
+         WHERE S.INTG_KEY_ID = #{smtNo}
+           AND S.DEL_YN = 'N'
+           AND S.ADDR_SPR_CD = 'BP'
+    </select>
+
+    <!-- 거래처주소조회 -->
+    <select id="selectBizptnrAddr" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectBizptnrAddr */
+        SELECT CONCAT(IFNULL(BIZPTNR_ENG_ADDR,''), IFNULL(BIZPTNR_ENG_DTL_ADDR,'')) AS BIZPTNR_ADDR
+          FROM TB_COM_BIZPTNR
+         WHERE BIZPTNR_CD   = #{bizptnrCd}
+         LIMIT 1
+    </select>
+
+    <!-- 거래처주소조회 -->
+    <select id="selectBlMarkAddr" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectBlMarkAddr */
+        SELECT A.BL_MARK_ADDR AS BIZPTNR_ADDR
+        , A.BIZPTNR_ZIPCD AS ZIPCD
+        , (SELECT ENG_LOC_NM
+           FROM TB_COM_LOC
+           WHERE LOC_CD = A.CTY_CD
+           AND LOC_SPR_cD = 'CT'
+           AND USE_YN = 'Y'
+           LIMIT 1) AS CTY_NM
+        , A.NATN_CD
+        FROM TB_COM_BIZPTNR A
+        WHERE A.BIZPTNR_CD   = #{bizptnrCd}
+        LIMIT 1
+    </select>
+
+    <select id="selectDimInfo" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectDimInfo */
+        SELECT IFNULL(CASE WHEN MAX(LEN_UNIT_CD) = 'CM' THEN IFNULL(SUM(VOL_WGT),0)
+                           WHEN MAX(LEN_UNIT_CD) = 'IN' THEN FC_FWD_CONVERT_UNIT('LB2KG', #{exctSprCd}, IFNULL(SUM(VOL_WGT),0))
+                      END,0) AS VOL_WGT
+              ,IFNULL(CASE WHEN MAX(LEN_UNIT_CD) = 'CM' THEN FC_FWD_CONVERT_UNIT('KG2LB', #{exctSprCd}, IFNULL(SUM(VOL_WGT),0))
+                           WHEN MAX(LEN_UNIT_CD) = 'IN' THEN IFNULL(SUM(VOL_WGT),0)
+                      END,0) AS LB_VOL_WGT
+          FROM TB_FWD_INTG_DIM
+         WHERE INTG_KEY_ID = #{smtNo}
+    </select>
+
+    <select id="selectBlIntgRmk" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectBlIntgRmk */
+        SELECT A.INTG_KEY_ID              /*통합SUBID    */
+              ,A.RMK_SPR_CD               /*적요구분코드   */
+              ,(SELECT C.DTL_CD_NM
+                  FROM TB_COM_ETC_CD C
+                 WHERE C.CLAS_CD = '0050'
+                   AND A.RMK_SPR_CD = C.DTL_CD) AS RMK_SPR_NM  /*적요구분명   */
+              ,A.REG_DT                   /*등록일시     */
+              ,A.RSTR_ID                  /*등록자ID     */
+              ,A.UPD_DT                   /*수정일시     */
+              ,A.UPDR_ID                  /*수정자ID     */
+              ,'F' CHK
+              ,A.BLCK_YN
+              ,A.RIDR_YN
+              ,A.CONF_YN
+              ,A.FRM_CONT         AS FRM_CONT
+              ,SUBSTR(A.FRM_CONT, 1, 4000) AS RMK1
+              ,SUBSTR(A.FRM_CONT, 4001, 4000) AS RMK2
+              ,SUBSTR(A.FRM_CONT, 8001, 4000) AS RMK3
+              ,SUBSTR(A.FRM_CONT, 12001, 4000) AS RMK4
+              ,SUBSTR(A.FRM_CONT, 16001, 4000) AS RMK5
+          FROM TB_FWD_INTG_RMK A
+	     WHERE A.INTG_KEY_ID = #{intgKeyId}
+	       AND A.DEL_YN = 'N'
+    </select>
+
+    <select id="selectCoPYBlIntgAddr" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectCoPYBlIntgAddr */
+		    SELECT CASE WHEN F.SHPP_CD = G.SHPP_CD THEN 'O' ELSE 'X' END AS SHPP
+		          ,CASE WHEN F.CNEE_CD = G.CNEE_CD THEN 'O' ELSE 'X' END AS CNEE
+		          ,CASE WHEN F.NTPR_CD = G.NTPR_CD THEN 'O' ELSE 'X' END AS NTFY
+		          ,(SELECT A.INTG_KEY_ID
+		              FROM TB_FWD_INTG_ADDR A
+		             WHERE 1=1
+		               AND A.INTG_KEY_ID = #{blId}
+		               AND A.ADDR_SPR_CD = 'BS'
+		               AND A.DEL_YN = 'N') AS BS_INTG_SUB_ID
+                  ,(SELECT A.INTG_KEY_ID
+                      FROM TB_FWD_INTG_ADDR A
+                     WHERE 1=1
+                       AND A.INTG_KEY_ID = #{blId}
+                       AND A.ADDR_SPR_CD = 'BC'
+                       AND A.DEL_YN = 'N') AS BC_INTG_SUB_ID
+                  ,(SELECT A.INTG_KEY_ID
+                      FROM TB_FWD_INTG_ADDR A
+                     WHERE 1=1
+                       AND A.INTG_KEY_ID = #{blId}
+                       AND A.ADDR_SPR_CD = 'BN'
+                       AND A.DEL_YN = 'N') AS BN_INTG_SUB_ID
+                  ,(SELECT A.INTG_KEY_ID
+                      FROM TB_FWD_INTG_ADDR A
+                     WHERE 1=1
+                       AND A.INTG_KEY_ID = #{oldBlId}
+                       AND A.ADDR_SPR_CD = 'BS'
+                       AND A.DEL_YN = 'N') AS BS_ADDR
+                  ,(SELECT A.INTG_KEY_ID
+                      FROM TB_FWD_INTG_ADDR A
+                     WHERE 1=1
+                       AND A.INTG_KEY_ID = #{oldBlId}
+                       AND A.ADDR_SPR_CD = 'BC'
+                       AND A.DEL_YN = 'N') AS BC_ADDR
+                  ,(SELECT A.INTG_KEY_ID
+                      FROM TB_FWD_INTG_ADDR A
+                     WHERE 1=1
+                       AND A.INTG_KEY_ID = #{oldBlId}
+                       AND A.ADDR_SPR_CD = 'BN'
+                       AND A.DEL_YN = 'N') AS BN_ADDR
+		      FROM TB_FWD_BL F  -- OLD
+		CROSS JOIN TB_FWD_BL G  -- NEW
+		     WHERE F.BL_ID =  #{oldBlId}
+		       AND G.BL_ID =  #{blId}
+    </select>
+
+    <!-- BL신고주소존재여부조회 -->
+    <select id="selectBlDeclAddrExstYn" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectBlDeclAddrExstYn */
+	    SELECT (SELECT C.INTG_KEY_ID      /* 20120407 주소조회오류  수정 안영수*/
+	              FROM TB_FWD_INTG_ADDR C
+	             WHERE C.INTG_KEY_ID = #{intgKeyId}
+	               AND C.DEL_YN = 'N'
+	               AND C.ADDR_SPR_CD = 'MS'
+	             LIMIT 1 ) AS INTG_SUB_ID
+	          ,'MS' ADDR_SPR_CD
+	          ,A.INTG_ADDR
+	          ,A.ZIPCD
+	          ,A.CTY_NM
+	          ,A.STATE_NM
+	      FROM TB_FWD_INTG_ADDR A
+	     WHERE A.INTG_KEY_ID = #{intgKeyId}
+	       AND A.DEL_YN = 'N'
+	       AND A.ADDR_SPR_CD = 'BS'
+	     UNION ALL
+	    SELECT (SELECT C.INTG_KEY_ID      /* 20120407 주소조회오류  수정 안영수*/
+	              FROM TB_FWD_INTG_ADDR C
+	             WHERE C.INTG_KEY_ID = #{intgKeyId}
+	               AND C.DEL_YN = 'N'
+	               AND C.ADDR_SPR_CD = 'MC'
+	            LIMIT 1 ) AS INTG_SUB_ID
+	          ,'MC' ADDR_SPR_CD
+	          ,A.INTG_ADDR
+	          ,A.ZIPCD
+	          ,A.CTY_NM
+	          ,A.STATE_NM
+	      FROM TB_FWD_INTG_ADDR A
+	     WHERE A.INTG_KEY_ID = #{intgKeyId}
+	       AND A.DEL_YN = 'N'
+	       AND A.ADDR_SPR_CD = 'BC'
+	     UNION ALL
+	    SELECT (SELECT C.INTG_KEY_ID      /* 20120407 주소조회오류  수정 안영수*/
+	              FROM TB_FWD_INTG_ADDR C
+	             WHERE C.INTG_KEY_ID = #{intgKeyId}
+	               AND C.DEL_YN = 'N'
+	               AND C.ADDR_SPR_CD = 'MN'
+	             LIMIT 1 )  AS INTG_SUB_ID
+	          ,'MN' ADDR_SPR_CD
+	          ,A.INTG_ADDR
+	          ,A.ZIPCD
+	          ,A.CTY_NM
+	          ,A.STATE_NM
+	      FROM TB_FWD_INTG_ADDR A
+	     WHERE A.INTG_KEY_ID = #{intgKeyId}
+	       AND A.DEL_YN = 'N'
+	       AND A.ADDR_SPR_CD = 'BN'
+    </select>
+
+    <select id="selectIntgFrmContCnt" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgFrmContCnt */
+        SELECT CEIL(FC_FWD_STR_CNT_RTN(S.FRM_CONT) / #{num}) AS CONT_CNT /* 구분별내용 5 파라미터로 대체 */
+        FROM   TB_FWD_INTG_RMK      S /* 통합비고 */
+        WHERE  1=1
+        AND    S.DEL_YN = 'N' /* 삭제여부 */
+        AND    S.INTG_KEY_ID = #{blId}
+        AND    S.RMK_SPR_CD = #{rmkSprCd} /* 적요구분코드 */
+        LIMIT  1
+    </select>
+
+   <!-- BL통합참조BL번호생성  -->
+    <insert id="insertIntgRefBlNo" parameterType="dataItem" >
+    /* fwd.document.fwdIntgSubMgnt.insertIntgRefBlNo*/
+            INSERT INTO TB_FWD_INTG_REF_BL_NO(
+                INTG_KEY_ID
+			   ,INTG_KEY_SEQ
+			   ,REF_BL_NO
+			   ,RPRS_YN
+			   ,SCAN_STAT_CD
+			   ,SCAN_MSG_CONT
+			   ,WGT_MSRM_STAT_CD
+			   ,WGT_MSRM_MSG_CONT
+			   ,SRTNG_SPR_CD
+			   ,CLAS_MACH_NO
+			   ,CLAS_STAT_CD
+			   ,CLAS_MSG_CONT
+			   ,SCAN_DT
+			   ,WGT_MSRM_DT
+			   ,MSRM_WGT
+			   ,SRTNG_DT
+			   ,SCAN_SEQ
+			   ,SCAN_CNT
+			   ,MSRM_HGT
+			   ,MSRM_WTH_LEN
+			   ,MSRM_VERT_LEN
+			   ,MSRM_RECV_YN
+			   ,MACH_MSRM_WGT
+			   ,MACH_MSRM_DT
+			   ,DEL_YN
+			   ,REG_DT
+			   ,RSTR_ID
+			   ,UPD_DT
+			   ,UPDR_ID
+            )
+            VALUES
+            (
+             #{intgKeyId}
+            ,#{intgKeySeq}
+            ,#{refBlNo}
+            ,#{rprsYn}
+            ,#{scanStatCd}
+            ,#{scanMsgCont}
+            ,#{wgtMsrmStatCd}
+            ,#{wgtMsrmMsgCont}
+            ,#{srtngSprCd}
+            ,#{clasMachNo}
+            ,#{clasStatCd}
+            ,#{clasMsgCont}
+            ,#{scanDt}
+            ,#{wgtMsrmDt}
+            ,#{msrmWgt}
+            ,#{srtngDt}
+            ,#{scanSeq}
+            ,#{scanCnt}
+            ,#{msrmHgt}
+            ,#{msrmWthLen}
+            ,#{msrmVertLen}
+            ,#{msrmRecvYn}
+            ,#{machMsrmWgt}
+            ,#{machMsrmDt}
+            ,'N'
+            ,NOW()
+            ,#{userId}
+            ,NOW()
+            ,#{userId}
+            )
+    </insert>
+
+    <!-- BL통합참조BL번호수정  -->
+    <update id="updateIntgRefBlNo" parameterType="dataItem" >
+    /* fwd.document.fwdIntgSubMgnt.updateIntgRefBlNo*/
+            UPDATE TB_FWD_INTG_REF_BL_NO
+               SET UPD_DT                = NOW()
+                  ,UPDR_ID               = #{userId}
+             <if test="_parameter.containsKey('refBlNo')">
+                  ,REF_BL_NO          = #{refBlNo}
+             </if>
+             <if test="_parameter.containsKey('rprsYn')">
+                  ,RPRS_YN          = #{rprsYn}
+             </if>
+             <if test="_parameter.containsKey('scanStatCd')">
+                  ,SCAN_STAT_CD          = #{scanStatCd}
+                  ,SCAN_DT               = NOW()
+             </if>
+             <if test="_parameter.containsKey('scanMsgCont')">
+                  ,SCAN_MSG_CONT         = #{scanMsgCont}
+             </if>
+             <if test="_parameter.containsKey('wgtMsrmStatCd')">
+                  ,WGT_MSRM_STAT_CD      = #{wgtMsrmStatCd}
+                  ,WGT_MSRM_DT           = NOW()
+             </if>
+             <if test="_parameter.containsKey('wgtMsrmMsgCont')">
+                  ,WGT_MSRM_MSG_CONT     = #{wgtMsrmMsgCont}
+             </if>
+             <if test="_parameter.containsKey('srtngSprCd')">
+                  ,SRTNG_SPR_CD          = #{srtngSprCd}
+                  ,SRTNG_DT              = NOW()
+             </if>
+             <if test="_parameter.containsKey('clasMachNo')">
+                  ,CLAS_MACH_NO          = #{clasMachNo}
+             </if>
+             <if test="_parameter.containsKey('clasStatCd')">
+                  ,CLAS_STAT_CD          = #{clasStatCd}
+             </if>
+             <if test="_parameter.containsKey('clasMsgCont')">
+                  ,CLAS_MSG_CONT         = #{clasMsgCont}
+             </if>
+             <if test="_parameter.containsKey('msrmWgt')">
+                  ,MSRM_WGT              = #{msrmWgt}
+             </if>
+             WHERE INTG_KEY_ID           = #{intgSubId}
+    </update>
+
+    <update id="deleteIntgRefBlNo" parameterType="dataItem" >
+    /* fwd.document.fwdIntgSubMgnt.deleteIntgRefBlNo*/
+            UPDATE TB_FWD_INTG_REF_BL_NO
+               SET DEL_YN                = 'Y'
+                  ,UPD_DT                = NOW()
+                  ,UPDR_ID               = #{userId}
+             WHERE INTG_KEY_ID           = #{intgSubId}
+    </update>
+
+    <select id="selectIntgFrmContRowCnt" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgFrmContRowCnt */
+        SELECT
+               CEIL(FC_FWD_STR_CNT_RTN3(S.FRM_CONT) / #{num}) AS V_CNT/* num 5 파라미터로 대체*/
+               , FC_FWD_STR_RTN(S.FRM_CONT, 1, 0, 'X', 'J') AS V_DESC
+        FROM   TB_FWD_INTG_RMK S /* 통합비고 */
+        WHERE  1=1
+        AND    S.DEL_YN = 'N' /* 삭제여부 */
+        AND    S.INTG_KEY_ID = #{blId}
+        AND    S.RMK_SPR_CD = #{rmkSprCd} /* 적요구분코드 항공 GODS 해운 DESC  */
+        LIMIT 1
+    </select>
+
+    <!-- 통합주소구분코드Cnt조회 -->
+    <select id="selectIntgAddrSprCdCntList" parameterType="dataItem" resultType="dataItem">
+        /* fwd.document.fwdIntgSubMgnt.selectIntgAddrSprCdCntList */
+	    SELECT COUNT(S.ADDR_SPR_CD) AS CNT
+	      FROM TB_FWD_INTG_ADDR S
+	     WHERE S.INTG_KEY_ID = #{smtNo}
+	       AND S.DEL_YN = 'N'
+	  GROUP BY S.ADDR_SPR_CD
+    </select>
+
+    <!-- 통합DIM조회 -->
+    <select id="selectBlIntgDIM" parameterType="dataItem" resultType="dataItem">
+    SELECT A.INTG_KEY_ID              /*통합SUBID    */
+          ,A.DIM_SPR_CD               /*DIMENSION구분코드   */
+          ,(SELECT C.DTL_CD_NM
+              FROM TB_COM_ETC_CD C
+             WHERE C.CLAS_CD = '0051'
+               AND A.DIM_SPR_CD = C.DTL_CD) AS DIM_SPR_NM  /*DIMENSION구분명   */
+          ,A.LEN_UNIT_CD              /*길이단위코드   */
+          ,A.VERT_LEN                 /*세로길이   */
+          ,A.WTH_LEN                  /*가로길이   */
+          ,A.HGT                      /*높이   */
+          ,A.PKG_QTY                  /*패키지수량   */
+          ,A.PKG_UNIT_CD              /*패키지단위코드   */
+          ,A.VOL_WGT                  /*부피중량   */
+          ,A.WGT_UNIT_CD              /*중량단위코드   */
+          ,A.RMK                      /*적요   */
+          ,A.REG_DT                   /*등록일시     */
+          ,A.RSTR_ID                  /*등록자ID     */
+          ,A.UPD_DT                   /*수정일시     */
+          ,A.UPDR_ID                  /*수정자ID     */
+          ,'F' CHK
+          ,A.PACKG_BOX_ID
+          ,A.GWT
+          ,A.RTON
+          ,A.BULK_TYPE_CD
+          ,A.CBM
+          ,IFNULL((SELECT X.PACKG_BOX_NM
+                     FROM TB_FWD_PACKG_BOX X
+                    WHERE A.PACKG_BOX_ID = X.PACKG_BOX_ID
+                      AND X.USE_YN = 'Y'), A.PACKG_BOX_ID) PACKG_BOX_NM
+          ,A.ITEM_SEQ
+          ,A.BULK_YN
+          ,A.CARR_VOL_WGT
+          ,A.ADD_SVC_TYPE_CD
+      FROM TB_FWD_INTG_DIM A
+     WHERE A.INTG_KEY_ID = #{intgKeyId}
+       AND A.DEL_YN = 'N'
+    <if test="_parameter.containsKey('dimSprCd')">
+       AND DIM_SPR_CD IN  <foreach collection="dimSprCdList" item="dimSprCd" index="index" separator="," open="(" close=")">
+                               #{rmkSprCd}
+                          </foreach>
+    </if>
+    </select>
+    <insert id="createIntgRmk" parameterType="dataItem">
+        /*fwd.document.fwdIntgSubMgnt.createIntgRmk*/
+	    INSERT INTO TB_FWD_INTG_RMK(
+	                   INTG_KEY_ID
+	                   ,INTG_KEY_SEQ
+	                   ,RMK_SPR_CD
+	          <!--     ,LOCL_REG_DT
+	                   ,LOCL_UPD_DT -->
+						,REG_DT
+						,RSTR_ID
+						,UPD_DT
+						,UPDR_ID
+						,BLCK_YN
+						,RIDR_YN
+						,CONF_YN
+						,FRM_CONT
+	                   )
+	    VALUES(
+		     #{intgKeyId}
+		     ,IFNULL((SELECT MAX(X.INTG_KEY_SEQ) +1 FROM TB_FWD_INTG_RMK X WHERE X.INTG_KEY_ID = #{intgKeyId}), 1) 
+		    ,#{rmkSprCd}   
+		<!--     ,NOW()
+		    ,NOW() -->
+		    ,NOW()
+		    ,#{rstrId}     
+		    ,NOW()
+		    ,#{updrId}
+		    ,IFNULL(#{blckYn},'N')
+		    ,IFNULL(#{ridrYn},'N')
+		    ,IFNULL(#{confYn},'N')
+		    ,#{frmCont}   
+	    )
+
+    </insert>
+    
+    <!-- 통합품목수정 --> 
+    <update id="updateIntgRmk" parameterType="dataItem">
+        /*fwd.document.fwdIntgSubMgnt.updateIntgRmk*/
+	    UPDATE TB_FWD_INTG_RMK
+	    SET    UPD_DT              = NOW()
+	          ,UPDR_ID             = #{updrId}
+	          <!-- ,LOCL_UPD_DT         = NOW() -->
+	              
+	    <!-- <if test='rmkSprCd != null'>
+	          ,RMK_SPR_CD         = #{rmkSprCd} 
+	    </if>
+	    <if test='rmkSprCd == null' >
+	          ,RMK_SPR_CD         = ''
+	    </if>  -->  
+	    <if test='rprsItemYn != null'>
+	          ,RPRS_ITEM_YN        = #{rprsItemYn}
+	    </if>
+	    <if test='itemGrpNm != null' >
+	          ,ITEM_GRP_NM         = #{itemGrpNm} 
+	    </if>
+	    <if test='confYn != null' >
+	          ,CONF_YN         = #{confYn}
+	    </if>
+	    <if test='frmCont == null' >
+	          ,FRM_CONT             = ''    
+	    </if>
+	    <if test='frmCont != null' >
+	          ,FRM_CONT             = #{frmCont}    
+	    </if>
+	    WHERE  INTG_KEY_ID         = #{intgSubId} 
+	    <if test='rmkSprCd != null'>
+	          AND RMK_SPR_CD         = #{rmkSprCd} 
+	    </if>
+    </update>
+</mapper>

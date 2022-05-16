@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.notice">
+
+	
+	<resultMap id="notice" type="NoticeVO">
+		<result property ="notice_id"			column="NOTICE_ID"	/>
+		<result property ="title"				column="TITLE"	/>
+		<result property ="writer"				column="WRITER"	/>
+		<result property ="reg_date"			column="REG_DATE"	/>
+		<result property ="explanation"			column="EXPLANATION"	/>
+		<result property ="hits"				column="HITS"	/>
+		<result property ="use_yn"				column="USE_YN"	/>
+		<result property ="total_count"			column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	<!-- PJS 생성  -->
+	<!-- 2020-03-25 -->
+	<insert id="insertNoticeInfo" parameterType="NoticeVO">
+		<selectKey resultType="int"  keyProperty="notice_id" order="BEFORE"> 
+			SELECT IFNULL(MAX(NOTICE_ID),0)+1 FROM NOTICE
+		</selectKey> 
+		INSERT INTO NOTICE ( 
+			NOTICE_ID
+			,	TITLE
+			,	EXPLANATION
+		) 
+		VALUES (
+			#{notice_id} 
+			,	#{title} 
+			,	#{explanation}
+		);
+	</insert>
+	
+	
+	<insert id="insertRelativeFileInfo" parameterType="NoticeVO">
+		INSERT INTO NOTICE_FILE_RELATIVE ( 
+			NOTICE_ID
+			,	FILE_ID
+		) 
+		VALUES ( 
+			#{notice_id}
+			,	#{file_id}
+		);
+	</insert>
+	
+		
+	<update id="updateNoticeInfo" parameterType="NoticeVO">
+		UPDATE NOTICE SET   
+			TITLE = #{title}
+			,	REG_DATE = NOW()
+			,	EXPLANATION = #{explanation}
+		WHERE NOTICE_ID = #{notice_id}
+	</update>
+	
+	
+	<update id="deleteNoticeInfo" parameterType="NoticeVO">
+		UPDATE NOTICE SET   
+			USE_YN = 'N'
+		WHERE NOTICE_ID = #{notice_id}
+	</update>
+	
+	
+	<update id="updateHits" parameterType="NoticeVO">
+		UPDATE NOTICE SET   
+			HITS = HITS+1
+		WHERE NOTICE_ID = #{notice_id}
+	</update>
+	
+	
+	<select id="selectPagingList" parameterType="DataMap"  resultMap="notice">
+		<include refid="common.pagingPre"/>
+		SELECT
+			NOTICE_ID
+			, TITLE
+			, WRITER
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, EXPLANATION
+			, ATTACH_FILE_ID_1
+			, ATTACH_FILE_ID_2
+			, (SELECT B.NAME FROM UPLOAD_FILE B WHERE B.FIlE_ID = A.ATTACH_FILE_ID_1 ) AS ATTACH_FILE_NAME_1
+			, (SELECT B.NAME FROM UPLOAD_FILE B WHERE B.FIlE_ID = A.ATTACH_FILE_ID_2 ) AS ATTACH_FILE_NAME_2
+			, TYPE
+			, HITS
+			, MAIN_PAGE_YN
+		FROM
+			NOTICE A
+		WHERE
+			USE_YN = 'Y'
+		ORDER BY NOTICE_ID DESC
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<select id="selectDetail" parameterType="NoticeVO"  resultMap="notice">
+		SELECT
+			NOTICE_ID
+			, TITLE
+			, WRITER
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, EXPLANATION
+			, HITS
+		FROM NOTICE A
+		WHERE 
+			NOTICE_ID = #{notice_id}
+	</select>
+	
+	
+	<select id="selectSearchPagingList" parameterType="DataMap"  resultMap="notice">
+		<include refid="common.pagingPre"/>
+		SELECT
+			NOTICE_ID
+			, TITLE
+			, WRITER
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, EXPLANATION
+			, HITS
+		FROM
+			NOTICE A
+		WHERE
+			1 = 1
+			AND USE_YN = 'Y'
+			<if test='title != null and title != "" '>
+				AND TITLE LIKE CONCAT('%',#{title},'%')
+			</if>
+			
+			<if test='explanation != null and explanation != "" '>
+				AND EXPLANATION LIKE CONCAT('%',#{explanation},'%')
+			</if>
+			
+			<if test='titleExplanation != null and titleExplanation != "" '>
+				AND ( EXPLANATION LIKE CONCAT('%',#{titleExplanation},'%') OR TITLE LIKE CONCAT('%',#{titleExplanation},'%') )
+			</if>
+			
+			<if test='date_from != null and date_from != "" and date_to != null and date_to != "" '>
+	      		AND DATE_FORMAT(REG_DATE,'%Y-%m-%d') <![CDATA[ >= ]]>  #{date_from} AND DATE_FORMAT(REG_DATE,'%Y-%m-%d') <![CDATA[ <= ]]> #{date_to} 
+			</if>
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	
+	<update id="updateNoticeBlock" parameterType="String">
+		UPDATE NOTICE SET   
+			USE_YN = 
+				CASE 
+					WHEN (SELECT USE_YN FROM NOTICE WHERE NOTICE_ID = #{notice}) = 'Y'
+					THEN 'N'
+					ELSE 'Y'
+				END	
+		WHERE 
+			NOTICE_ID = #{notice}
+	</update>
+	
+	
+	<!-- PJS 생성  -->
+	<!-- 2020-03-28 -->
+	<select id="selectCountList" parameterType="Integer"  resultMap="notice">
+		SELECT
+			NOTICE_ID
+			, TITLE
+			, WRITER
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, EXPLANATION
+			, ATTACH_FILE_ID_1
+			, ATTACH_FILE_ID_2
+			, (SELECT B.NAME FROM UPLOAD_FILE B WHERE B.FIlE_ID = A.ATTACH_FILE_ID_1 ) AS ATTACH_FILE_NAME_1
+			, (SELECT B.NAME FROM UPLOAD_FILE B WHERE B.FIlE_ID = A.ATTACH_FILE_ID_2 ) AS ATTACH_FILE_NAME_2
+			, MAIN_PAGE_YN
+			, TYPE
+		FROM
+			NOTICE A
+		WHERE
+			USE_YN = 'Y' 
+			AND
+			TYPE = 'C0001'
+		ORDER BY NOTICE_ID DESC
+		LIMIT #{count}
+	</select>
+	
+	
+	
+	<select id="selectPreNextList" parameterType="DataMap"  resultMap="notice">
+		SELECT
+			NOTICE_ID
+			, TITLE
+			, WRITER
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+			, EXPLANATION
+			, ATTACH_FILE_ID_1
+			, ATTACH_FILE_ID_2
+			, USE_YN
+			, MAIN_PAGE_YN
+			, TYPE
+		FROM
+			NOTICE
+		WHERE 
+			1 = 1
+			<!--  Member Type - 'P'이면 Admin  -->
+			<if test='member_type != null and member_type != "P" '>
+				AND USE_YN = 'Y' AND TYPE = #{type}
+				AND NOTICE_ID IN (
+    				(SELECT NOTICE_ID FROM NOTICE WHERE NOTICE_ID <![CDATA[ < ]]> #{notice_id} AND TYPE = #{type} ORDER BY NOTICE_ID DESC LIMIT 1),
+    				(SELECT NOTICE_ID FROM NOTICE WHERE NOTICE_ID <![CDATA[ > ]]> #{notice_id} AND TYPE = #{type} ORDER BY NOTICE_ID LIMIT 1)
+  				)
+			</if>
+			
+			<if test='member_type != null and member_type == "P" '>
+				AND NOTICE_ID IN (
+    				(SELECT NOTICE_ID FROM NOTICE WHERE NOTICE_ID <![CDATA[ < ]]> #{notice_id} ORDER BY NOTICE_ID DESC LIMIT 1),
+    				(SELECT NOTICE_ID FROM NOTICE WHERE NOTICE_ID <![CDATA[ > ]]> #{notice_id} ORDER BY NOTICE_ID LIMIT 1)
+	  			)
+			</if>
+	</select>
+	
+	<update id="updateMainPageYN" parameterType="NoticeVO">
+		UPDATE NOTICE SET   
+			MAIN_PAGE_YN = #{main_page_yn}
+		WHERE 
+			NOTICE_ID = #{notice_id}
+	</update>
+	
+	
+	<select id="selectRelativeFileInfo" parameterType="NoticeVO" resultType="int">
+		SELECT
+			FILE_ID
+		FROM
+			NOTICE_FILE_RELATIVE
+		WHERE
+			NOTICE_ID = #{notice_id} 
+	</select>
+	
+	<delete id="deleteRelativeInfoWithFileId" parameterType="NoticeVO">
+		DELETE FROM NOTICE_FILE_RELATIVE			
+		WHERE 
+			FILE_ID IN
+			<foreach collection="delete_file_list" item="file_id" separator="," open="(" close=")" >
+				#{file_id}
+			</foreach>
+	</delete>
+	
+	<delete id="deleteRelativeInfo" parameterType="NoticeVO">
+		DELETE FROM NOTICE_FILE_RELATIVE			
+		WHERE 
+			NOTICE_ID = #{notice_id} 
+	</delete>
+	
+</mapper>

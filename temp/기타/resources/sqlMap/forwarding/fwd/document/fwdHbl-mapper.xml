@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.document.fwdHbl">
+
+
+    <!-- I고객사인터페이스관리Mgr.LGCHBL운임상세등록 -->
+    <update id="updateHblCustSendYn" parameterType="dataItem" >
+        /* fwd.document.fwdHbl.updateHblCustSendYn */
+	    UPDATE  TB_FWD_BL_EXPND
+        SET     BL_CUST_SEND_YN    = 'Y'
+                ,UPD_DT             = NOW()
+                ,UPDR_ID            = #{updrId}
+        WHERE   BL_ID = (
+                            SELECT A.BL_ID
+                            FROM   TB_FWD_BL A
+	                        WHERE  A.BL_ID = #{blId}
+	                        AND    A.BL_SPR_CD IN ('H','D')
+	                        AND    A.DEL_YN = 'N'
+                         )
+    </update>
+
+    <!-- IHBLMgr.BL상태수정 -->
+    <update id="updateBlStat" parameterType="dataItem" >
+        /* fwd.document.fwdHbl.updateBlStat */
+        UPDATE TB_FWD_BL
+	    SET    BL_STAT_CD = #{statCd}
+	           , BL_STAT_YN = #{closYn}
+	           , UPD_DT     = NOW()
+	    WHERE  BL_ID = #{blId}
+    </update>
+    
+    
+    <!-- IHBLMgr.EDMS연계기본정보조회 -->
+    <select id="selectEdmsReltBasisInfo" parameterType="dataItem" resultType="dataItem">
+        /* fwd.blmgnt.fwdBlComnMgnt.selectEdmsReltBasisInfo */
+		SELECT A.SMT_NO
+	           , A.EO_NO
+	           , A.BL_NO
+	           , A.BL_SPR_CD
+	           , B.CHG_BF_BL_NO
+        FROM   TB_FWD_BL A
+	           INNER JOIN TB_FWD_BL_EXPND B ON B.BL_ID = A.BL_ID
+        WHERE  
+        AND    A.BL_ID = #{blId}
+        AND    A.DEL_YN = 'N'
+    </select>
+
+
+
+
+    
+</mapper>

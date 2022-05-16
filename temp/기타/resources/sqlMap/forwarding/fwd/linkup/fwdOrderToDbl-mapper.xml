@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.linkup.fwdOrderToDbl">
+     
+    
+    <select id="selectFwdOrderToDblCheckDbl" parameterType="dataItem" resultType="dataItem">
+        SELECT IFNULL(MAX(X.BL_ID),'X') AS CHK_NON_EXCT_BL_YN
+		  FROM TB_FWD_BL X
+		 WHERE X.NON_EXCT_BL_YN = 'Y' 
+		     AND X.BL_ID = #{blId} 
+    </select> 
+
+     
+     
+    <update id="updateFwdOrderToDblSdblBookingInfo" parameterType="dataItem" >
+    /*fwd.linkup.fwdOrderToDbl.updateSdblBookingInfo*/
+			UPDATE  TB_FWD_BL
+			   SET  UPDR_ID = #{userId}
+			        ,UPD_DT      = NOW() 
+			        ,ONBR_YMD    = #{onbrYmd}
+			        ,ARR_YMD     = #{arrYmd}
+                    ,ETA_YMD     = #{etaYmd} 
+                    ,FLT_VSL_NM  = #{fltVslNm} 
+                    ,VOYAGE      = #{voyage} 
+		   	   WHERE BL_ID = #{blId}
+    </update>
+    
+    
+    
+</mapper>

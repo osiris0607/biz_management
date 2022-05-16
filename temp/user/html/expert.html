@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />		
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>
+	</head>
+
+    <body>
+        <div id="wrap">
+			<div id="skip_nav">  
+				<!--a href="#nav" title="메인메뉴 바로가기">메인메뉴 바로가기</a-->
+				<a href="#content" title="본문내용 바로가기">본문내용 바로가기</a>
+			</div>
+			<!--팝업-->
+			<!--아이디 중복 팝업-->
+			<div class="expert_certification_popup_box">
+				<div class="popup_bg"></div>
+				<div class="expert_certification_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">본인인증 안내</h4>
+						<a href="javascript:void(0)" title="닫기" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<div class="popup_txt_areabg">
+							<p tabindex="0"><span class="font_blue">본인 인증이</span> 완료되었습니다.</p>	
+							<!--p tabindex="0">입력하신 <span class="font_blue">000</span> 아이디는 사용이 가능합니다.</p-->
+						</div>						
+						<div class="popup_button_area_center">
+							<button type="button" class="blue_btn popup_close_btn" title="확인" onclick="location.href='./expert_certification.html'">확인</button>
+						</div>
+					</div>						
+				</div> 
+			</div>
+			<!--//아이디 중복 팝업-->
+			<!--//팝업-->
+
+			<div id="container">
+				<div class="content_area login_area_box">
+					<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="logo">
+						<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템"></h1>
+					</a>
+				</div>
+				<p class="ta_c header_logo_p">사업평가 · 관리시스템입니다.</p>
+				<section id="content">
+					<div id="sub_contents">						
+					    <div class="content_area login_box_area expert_box">
+						<h2>서울기술연구원 신기술접수소의 전문가 등록</h2>		
+						<img src="../images/sub/expert_add_bg.png" alt="기존 전문가" />												
+						<div class="user_box mb50">
+							<ul class="clearfix">
+								<li>
+									<a href="" class="existing_expert">
+										<span class="title">기존 전문가</span>
+										<img src="../images/sub/expert_existing_img.png" alt="기존 전문가" />
+										<p>기존 전문가분께서는 이메일 주소로 조회하여<br /> 본인인증 후 정보를 업데이트 해주세요.</p>
+										<div class="search_expert_btn gray_btn2 w80" style="margin: auto;padding: 7px 0 0 0;">조회</div>
+									</a>										
+								</li>
+								<li>
+									<a href="" class="new_expert">
+										<span class="title">신규 전문가</span>
+										<img src="../images/sub/expert_new_img.png" alt="신규 전문가" />
+										<p>신규 전문가 신청을 하시는 경우<br /> 본인인증을 하시면 등록이 가능합니다.</p>
+										<div class="search_expert_btn blue_btn2 w80" style="margin: auto;padding: 7px 0 0 0;">등록</div>
+									</a>
+								</li>									
+							</ul>
+						</div>
+						
+						<div class="existing_expert_box" style="display:none">
+								<div class="info_txt">
+									<p>※ 기존 전문가분께서는 <span class="font_blue">이름, 핸드폰번호 및 이메일 주소</span>로 조회하여 <span class="font_blue">본인인증</span> 후 정보를 업데이트 해주세요.</p>						
+								</div>
+								<h4 class="ta_l">전문가 조회</h4>
+								<div class="search_area">
+									<dl class="search_box">
+										<dt class="hidden">검색대상</dt>
+										<dd class="box">
+											<label for="expert_email" class="fl">구분</label>
+											<select id="expert_email" class="in_wp150 fl ace-select ls">
+												<option value="이름">이름</option>
+												<option value="휴대전화">휴대전화</option>
+												<option value="이메일">이메일</option>
+											</select>
+											
+											<div class="input_search_box fl w77">
+												<label for="input_txt2" class="hidden">검색어 입력</label>
+												<input id="input_txt2" class="w83 fl ml10 mr5" name="input_txt" type="text" placeholder="검색어를 입력하세요.">
+												<div class="fr clearfix">
+													<button type="button" class="search_txt_del2 fl" title="검색어 삭제"><img src="../images/icon/search_txt_del.png" alt="검색어 삭제 버튼"></button>	
+													<button type="submit" class="serch_btn blue_btn fl mr20" title="검색">검색</button>	
+												</div>	
+											</div>										
+										</dd>
+									</dl>								
+								</div>
+								
+								<!--전문가 조회 결과-->
+								<h4 class="ta_l" style="margin-top: 70px !important;">전문가 조회 결과</h4>
+								<P class="ta_l w100">- 해당되는 본인 정보를 선택한 후 <span class="font_blue">본인인증</span>을 진행해주세요. </P>
+								<div class="table_area">
+									<table class="list fixed expert_table">
+										<caption>전문가 조회 결과</caption>
+										<colgroup>
+											<col style="width: 5%;">											
+											<col style="width: 15%;">
+											<col style="width: 15%;">
+											<col style="width: 5%;">
+											<col style="width: 15%;">
+											<col style="width: 20%;">
+											<col style="width: 10%;">
+											<col style="width: 15%;">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col" colspan="8">전문가 정보</th>
+											</tr>
+											<tr>
+												<th scope="col" class="ta_c">&nbsp;</th>												
+												<th scope="col">기관명</th>
+												<th scope="col">학과(부서)</th>
+												<th scope="col">성명</th>
+												<th scope="col">연구분야</th>
+												<th scope="col">국가과학 기술분류</th>
+												<th scope="col">휴대전화</th>
+												<th scope="col" class="last">이메일</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="first">
+													<input type="radio" id="checkbox0" class="fl checkbox_" name="radio_check">
+													<label for="checkbox0" class="checkbox_label">&nbsp;</label></td>											
+												<td><span>서울대학교</span></td>
+												<td><span>가나다라가나다라가나다라부서</span></td>
+												<td><span>홍길동</span></td>
+												<td><span>연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야연구분야</span></td>											
+												<td><span class="d_ib">대분류</span> > <span class="d_ib">중분류</span> > <span class="d_ib">소분류</span></td>
+												<td class="ls"><span>010-****-5678</span></td>
+												<td class="last ls""><span>manager@innothink.krmanager@innothink.kr</span></td>
+											</tr>	
+											<tr>
+												<td class="first">
+													<input type="radio" id="checkbox1_1" class="fl checkbox_" name="radio_check">
+													<label for="checkbox1_1" class="checkbox_label">&nbsp;</label>
+												</td>												
+												<td><span>서울대학교</span></td>
+												<td><span>--</span></td>
+												<td><span>홍길동</span></td>
+												<td><span>00</span></td>											
+												<td><span class="d_ib">대분류</span> > <span class="d_ib">중분류</span> > <span class="d_ib">소분류</span></td>
+												<td class="ls"><span>010-****-5678</span></td>
+												<td class="last ls"><span>manager@innothink.kr</span></td>
+											</tr>	
+											<tr>
+												<td class="first">
+													<input type="radio" id="checkbox1_2" class="fl checkbox_" name="radio_check">
+													<label for="checkbox1_2" class="checkbox_label">&nbsp;</label>
+												</td>												
+												<td><span>서울대학교</span></td>
+												<td><span>--</span></td>
+												<td><span>홍길동</span></td>
+												<td><span>00</span></td>											
+												<td><span class="d_ib">대분류</span> > <span class="d_ib">중분류</span> > <span class="d_ib">소분류</span></td>
+												<td class="ls"><span>010-****-5678</span></td>
+												<td class="last ls"><span>manager@innothink.kr</span></td>
+											</tr>												
+											<tr>
+												<td class="first">
+													<input type="radio" id="checkbox1_3" class="fl checkbox_" name="radio_check">
+													<label for="checkbox1_3" class="checkbox_label">&nbsp;</label>
+												</td>												
+												<td><span>서울대학교</span></td>
+												<td><span>--</span></td>
+												<td><span>홍길동</span></td>
+												<td><span>00</span></td>											
+												<td><span class="d_ib">대분류</span> > <span class="d_ib">중분류</span> > <span class="d_ib">소분류</span></td>
+												<td class="ls"><span>010-****-5678</span></td>
+												<td class="last ls"><span>manager@innothink.kr</span></td>
+											</tr>
+											<tr>
+												<td class="first">
+													<input type="radio" id="checkbox1_4" class="fl checkbox_" name="radio_check">
+													<label for="checkbox1_4" class="checkbox_label">&nbsp;</label>
+												</td>											
+												<td><span>서울대학교</span></td>
+												<td><span>--</span></td>
+												<td><span>홍길동</span></td>
+												<td><span>00</span></td>											
+												<td><span class="d_ib">대분류</span> > <span class="d_ib">중분류</span> > <span class="d_ib">소분류</span></td>
+												<td class="ls"><span>010-****-5678</span></td>
+												<td class="last ls"><span>manager@innothink.kr</span></td>
+											</tr>	
+										</tbody>
+									</table>
+									<div class="paging_area">
+										<a href="" class="stimg" title="맨처음 페이지로 이동"><img src="../images/icon/btn_paging_first.png" alt="맨처음 페이지로 이동" /></a>
+										<a href="" class="stimg" title="전 페이지로 이동"><img src="../images/icon/btn_paging_prev.png" alt="전 페이지로 이동" /></a>
+										<strong>1</strong>
+										<a href="">2</a>
+										<a href="">3</a>
+										<a href="">4</a>
+										<a href="">5</a>
+										<a href="">6</a>
+										<a href="">7</a>
+										<a href="">8</a>
+										<a href="">9</a>
+										<a href="">10</a>
+										<a href="" class="stimg" title="다음 페이지로 이동"><img src="../images/icon/btn_paging_next.png" alt="다음 페이지로 이동" /></a>
+										<a href="" class="stimg" title="맨마지막 페이지로 이동"><img src="../images/icon/btn_paging_last.png" alt="맨마지막 페이지로 이동" /></a>
+									</div>
+									<div class="clearfix mb50 certification">
+										<button type="button" class="blue_btn mt10 fr phone_certification_btn" title="본인인증">본인인증</button>
+									</div>
+								</div>
+							</div>
+							<!--//기존 전문가-->
+
+							<!--신규 전문가-->
+							<div class="new_expert_box" style="display:none">
+							<!--div class="data_null ta_c">조회된 내용이 없습니다.</div-->								
+								<!--//전문가 조회 결과-->
+								<div class="info_txt mb10">
+									<p class="new_expert_title">신규 전문가 신청을 하시는 경우 <span class="font_blue">본인인증</span>을 하시면 등록이 가능합니다.</p>
+								</div>
+								<!--전문가 본인 인증-->
+								<div class="phone_certification ta_l">
+									<h5>전문가 본인인증</h5>
+									<p style="margin-left:86px;margin-bottom:0">본인 명의로 등록된 휴대폰으로 본인인증 해주시기 바랍니다.</p>
+									<button type="button" class="blue_btn3 mt10" title="휴대폰 인증하기">휴대폰 인증하기</button>
+									<!--button type="button" class="blue_btn3" title="휴대폰 인증하기">인증 완료</button-->
+								</div>	
+								<!--//전문가 본인 인증-->
+							</div>	
+							<!--//신규 전문가-->
+							
+						</div>
+					</div>								
+				</section>
+			</div>
+		</div>
+		<script src="../js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.blmgnt.fwdBlspclbizMgt"> 
+
+    <select id="selectExpLiceInsYn" parameterType="dataItem" resultType="dataItem">
+	    /* fwd.blmgnt.fwdBlspclbizMgt.selectExpLiceInsYn */
+	    SELECT COUNT(B.BL_ID) EXP_CNT
+	      FROM TB_FWD_BL A
+	INNER JOIN TB_FWD_BL_EXP_LICE B
+	        ON A.BL_ID = B.BL_ID
+	     WHERE B.DEL_YN  = 'N'
+	       AND A.BL_ID   = #{blId}
+	       AND B.EXP_LICE_NO IS NOT NULL
+	     <if test='expLiceNo != null and expLiceNo != ""'>
+	       AND  B.EXP_LICE_NO = #{expLiceNo}
+	     </if>
+    </select>
+         
+</mapper>

@@ -1,0 +1,80 @@
+AnchorData
+
+
+	* DB 계정
+
+
+            - 103.55.191.104
+            - 3306
+            - root / Anchordb0914@
+            - anchor / Anchoruser0914@
+
+	* 
+터미널 접속 계정
+
+
+            - 103.55.191.104 
+            - SSH 접속
+            - root / 앵커0914@
+            - anchor / anchor0914
+
+	* 
+SVN 접속
+
+
+            - svn://103.55.191.104/repos/
+            - 계정은 본인들 계정
+            - oz / 94038376
+
+	* 
+Sample Soruce : svn://103.55.191.104/repos/anchor/sample
+
+
+
+
+
+AnchorData - 서기연
+기타 사항
+	1. 공공클라우드  https://orgcloud.gabia.com
+
+                - ID / PWD :  innotech0941 / sit1234!!
+
+DB: 45.115.152.68 : 패스워드 변경 하라고 하는데 해도 되나?
+- OS: Centos-7
+- PW(root): sitdb1234!!
+- DB: Mariadb-5.5.63
+-계정 : sit / chungdaminc00@@
+
+
+비즈사이렌 아이디,비번 알려드립니다.
+id : SAOQ001
+pwd : AA0917
+localhost servNm : 010002
+anchorData servNm : 011001
+
+Web: 45.115.152.108
+- 계정 : root / sit@WebAccount20221
+
+DB : 45.115.152.68
+- 계정 : root / sit@AccountDB20210823
+
+2.  이전 로그인 URL                - http://seoul-tech.com/user/login.do
+
+
+AnchorData - 애기평
+
+접속 정보
+	* 가비아 
+
+		* 접속 정보
+
+                        - ketep001                        - Ktp0504!@           서버 아이피 : 139.150.76.4
+
+		* 터미널 접속 정보
+
+                        - root /  ketep0504!@                        - ketep /  userketep0504!@-
+	* DB 정보
+
+            - root / Ketepdb0504!@            - ketep / Ketepdbuser0504!@
+
+ssl 비밀번호 : ketep0504

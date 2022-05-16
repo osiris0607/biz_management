@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="신기술접수소 사업평가관리시스템" />
+		<meta name="keywords" content="신기술 접수소, 서울 신기술 사업평가관리" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="신기술접수소 사업평가관리시스템 사이트" />
+		<meta property="og:url" content="" />
+		<meta property="og:description" content="신기술접수소 사업평가관리시스템" />
+		<title>신기술접수소 사업평가·관리 시스템</title>		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/lib/jquery-ui.min.css" />
+		<!--sign-->
+		<link rel="stylesheet" type="text/css" href="../css/lib/jquery.signaturepad.css" />	
+		<script src="../js/lib/jquery-3.3.1.min.js"></script>
+		<script src="../js/lib/all.min.js"></script>		
+		<script src="../js/lib/jquery.nice-select.min.js"></script>			
+		<script src="../js/lib/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!-- skip_nav --> 
+			<div id="skip_nav">  
+				<a href="#nav">메인메뉴 바로가기</a>
+				<a href="#content">본문내용 바로가기</a>
+			</div>
+			<!-- //skip --> 
+			<!--팝업-->
+			<!--로그아웃 팝업-->
+			<div class="logout_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="logout_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">로그 아웃</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">로그아웃</span> 하시겠습니까?</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="blue_btn mr5" onclick="location.href='./login.html'">예</button>
+							<button type="button" class="gray_btn lastClose layerClose">아니요</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//로그아웃 팝업-->
+			
+			<!--제출하기 팝업-->
+			<div class="agreement_send_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="agreement_send_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">제출 안내</h4>							
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">						
+						<div class="popup_titlebox_txt">
+							<p><span class="font_blue">[예]</span> 버튼을 누르면 제출이 완료되며, 수정은 불가능합니다.</p>							
+							<p>제출 완료 후에는 제출완료 상태이며, 담당자가 제출서류를 확인하여 이상이 없을 경우, <br />
+								완료될 예정입니다.</p>
+							<p class="font_blue fz_b"><span class="fw500 font_blue">제출하시겠습니까?</span></p>
+						</div>
+					    <div class="popup_button_area_center">
+							<button type="submit" class="blue_btn mr5 ok_btn">예</button>
+							<button type="button" class="gray_btn lastClose layerClose popup_close_btn">아니요</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//제출하기 팝업-->
+
+			
+
+			
+
+			<!--임시저장 팝업-->
+			<div class="save_popup2_box">		
+				<div class="popup_bg"></div>
+				<div class="save_popup2_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">임시저장 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">임시저장</span> 되었습니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//임시저장 팝업-->
+
+			<!--접수완료 팝업-->
+			<div class="save_popup_box">		
+				<div class="popup_bg"></div>
+				<div class="save_popup_popup">
+					<div class="popup_titlebox clearfix">
+						<h4 class="fl">접수완료 안내</h4>
+			            <a href="javascript:void(0)" title="닫기" class="white_font close_btn logout_popup_close_btn popup_close_btn fr"><i class="fas fa-times"></i><span class="hidden">닫기</span></a>
+					</div>					
+					<div class="popup_txt_area">
+						<p tabindex="0"><span class="font_blue">접수완료</span> 되었습니다.</p>
+					    <div class="popup_button_area_center">
+							<button type="button" class="gray_btn popup_close_btn">닫기</button>
+						</div>	
+					</div>									
+				</div> 
+			</div>
+			<!--//접수완료 팝업-->
+
+			
+
+			<!-- header -->
+			<div id="header">
+				<header>			
+					<!-- hsection -->
+					<div class="hsection">
+						<div class="clearfix">
+							<ul class="fl member_class clearfix">
+								<li class="active"><a href="./" title="연구자">연구자</a></li>
+								<!--<li><a href="./member_signup_agreement.html" title="평가위원 등록">평가위원 등록</a></li>-->
+								<li><a href="./estimation_list.html" title="평가위원">평가위원</a></li>
+								<!--<li><a href="#">전문가</a></li>-->
+							</ul>
+							<ul class="fr top_area">
+								<li>
+									<!--a href="./login.html" title="기업 로그인" class="clearfix">
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="기업 로그인" /><span class="fl">기업 로그인</span>
+									</a-->
+								</li>
+								<li class="login_area">						
+									<!--a href="" title="로그아웃" class="openLayer logout_pop_open">
+										<img src="../images/icon/icon_logout.png" class="fl top_img" alt="로그아웃"><span class="fl">로그아웃</span>
+									</a-->
+									<!--로그인-->
+									<a href="./login.html" title="로그아웃" class="clearfix">
+										<!--최초 로그인팝업-->
+										<!--a href="./login.html" title="로그아웃" class="clearfix login_first_popup_open"-->
+										<img src="../images/icon/icon_login_company.png" class="fl top_img" alt="로그인" /><span class="fl">로그인</span>
+									</a>									
+								</li>
+								<!--li>
+									<a href="./mypage_company.html" title="마이페이지" class="clearfix">
+										<img src="../images/icon/icon_mypage.png" class="fl top_img" alt="마이페이지" /><span class="fl">마이페이지</span>
+									</a>
+								</li-->
+								<li>
+									<a href="./member_signup.html" title="회원가입" class="clearfix">
+										<img src="../images/icon/icon_member_sign.png" class="fl top_img" alt="회원가입" /><span class="fl">회원가입</span>
+									</a>
+								</li>
+								<!--li>
+									<a href="" title="전체메뉴" class="clearfix">
+										<img src="../images/icon/icon_menu.png" class="fl top_img" alt="전체메뉴" /><span class="fl">전체메뉴</span>
+									</a>
+								</li-->
+							</ul>
+						</div>
+					</div>
+					<!--// hsection -->
+					
+					<!-- nav -->
+					<div id="nav">
+						<div class="gnb clearfix">
+							<a href="./index.html" title="신기술접수소 사업평가·관리 시스템 홈페이지 이동" class="fl logo">
+								<h1 class="home_logo"><img src="../images/main/logo.png" alt="신기술접수소 사업평가·관리 시스템" /></h1>
+							</a>
+							<nav>
+								<ul class="menu fl">
+									<li><a href="./announcement.html" title="공고"><span>공고</span></a></li>
+									<li><a href="./reception.html" title="접수"><span>접수</span></a></li>
+									<li><a href="./agreement.html" title="협약"><span>협약</span></a></li>
+									<li><a href="./execute.html" title="수행"><span>수행</span></a></li>
+									<li><a href="./estimation.html" title="평가"><span>평가</span></a></li>
+									<li><a href="./compute.html" title="정산"><span>정산</span></a></li>
+									<li><a href="./information.html" title="알림·정보"><span>알림·정보</span></a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--// nav -->
+				</header>
+			</div>
+			<!--// header -->			
+			<!-- container -->
+			<div id="container" class="mb50">
+				<h2 class="hidden">서브 컨텐츠 화면</h2>					
+				<section id="content">
+					<div id="sub_contents">
+					    <div class="content_area">
+							<h3>협약</h3>
+							<div class="route hidden">
+								<ul class="clearfix">
+									<li><i class="fas fa-home">홈</i></li>
+									<li>협약</li>
+									<li>협약</li>
+								</ul>
+							</div>
+							
+							
+							<!--기관-->
+							<div class="content_area copmpany_area agreement_send_view2" id="copmpany_area">													
+								<div class="table_area">
+									<h4>과제 정보</h4>	
+									<!--과제 정보-->
+									<table class="write fixed assignment_info">
+										<caption>과제 정보</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>	
+											<tr>
+												<th scope="row">과제번호</th>
+											    <td><span>A1234567</span></td> 
+										    </tr>
+										    <tr>
+												<th scope="row">사업명</th>
+											    <td><span>기술제안</span></td> 
+										    </tr>																	       
+											<tr>
+												<th scope="row">공고명</th>
+											    <td><span>기술제안</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">기술명</th>
+											    <td><span>기술명</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">연구기관/연구책임자</th>
+											    <td><span class="fl">연구기관</span> <span class="fl ml5 mr5">/</span> <span class="fl">홍길동</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">연구기간</th>
+											    <td><span class="fl">2021</span><span class="fl">-</span><span class="fl">09</span><span class="fl">-</span><span class="fl">17</span><span class="fl ml5 mr5">~</span><span class="fl">2021</span><span class="fl">-</span><span class="fl">09</span><span class="fl">-</span><span class="fl">17</span></td> 
+											</tr>
+											<tr>
+											    <th scope="row">연구비</th>
+											    <td><span class="fl mr5">200,000,000</span><span class="fl">(만원)</span></td> 
+											</tr>
+										</tbody>
+							        </table>
+									<!--//과제 정보-->								    
+									
+									<!--기관정보-->
+									<div class="clearfix">
+										<h4 class="fl sub_title_h4">기관 정보</h4>	
+										<button type="button" class="blue_btn fr mt10 assignment_info_btn fr mt50">수정</button>
+									</div>
+								    <table class="write fixed assignment_info">
+										<caption>기관 정보</caption> 
+										<colgroup>
+										    <col style="width: 20%">
+										    <col style="width: 80%">
+										</colgroup>
+										<tbody>		
+										    <tr>
+												<th scope="row"><label for="li_number">사업자등록번호</label></th>
+												<td class="clearfix">										
+													<input type="text" class="form-control w_18" id="li_number" maxlength="10" />				
+													<script>
+														//사업자등록번호 자동입력(-)	
+														function licenseNum(str){
+														  str = str.replace(/[^0-9]/g, '');
+														  var tmp = '';
+														  if(str.length < 4){
+															  return str;
+														  }else if(str.length < 7){
+															  tmp += str.substr(0, 3);
+															  tmp += '-';
+															  tmp += str.substr(3);
+															  return tmp;
+														  }else{             
+															  tmp += str.substr(0, 3);
+															  tmp += '-';
+															  tmp += str.substr(1, 2);
+															  tmp += '-';
+															  tmp += str.substr(5);
+															  return tmp;
+														  }
+														  return str;
+														}
+													 
+														var li_number = document.getElementById("li_number");
+														li_number.onkeyup = function(event){
+															   event = event || window.event;
+															   var _val = this.value.trim();
+															   this.value = licenseNum(_val) ;
+														};
+													</script>			
+												</td> 
+										    </tr>															       
+										    <tr>
+												<th scope="row"><label for="agreement_company_name">기관명</label></th>
+												<td><input type="text" id="agreement_company_name" class="form-control w40" /></td>
+										    </tr>
+										    <tr>
+												<th scope="row">주소</th>
+												<td>
+													<input type="text" id="member_address" class="form-control w50 fl mr5" disabled />
+													<input type="text" class="form-control w30 fl mr5">
+													<button type="button" class="gray_btn2 adress_btn">검색</button>
+												</td>
+										    </tr>
+										    <tr>
+												<th scope="row"><label for="mypage_company_company_tel">전화</label></th>
+												<td>
+													<select name="mypage_company_company_tel" id="mypage_company_company_tel" class="w_8 fl ace-select">
+														<option value="031">031</option>
+														<option value="02">02</option>
+													</select>
+													<span style="display:block;" class="fl mc8">-</span>
+													<label for="mypage_company_company_tel2" class="hidden">전화</label>
+													<input type="tel" id="mypage_company_company_tel2" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls" />
+													<span style="display:block;" class="fl mc8 ls">-</span>
+													<label for="mypage_company_company_tel3" class="hidden">전화</label>
+													<input type="tel" id="mypage_company_company_tel3" maxlength="4" class="form-control brc-on-focusd-inline-block w_6 fl ls" />
+												</td> 
+										    </tr>
+										    <tr>
+												<th scope="row"><label for="agreement_company_ceo_name">대표자명</label></th>
+												<td><input type="text" id="agreement_company_ceo_name" class="form-control w_18" /></td> 
+										    </tr>
+										    <tr>
+												<th scope="row"><label for="agreement_company_sectors">업종</label></th>
+												<td><input type="text" id="agreement_company_sectors" class="form-control w_40" /></td> 
+										    </tr>
+										    <tr>
+												<th scope="row"><label for="agreement_company_business_class">업태</label></th>
+												<td><input type="text" id="agreement_company_business_class" class="form-control w_40" /></td> 
+										    </tr>
+										    <tr>
+												<th scope="row"><label for="join_datepicker">설립일</label></th>
+												<td>
+													<div class="datepicker_area fl mr5">
+														<input type="text" id="join_datepicker" class="datepicker form-control w_14 mr5 ls" />
+													</div>
+												</td> 
+											</tr>
+											<tr>
+												<th scope="row">설립 구분</th>
+												<td>
+													<input type="radio" id="mypage_company_classification_of_establishment1" name="mypage_company_classification_g" value="1" checked />
+													<label for="mypage_company_classification_of_establishment1">영리</label>
+													<input type="radio" id="mypage_company_classification_of_establishment2" name="mypage_company_classification_g" value="1" />
+													<label for="mypage_company_classification_of_establishment2">비영리</label>								
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">기업 분류</th>
+												<td>
+													<input type="radio" id="mypage_company_class1" name="mypage_company_class_g" />
+													<label for="mypage_company_class1">대기업</label>
+													<input type="radio" id="mypage_company_class2" name="mypage_company_class_g" />
+													<label for="mypage_company_class2">중견기업</label>	
+													<input type="radio" id="mypage_company_class3" name="mypage_company_class_g" checked />
+													<label for="mypage_company_class3">중소기업</label>
+													<input type="radio" id="mypage_company_class4" name="mypage_company_class_g" />
+													<label for="mypage_company_class4">기타</label>	
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">기업 유형</th>
+												<td>
+													<input type="radio" id="mypage_company_other_class1" name="mypage_company_other_class_g" />
+													<label for="mypage_company_other_class1">여성기업</label>
+													<input type="radio" id="mypage_company_other_class2" name="mypage_company_other_class_g" />
+													<label for="mypage_company_other_class2">장애인기업</label>	
+													<input type="radio" id="mypage_company_other_class3" name="mypage_company_other_class_g" />
+													<label for="mypage_company_other_class3">사회적기업</label>
+													<input type="radio" id="mypage_company_other_class4" name="mypage_company_other_class_g" checked /> 
+													<label for="mypage_company_other_class4">해당 없음</label>	
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">기업부설연구소 유무</th>
+												<td>
+													<input type="radio" id="mypage_company_or_lab1" name="mypage_company_or_lab_g" checked />
+													<label for="mypage_company_or_lab1">있음</label>
+													<input type="radio" id="mypage_company_or_lab2" name="mypage_company_or_lab_g" />
+													<label for="mypage_company_or_lab2">없음</label>	
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--//기관정보-->
+
+									<!--주관기관-->
+									<!--연구책임자 정보(주관기관)-->
+									<div class="view_top_area section1">
+										<div class="section_title">주관기관</div>							    
+										<div class="view_top_area clearfix">
+											<h4 class="fl sub_title_h4">연구책임자 정보</h4>
+										</div>
+										<div class="table_area">
+											<table class="write fixed list responsible">
+												<caption>연구책임자 정보</caption> 
+												<colgroup>
+												   <col style="width: 3%">
+												   <col style="width: 5%">
+												   <col style="width: 10%">
+												   <col style="width: 8%">
+												   <col style="width: 6%">
+												   <col style="width: 6%">
+												   <col style="width: 8%">
+												   <col style="width: 8%">
+												   <col style="width: 26%">
+												   <col style="width: 4%">
+												   <col style="width: 8%">
+												   <col style="width: 8%">
+												</colgroup>
+												<thead>
+												   <tr>
+													   <th scope="col">번호</th>
+													   <th scope="col">구분</th>
+													   <th scope="col">기관명</th>
+													   <th scope="col">부서</th>
+													   <th scope="col">직책</th>
+													   <th scope="col">성명</th>
+													   <th scope="col">생년월일</th>
+													   <th scope="col">휴대전화</th>
+													   <th scope="col">이메일</th>
+													   <th scope="col">참여율</th>
+													   <th scope="col">참여시작일</th>
+													   <th scope="col">참여종료일</th>
+												   </tr>
+												</thead>
+												<tbody>								       
+												   <tr>
+														<td>1</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_companyname" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_companypartname" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_companypositionname" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_name" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_birthday" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_phoneNumber" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w70 onlynum ls fl mr5" id="responsible_percent" maxlength="3" /><span class="
+														fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_startday" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_endday" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+												   </tr>
+												</tbody>
+											</table>
+										</div>
+										<!--//연구책임자 정보(주관기관)-->
+										
+										<!-- 참여연구원 정보-->
+										<div class="view_top_area clearfix">
+										   <h4 class="fl sub_title_h4">참여 연구원 정보</h4>
+										</div>
+										<div class="table_area" style="overflow-x: scroll;">
+											<table class="write fixed list chamyeo">
+												<caption>참여 연구원 정보</caption> 
+												<colgroup>
+												   <col style="width: 3%">
+												   <col style="width: 4%">
+												   <col style="width: 8%">
+												   <col style="width: 8%">
+												   <col style="width: 6%">
+												   <col style="width: 6%">
+												   <col style="width: 8%">
+												   <col style="width: 7%">
+												   <col style="width: 24%">
+												   <col style="width: 4%">
+												   <col style="width: 8%">
+												   <col style="width: 8%">
+												   <col style="width: 6%">
+												</colgroup>
+												<thead>
+												   <tr>
+													   <th scope="col">번호</th>
+													   <th scope="col">구분</th>
+													   <th scope="col">기관명</th>
+													   <th scope="col">부서</th>
+													   <th scope="col">직책</th>
+													   <th scope="col">성명</th>
+													   <th scope="col">생년월일</th>
+													   <th scope="col">휴대전화</th>
+													   <th scope="col">이메일</th>
+													   <th scope="col">참여율</th>
+													   <th scope="col">참여시작일</th>
+													   <th scope="col">참여종료일</th>
+													   <th scope="col">역할</th>
+												   </tr>
+												</thead>
+												<tbody>								       
+												   <tr>
+														<td>1</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname1" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname1" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname1" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name1" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday1" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber1" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td>
+															<input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent1" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday1" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday1" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role1" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>2</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname2" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname2" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname2" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name2" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday2" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber2" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td>
+															<input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent2" maxlength="3" /><span class="fl mt5">%</span>
+														</td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday2" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday2" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role2" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>3</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname3" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname3" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname3" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name3" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday3" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber3" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent3" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday3" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday3" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role3" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>4</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname4" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname4" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname4" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name4" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday4" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber4" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent4" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday4" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday4" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role4" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>5</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname5" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname5" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname5" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name5" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday5" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber5" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent5" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday5" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday5" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role5" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>6</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname6" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname6" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname6" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name6" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday6" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber6" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />								
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent6" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday6" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday6" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role6" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>7</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname7" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname7" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname7" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name7" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday7" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber7" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent7" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday7" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday7" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role7" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>8</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname8" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname8" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname8" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name8" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday8" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber8" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent8" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday8" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday8" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role8" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>9</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname9" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname9" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname9" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name9" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday9" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber9" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent9" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday9" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday9" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role9" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>10</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companyname10" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypartname10" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_companypositionname10" /></td>
+														<td><input type="text" class="form-control w100" id="responsible_chamyeo_name10" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_birthday10" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="responsible_chamyeo_phoneNumber10" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="responsible_chamyeo_percent10" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="responsible_chamyeo_startday10" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="responsible_chamyeo_endday10" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="responsible_chamyeo_role10" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												</tbody>
+											</table>
+										</div>
+										<!-- //참여연구원 정보-->										
+									</div>								
+									<!--//주관기관-->
+									
+									<!--참여기관-->
+									<!--책임연구원책임자 정보-->
+									<div class="view_top_area section1">
+										<div class="section_title">참여기관</div>							    
+										<div class="view_top_area clearfix">
+											<h4 class="fl sub_title_h4">책임연구원책임자 정보</h4>
+										</div>
+										<div class="table_area">
+											<table class="write fixed list responsible">
+												<caption>책임연구원책임자 정보</caption> 
+												<colgroup>
+												   <col style="width: 3%">
+												   <col style="width: 5%">
+												   <col style="width: 10%">
+												   <col style="width: 8%">
+												   <col style="width: 6%">
+												   <col style="width: 6%">
+												   <col style="width: 8%">
+												   <col style="width: 8%">
+												   <col style="width: 26%">
+												   <col style="width: 4%">
+												   <col style="width: 8%">
+												   <col style="width: 8%">
+												</colgroup>
+												<thead>
+												   <tr>
+													   <th scope="col">번호</th>
+													   <th scope="col">구분</th>
+													   <th scope="col">기관명</th>
+													   <th scope="col">부서</th>
+													   <th scope="col">직책</th>
+													   <th scope="col">성명</th>
+													   <th scope="col">생년월일</th>
+													   <th scope="col">휴대전화</th>
+													   <th scope="col">이메일</th>
+													   <th scope="col">참여율</th>
+													   <th scope="col">참여시작일</th>
+													   <th scope="col">참여종료일</th>
+												   </tr>
+												</thead>
+												<tbody>								       
+												   <tr>
+														<td>1</td>
+														<td><span>주관기관</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_companyname" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_companypartname" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_companypositionname" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_name" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_birthday" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_phoneNumber" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td>
+															<input type="text" class="form-control w70 onlynum ls fl mr5" id="chamyeo_responsible_percent" maxlength="3" /><span class="fl mt5">%</span>
+														</td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_startday" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_endday" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+												   </tr>
+												</tbody>
+											</table>
+										</div>
+										<!--//책임연구원책임자 정보-->
+										
+										<!-- 참여연구원 정보-->
+										<div class="view_top_area clearfix">
+										   <h4 class="fl sub_title_h4">참여 연구원 정보</h4>
+										</div>
+										<div class="table_area" style="overflow-x: scroll;">
+											<table class="write fixed list chamyeo">
+												<caption>참여 연구원 정보</caption> 
+												<colgroup>
+												   <col style="width: 3%">
+												   <col style="width: 5%">
+												   <col style="width: 8%">
+												   <col style="width: 7%">
+												   <col style="width: 6%">
+												   <col style="width: 6%">
+												   <col style="width: 8%">
+												   <col style="width: 7%">
+												   <col style="width: 24%">
+												   <col style="width: 4%">
+												   <col style="width: 8%">
+												   <col style="width: 8%">
+												   <col style="width: 6%">
+												</colgroup>
+												<thead>
+												   <tr>
+													   <th scope="col">번호</th>
+													   <th scope="col">구분</th>
+													   <th scope="col">기관명</th>
+													   <th scope="col">부서</th>
+													   <th scope="col">직책</th>
+													   <th scope="col">성명</th>
+													   <th scope="col">생년월일</th>
+													   <th scope="col">휴대전화</th>
+													   <th scope="col">이메일</th>
+													   <th scope="col">참여율</th>
+													   <th scope="col">참여시작일</th>
+													   <th scope="col">참여종료일</th>
+													   <th scope="col">역할</th>
+												   </tr>
+												</thead>
+												<tbody>								       
+												   <tr>
+														<td>1</td>
+														<td><span>참여기관1</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname1" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname1" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname1" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name1" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday1" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber1" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent1" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday1" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday1" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role1" class="form-control w100 ls" />						
+														</td>
+												   </tr>
+												   <tr>
+														<td>2</td>
+														<td><span>참여기관2</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname2" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname2" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname2" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name2" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday2" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber2" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent2" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday2" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday2" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role2" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>3</td>
+														<td><span>참여기관3</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname3" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname3" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname3" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name3" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday3" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber3" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent3" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday3" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday3" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role3" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>4</td>
+														<td><span>참여기관4</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname4" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname4" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname4" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name4" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday4" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber4" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent4" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday4" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday4" class="datepicker form-control w_12 ls mr5">
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role4" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>5</td>
+														<td><span>참여기관5</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname5" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname5" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname5" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name5" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday5" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber5" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent5" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday5" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday5" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role5" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>6</td>
+														<td><span>참여기관6</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname6" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname6" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname6" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name6" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday6" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber6" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent6" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday6" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday6" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role6" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>7</td>
+														<td><span>참여기관7</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname7" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname7" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname7" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name7" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday7" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber7" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent7" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday7" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday7" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role7" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>8</td>
+														<td><span>참여기관8</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname8" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname8" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname8" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name8" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday8" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber8" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent8" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday8" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday8" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role8" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>9</td>
+														<td><span>참여기관9</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname9" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname9" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname9" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name9" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday9" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber9" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent9" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday9" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday9" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role9" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												   <tr>
+														<td>10</td>
+														<td><span>참여기관10</span></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companyname10" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypartname10" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_companypositionname10" /></td>
+														<td><input type="text" class="form-control w100" id="chamyeo_responsible_chamyeo_name10" /></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_birthday10" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<input type="text" class="form-control w100 phoneNumber ls" id="chamyeo_responsible_chamyeo_phoneNumber10" maxlength="13" />
+														</td>
+														<td>
+															<form class="responsible_studies_email">													
+																<input type="text" name="str_email" class="form-control w30 fl d_input">
+																<span class="fl ml1 mr1 pt10 mail_f">@</span>											
+																<input type="text" name="str_email" class="form-control fl mb5 w30 str_email mr5" disabled />				
+																<select name="selectEmail" class="fl ace-select d_input w34 selectEmail"> 
+																   <option value="0">------선택------</option> 
+																   <option value="1">직접입력</option> 
+																   <option value="naver.com">naver.com</option> 
+																   <option value="hanmail.net">hanmail.net</option> 
+																   <option value="hotmail.com">hotmail.com</option> 
+																   <option value="nate.com">nate.com</option> 
+																   <option value="yahoo.co.kr">yahoo.co.kr</option> 
+																   <option value="empas.com">empas.com</option> 
+																   <option value="dreamwiz.com">dreamwiz.com</option> 
+																   <option value="freechal.com">freechal.com</option> 
+																   <option value="lycos.co.kr">lycos.co.kr</option> 
+																   <option value="korea.com">korea.com</option> 
+																   <option value="gmail.com">gmail.com</option> 
+																   <option value="hanmir.com">hanmir.com</option> 
+																   <option value="paran.com">paran.com</option> 
+																</select>
+															</form>
+														</td>
+														<td><input type="text" class="form-control w75 onlynum ls fl mr5" id="chamyeo_responsible_chamyeo_percent10" maxlength="3" /><span class="fl mt5">%</span></td>
+														<td>
+															<div class="datepicker_area w100">
+																<input type="text" id="chamyeo_responsible_chamyeo_startday10" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>
+															<div class="datepicker_area">
+																<input type="text" id="chamyeo_responsible_chamyeo_endday10" class="datepicker form-control w_12 ls mr5" />
+															</div>
+														</td>
+														<td>														
+															<input type="text" id="chamyeo_responsible_chamyeo_role10" class="form-control w100 ls" />							
+														</td>
+												   </tr>
+												</tbody>
+											</table>
+										</div>
+										<!-- //참여연구원 정보-->
+									</div>								
+									<!--//참여기관-->
+
+									<!--연구비 정보-->
+									<div class="view_top_area clearfix">
+									   <h4 class="fl sub_title_h4">연구비 정보</h4>
+									   <button type="button" class="blue_btn2 fr mt50 add_table_cell">추가</button>
+									</div>
+									<div class="table_area">
+										<table class="write fixed list research_cost">										 
+											<caption>연구비 정보</caption>		
+											<colgroup>
+											   <col style="width: 20%">
+											   <col style="width: 20%">
+											   <col style="width: 20%">
+											   <col style="width: 20%">
+											   <col style="width: 20%">
+											</colgroup>
+											<thead>
+											   <tr><th scope="col" colspan="5">구분</th></tr>
+											   <tr>
+												   <th scope="col">&nbsp;</th>
+												   <th scope="col">시지원금(A)</th>
+												   <th scope="col">민간부담금 현금(B)</th>
+												   <th scope="col">민간부담금 현물(C)</th>
+												   <th scope="col">총사업비(D=A+B+C)</th>												   
+											   </tr>
+											</thead>													
+											<tbody>	
+												<tr>
+													<td class="ta_c total_all"><span class="fw_b">총사업비</span></td>
+													<td class="total_all">
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="support_amount1" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td class="total_all">
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="cash1" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td class="total_all">
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="hyeonmul1" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+													<td class="total_all">
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="total_project_cost1" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="ta_c">주관기관</td>
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="support_amount2" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="cash2" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="hyeonmul2" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="total_project_cost2" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="ta_c">참여기관1</td>
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="support_amount3" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="cash3" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="hyeonmul3" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="total_project_cost3" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="ta_c">참여기관2</td>
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="support_amount4" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="cash4" />
+														<span class="fl mt5">(만원)</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="hyeonmul4" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w80 ls mb5 money fl mr5" id="total_project_cost4" />
+														<span class="fl mt5">(만원)</span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!-- //연구비 정보-->
+
+									<!--연구비 상세정보-->
+									<div class="view_top_area clearfix">
+									   <h4 class="fl sub_title_h4">연구비 상세정보</h4>
+									   <button type="button" class="blue_btn2 fr mt50 add_table_cell">추가</button>
+									</div>
+									<div class="table_area" style="overflow-x: scroll;">
+										<table class="write fixed list research_cost_detail">										 
+											<caption>연구비 정보</caption>		
+											<colgroup>
+											   <col style="width: 5%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 9%">
+											   <col style="width: 10%">
+											</colgroup>
+											<thead>
+											   <tr><th scope="col" colspan="11">비목</th></tr>
+											   <tr>
+												   <th scope="col">&nbsp;</th>
+												   <th scope="col" class="total">인건비(A+B)</th>
+												   <th scope="col">내부인건비(A)</th>
+												   <th scope="col">외부인건비(B)</th>
+												   <th scope="col" class="total">경비(C+D+E+F)</th>	
+												   <th scope="col">연구장비/재료비(C)</th>	
+												   <th scope="col">연구활동비(D)</th>	
+												   <th scope="col">위탁사업비(E)</th>	
+												   <th scope="col">성과장려비(F)</th>
+												   <th scope="col" class="total">간접비(G)</th>
+												   <th scope="col" class="total_all">합계(A+B+C+D+E+F+G)</th>
+											   </tr>
+											</thead>													
+											<tbody>	
+												<tr>
+													<td class="ta_c">총사업비</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="aplusb_total1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="aplusb_total1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="a1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="a1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="b1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="b1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="cdef1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="cdef1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="c1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="c1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="d1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="d1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="e1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="e1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="f1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="f1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="g1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="g1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total_all">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="total_project_detail_cost1" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="total_project_detail_cost1_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="ta_c">주관기관</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="aplusb_total2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="aplusb_total2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="a2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="a2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="b2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="b2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="cdef2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="cdef2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="c2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="c2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="d2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="d2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="e2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="e2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="f2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="f2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="g2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="g2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total_all">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="total_project_detail_cost2" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="total_project_detail_cost2_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="ta_c">참여기관1</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="aplusb_total3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="aplusb_total3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="a3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="a3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="b3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="b3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="cdef3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="cdef3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="c3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="c3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="d3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="d3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="e3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="e3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="f3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="f3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="g3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="g3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total_all">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="total_project_detail_cost3" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="total_project_detail_cost3_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="ta_c">참여기관2</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="aplusb_total4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="aplusb_total4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="a4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="a4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td> 
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="b4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="b4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="cdef4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="cdef4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="c4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="c4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="d4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="d4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="e4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="e4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td>
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="f4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="f4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="g4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="g4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+													<td class="total_all">
+														<input type="text" class="form-control w50 ls mb5 money fl mr5" id="total_project_detail_cost4" />
+														<span class="fl mt5 mr10">(만원)</span>
+														<input type="text" class="form-control w20 onlynum ls fl mr5" id="total_project_detail_cost4_p" maxlength="3" />
+														<span class="fl mt5">%</span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!-- //연구비 정보-->
+									
+									<!--제출서류-->
+									<h4>제출서류</h4>
+									<table class="write fixed documentssubmit">
+										<caption>제출서류</caption>
+										<colgroup>
+											<col style="width: 20%;">
+											<col style="width: 80%;">
+										</colgroup>
+										<tbody>	
+										    <tr>
+												<th scope="row">계획서</th>
+											    <td>
+													<a href="" download>계획서.pdf</a>												   
+												</td> 
+										    </tr>																	       
+											<tr>
+												<th scope="row">협약서</th>
+											    <td>
+													<a href="" download>협약서.pdf</a>
+												</td> 
+											</tr>
+											<tr>
+											   <th scope="row">기타</th>											    
+											   <td>
+													<a href="" download>기타.pdf</a>
+												</td> 
+											</tr>											
+										</tbody>
+							        </table>
+									<!--//제출서류-->								
+
+
+									<div class="button_box clearfix fr pb20">							
+										<button type="button" class="gray_btn fl" onclick="location.href='./agreement.html'">목록</button>
+									</div>
+								</div>	<!--//table_area-->							
+							</div><!--//content_area-->
+							<!--//기관-->
+						</div>
+					</div><!--//sub_contents-->
+				</section>
+			</div>
+			<!-- //container -->
+			<!-- footer --> 
+				<div id="footer" class="main_footer">
+					<footer>
+						<div class="footer_area">
+							<!-- footer_left --> 
+							<div class="footer_left">
+								<div class="footer_content">
+									<div class="footer_link_area clearfix">
+										<ul class="fl">
+											<li>
+												<a href="./tos.html" title="이용 약관">
+													<span>이용 약관</span>
+												</a>
+											</li>
+											<li>
+												<a href="./privacy_policy.html" title="개인정보 처리방침">
+													<span>개인정보 처리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="./roc.html" title="이메일무단 수집 거부">
+													<span>이메일무단 수집 거부</span>
+												</a>
+											</li>
+											<li>
+												<a href="http://seoul-tech.com/web/intropage/intropageShow.do?page_id=e35c124aa9084e84bc8c663f9ae796cf" title="신기술 접수소 소개">
+													<span>신기술 접수소 소개</span>
+												</a>
+											</li>
+											<!--li>
+												<a href="#" title="저작권 정책">
+													<span>저작권 정책</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="영상정보처리기기 운영 관리방침">
+													<span>영상정보처리기기 운영 관리방침</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="홈페이지 바로가기">
+													<span>홈페이지 바로가기</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" title="행정서비스 현장">
+													<span>행정서비스 현장</span>
+												</a>
+											</li-->
+										</ul>
+										<label for="footer_cooperation" class="hidden">협력기관</label>
+										<select id="footer_cooperation" class="selectbox fr in_wp258 ace-select" name="select" onchange="javascript:go_url(this.options[this.selectedIndex].value);">
+											<option value="협력기관">협력기관</option>
+											<option value="http://www.seoul-tech.com/">신기술 접수소</option>
+										</select> 
+									</div>
+									<div class="footer_addr_area clearfix">
+										<div class="footer_logo fl"><img src="../images/main/footer_logo.png" alt=""></div>
+										<div class="footer_addr_list fr">							
+											<address>서울기술연구원(03909) | 서울특별시 마포구 매봉산로37 (상암동) DMC 산학협력연구센터 8층 | TEL. 02-6912-0941</address>
+											<p>Copyright  신기술접수소 사업평가·관리 시스템 All rights reserved. </p>							
+										</div>							
+									</div>
+								</div>
+							</div>
+							<!--// footer_left -->					
+						</div>
+					</footer>
+				</div>
+				<!-- //footer -->		
+		</div>
+		<!-- //wrap -->
+
+		
+    <script src="../js/script.js"></script>
+	
+	</body>
+</html>

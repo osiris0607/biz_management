@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.util">
+
+	<resultMap id="administrativeDistrict" type="UtilAdministrativeDistrictVO">
+		<result property ="master_id"			column="MASTER_ID"	/>
+		<result property ="parent_id"			column="PARENT_ID"	/>
+		<result property ="code"				column="CODE"	/>
+		<result property ="full_addr"			column="FULL_ADDR"	/>
+		<result property ="addr"				column="ADDR"	/>
+		
+	</resultMap>
+	
+	<insert id="insertAdministrativeDistrict" parameterType="UtilAdministrativeDistrictVO">
+		REPLACE INTO  ADMINISTRATIVE_DISTRICT ( 
+			MASTER_ID
+			,	PARENT_ID
+			,	CODE
+			,	FULL_ADDR
+			,	ADDR
+		) 
+		VALUES (
+			#{master_id} 
+			,	#{parent_id}
+			,	#{code}
+			,	#{full_addr}
+			,	#{addr}
+		);
+	</insert>
+	
+	
+	<select id="selectAdministrativeDistrictAllList" resultMap="administrativeDistrict">
+		SELECT
+			MASTER_ID
+			,	PARENT_ID
+			,	CODE
+			,	FULL_ADDR
+			,	ADDR
+		FROM
+			ADMINISTRATIVE_DISTRICT
+	</select>
+	
+	
+	
+	
+	
+</mapper>

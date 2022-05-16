@@ -1,0 +1,1422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fwd.common.fwdFuncInclude">
+    
+    <!-- FC_FW_GET_FRGH_YN -->
+    <sql id="fwdFcFwGetFrghYn" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetFrghYn (FC_FW_GET_FRGH_YN ?? )*/
+	    SELECT (CASE WHEN IFNULL(COUNT(1),0) = 0 THEN 'N' 
+	                 ELSE 'Y' END)
+	      FROM TB_FWD_BL IA
+	INNER JOIN TB_SMT_INTG_TASK_DEPT IB ON IB.EO_NO = IA.EO_NO
+	       AND IB.CST_BL_ID = IA.BL_ID
+	       AND IB.DEL_YN = 'N'           
+	INNER JOIN TB_ISM_SELLBUY IC ON IC.EO_NO = IA.EO_NO
+	       AND IC.SMT_NO = IA.SMT_NO
+	       AND IC.CORP_CD = IB.EXCT_BIZPTNR_CD
+	       AND IC.SELLBUY_SPR_CD NOT IN ('BC','SD') -- CR/DR은 체크로직서 제외
+           AND IC.OFFSET_SMT_NO1 IS NULL -- 역전표 삭제건    
+           AND IC.DEL_YN = 'N'
+  	     WHERE IA.DEL_YN = 'N'
+  	       AND IA.BL_ID          = ${blId}
+	       AND IB.INTG_TASK_NO   = ${intgTaskNo}
+	       AND IC.SELLBUY_SPR_CD = ${sellbuySprCd}
+    </sql>
+    
+    <!-- FC_IS_GET_FRT_STATUS_FRT -->
+    <sql id="fwdFcIsGetFrtStatusFrt" >
+        /* fwd.common.fwdFuncInclude.fwdFcIsGetFrtStatusFrt (??)*/
+	    SELECT (CASE WHEN IFNULL(COUNT(*),0) > 0 THEN 'Y' 
+	                 ELSE 'N' END) AS RTN_YN
+	      FROM TB_ISM_SELLBUY AI
+	INNER JOIN TB_FWD_BL BI ON BI.SMT_NO = AI.SMT_NO
+	       AND BI.BL_NO = AI.BL_NO
+	       AND BI.BL_ID = AI.BL_ID
+	       AND BI.DEL_YN = 'N'
+	     WHERE AI.CORP_CD = ${corpCd}
+	       AND AI.FRGH_CD = ${frtCd}
+	       AND BI.BL_ID   = ${blId}
+	       AND AI.OFFSET_SMT_NO1 IS NULL
+	       AND AI.DEL_YN = 'N'
+    </sql>
+    
+    <!-- FC_FW_GET_RELT_EO_YN -->
+    <sql id="fwdFcFwGetReltEoYn" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetReltEoYn (FC_FW_GET_RELT_EO_YN)*/
+        SELECT IFNULL(MAX(CASE WHEN AI.STG_SPR_CD = '1' AND AI.EXCT_SPR_CD = 'RL' 
+                               THEN 'Y' ELSE 'N' END),'N')
+          FROM TB_SMT_EO AI
+         INNER JOIN TB_FWD_BL BI ON BI.EO_NO = AI.EO_NO
+         WHERE AI.EO_NO = BI.EO_NO
+           AND AI.DEL_YN = 'N'
+           AND AI.SMT_NO = ${smtNo}
+    </sql>
+    
+    <!-- FC_FW_GET_TASK_SPR -->
+    <sql id="fwdFcFwGetTaskSpr" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetTaskSpr (FC_FW_GET_TASK_SPR)*/
+        SELECT TASK_SPR_CD
+          FROM TB_SMT_INTG_TASK_DEPT AI
+         WHERE AI.DEL_YN = 'N'
+           AND AI.EO_NO = ${eoNo}
+           AND AI.EXCT_BIZPTNR_CD = ${exctBizptnrCd}
+         LIMIT 1
+    </sql>
+    
+    <!-- FC_FW_GET_SO_REVN_YN -->
+    <sql id="fwdFcFwGetSoRevnYn" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetSoRevnYn (FC_FW_GET_SO_REVN_YN)*/
+        SELECT (CASE WHEN COUNT(1) > 0 THEN 'Y' ELSE 'N' END) AS REV_YN
+          FROM TB_ISM_SMT_PROFIT_CLOS PF
+		 WHERE PF.OFFSET_SPR_CD = 'SLIP'
+		   AND PF.SMT_NO = ${smtNo}
+		   AND PF.REVN_RCGN_FNL_YN = 'Y'
+    </sql>    
+    
+    <!-- FC_IS_GET_FRT_STATUS_STA -->
+    <sql id="fwdFcIsGetFrtStatusSta" >
+        /* fwd.common.fwdFuncInclude.fwdFcIsGetFrtStatusSta  (??)*/
+        SELECT IFNULL(CI.DTL_CD_NM, '') 
+		  FROM TB_COM_ETC_CD CI
+		 WHERE CI.CLAS_CD = '0107'
+		   AND CI.DTL_CD = (
+		    SELECT IFNULL(MIN(AI.ADJ_CONF_SPR_CD),'X')
+		      FROM TB_ISM_SELLBUY AI
+		INNER JOIN TB_FWD_BL BI ON BI.SMT_NO = AI.SMT_NO
+		       AND BI.BL_NO = AI.BL_NO
+		       AND BI.BL_ID = AI.BL_ID
+		       AND BI.DEL_YN = 'N'
+		     WHERE AI.CORP_CD = ${corpCd}
+		       AND AI.FRGH_CD = ${frtCd}
+		       AND BI.BL_ID   = ${blId}
+		       AND AI.OFFSET_SMT_NO1 IS NULL
+		       AND AI.DEL_YN = 'N'
+		)
+    </sql>
+
+    <!-- FC_FW_GET_SWITCH_INFO -->
+    <sql id="fwdFcFwGetSwitchInfo" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetSwitchInfo (FC_FW_GET_SWITCH_INFO 파라미터 : SWITCH_STATUS)*/
+        SELECT (CASE WHEN MAX(XI.SO_SWT_YN) = 'N' THEN 'N'
+	                 WHEN MAX(XI.TRD_YN) = 'N' THEN 'N'
+	                 ELSE (CASE WHEN MAX(XI.BL_SWT_YN) = 'Y' THEN 'SD' ELSE 'SL' END)
+	            END) AS SWITCH_STATUS
+	      FROM (
+	             SELECT IFNULL(BI.SWT_BL_YN,'N') AS SO_SWT_YN
+	                  , IFNULL(AI.BL_SWITCH_YN,'N') AS BL_SWT_YN
+	                  /*, FC_FW_GET_TASK_YN(A.EO_NO, 'TRD') AS TRD_YN*/
+	                  , (CASE WHEN CI.EO_NO IS NULL THEN 'N' ELSE 'Y' END) AS TRD_YN
+	               FROM TB_FWD_BL DI
+	         INNER JOIN TB_FWD_BL AI ON AI.EO_NO = DI.EO_NO
+	                AND AI.DEL_YN = 'N'
+	         INNER JOIN TB_SMT_ORD BI ON BI.SMT_NO = AI.SMT_NO
+	    LEFT OUTER JOIN TB_SMT_INTG_TASK_DEPT CI ON CI.EO_NO = AI.EO_NO
+	                AND CI.DEL_YN = 'N'
+	                AND CI.TASK_SPR_CD = 'TRD'
+	              WHERE DI.DEL_YN = 'N'
+	                AND DI.BL_ID = ${blId}) XI
+    </sql>
+    
+    <!-- FC_FW_GET_MBL_TASK_NO -->
+    <sql id="fwdFcFwGetMblTaskNo" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetMblTaskNo (FC_FW_GET_MBL_TASK_NO)*/
+	    SELECT SUB.INTG_TASK_NO
+	      FROM (
+	            SELECT 1 AS SORT_NO
+	                  ,CI.BL_ID
+	                  ,CI.BL_NO
+	                  ,DI.INTG_TASK_NO
+	                  ,DI.TASK_SPR_CD
+	                  ,DI.EXCT_BIZPTNR_CD 
+	              FROM TB_FWD_BL AI
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT BI
+	                ON AI.BL_ID  = BI.CST_BL_ID
+	               AND AI.EO_NO  = BI.EO_NO
+	        INNER JOIN TB_FWD_BL CI
+	                ON AI.MBL_ID = CI.BL_ID
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT DI
+	                ON CI.EO_NO  = DI.EO_NO
+	               AND CI.BL_ID  = DI.CST_BL_ID
+	             WHERE AI.DEL_YN = 'N'
+	               AND BI.DEL_YN = 'N'
+	               AND BI.EXCT_BIZPTNR_CD = DI.EXCT_BIZPTNR_CD
+	               AND BI.TASK_SPR_CD     = DI.TASK_SPR_CD
+	               AND AI.BL_ID           = ${blId}
+	               AND BI.INTG_TASK_NO    = ${intgTaskNo}
+	             UNION ALL
+	            SELECT 2 AS SORT_NO
+	                  ,CI.BL_ID
+	                  ,CI.BL_NO
+	                  ,DI.INTG_TASK_NO
+	                  ,DI.TASK_SPR_CD
+	                  ,DI.EXCT_BIZPTNR_CD 
+	              FROM TB_FWD_BL AI
+	        INNER JOIN TB_FWD_BL CI
+	                ON AI.MBL_ID = CI.BL_ID
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT DI
+	                ON CI.EO_NO  = DI.EO_NO
+	               AND CI.BL_ID  = DI.CST_BL_ID
+	        INNER JOIN (SELECT TASK_SPR_CD
+	                         , EXCT_BIZPTNR_CD
+	                      FROM TB_SMT_INTG_TASK_DEPT 
+	                     WHERE DEL_YN = 'N'
+	                       AND INTG_TASK_NO = ${intgTaskNo} ) BI
+                    ON DI.EXCT_BIZPTNR_CD = BI.EXCT_BIZPTNR_CD
+                   AND DI.TASK_SPR_CD     = BI.TASK_SPR_CD
+	             WHERE AI.DEL_YN = 'N'
+	               AND AI.BL_ID  = (SELECT ORIGN_BL_ID 
+	                                 FROM TB_FWD_BL
+	                                WHERE BL_ID = ${blId} )
+                 UNION ALL
+	            SELECT 3
+	                  ,CI.BL_ID
+	                  ,CI.BL_NO
+	                  ,DI.INTG_TASK_NO
+	                  ,DI.TASK_SPR_CD
+	                  ,DI.EXCT_BIZPTNR_CD 
+	              FROM TB_FWD_BL AI
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT BI
+	                ON AI.BL_ID  = BI.CST_BL_ID
+	               AND AI.EO_NO  = BI.EO_NO
+	        INNER JOIN TB_FWD_BL CI
+	                ON AI.MBL_ID = CI.BL_ID
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT DI
+	                ON CI.EO_NO  = DI.EO_NO
+	               AND CI.BL_ID  = DI.CST_BL_ID
+	             WHERE AI.DEL_YN = 'N'
+	               AND BI.DEL_YN = 'N'
+	               AND DI.TASK_SPR_CD = CASE WHEN BI.TASK_SPR_CD = 'IMP' THEN 'IMP'
+	                                        WHEN AI.EXCT_SPR_CD = 'AR' AND BI.TASK_SPR_CD = 'ADJ' THEN 'XXX'
+	                                        ELSE 'EXP' END
+	               AND AI.BL_ID        = ${blId}
+	               AND BI.INTG_TASK_NO = ${intgTaskNo}
+                 UNION ALL
+	            SELECT 4
+	                  ,CI.BL_ID
+	                  ,CI.BL_NO
+	                  ,DI.INTG_TASK_NO
+	                  ,DI.TASK_SPR_CD
+	                  ,DI.EXCT_BIZPTNR_CD 
+	              FROM TB_FWD_BL AI
+	        INNER JOIN TB_FWD_BL CI
+	                ON AI.MBL_ID = CI.BL_ID
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT DI
+	                ON CI.EO_NO  = DI.EO_NO
+	               AND CI.BL_ID  = DI.CST_BL_ID
+	        CROSS JOIN (SELECT TASK_SPR_CD, EXCT_BIZPTNR_CD
+	                      FROM TB_SMT_INTG_TASK_DEPT 
+	                     WHERE DEL_YN = 'N'
+	                       AND INTG_TASK_NO = ${intgTaskNo} ) BI
+	             WHERE AI.DEL_YN = 'N'
+	               AND DI.TASK_SPR_CD  = CASE WHEN BI.TASK_SPR_CD = 'IMP' THEN 'IMP'
+	                                         WHEN AI.EXCT_SPR_CD = 'AR' AND BI.TASK_SPR_CD = 'ADJ' THEN 'XXX'
+	                                         ELSE 'EXP' END
+	               AND AI.BL_ID        = (SELECT ORIGN_BL_ID 
+	                                       FROM TB_FWD_BL
+	                                      WHERE BL_ID = ${blId} )                                  
+	          ) SUB
+	     LIMIT 1
+    </sql>
+
+    <!-- FC_FW_GET_TASK_YN -->
+    <sql id="fwdFcFwGetTaskYn" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetTaskYn (FC_FW_GET_TASK_YN)*/
+        SELECT CASE WHEN IFNULL(COUNT(1),0) > 0 THEN 'Y' ELSE 'N' END
+          FROM TB_SMT_INTG_TASK_DEPT
+         WHERE DEL_YN = 'N'
+           AND EO_NO = ${eoNo}
+           AND TASK_SPR_CD = ${taskSprCd}
+    </sql>
+    
+    <!-- FC_FW_REF_LEADTIME_EXCEPT -->
+    <!-- TODO FC_CM_GET_BIZPTNR_GRP_CD -->
+    <sql id="fcFwRefLeadtimeExcept" >
+        /* fwd.common.fwdFuncInclude.fcFwRefLeadtimeExcept (FC_FW_REF_LEADTIME_EXCEPT) */
+        SELECT CASE WHEN A.BL_SPR_CD = 'D' AND SUBSTR(A.INCOT_CD, 1, 1) IN ('E', 'F') THEN 'Y'
+                    WHEN EXISTS (SELECT 1
+                                   FROM TB_SMT_INTG_TASK_DEPT
+                                  WHERE CST_BL_ID = A.BL_ID
+                                    AND SMT_NO = A.SMT_NO
+                                    AND DEL_YN = 'N'
+                                    AND TASK_SPR_CD = 'EXP'
+                                    AND EXCT_BIZPTNR_CD IN ('X100','X200')) THEN 'Y'
+                    WHEN A.LADG_TYPE_CD = 'B' THEN 'Y'
+                    WHEN NOT EXISTS (SELECT 1
+                                       FROM TB_SMT_INTG_TASK_DEPT TD
+                                      WHERE TD.CST_BL_ID = A.BL_ID
+                                        AND TD.SMT_NO = A.SMT_NO
+                                        AND TD.DEL_YN = 'N'
+                                        AND TD.TASK_SPR_CD = 'EXP'
+                                        AND TD.EXCT_BIZPTNR_CD NOT IN ('X100','X200')
+                                        AND EXISTS (SELECT EC.DTL_CD_NM
+                                                      FROM TB_COM_ETC_CD EC
+                                                     WHERE EC.CLAS_CD = '1512'
+                                                       AND EC.USE_YN  = 'Y'
+                                                       AND EC.DTL_CD_NM = (SELECT '' /* TODO ::: FC_CM_GET_BIZPTNR_GRP_CD(TD.CARR_CD)*/
+                                                                             FROM DUAL) )) THEN 'Y'
+               ELSE 'N'
+               END
+          FROM TB_FWD_BL A
+         WHERE A.BL_ID =  ${blId}
+           AND A.BL_SWITCH_YN = 'N'
+           AND A.DEL_YN = 'N'
+         LIMIT 1  <!-- TODO 임시로 처리 해 놓음 -->
+    </sql>
+    
+    <!-- FC_FW_GET_BPO_SEND_BL_YN -->
+    <sql id="fwdFcFwGetBpoSendBlYn" >
+        /* fwd.common.fwdFuncInclude.fcFwGetBpoSendBlYn (FC_FW_GET_BPO_SEND_BL_YN) */
+	    SELECT CASE WHEN COUNT(1) = 0 THEN 'N' ELSE 'Y' END
+	      FROM (
+	            SELECT AAA.BL_ID
+	              FROM TB_FWD_BL AAA
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT BBB
+	                ON AAA.EO_NO = BBB.EO_NO
+	               AND AAA.BL_ID = BBB.CST_BL_ID
+	        INNER JOIN TB_SMT_ORD CCC
+	                ON AAA.SMT_NO = CCC.SMT_NO
+	        INNER JOIN TB_SMT_ORD_CO_RELT DDD
+	                ON CCC.SMT_NO = DDD.SMT_NO
+	        INNER JOIN TB_SMT_CO EEE
+	                ON DDD.CO_RECV_NO = EEE.CO_RECV_NO
+	             WHERE AAA.DEL_YN = 'N'
+	               AND BBB.DEL_YN = 'N'
+	               AND DDD.DEL_YN = 'N'
+	               AND EEE.CO_CST_GRP_CD = '93'
+	               AND EEE.DEL_YN = 'N'
+	               AND AAA.BL_ID = ${blId}
+	               AND BBB.INTG_TASK_NO = ${intgTaskNo}
+	               AND AAA.EXCT_SPR_CD IN ('OC', 'AR')
+	             UNION ALL
+	            SELECT AAA.BL_ID
+	              FROM TB_FWD_BL AAA
+	        INNER JOIN TB_SMT_INTG_TASK_DEPT BBB
+	                ON AAA.EO_NO = BBB.EO_NO
+	               AND AAA.BL_ID = BBB.CST_BL_ID
+	             WHERE AAA.DEL_YN = 'N'
+	               AND BBB.DEL_YN = 'N'
+	               AND AAA.BL_ID = ${blId}
+	               AND BBB.TASK_SPR_CD = 'IMP'
+	               AND AAA.EXCT_SPR_CD IN ('OC', 'AR')
+	               AND EXISTS (SELECT 1
+	                             FROM TB_COM_CD_MPNG ZZZ
+	                            WHERE ZZZ.CD_MPNG_SPR_NM = 'ORDER_CUSTOMER_CODE'
+	                              AND ZZZ.RLT_BIZPTNR_CD = '93'
+	                              AND ZZZ.INSD_CD = AAA.CNEE_CD
+	                              AND ZZZ.USE_YN = 'Y')
+	               ) SUB
+    </sql>
+    
+    <!-- FC_FW_GET_CONV_TEU -->
+    <sql id="fwdFcFwGetConvTeu" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetConvTeu (FC_FW_GET_CONV_TEU) */
+        SELECT CASE WHEN EXCT_SPR_CD = 'OC' AND LADG_TYPE_CD IN ('L','B') AND SELL_RTON <![CDATA[<>]]> 0 THEN (CASE WHEN ${sellCbm}  >= ${sellGwt} / 1000 THEN
+                                                                                                                         ROUND(${sellCbm} / 15,3)
+                                                                                                                    ELSE
+                                                                                                                         ROUND(ROUND(${sellGwt} / 1000,2) / 18,3)
+                                                                                                               END)
+               ELSE 0 END 
+          FROM TB_FWD_BL
+         WHERE BL_ID = ${blId}
+    </sql>
+    
+    <!-- FC_CM_GET_BIZPTNR_NM -->
+    <sql id="fwdFcCmGetBizptnrNm">
+    /* fwd.common.fwdFuncInclude.fwdFcCmGetBizptnrNm (FC_CM_GET_BIZPTNR_NM)*/
+	    SELECT AAA.BIZPTNR_NM
+	      FROM (SELECT BIZPTNR_ENG_NM AS BIZPTNR_NM
+	              FROM TB_COM_BIZPTNR
+	             WHERE BIZPTNR_CD = ${bizptnrCd}
+	             UNION ALL
+	            SELECT ETC_CONT1 AS BIZPTNR_NM
+	              FROM TB_COM_ETC_CD
+	             WHERE CLAS_CD ='1118'
+	               AND DTL_CD_NM = ${bizptnrCd}) AAA
+	     LIMIT 1
+    </sql>
+    
+    <!-- FC_FW_GET_CUST_PROG_STAT_CD -->
+    <sql id="fwdFcFwGetCustProgStatCd" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetCustProgStatCd (FC_FW_GET_CUST_PROG_STAT_CD) */
+        SELECT CASE WHEN X4.CUST_PROG_STAT_CD = '00' THEN '0001'
+                    WHEN X4.CUST_PROG_STAT_CD = '01' THEN '0002'
+                    WHEN X4.CUST_PROG_STAT_CD = '10' THEN '0003'
+                    WHEN X4.CUST_PROG_STAT_CD = '11' THEN '0004'
+                    ELSE '' END
+          FROM (
+                SELECT CONCAT(CASE WHEN X3.C_RNK > 0 AND X3.C_RNK >= X3.U_RNK THEN '1'
+                                   WHEN X3.U_RNK > 0 THEN '0'
+                                   WHEN (SELECT COUNT(1)
+                                           FROM NFINF.TB_FWD_INT9100 Z
+                                          WHERE Z.BL_ID = ${gsiBlMgntNo}
+                                            AND Z.EXPIMP_SEPATR = ${expimpSepatr}
+                                            AND Z.FNL_MDF_CNT > (SELECT IFNULL(MAX(ZZ.FNL_MDF_CNT), 0)
+                                                                   FROM NFINF.TB_FWD_INT9100 ZZ
+                                                                  WHERE ZZ.BL_ID = Z.BL_ID
+                                                                    AND ZZ.EXPIMP_SEPATR = Z.EXPIMP_SEPATR
+                                                                    AND   ZZ.INTERFACE_TYPE = '1')) > 0 THEN '0'
+                                   ELSE '' END,
+                              CASE WHEN X3.S_RNK > 0 AND X3.S_RNK >= X3.D_RNK THEN '1'
+                                   WHEN X3.S_RNK > 0 THEN '0'
+                                   WHEN (SELECT COUNT(1)
+                                           FROM NFINF.TB_FWD_INT9100 Z
+                                          WHERE Z.BL_ID = ${gsiBlMgntNo}
+                                            AND Z.EXPIMP_SEPATR = ${expimpSepatr}
+                                            AND Z.FNL_MDF_CNT > (SELECT IFNULL(MAX(ZZ.FNL_MDF_CNT), 0)
+                                                                   FROM NFINF.TB_FWD_INT9100 ZZ
+                                                                  WHERE ZZ.BL_ID = Z.BL_ID
+                                                                    AND ZZ.EXPIMP_SEPATR = Z.EXPIMP_SEPATR
+                                                                    AND ZZ.INTERFACE_TYPE = '1')) > 0 THEN '0'
+                                   ELSE '' END) CUST_PROG_STAT_CD
+                  FROM (
+                        SELECT MAX(CASE WHEN X2.TYPE = 'Y' THEN X2.RNK ELSE 0 END) AS C_RNK /*최종 Confirm 순위*/
+                              ,MAX(CASE WHEN X2.TYPE IN ('I', 'U') AND X2.SPR = 'C' THEN X2.RNK ELSE 0 END) AS U_RNK /*최종 수정요청 승인 응답 순위*/
+                              ,MAX(CASE WHEN X2.TYPE = 'D' THEN X2.RNK ELSE 0 END) AS D_RNK /*최종 삭제요청 순위*/
+                              ,MAX(CASE WHEN X2.TYPE IN ('I', 'U') AND X2.SND_YN = 'N' THEN X2.RNK ELSE 0 END) AS S_RNK /*미전송건 존재 여부*/
+                          FROM (
+                                SELECT X1.INTERFACE_ID KEY
+                                      ,X1.INTERFACE_TYPE TYPE
+                                      ,X1.SND_STAT_CD STAT
+                                      ,X1.BL_CHG_ATCL_APLY_YN AS SPR
+                                      ,X1.SND_YN AS SND_YN
+                                      ,RANK() OVER(PARTITION BY 1 ORDER BY X1.INTERFACE_ID) RNK
+                                  FROM (
+                                        SELECT MAX(A.INTERFACE_ID) AS INTERFACE_ID
+                                              ,A.INTERFACE_TYPE
+                                              ,A.SND_STAT_CD
+                                              ,CASE WHEN A.BL_SND_IF_KEY IS NULL THEN 'N' ELSE 'Y' END AS SND_YN
+                                              ,IFNULL(B.BL_CHG_ATCL_APLY_YN, 'O') BL_CHG_ATCL_APLY_YN
+                                          FROM NFINF.TB_FWD_INT740 A
+                               LEFT OUTER JOIN NFINF.TB_FWD_INT741  B
+                                            ON A.INTERFACE_CD = B.INTERFACE_CD
+                                         WHERE A.GSI_BL_MGNT_NO = ${gsiBlMgntNo}
+                                           AND A.EXPIMP_DOC_TYPE_CD = ${expimpSepatr}
+                                      GROUP BY A.INTERFACE_TYPE
+                                              ,A.SND_STAT_CD
+                                              ,A.BL_SND_IF_KEY
+                                              ,B.BL_CHG_ATCL_APLY_YN) X1
+                               ) X2
+                       ) X3
+               ) X4
+    </sql>
+    
+    <!-- FC_CM_GET_EMP_NM -->
+    <sql id="fwdFcCmGetEmpNm" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetEmpNm (FC_CM_GET_EMP_NM)*/
+        SELECT ENG_EMP_NM
+          FROM TB_COM_EMP
+         WHERE EMPNO = #{empNo}
+    </sql>
+    
+    <!-- FC_CM_GET_ACCTG_DEPT_NM -->
+    <sql id="fwdFcCmGetAcctgDeptNm" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetAcctgDeptNm (FC_CM_GET_ACCTG_DEPT_NM)*/
+	    SELECT ACCTG_DEPT_ENG_NM
+	      FROM TB_COM_ACCTG_DEPT
+	     WHERE ACCTG_DEPT_CD = #{acctgDeptCd};
+    </sql>	  
+    
+    <!-- FC_FW_B2BI_GET_CODE :: LGE_SHIPPING_LINE1_CODE -->
+    <sql id="fwdFcFwB2biGetCode_LgeShippingLine1Code" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwB2biGetCode_LgeShippingLine1Code */
+			SELECT 
+			       IFNULL (  (SELECT   AA.SHIPPING_LINE1_CODE
+			                  FROM     NFINF.TB_SMT_INT160 AA
+			                  WHERE    AA.SR_NO = ${refNo}
+			                  AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+			                                             FROM   NFINF.TB_SMT_INT160 BB
+			                                             WHERE  BB.SR_NO = ${refNo})
+                              <![CDATA[ 
+			                  AND      AA.SHIPPING_REQUEST_STATUS_CODE <> '1' )
+			                  ]]>  
+			                ,(SELECT  AA.SHIPPING_LINE1_CODE
+			                  FROM     NFINF.TB_SMT_INT167 AA
+			                  WHERE    AA.INVOICE_NO = ${refNo}
+			                  AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+			                                             FROM   NFINF.TB_SMT_INT167 BB
+			                                             WHERE  BB.INVOICE_NO = ${refNo})
+                              <![CDATA[ 
+			                  AND      AA.EDI_STATUS_CODE <> '1') 
+			                  ]]>  
+		                  )
+    </sql>
+    
+    <!-- FC_FW_B2BI_GET_CODE :: SEND_DEPARTMENT_TYPE_CODE -->
+    <sql id="fwdFcFwB2biGetCode_SendDepartmentTypeCode" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwB2biGetCode_SendDepartmentTypeCode*/
+        SELECT 
+               IFNULL (  
+                         (SELECT   AA.SEND_DEPARTMENT_TYPE_CODE
+					      FROM     NFINF.TB_SMT_INT160 AA
+					      WHERE    AA.SR_NO = ${refNo}
+					      AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+					                                 FROM   NFINF.TB_SMT_INT160 BB
+					                                 WHERE  BB.SR_NO = ${refNo}
+					                                )
+					      <![CDATA[                          
+					      AND      AA.SHIPPING_REQUEST_STATUS_CODE <> '1' /*취소전송 '1'은 제외 HYY ADD, 2015.1.14*/ )
+					      ]]>  
+                        , (SELECT   AA.SEND_DEPARTMENT_TYPE_CODE
+		                   FROM     NFINF.TB_SMT_INT167 AA
+		                   WHERE    AA.INVOICE_NO = ${refNo}
+		                   AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+		                                             FROM   NFINF.TB_SMT_INT167 BB
+		                                             WHERE  BB.INVOICE_NO = ${refNo}
+		                                            )
+                           <![CDATA[     
+		                   AND      AA.EDI_STATUS_CODE <> '1'  /*취소전송 '1'은 제외 HYY ADD, 2015.1.14*/ ) 
+		                   ]]>
+	                   )                      
+    </sql>
+    
+    <!-- FC_FW_B2BI_GET_CODE :: LGE_SHIPPING_LINE2_CODE -->
+    <sql id="fwdFcFwB2biGetCode_LgeShippingLine2Code" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwB2biGetCode_LgeShippingLine2Code */
+            SELECT 
+                   IFNULL (  (SELECT   AA.SHIPPING_LINE2_CODE
+                              FROM     NFINF.TB_SMT_INT160 AA
+                              WHERE    AA.SR_NO = ${refNo}
+                              AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+                                                         FROM   NFINF.TB_SMT_INT160 BB
+                                                         WHERE  BB.SR_NO = ${refNo})
+                              <![CDATA[ 
+                              AND      AA.SHIPPING_REQUEST_STATUS_CODE <> '1' )
+                              ]]>  
+                            ,(SELECT  AA.SHIPPING_LINE2_CODE
+                              FROM     NFINF.TB_SMT_INT167 AA
+                              WHERE    AA.INVOICE_NO = ${refNo}
+                              AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+                                                         FROM   NFINF.TB_SMT_INT167 BB
+                                                         WHERE  BB.INVOICE_NO = ${refNo})
+                              <![CDATA[ 
+                              AND      AA.EDI_STATUS_CODE <> '1') 
+                              ]]>  
+                          )
+    </sql>
+    
+    <!-- FC_FW_B2BI_GET_CODE :: LGE_EDI_RECEIVER_ID -->
+    <sql id="fwdFcFwB2biGetCode_LgeEdiReceiverId" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwB2biGetCode_LgeEdiReceiverId */
+            SELECT 
+                   IFNULL (  (SELECT   AA.EDI_RECEIVER_ID
+                              FROM     NFINF.TB_SMT_INT160 AA
+                              WHERE    AA.SR_NO = ${refNo}
+                              AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+                                                         FROM   NFINF.TB_SMT_INT160 BB
+                                                         WHERE  BB.SR_NO = ${refNo})
+                              <![CDATA[ 
+                              AND      AA.SHIPPING_REQUEST_STATUS_CODE <> '1' )
+                              ]]>  
+                            ,(SELECT  AA.EDI_RECEIVER_ID
+                              FROM     NFINF.TB_SMT_INT167 AA
+                              WHERE    AA.INVOICE_NO = ${refNo}
+                              AND      AA.INTERFACE_ID = (SELECT MAX(BB.INTERFACE_ID)
+                                                         FROM   NFINF.TB_SMT_INT167 BB
+                                                         WHERE  BB.INVOICE_NO = ${refNo})
+                              <![CDATA[ 
+                              AND      AA.EDI_STATUS_CODE <> '1') 
+                              ]]>  
+                          )
+    </sql>
+    
+    <!-- FC_FW_B2BI_GET_CODE :: GERP_IN_PRE_RESULT, EDMS_IMG, LGD_BL_RESPONSE -->
+    <sql id="fwdFcFwB2biGetCode" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwB2biGetCode */
+            CASE 
+                WHEN ${tag} = 'GERP_IN_PRE_RESULT'
+                THEN 
+                     (SELECT CASE 
+                                WHEN IFNULL(${param1}, '') = 'RESULT_CD'  
+                                THEN AA.EXECUTION_FLAG
+                                WHEN IFNULL(${param1}, '') = 'RESULT_MSG' 
+                                THEN AA.INTERFACE_LOG_CONTENT
+                            END
+                     FROM   (SELECT EXECUTION_FLAG
+                                    ,INTERFACE_LOG_CONTENT
+                             FROM NFINF.TB_FWD_INT125
+                             WHERE ORG_DOC_ID =(SELECT MAX(DOC_ID)
+                                                FROM   NFINF.TB_FWD_INT109
+                                                WHERE  HOUSE_BL_NO = IFNULL(${param2}, '') ) 
+                             ) AA
+                     LIMIT   1)
+                WHEN ${tag} = 'EDMS_IMG'
+                THEN (CASE
+                           WHEN IFNULL(${param1}, '') = 'PREBL_ATT_YN' OR IFNULL(${param1}, '') = 'PREBL_ATT_DT'
+                           THEN (
+                                  SELECT 
+                                        CASE 
+                                            WHEN IFNULL(${param1}, '') = 'PREBL_ATT_YN' 
+                                            THEN BB.BLOB_ATCH_YN
+                                            WHEN IFNULL(${param1}, '') = 'PREBL_ATT_DT' 
+                                            THEN IF(BB.BLOB_ATCH_YN='N','', DATE_FORMAT(BB.UPD_DT, '%Y/%m/%d %H:%i'))
+                                        END
+                                   FROM (SELECT BLOB_ATCH_YN
+                                               ,UPD_DT
+                                         FROM   NFINF.TB_FWD_INT1010
+                                         WHERE  INTERFACE_ID =(SELECT MAX(INTERFACE_ID)
+                                                                FROM   NFINF.TB_FWD_INT109
+                                                                WHERE  HOUSE_BL_NO = IFNULL(${param2}, '') )
+                                         ) BB
+                                 )
+                           ELSE NULL
+                     END)
+                WHEN ${tag} = 'LGD_BL_RESPONSE'
+                THEN (SELECT 
+                            CASE WHEN ${param1} = 'YN'  
+                                 THEN B.DOCUMENT_STATUS_CODE
+                                 WHEN ${param1} = 'MSG' 
+                                 THEN B.ERROR_EXPLANATION_TEXT
+                                 WHEN ${param1} = 'DT'  
+                                 THEN DATE_FORMAT(B.RESPONSE_DATE, '%Y/%m/%d %H:%i')
+                            END
+                     FROM   NFINF.TB_ISM_INT431 B
+                     WHERE  B.INTERFACE_ID =(SELECT MAX(A.INTERFACE_ID)
+                                            FROM   NFINF.TB_ISM_INT431 A
+                                            WHERE  A.DOCUMENT_TYPE_CODE = 'BL'
+                                            AND    A.KEY_FIELD1_NAME = IFNULL(${param2}, '') 
+                                            AND    A.KEY_FIELD2_NAME = IFNULL(${param3}, '') )
+                    )
+           END
+    </sql>
+    
+    <!-- 1. 프로그램 ID : FC_CM_GET_ETC_CD_NM
+         2. 기능정의 : 분류코드 및 상세코드를 입력받아 코드명을 리턴한다.
+         3. in Parameter : clasCd (분류코드)
+                           dtlCd (상세코드)
+     -->
+    <sql id="fwdFcCmGetEtcCdNm" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetEtcCdNm */
+        SELECT DTL_CD_NM
+	    FROM   TB_COM_ETC_CD
+	    WHERE  CLAS_CD = ${clasCd}
+	    AND    DTL_CD = ${dtlCd}
+	    AND    USE_YN ='Y'
+    </sql>
+    
+    <!-- FC_FW_CHK_SEA_FRT_CALC_YN -->
+    <sql id="fcFwChkSeaFrtCalcYn" >
+        /* fwd.common.fwdFuncInclude.fcFwChkSeaFrtCalcYn */
+        SELECT CASE WHEN D1.ARRN_CONT IS NULL THEN 'Y'
+                    WHEN REGEXP_INSTR(D1.ARRN_CONT,'[1|2|3|4|5|6|7|8|9]') = 0 THEN 'Y' 
+                    ELSE 'N' END
+          FROM TB_FWD_BL A1
+    INNER JOIN TB_SMT_ORD B1
+            ON A1.SMT_NO  = B1.SMT_NO
+    INNER JOIN TB_FWD_BL_EXPND C1
+            ON A1.BL_ID  = C1.BL_ID
+    INNER JOIN TB_FWD_BL_PRT_EXPND D1
+            ON A1.BL_ID  = D1.BL_ID
+    INNER JOIN TB_COM_LOC E1 /* POD */
+            ON A1.POD_CD = E1.LOC_CD
+    INNER JOIN TB_COM_LOC F1 /* POL */
+            ON A1.POL_CD = F1.LOC_CD
+         WHERE A1.DEL_YN = 'N'
+           AND B1.DEL_YN = 'N'
+           AND A1.EXCT_SPR_CD = 'OC' /*해상*/ 
+           AND A1.BL_SPR_CD   = 'H' /*HBL*/
+           AND A1.FRGTTERM_CD = 'PP' /*PP*/
+           AND E1.NATN_CD     IN ('US', 'CO', 'CL', 'AR', 'CA')  /*POD기준 국가 추가*/
+           AND F1.NATN_CD     <![CDATA[<>]]> 'CN'  /*중국 POL은 제외*/
+           AND A1.BL_ID       = ${blId} 
+           AND EXISTS (SELECT AA.BiZPTNR_CD /* MAIN거래처*/ 
+                         FROM TB_COM_BIZPTNR AA
+                        WHERE AA.USE_YN = 'Y'
+                          AND AA.BIZPTNR_GRP_CD = '1001001' /* LG전자 */
+                          AND AA.BIZPTNR_CD = B1.ORD_BIZPTNR_CD
+                        UNION ALL                        
+                       SELECT BB.BIZPTNR_CD /* SUB거래처 */ 
+                         FROM TB_COM_BIZPTNR BB /* Sub */
+                   INNER JOIN TB_COM_BIZPTNR CC /* Main */
+                           ON BB.MBIZPTNR_CD = CC.BIZPTNR_CD
+                        WHERE BB.USE_YN = 'Y'
+                          AND CC.BIZPTNR_GRP_CD = '1001001' /* LG전자 */
+                          AND BB.BIZPTNR_CD = B1.ORD_BIZPTNR_CD 
+                        UNION ALL
+                       SELECT CC.BIZPTNR_CD /* 추가 거래처 */
+                         FROM TB_COM_BIZPTNR CC
+                        WHERE CC.USE_YN = 'Y'
+                          AND CC.BIZPTNR_CD IN ('1000349','1000115','1032587','1033071') /* 1000349:LG SILTRON, 1000115:LG CHEM,1032587:LG HAUSYS, 1033071:DONGYANG */
+                          AND CC.BIZPTNR_CD = B1.ORD_BIZPTNR_CD)
+    </sql>
+    
+    <!-- FC_FW_GET_AUTO_RATE_YN -->
+    <sql id="fcFwGetAutoRateYn" >
+		WITH TBL AS (
+		     SELECT A.EXCT_SPR_CD
+		           ,A.BL_SPR_CD
+		           ,A.EXPS_BIZ_TYPE_CD
+		           ,A.FRGTTERM_CD
+		           ,A.SPLIT_BL_YN
+		           ,A.CONSOL_DSBL_HBL_YN
+		           ,A.SPLIT_RESN_CD
+		           ,B.TASK_SPR_CD
+		           ,IFNULL((SELECT CASE WHEN X1.MAX_CORP_CD = X1.MIN_CORP_CD AND CORP_CNT > 1 THEN 'Y' ELSE 'N' END
+		                      FROM (SELECT MAX(EXCT_BIZPTNR_CD) AS MAX_CORP_CD
+		                                  ,MIN(EXCT_BIZPTNR_CD) AS MIN_CORP_CD
+		                                  ,COUNT(1) As CORP_CNT
+		                              FROM TB_SMT_INTG_TASK_DEPT
+		                             WHERE DEL_YN = 'N'
+		                               AND EO_NO = (SELECT EO_NO FROM TB_FWD_BL WHERE BL_ID = ${blId})
+		                               AND TASK_SPR_CD IN ('EXP','IMP')) X1
+		            ),'N') AS SAME_CORP_YN
+		           ,A.LOCL_PTNR_YN
+		           ,(SELECT EXCT_BIZPTNR_CD
+		               FROM TB_SMT_INTG_TASK_DEPT
+		              WHERE DEL_YN = 'N'
+		                AND EO_NO = A.EO_NO
+		                AND TASK_SPR_CD = 'IMP'
+		              LIMIT 1) AS IMP_CORP_CD
+		           ,(SELECT EXCT_BIZPTNR_CD
+		               FROM TB_SMT_INTG_TASK_DEPT
+		              WHERE DEL_YN = 'N'
+		                AND EO_NO = A.EO_NO
+		                AND TASK_SPR_CD = 'EXP'
+		              LIMIT 1) AS EXP_CORP_CD
+		           ,IFNULL(A.NON_EXCT_BL_YN,'N') AS NON_EXCT_BL_YN
+		           ,A.BL_ID
+		           ,B.INTG_TASK_NO
+		       FROM TB_FWD_BL A
+		 INNER JOIN TB_SMT_INTG_TASK_DEPT B
+		         ON A.BL_ID = B.CST_BL_ID
+		        AND A.EO_NO = B.EO_NO
+		      WHERE A.DEL_YN = 'N'
+		        AND B.DEL_YN = 'N'
+		        AND A.BL_ID = ${blId}
+		        AND B.INTG_TASK_NO = ${intgTaskNo})
+		SELECT IFNULL(CASE WHEN EXCT_SPR_CD = 'EX' THEN ''
+		                   ELSE CASE WHEN SPLIT_BL_YN = 'Y' AND SPLIT_RESN_CD = '30' THEN 'N'
+		                             WHEN TASK_SPR_CD = 'IMP' AND SAME_CORP_YN = 'Y' THEN 'N'
+		                             WHEN ${statusCd} = '320' THEN
+		                                  CASE WHEN NON_EXCT_BL_YN = 'Y' THEN 'N'
+		                                       WHEN CONSOL_DSBL_HBL_YN = 'Y' AND EXP_CORP_CD = 'A100' AND EXCT_SPR_CD = 'AR' AND BL_SPR_CD = 'D' THEN 'Y'
+		                                       ELSE 'Y' END
+		                                  END
+		              END, 'Y')
+		  FROM TBL
+    </sql>
+    
+    <!-- FC_FW_GET_HBL_CLOSE_CHK -->
+    <sql id="fwdFcFwGetHblCloseChk" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetHblCloseChk */
+	   SELECT SUM(X1.HBL_CNT) HBL_SUM
+	     FROM (SELECT COUNT(1) HBL_CNT
+	             FROM TB_FWD_BL A
+	       INNER JOIN TB_SMT_INTG_TASK_DEPT B
+	               ON A.BL_ID = B.CST_BL_ID
+	              AND A.EO_NO = B.EO_NO
+	       INNER JOIN TB_FWD_BL_EXPND C
+	               ON A.BL_ID = C.BL_ID
+	            WHERE B.TASK_SPR_CD = 'IMP'
+	              AND B.OFCR_EMPNO IS NULL
+	              AND CASE WHEN C.ARR_CLOS_AUTO_APLY_YN = 'Y' THEN (SELECT CASE WHEN COUNT(*) = 0 THEN 'N' ELSE 'Y' END
+                                                                      FROM TB_SMT_INTG_TASK_DEPT
+                                                                     WHERE EO_NO IN (SELECT EO_NO
+                                                                                       FROM TB_FWD_BL
+                                                                                      WHERE BL_ID = ${mblId})
+                                                                       AND DEL_YN = 'N'
+                                                                       AND TASK_SPR_CD IN ('EXP','IMP')
+                                                                       AND LOCL_PTNR_YN = 'Y'
+                                                                       AND EXCT_BIZPTNR_CD IN ('X100','X200')) ELSE A.LOCL_PTNR_YN = 'N' END
+	              AND A.DEL_YN = 'N'
+	              AND B.DEL_YN = 'N'
+	              AND A.EXCT_SPR_CD IN ('AR','OC')
+	              AND A.MBL_ID = ${mblId}
+	            UNION ALL
+	           SELECT COUNT(1) HBL_CNT
+	             FROM TB_FWD_BL A
+	       INNER JOIN TB_SMT_INTG_TASK_DEPT B
+	               ON A.BL_ID = B.CST_BL_ID
+	              AND A.EO_NO = B.EO_NO
+	       INNER JOIN TB_FWD_BL_EXPND C
+	               ON A.BL_ID = C.BL_ID
+	            WHERE B.TASK_SPR_CD = 'IMP'
+	              AND B.OFCR_EMPNO IS NULL
+                  AND CASE WHEN C.ARR_CLOS_AUTO_APLY_YN = 'Y' THEN (SELECT CASE WHEN COUNT(*) = 0 THEN 'N' ELSE 'Y' END
+                                                                      FROM TB_SMT_INTG_TASK_DEPT
+                                                                     WHERE EO_NO IN (SELECT EO_NO
+                                                                                       FROM TB_FWD_BL
+                                                                                      WHERE BL_ID = ${mblId})
+                                                                       AND DEL_YN = 'N'
+                                                                       AND TASK_SPR_CD IN ('EXP','IMP')
+                                                                       AND LOCL_PTNR_YN = 'Y'
+                                                                       AND EXCT_BIZPTNR_CD IN ('X100','X200')) ELSE A.LOCL_PTNR_YN = 'N' END
+	              AND A.DEL_YN = 'N'
+	              AND B.DEL_YN = 'N'
+	              AND A.EXCT_SPR_CD IN ('AR','OC')
+	              AND A.ORIGN_BL_ID IN (SELECT X.BL_ID
+	                                      FROM TB_FWD_BL X
+	                                     WHERE X.MBL_ID = ${mblId}
+	                                       AND X.DEL_YN = 'N')) X1
+    </sql>
+    
+    <!-- FC_FW_GET_LOCLPTNR_YN -->
+    <sql id="fwdFcFwGetLoclptnrYn" >
+       /* fwd.common.fwdFuncInclude.fwdFcFwGetLoclptnrYn*/
+       SELECT CASE WHEN COUNT(*) = 0 THEN 'N' ELSE 'Y' END
+		 FROM TB_SMT_INTG_TASK_DEPT
+		WHERE EO_NO IN (SELECT EO_NO
+		                  FROM TB_FWD_BL
+		                 WHERE BL_ID = ${blId})
+		  AND DEL_YN = 'N'
+		  AND TASK_SPR_CD IN ('EXP','IMP')
+		  AND LOCL_PTNR_YN = 'Y'
+		  AND EXCT_BIZPTNR_CD IN ('X100','X200')
+    </sql>
+    
+    <!-- HBL_MBL 진행상태 -->
+    <!-- FC_FW_GET_BL_STAT_TEXT :: HBL_MBL_CLOS -->
+    <sql id="fwdFcFwGetBlStatTextHblMblClos" >
+       /* fwd.common.fwdFuncInclude.fwdFcFwGetBlStatTextHblMblClos*/
+       SELECT CASE WHEN XA.EXCT_SPR_CD = 'OC' THEN /* Sea */
+                       CASE WHEN XB.ONBR_CLOS_YN = 'Y' THEN 'OBD Closed' 
+                            WHEN XA.MBL_NO IS NOT NULL THEN 'MBL Received'
+                            WHEN XA.SR_NO IS NOT NULL THEN 'SR Created'
+                            ELSE '' END 
+                   WHEN XA.EXCT_SPR_CD IN ( 'AR', 'EX') THEN /* Air */
+                       CASE WHEN XB.ONBR_CLOS_YN = 'Y' THEN 'OBD Closed'
+                            WHEN XB.WGT_CLOS_YN = 'Y' THEN 'Weight Closed'
+                            WHEN XB.CONSOL_CLOS_YN = 'Y' THEN 'Consol Closed'
+                            ELSE '' END    
+              END AS STAT_TEXT
+         FROM TB_FWD_BL XA /* HBL */
+   CROSS JOIN TB_FWD_BL XB /* MBL */
+           ON XA.MBL_ID = XB.BL_ID
+        WHERE XA.DEL_YN = 'N'
+          AND XB.DEL_YN = 'N'
+          AND XA.BL_ID  = ${blId}
+    </sql>
+    
+    <!-- Sell Buy 여부 -->
+    <!-- FC_FW_GET_BL_STAT_TEXT :: HBL_SELLBUY -->
+    <sql id="fwdFcFwGetBlStatTextHblSellbuy" >
+       /* fwd.common.fwdFuncInclude.fwdFcFwGetBlStatTextHblSellbuy*/
+       SELECT CASE WHEN X1.SELL_CNT > 0 THEN
+                       CASE WHEN X1.BUY_CNT > 0 THEN 'Selling/Buying'
+                            WHEN X1.BUY_CNT = 0 THEN 'Selling' END
+                   WHEN X1.BUY_CNT > 0 THEN 'Buying'
+                   ELSE ''
+              END AS STAT_TEXT
+       FROM (
+             SELECT SUM(CASE WHEN XA.SELLBUY_SPR_CD = 'SO' THEN 1 ELSE 0 END) AS SELL_CNT
+                   ,SUM(CASE WHEN XA.SELLBUY_SPR_CD = 'BO' THEN 1 ELSE 0 END) AS BUY_CNT 
+               FROM TB_ISM_SELLBUY XA
+         INNER JOIN TB_FWD_BL XB
+                 ON XA.SMT_NO = XB.SMT_NO
+                AND XA.EO_NO = XB.EO_NO
+                AND XA.ADJ_BIZ_NO = XB.BL_ID /* BL ID조건 추가 */
+              WHERE XA.OFFSET_SMT_NO1 IS NULL /* 역전표 삭제건 */
+                AND XA.DEL_YN = 'N'
+                AND ( XA.SELLBUY_SPR_CD IN ('SO', 'BO') -- 매출/매입
+                      OR (XA.SPOT_FRGH_YN = 'Y' AND XA.SELLBUY_SPR_CD IN ('SD', 'BC', 'SI', 'BI')) /* SPOT 법인정산/사내거래 */
+                      OR (XA.RSTR_ID  LIKE '%TDT%' AND IFNULL(XA.CHNOV_OFFSET_YN, 'N') != 'Y') /* 전환데이터 */
+                    )
+                AND XB.BL_ID = ${blId}) X1
+    </sql>
+    
+    <!-- ISF 전송여부 -->
+    <!-- FC_FW_GET_BL_STAT_TEXT :: ISF_SEND -->
+    <sql id="fwdFcFwGetBlStatTextIsfSend" >
+       /* fwd.common.fwdFuncInclude.fwdFcFwGetBlStatTextIsfSend*/
+      SELECT CASE WHEN X1.ISF_SEND_YN = 'N' THEN CONCAT('ISF Not Send(',IFNULL(X1.DD,''),'days)') ELSE '' END AS STAT_TEXT
+        FROM (
+              SELECT IFNULL(XC.ISF_SEND_YN,'N') AS ISF_SEND_YN
+                    ,XA.ONBR_YMD
+                    ,XC.ISF_SEND_DT
+                    ,DATEDIFF(DATE_FORMAT(NOW(), '%y/%m/%d'), DATE_FORMAT(DATE_ADD(XA.ONBR_YMD, INTERVAL -2 DAY), '%y/%m/%d')) AS DD
+                FROM TB_FWD_BL XA
+          INNER JOIN TB_SMT_INTG_TASK_DEPT XB
+                  ON XA.BL_ID     = XB.CST_BL_ID
+                 AND XA.EO_NO     = XB.EO_NO
+     LEFT OUTER JOIN TB_FWD_ISF_HEADR XC
+                  ON XA.BL_ID     = XC.BL_ID
+                 AND XC.DEL_YN      = 'N'
+          INNER JOIN TB_COM_LOC XD
+                  ON XA.POD_CD    = XD.LOC_CD
+                 AND XD.NATN_CD   = 'US'
+               WHERE XA.DEL_YN    = 'N'
+                 AND XB.DEL_YN    = 'N' 
+                 AND XB.TASK_SPR_CD = 'EXP'
+                 AND XA.BL_ID       = ${blId}) X1
+    </sql>
+    
+    <!-- FC_CM_GET_LOC_NM -->
+    <sql id="fwdFcCmGetLocNm" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetLocNm */
+        CASE
+            WHEN    ${tag} = 'LOC_NM'
+            THEN    (SELECT IFNULL(IFNULL(LOC_NM,ENG_LOC_NM), LOC_CD)
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') )  
+            WHEN    ${tag} = 'LOC_ACRN_NM'
+            THEN    (SELECT LOC_ACRN_NM
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') )         
+            WHEN    ${tag} = 'LOC_SPR_CD'
+            THEN    (SELECT LOC_SPR_CD
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') )  
+            WHEN    ${tag} = 'NATN_CD'
+            THEN    (SELECT NATN_CD
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') )  
+            WHEN    ${tag} = 'ENG_LOC_NM'
+            THEN    (SELECT ENG_LOC_NM
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') ) 
+            WHEN    ${tag} = 'LOC_CD'
+            THEN    (SELECT LOC_CD
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') ) 
+            WHEN    ${tag} = 'CTY_CD'
+            THEN    (SELECT CTY_CD
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') )       
+            WHEN    ${tag} = 'IATA_CD'
+            THEN    (SELECT IATA_CD
+                     FROM   TB_COM_LOC
+                     WHERE  LOC_CD = IFNULL(TRIM(${param1}), '') )        
+        END
+    </sql>
+    
+    <!-- FC_CM_GET_EDI_NM1 -->
+    <sql id="fwdFcCmGetEdiNm1" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetEdiNm1 */
+        CASE
+            WHEN    ${tag} = 'LGD_PORT_MAP_OUT'
+            THEN    (SELECT OUTR_CD
+                     FROM   TB_COM_CD_MPNG
+                     WHERE  CD_MPNG_SPR_NM = 'PORT_CODE'
+                     AND    RLT_BIZPTNR_CD LIKE '02'
+                     AND    MPNG_DRCT_CD IN ('D', 'T')
+                     AND    INSD_CD = IFNULL(${param1}, '')
+                     AND    USE_YN = 'Y'
+                     LIMIT  1)
+            WHEN    ${tag} = '거래처영문명'
+            THEN    (SELECT BIZPTNR_ENG_NM
+                     FROM   TB_COM_BIZPTNR
+                     WHERE  BIZPTNR_CD = IFNULL(${param1}, ''))         
+        END
+    </sql>
+    
+    <!-- FC_CM_GET_EDI_NM2 -->
+    <sql id="fwdFcCmGetEdiNm2" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetEdiNm2 */
+        CASE
+            WHEN    ${tag} = 'PKE_EDI코드'
+            THEN    (SELECT OUTR_CD
+                     FROM   TB_COM_CD_MPNG
+                     WHERE  UPPR_CD_MPNG_NO = ${param1}
+                     AND    INSD_CD = ${param2}
+                     AND    USE_YN = 'Y'
+                     LIMIT  1)
+            WHEN    ${tag} = 'LGI_BL_LST_SND_DT'
+            THEN    (SELECT DATE_FORMAT(MAX(CREATE_DATE), '%Y/%m/%d %H:%i')
+                     FROM   NFINF.TB_FWD_INT676 A
+                     WHERE  A.BL_NO = ${param1})
+            WHEN    ${tag} = 'LGI_BL_SND_YN'
+            THEN    (SELECT IF(IFNULL(COUNT(1), 0)=0, 'N','Y')
+                     FROM   NFINF.TB_FWD_INT676 A
+                     WHERE  A.BL_NO = ${param1})
+            WHEN    ${tag} = 'LGI_RESPONSE'
+            THEN    (SELECT RTN
+                     FROM  (SELECT IF(${param2}='CODE',RETURN_CODE, RETURN_MSG) AS RTN
+                            FROM   NFINF.TB_FWD_INT683
+                            WHERE  DOC_NO = ${param1}
+                            ORDER BY INTERFACE_ID DESC) AA
+                     LIMIT 1)
+            WHEN    ${tag} = 'LGI_IMG_SND'
+            THEN    (SELECT CASE WHEN ${param2} = 'YN' 
+                                 THEN BLOB_ATCH_YN
+                                 WHEN ${param2} = 'MSG' 
+                                 THEN IF(BLOB_ATCH_YN='N','', DATE_FORMAT(UPD_DT, '%Y/%m/%d %H:%i'))
+                            END
+                       FROM (SELECT BLOB_ATCH_YN
+                                   ,UPD_DT
+                             FROM   NFINF.TB_FWD_INT1010
+                             WHERE  INTERFACE_ID =(SELECT MAX(INTERFACE_ID)
+                                                    FROM   NFINF.TB_FWD_INT676
+                                                    WHERE  BL_NO = ${param1} )) AA 
+                    )              
+       END
+    </sql>
+    
+    <!-- FC_CM_MPNG_TRANSMIT -->
+    <sql id="fwdFcCmMpgnTransmit" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmMpgnTransmit */
+        <!-- param1     /*시스템유형 : 오더(OM)*/
+             param2     /*관계거래처 : LGD(LGD001)*/
+             param3     /*맵핑구분 : SELECT INSD_CD FROM TB_CM_CD_MPNG WHERE CD_TYPE_CD = 'M'*/
+             param4     /*내부코드*/
+             param5     /*내부코드2*/
+             param6     /*내부코드3*/
+             param7     /*맵핑할 외부코드 구분 : OUTR_CD(1), OUTR_CD2(2), OUTR_CD3(3)*/ -->
+        IFNULL (
+                    (SELECT 
+                           (CASE
+                                WHEN ${param7} = '1'
+                                THEN OUTR_CD
+                                WHEN ${param7} = '2'
+                                THEN OUTR_CD2
+                                WHEN ${param7} = '3'
+                                THEN OUTR_CD3
+                                ELSE OUTR_CD
+                           END)
+                     FROM   TB_COM_CD_MPNG
+                     WHERE  CD_TYPE_CD = 'C'                                     /*DETAIL 맵핑코드*/
+                     AND    CD_MPNG_SPR_NM = ${param3}                           /*맵핑구분*/
+                     AND    SYS_TYPE_CD LIKE CONCAT(${param1}, '%')              /*시스템 유형*/
+                     AND    MPNG_DRCT_CD IN ('T', 'D')                           /*송신 (양뱡향 'RT' 추가)*/
+                     AND    (${param2} IS NULL OR RLT_BIZPTNR_CD = ${param2})    /*관계거래처코드*/
+                     AND    INSD_CD = ${param4}
+                     AND    (${param5} IS NULL OR INSD_CD2 = ${param5})
+                     AND    (${param6} IS NULL OR INSD_CD3 = ${param6})
+                     AND    USE_YN = 'Y'   
+                     LIMIT  1)
+                ,
+                     CASE
+                         WHEN ${param3} = 'LGD_CUST_MAP' OR ${param3} = 'CUSTOMER_CODE'
+                         THEN (
+                                SELECT 
+                                      (CASE
+                                            WHEN ${param7} = '1'
+                                            THEN OUTR_CD
+                                            WHEN ${param7} = '2'
+                                            THEN OUTR_CD2
+                                            WHEN ${param7} = '3'
+                                            THEN OUTR_CD3
+                                            ELSE OUTR_CD
+                                      END)
+                                FROM   TB_COM_CD_MPNG
+                                WHERE  CD_TYPE_CD = 'C'                                     /*DETAIL 맵핑코드*/
+                                AND    CD_MPNG_SPR_NM IN ('CUSTOMER_CODE','LGD_CUST_MAP')   /*맵핑구분*/        
+                                AND    MPNG_DRCT_CD IN ('T', 'D')                           /*송신 (양뱡향 'RT' 추가)*/
+                                AND    (RLT_BIZPTNR_CD = ${param2} OR RLT_BIZPTNR_NM = ${param2})    /*관계거래처코드*/
+                                AND    INSD_CD = ${param4}
+                                AND    (${param5} IS NULL OR INSD_CD2 = ${param5})
+                                AND    (${param6} IS NULL OR INSD_CD3 = ${param6})
+                                AND    USE_YN = 'Y'
+                                LIMIT  1
+                               )
+                         ELSE ''
+                     END
+                )
+    </sql>
+    
+    <!-- FC_CM_MPNG_RECEIVE -->
+    <sql id="fwdFcCmMpgnReceive" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmMpgnReceive */
+        <!-- param1     /*시스템유형 : 오더(OM)*/
+             param2     /*관계거래처 : LGD(LGD001)*/
+             param3     /*맵핑구분 : SELECT INSD_CD FROM TB_CM_CD_MPNG WHERE CD_TYPE_CD = 'M'*/
+             param4     /*내부코드*/
+             param5     /*내부코드2*/
+             param6     /*내부코드3*/
+             param7     /*맵핑할 외부코드 구분 : OUTR_CD(1), OUTR_CD2(2), OUTR_CD3(3)*/ -->
+        IFNULL (
+                    (SELECT 
+                           (CASE
+                                WHEN ${param7} = '1'
+                                THEN INSD_CD
+                                WHEN ${param7} = '2'
+                                THEN INSD_CD2
+                                WHEN ${param7} = '3'
+                                THEN INSD_CD3
+                                ELSE INSD_CD
+                           END)
+                     FROM   TB_COM_CD_MPNG
+                     WHERE  CD_TYPE_CD = 'C'                                     /*DETAIL 맵핑코드*/
+                     AND    CD_MPNG_SPR_NM = ${param3}                           /*맵핑구분*/
+                     AND    SYS_TYPE_CD LIKE CONCAT(${param1}, '%')              /*시스템 유형*/
+                     AND    MPNG_DRCT_CD IN ('R', 'D')                           /*송신 (양뱡향 'RT' 추가)*/
+                     AND    (${param2} IS NULL OR RLT_BIZPTNR_CD = ${param2})    /*관계거래처코드*/
+                     AND    OUTR_CD = ${param4}
+                     AND    (${param5} IS NULL OR OUTR_CD2 = ${param5})
+                     AND    (${param6} IS NULL OR OUTR_CD3 = ${param6})
+                     AND    USE_YN = 'Y'   
+                     LIMIT  1)
+                , '')
+    </sql>
+    
+    <!-- FC_FW_GET_SWITCH_INFO_EDI -->
+    <sql id="fwdFcFwGetSwitchInfoEdi" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetSwitchInfoEdi */
+        <!-- tag        /*종류*/
+             param1     /*HBL ID*/
+             param2     /*HBL의 INTG TASK NO*/ -->
+        CASE
+            WHEN    ${tag} = 'NORMBLID'
+            THEN    (SELECT MBL_ID
+                     FROM   TB_FWD_BL A
+                     WHERE  DEL_YN  = 'N'
+                     AND    IFNULL(A.BL_SWITCH_YN, 'N') = 'N'
+                     AND    BL_ID = (SELECT ORIGN_BL_ID
+                                    FROM   TB_FWD_BL
+                                    WHERE  BL_ID = IFNULL(${param1},'') ) )
+            WHEN    ${tag} = 'MBL_TASK_NO'
+            THEN    (SELECT B.INTG_TASK_NO
+                     FROM   TB_FWD_BL A
+                          , TB_SMT_INTG_TASK_DEPT B
+                     WHERE  A.DEL_YN  = 'N'
+                     AND    IFNULL(A.BL_SWITCH_YN, 'N') = 'N'
+                     AND    A.MBL_ID  = B.CST_BL_ID /* MBL의 통합역할부서 조회 */
+                     AND    B.TASK_SPR_CD = IFNULL(${param2}, '')   /* HBL의 역할과 MBL의 역할은 동일하다는 가정 */
+                     AND    A.BL_ID = (SELECT ORIGN_BL_ID
+                                       FROM   TB_FWD_BL
+                                       WHERE  BL_ID = IFNULL(${param1},'') ) )                  
+            WHEN    ${tag} = 'SWITCH_STATUS'
+            THEN    (SELECT (CASE WHEN MAX(XI.SO_SWT_YN) = 'N' THEN 'N'
+                                  WHEN MAX(XI.TRD_YN) = 'N' THEN 'N'
+                                  ELSE (CASE WHEN MAX(XI.BL_SWT_YN) = 'Y' THEN 'SD' ELSE 'SL' END)
+                            END) AS SWITCH_STATUS
+                      FROM (
+                             SELECT IFNULL(BI.SWT_BL_YN,'N') AS SO_SWT_YN
+                                  , IFNULL(AI.BL_SWITCH_YN,'N') AS BL_SWT_YN
+                                  /*, FC_FW_GET_TASK_YN(A.EO_NO, 'TRD') AS TRD_YN*/
+                                  , (CASE WHEN CI.EO_NO IS NULL THEN 'N' ELSE 'Y' END) AS TRD_YN
+                               FROM TB_FWD_BL DI
+                         INNER JOIN TB_FWD_BL AI ON AI.EO_NO = DI.EO_NO
+                                AND AI.DEL_YN = 'N'
+                         INNER JOIN TB_SMT_ORD BI ON BI.SMT_NO = AI.SMT_NO
+                    LEFT OUTER JOIN TB_SMT_INTG_TASK_DEPT CI ON CI.EO_NO = AI.EO_NO
+                                AND CI.DEL_YN = 'N'
+                                AND CI.TASK_SPR_CD = 'TRD'
+                              WHERE DI.DEL_YN = 'N'
+                                AND DI.BL_ID = IFNULL(${param1},'') ) XI )                     
+       END
+    </sql>
+    
+    
+    <!-- FC_FW_EDI_STATUS_NM -->
+    <sql id="fwdFcFwdEdiStatusNm" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwdEdiStatusNm */
+        <!-- tag       
+             param1    
+             param2  -->
+        CASE
+            WHEN    ${tag} = 'LPL SEND YN'
+            THEN    ( CASE
+                            WHEN IFNULL(${param1},'') = 'AR'
+                            THEN (SELECT COUNT(*)
+                                  FROM   NFINF.TB_FWD_INT060
+                                  WHERE  HOUSE_BLNO = IFNULL(${param2},'') )
+                            ELSE (SELECT COUNT(*)
+                                  FROM   NFINF.TB_FWD_INT061
+                                  WHERE  HOUSE_BLNO = IFNULL(${param2},'') ) 
+                      END )
+            WHEN    ${tag} = 'LPL SEND STATUS'
+            THEN    ( CASE
+                            WHEN IFNULL(${param1},'') = 'AR'
+                            THEN IF(  ( SELECT IF(COUNT(*)=0,'N','Y')
+                                        FROM   NFINF.TB_FWD_INT060
+                                        WHERE  HOUSE_BLNO =IFNULL(${param2},'') ) = 'Y'
+                                     ,( SELECT 
+                                               CASE
+                                                     WHEN IFNULL(RESULT_TYPE_CODE,'X') = 'N'
+                                                     THEN 'S'
+                                                     WHEN IFNULL(RESULT_TYPE_CODE,'X') = 'X'
+                                                     THEN 'X'
+                                                     ELSE 'E'
+                                               END
+                                        FROM   NFINF.TB_FWD_INT065
+                                        WHERE INTERFACE_ID IN ( SELECT MAX(A.INTERFACE_ID)
+                                                                FROM   NFINF.TB_FWD_INT065 A
+                                                                LEFT OUTER JOIN NFINF.TB_FWD_INT066 B ON B.INTERFACE_ID = A.INTERFACE_ID
+                                                                WHERE  1=1
+                                                                AND    A.REF_CONV_ID IN (SELECT CONVERSATION_ID
+                                                                                         FROM   NFINF.TB_FWD_INT060
+                                                                                         WHERE  HOUSE_BLNO = IFNULL(${param2},''))) ) 
+                                    
+                                     ,'Y'  
+                                    ) <!-- WHEN IFNULL(${param1},'') = 'AR' END -->
+                            ELSE IF(  ( SELECT IF(COUNT(*)=0,'N','Y')
+                                        FROM   NFINF.TB_FWD_INT061
+                                        WHERE  HOUSE_BLNO =IFNULL(${param2},'') ) = 'Y'
+                                     ,( SELECT 
+                                               CASE
+                                                     WHEN IFNULL(RESULT_TYPE_CODE,'X') = 'N'
+                                                     THEN 'S'
+                                                     WHEN IFNULL(RESULT_TYPE_CODE,'X') = 'X'
+                                                     THEN 'X'
+                                                     ELSE 'E'
+                                               END
+                                        FROM   NFINF.TB_FWD_INT065
+                                        WHERE INTERFACE_ID IN ( SELECT MAX(A.INTERFACE_ID)
+                                                                FROM   NFINF.TB_FWD_INT065 A
+                                                                WHERE  A.REF_CONV_ID IN (SELECT CONVERSATION_ID
+                                                                                         FROM   NFINF.TB_FWD_INT061
+                                                                                         WHERE  HOUSE_BLNO = IFNULL(${param2},''))) ) 
+                                    
+                                     ,'Y'  
+                                    )
+                      END )                    
+        END
+    </sql>
+    
+    <!-- FC_FW_HIST_POD_ETA_YMD -->
+    <sql id="fwdFcFwHistPodEtaYmd" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwHistPodEtaYmd (FC_FW_HIST_POD_ETA_YMD)*/
+	    SELECT CASE WHEN EXISTS (SELECT 'X'
+	                               FROM TB_COM_ETC_CD SA
+	                              WHERE 1=1
+	                                AND SA.ETC_CONT1 IN ((SELECT SA.SHPP_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId}  OR SA.MBL_ID = ${blId})
+	                                                       UNION ALL
+	                                                      (SELECT SA.CNEE_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} OR SA.MBL_ID = ${blId}))
+	                                AND SA.CLAS_CD = '2952' AND SA.USE_YN ='Y') THEN DATE_FORMAT((DATE_FORMAT((SELECT SA.ONBR_YMD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1), 'Y-%m-%d')
+	                                                                                             + IFNULL((SELECT SA.ETC_CONT5
+	                                                                                                         FROM TB_COM_ETC_CD SA
+	                                                                                                        WHERE 1=1
+	                                                                                                          AND SA.CLAS_CD = '2951'
+	                                                                                                          AND SA.USE_YN ='Y'
+	                                                                                                          AND SA.ETC_CONT1||SA.ETC_CONT2||SA.ETC_CONT3||SA.ETC_CONT4 = '1008002'||(SELECT SA.POL_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                                                                                                                ||(SELECT SA.POD_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                                                                                                                ||(SELECT (SELECT SA.BIZPTNR_GRP_CD
+	                                                                                                                                                                                             FROM TB_COM_BIZPTNR_GRP_CD SA
+	                                                                                                                                                                                                 ,TB_COM_BIZPTNR SB
+	                                                                                                                                                                                            WHERE SA.BIZPTNR_GRP_CD = IFNULL(SB.BIZPTNR_GRP_CD, (SELECT BB.BIZPTNR_GRP_CD
+	                                                                                                                                                                                                                                                   FROM TB_COM_BIZPTNR AA
+	                                                                                                                                                                                                                                                       ,TB_COM_BIZPTNR BB
+	                                                                                                                                                                                                                                                  WHERE AA.MBIZPTNR_CD = BB.BIZPTNR_CD
+	                                                                                                                                                                                                                                                    AND AA.BIZPTNR_CD = SB.BIZPTNR_CD
+	                                                                                                                                                                                                                                                  LIMIT 1))
+	                                                                                                                                                                                              AND SB.BIZPTNR_CD = SB.CARR_CD LIMIT 1)
+	                                                                                                                                                                                     FROM TB_SMT_INTG_TASK_DEPT SB
+	                                                                                                                                                                                    WHERE SB.TASK_SPR_CD = 'EXP'
+	                                                                                                                                                                                      AND SB.EO_NO = (SELECT SA.EO_NO FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                                                                                                                      AND SB.EO_NO IS NOT NULL
+	                                                                                                                                                                                      AND SB.DEL_YN = 'N'
+	                                                                                                                                                                                    LIMIT 1)
+	                                                                                                        LIMIT 1), IFNULL((SELECT SA.ETC_CONT5 FROM TB_COM_ETC_CD SA
+	                                                                                                                               WHERE 1=1
+	                                                                                                                                 AND SA.CLAS_CD = '2951'
+	                                                                                                                                 AND SA.USE_YN ='Y'
+	                                                                                                                                 AND SA.ETC_CONT1||SA.ETC_CONT2||SA.ETC_CONT3 = '1008002'||(SELECT SA.POL_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                                                                                 ||(SELECT SA.POD_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                                                                 AND SA.ETC_CONT4 IS NULL  /* 2021.10. 01 김정숙 */                        
+	                                                                                                                               LIMIT 1), NULL)) ), '%y/%m/%d')   /* LGES 이지만 구간별 리드타임 값 설정 없음 */
+	                ELSE
+	                     CASE WHEN EXISTS (SELECT 'X'
+	                                         FROM TB_COM_ETC_CD SA
+	                                        WHERE 1=1
+	                                          AND SA.CLAS_CD = '2951'
+	                                          AND SA.USE_YN ='Y'
+	                                          AND SA.ETC_CONT2||SA.ETC_CONT3||SA.ETC_CONT4 = (SELECT SA.POL_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                       ||(SELECT SA.POD_CD FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                       ||(SELECT (SELECT SA.BIZPTNR_GRP_CD
+	                                                                                                    FROM TB_COM_BIZPTNR_GRP_CD SA
+	                                                                                                        ,TB_COM_BIZPTNR SB
+	                                                                                                   WHERE SA.BIZPTNR_GRP_CD=IFNULL(SB.BIZPTNR_GRP_CD, (SELECT BB.BIZPTNR_GRP_CD
+	                                                                                                                                                        FROM TB_COM_BIZPTNR AA
+	                                                                                                                                                            ,TB_COM_BIZPTNR BB
+	                                                                                                                                                       WHERE AA.MBIZPTNR_CD = BB.BIZPTNR_CD
+	                                                                                                                                                         AND AA.BIZPTNR_CD = SB.BIZPTNR_CD
+	                                                                                                                                                       LIMIT 1))
+	                                                                                                     AND SB.BIZPTNR_CD = SB.CARR_CD LIMIT 1)
+	                                                                                            FROM TB_SMT_INTG_TASK_DEPT SB
+	                                                                                           WHERE SB.TASK_SPR_CD = 'EXP'
+	                                                                                             AND SB.EO_NO = (SELECT SA.EO_NO FROM TB_FWD_BL SA WHERE SA.BL_ID = ${blId} LIMIT 1)
+	                                                                                             AND SB.EO_NO IS NOT NULL
+	                                                                                             AND SB.DEL_YN = 'N'
+	                                                                                           LIMIT 1)
+	                                          AND IFNULL(SA.ETC_CONT1,'NONLGES')  <![CDATA[<>]]> '1008002' LIMIT 1) THEN  NULL
+	                          ELSE NULL
+	                     END
+	         END AS HIST_POD_ETA_YMD
+    </sql>
+    
+    <!-- FC_FW_GET_ALLOC_CD -->
+    <sql id="fwdFcFwGetAllocCd">
+    /* fwd.common.fwdFuncInclude.fwdFcFwGetAllocCd (FC_FW_GET_ALLOC_CD) */
+    SELECT X2.ASGN_TYPE_CD
+      FROM (
+            SELECT X1.ASGN_TYPE_CD
+                  ,ROW_NUMBER() OVER (ORDER BY X1.RNK ASC) AS RNK
+              FROM (
+                    SELECT A.ASGN_TYPE_CD
+                          ,1 AS RNK
+                      FROM TB_FWD_CST_ALLOC A
+                     WHERE A.CORP_CD = ${corpCd}
+                       AND A.BIZPTNR_CD = ${bizptnrCd}
+                       AND A.EXCT_SPR_CD = ${exctSprCd}
+                       AND A.CARGO_TYPE_CD = ${cargoTypeCd}
+                       AND A.ASGN_TYPE_CD != 'CARR'
+                       AND A.USE_YN = 'Y'
+                     UNION ALL
+                    SELECT A.ASGN_TYPE_CD
+                          ,2 AS RNK
+                      FROM TB_FWD_CST_ALLOC_CARR A
+                     WHERE A.CORP_CD = ${corpCd}
+                       AND A.EXCT_SPR_CD = ${exctSprCd}
+                       AND A.CARGO_TYPE_CD = ${cargoTypeCd}
+                       AND A.AIRLN_ACRN_CD = ${carrNm}
+                       AND EXISTS (SELECT 1
+                                     FROM TB_FWD_CST_ALLOC B
+                                    WHERE B.CORP_CD = ${corpCd}
+                                      AND B.BIZPTNR_CD = ${bizptnrCd}
+                                      AND B.EXCT_SPR_CD = ${exctSprCd}
+                                      AND B.CARGO_TYPE_CD = ${cargoTypeCd}
+                                      AND B.ASGN_TYPE_CD = 'CARR'
+                                      AND B.USE_YN = 'Y')
+                     UNION ALL
+                    SELECT A.ASGN_TYPE_CD
+                          ,3 AS RNK
+                      FROM TB_FWD_CST_ALLOC A
+                     WHERE A.CORP_CD = ${corpCd}
+                       AND A.BIZPTNR_CD = ${bizptnrCd}
+                       AND A.EXCT_SPR_CD = ${exctSprCd}
+                       AND A.CARGO_TYPE_CD = '*'
+                       AND A.ASGN_TYPE_CD != 'CARR'
+                       AND A.USE_YN = 'Y'
+                     UNION ALL
+                    SELECT A.ASGN_TYPE_CD
+                          ,4 AS RNK
+                      FROM TB_FWD_CST_ALLOC_CARR A
+                     WHERE A.CORP_CD = ${corpCd}
+                       AND A.EXCT_SPR_CD = ${exctSprCd}
+                       AND A.CARGO_TYPE_CD = ${cargoTypeCd}
+                       AND A.AIRLN_ACRN_CD = ${carrNm}
+                       AND EXISTS (SELECT 1
+                                     FROM TB_FWD_CST_ALLOC B
+                                    WHERE B.CORP_CD = ${corpCd}
+                                      AND B.BIZPTNR_CD = ${bizptnrCd}
+                                      AND B.EXCT_SPR_CD = ${exctSprCd}
+                                      AND B.CARGO_TYPE_CD = '*'
+                                      AND B.ASGN_TYPE_CD = 'CARR'
+                                      AND B.USE_YN = 'Y')
+                     UNION ALL
+                    SELECT A.ASGN_TYPE_CD
+                          ,5 AS RNK
+                      FROM TB_FWD_CST_ALLOC_CARR A
+                     WHERE A.CORP_CD = ${corpCd}
+                       AND A.EXCT_SPR_CD = ${exctSprCd}
+                       AND A.CARGO_TYPE_CD = '*'
+                       AND A.AIRLN_ACRN_CD = ${carrNm}
+                       AND EXISTS (SELECT 1
+                                     FROM TB_FWD_CST_ALLOC B
+                                    WHERE B.CORP_CD = ${corpCd}
+                                      AND B.BIZPTNR_CD = ${bizptnrCd}
+                                      AND B.EXCT_SPR_CD = ${exctSprCd}
+                                      AND B.CARGO_TYPE_CD = '*'
+                                      AND B.ASGN_TYPE_CD = 'CARR'
+                                      AND B.USE_YN = 'Y')
+                   ) X1
+           ) X2
+    WHERE X2.RNK = 1
+    </sql>
+    
+    <!-- FC_CM_GET_BIZPTNR_CD_GRP_INFO -->
+    <sql id="fwdFcCmGetBizptnrCdGrpInfo" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetBizptnrCdGrpInfo (FC_CM_GET_BIZPTNR_CD_GRP_INFO)*/
+        SELECT CASE WHEN ${inType} = '1' THEN CASE WHEN ${inCdNm} = 'CD' THEN BIZPTNR_GRP_CD
+                                                   WHEN ${inCdNm} = 'NM' THEN BIZPTNR_GRP_ENG_ACRN_NM
+                                              END
+                    WHEN ${inType} = '2' THEN CASE WHEN ${inCdNm} = 'CD' THEN UPPR_BIZPTNR_GRP_CD
+                                                   WHEN ${inCdNm} = 'NM' THEN (<include refid="fwdFcCmGetBizptnrGrpNm">
+                                                                                               <property name="inBizptnrGrpCd" value="UPPR_BIZPTNR_GRP_CD"></property>
+                                                                                               <property name="inNmType" value="'ES'"></property>
+                                                                               </include>) /*FC_CM_GET_BIZPTNR_GRP_NM(UPPR_BIZPTNR_GRP_CD,'ES') */
+                                              END
+                    WHEN ${inType} = '3' THEN CASE WHEN ${inCdNm} = 'CD' THEN BIZPTNR_GRP_CD
+                                                   WHEN ${inCdNm} = 'NM' THEN BIZPTNR_GRP_ENG_NM
+                                              END
+               END
+          FROM TB_COM_BIZPTNR_GRP_CD
+         WHERE BIZPTNR_GRP_CD = ( SELECT BIZPTNR_GRP_CD
+                                    FROM (SELECT XC.BIZPTNR_GRP_CD
+                                            FROM TB_CM_BIZPTNR XC
+                                           WHERE XC.USE_YN = 'Y'
+                                             AND XC.BIZPTNR_CD = ${inBizptnrCd}
+                                             AND XC.BIZPTNR_GRP_CD IS NOT NULL
+                                           UNION
+                                          SELECT XY.BIZPTNR_GRP_CD
+                                            FROM TB_CM_BIZPTNR XX
+                                      INNER JOIN TB_CM_BIZPTNR XY
+                                              ON IFNULL( XX.MBIZPTNR_CD, XX.BIZPTNR_CD) = XY.BIZPTNR_CD
+                                           WHERE XX.USE_YN = 'Y'
+                                             AND XY.USE_YN = 'Y'
+                                             AND XY.BIZPTNR_GRP_CD IS NOT NULL
+                                             AND XX.BIZPTNR_CD  = ${inBizptnrCd}
+                                         ) LIMIT 1
+                                ) /*FC_CM_GET_BIZPTNR_GRP_INFO(v_in_bizptnr_cd,'BIZPTNR_GRP_CD')*/
+    </sql>
+    
+    <!-- FC_CM_GET_BIZPTNR_GRP_NM -->
+    <sql id="fwdFcCmGetBizptnrGrpNm" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetBizptnrGrpNm (FC_CM_GET_BIZPTNR_GRP_NM)*/
+        SELECT CASE WHEN ${inNmType} = 'LF' THEN (SELECT BIZPTNR_GRP_NM
+                                                    FROM TB_COM_BIZPTNR_GRP_CD
+                                                   WHERE BIZPTNR_GRP_CD = ${inBizptnrGrpCd})
+                    WHEN ${inNmType} = 'ES' THEN (SELECT BIZPTNR_GRP_ENG_ACRN_NM
+                                                    FROM TB_COM_BIZPTNR_GRP_CD
+                                                   WHERE BIZPTNR_GRP_CD = ${inBizptnrGrpCd})
+                    ELSE (SELECT BIZPTNR_GRP_ENG_NM
+                            FROM TB_COM_BIZPTNR_GRP_CD
+                           WHERE BIZPTNR_GRP_CD = ${inBizptnrGrpCd})
+               END
+    </sql>    
+    
+    <!-- FC_CM_GET_BIZPTNR_NM2 -->
+    <sql id="fwdFcCmGetBizptnrNm2" >
+        /* fwd.common.fwdFuncInclude.fwdFcCmGetBizptnrNm2 */
+        <!-- tag        /*거래처명 유형*/
+             param1     /*거래처코드*/ -->
+        CASE
+            WHEN    ${tag} = 'LS'
+            THEN    (SELECT BIZPTNR_ACRN_NM
+			         FROM   TB_COM_BIZPTNR
+			         WHERE  BIZPTNR_CD = ${param1} )
+            WHEN    ${tag} = 'EF'
+            THEN    (SELECT BIZPTNR_ENG_NM
+                     FROM   TB_COM_BIZPTNR
+                     WHERE  BIZPTNR_CD = ${param1} )
+			WHEN    ${tag} = 'ES'
+            THEN    (SELECT BIZPTNR_ENG_ACRN_NM
+                     FROM   TB_COM_BIZPTNR
+                     WHERE  BIZPTNR_CD = ${param1} )         
+			ELSE    (SELECT BIZPTNR_NM
+                     FROM   TB_COM_BIZPTNR
+                     WHERE  BIZPTNR_CD = ${param1} )          
+       END
+    </sql>
+    
+    <!-- FC_FW_GET_AUTOCLOSE_YN -->
+    <sql id="fwdFcFwGetAutocloseYn" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetAutocloseYn */
+        SELECT CASE WHEN COUNT(*) = 0 THEN 'N' ELSE 'Y' END
+          FROM TB_COM_ETC_CD
+         WHERE CLAS_CD = '0804'
+           AND ETC_CONT1 = ${destCorp}
+           AND ETC_CONT2 = ${destPtnr}
+           AND IFNULL(USE_YN,'N') = 'Y'
+    </sql>
+    
+    <!-- FC_FW_GET_PANTOS_PORT_CODE -->
+    <sql id="fwdFcFwGetPantosPortCode" >
+        /* fwd.common.fwdFuncInclude.fwdFcFwGetPantosPortCode */
+        SELECT AA.CODE
+        FROM
+	        (
+		        SELECT '1' AS SPR ,SUBSTR(OUTR_CD, 1, 4) AS CODE
+		                  FROM   TB_COM_CD_MPNG
+		                  WHERE  CD_TYPE_CD = 'C'                                     /*DETAIL 맵핑코드*/
+		                  AND    SYS_TYPE_CD = 'CC'                                   /*시스템 유형*/
+		                  AND    MPNG_DRCT_CD IN ('T', 'D')                           /*송신 (양뱡향 'RT' 추가)*/
+		                  AND    USE_YN = 'Y'
+		                  AND    INSD_CD  = ${podCd}
+		                  AND    CD_MPNG_SPR_NM = 'PANTOS_PORT_CODE_SEA'
+		        UNION
+		        SELECT '2' AS SPR ,SUBSTR(OUTR_CD, 1, 4) AS CODE
+		                  FROM   TB_COM_CD_MPNG
+		                  WHERE  CD_TYPE_CD = 'C'                                     /*DETAIL 맵핑코드*/
+		                  AND    SYS_TYPE_CD = 'CC'                                   /*시스템 유형*/
+		                  AND    MPNG_DRCT_CD IN ('T', 'D')                           /*송신 (양뱡향 'RT' 추가)*/
+		                  AND    USE_YN = 'Y'
+		                  AND    INSD_CD  =  ${podCd}
+		                  AND    CD_MPNG_SPR_NM = 'PANTOS_PORT_CODE_AIR'
+            ) AA
+	    WHERE 1=1
+	    LIMIT 1
+    </sql>
+    
+    
+</mapper>

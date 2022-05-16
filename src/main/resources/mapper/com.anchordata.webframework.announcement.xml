@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchordata.webframework.announcement">
+
+	<resultMap id="announcement" type="AnnouncementVO">
+		<result property ="announcement_id"			column="ANNOUNCEMENT_ID"	/>
+		<result property ="type"					column="TYPE"	/>
+		<result property ="type_name"				column="TYPE_NAME"	/>
+		<result property ="title"					column="TITLE"	/>
+		<result property ="business_name"			column="BUSINESS_NAME"	/>
+		<result property ="manager"					column="MANAGER"	/>
+		<result property ="manager_dept"			column="MANAGER_DEPT"	/>
+		<result property ="manager_job_title"		column="MANAGER_JOB_TITLE"	/>
+		<result property ="manager_phone"			column="MANAGER_PHONE"	/>
+		<result property ="manager_mail"			column="MANAGER_MAIL"	/>
+		<result property ="contents"				column="CONTENTS"	/>
+		<result property ="register"				column="REGISTER"	/>
+		<result property ="reg_date"				column="REG_DATE"	/>
+		<result property ="process_status"			column="PROCESS_STATUS"	/>
+		<result property ="status_name"				column="STATUS_NAME"	/>
+		<result property ="use_yn"					column="USE_YN"	/>
+		<result property ="hits"					column="HITS"	/>
+		<result property ="receipt_to"				column="RECEIPT_TO"	/>
+		<result property ="receipt_from"			column="RECEIPT_FROM"	/>
+		<result property ="total_count"				column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	<resultMap id="announcementExt" type="AnnouncementExtVO">
+		<result property ="extension_id"			column="EXTENSION_ID"	/>
+		<result property ="announcement_id"			column="ANNOUNCEMENT_ID"	/>
+		<result property ="ext_type"				column="EXT_TYPE"	/>
+		<result property ="ext_field_name"			column="EXT_FIELD_NAME"	/>
+		<result property ="ext_field_yn"			column="EXT_FIELD_YN"	/>
+		<result property ="total_count"				column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	<resultMap id="AnnouncementCheckList" type="AnnouncementCheckListVO">
+		<result property ="check_id"				column="CHECK_ID"	/>
+		<result property ="announcement_id"			column="ANNOUNCEMENT_ID"	/>
+		<result property ="all_use_yn"				column="ALL_USE_YN"	/>
+		<result property ="check_list_use_yn"		column="CHECK_LIST_USE_YN"	/>
+		<result property ="check_list_content"		column="CHECK_LIST_CONTENT"	/>
+		<result property ="popup_use_yn"			column="POPUP_USE_YN"	/>
+		<result property ="popup_warn_use_yn"		column="POPUP_WARN_USE_YN"	/>
+		<result property ="popup_warn_content"		column="POPUP_WARN_CONTENT"	/>
+		<result property ="total_count"				column="TOTAL_COUNT"	/>
+	</resultMap>
+	
+	<insert id="insertInfo" useGeneratedKeys="true" keyProperty="announcement_id" parameterType="AnnouncementVO">
+		INSERT INTO ANNOUNCEMENT ( 
+			TYPE
+			,	TITLE
+			,	BUSINESS_NAME
+			,	MANAGER
+			,	MANAGER_DEPT
+			,	MANAGER_JOB_TITLE
+			,	MANAGER_PHONE
+			,	MANAGER_MAIL
+			,	CONTENTS
+			,	REGISTER
+			,	PROCESS_STATUS
+			,	DATE
+			,	RECEIPT_TO
+			,	RECEIPT_FROM
+		) 
+		VALUES (
+			#{type} 
+			,	#{title} 
+			,	#{business_name}
+			,	#{manager}
+			,	#{manager_dept}
+			,	#{manager_job_title}
+			,	#{manager_phone}
+			,	#{manager_mail}
+			,	#{contents}
+			,	#{register}
+			,	#{process_status}
+			,	#{date}
+			,	#{receipt_to}
+			,	#{receipt_from}
+			
+		);
+	</insert>
+	
+	<update id="updateInfo" parameterType="AnnouncementVO">
+		UPDATE ANNOUNCEMENT SET   
+			TITLE = #{title}
+			,	BUSINESS_NAME = #{business_name}
+			,	MANAGER = #{manager}
+			,	MANAGER_DEPT = #{manager_dept}
+			,	MANAGER_JOB_TITLE = #{manager_job_title}
+			,	MANAGER_PHONE = #{manager_phone}
+			,	MANAGER_MAIL = #{manager_mail}
+			,	CONTENTS = #{contents}
+			,	REGISTER = #{register}
+			,	REGISTER = #{register}
+			,	DATE = #{date}
+			,	RECEIPT_TO = #{receipt_to}
+			,	RECEIPT_FROM = #{receipt_from}
+			,	PROCESS_STATUS = #{process_status}
+		WHERE 
+			ANNOUNCEMENT_ID = #{announcement_id}
+	</update>
+	
+	<insert id="insertExtensionInfo" parameterType="AnnouncementVO">
+		INSERT INTO ANNOUNCEMENT_EXTENSION ( 
+			ANNOUNCEMENT_ID
+			,	EXT_TYPE
+			,	EXT_FIELD_NAME
+			,	EXT_FIELD_YN
+		) 
+		VALUES 
+			<foreach collection="ext_field_list" item="item" separator=" , " >
+	        	(	
+	        		${announcement_id}
+	        		,	'${item.ext_type}'
+	        		,	'${item.ext_field_name}'
+	        		,	'${item.ext_field_yn}'
+        		 )
+			</foreach>
+	</insert>
+	
+	<update id="updateExtensionInfo" parameterType="AnnouncementVO">
+	 	INSERT INTO ANNOUNCEMENT_EXTENSION
+	 	VALUES
+	 		<foreach collection="ext_field_list" item="item" separator=" , " >
+	        	(	
+	        		${item.extension_id}
+	        		,	${item.announcement_id}
+	        		,	'${item.ext_type}'
+	        		,	'${item.ext_field_name}'
+	        		,	'${item.ext_field_yn}'
+        		 )
+			</foreach>
+        
+           ON DUPLICATE KEY UPDATE 
+           ANNOUNCEMENT_ID = VALUES(announcement_id)
+           , EXT_TYPE = VALUES(ext_type)
+           , EXT_FIELD_NAME = VALUES(ext_field_name)
+           , EXT_FIELD_YN = VALUES(ext_field_yn)
+	</update>
+	
+	
+
+	<select id="selectExtensionInfo" parameterType="AnnouncementVO" resultMap="announcementExt">
+		SELECT
+			EXTENSION_ID
+			,	ANNOUNCEMENT_ID
+			,	EXT_TYPE
+			,	EXT_FIELD_NAME
+			,	EXT_FIELD_YN
+		FROM
+			ANNOUNCEMENT_EXTENSION
+		WHERE
+			ANNOUNCEMENT_ID = #{announcement_id} 
+	</select>
+	
+	
+	
+	<insert id="insertCheckListInfo" parameterType="AnnouncementVO">
+		INSERT INTO ANNOUNCEMENT_CHECKLIST ( 
+			ANNOUNCEMENT_ID
+			,	ALL_USE_YN
+			,	CHECK_LIST_USE_YN
+			,	CHECK_LIST_CONTENT
+			,	POPUP_USE_YN
+			,	POPUP_WARN_USE_YN
+			,	POPUP_WARN_CONTENT
+		) 
+		VALUES 
+			<foreach collection="ext_check_list" item="item" separator=" , " >
+	        	(	
+	        		${announcement_id}
+	        		,	'${item.all_use_yn}'
+	        		,	'${item.check_list_use_yn}'
+	        		,	'${item.check_list_content}'
+	        		,	'${item.popup_use_yn}'
+	        		,	'${item.popup_warn_use_yn}'
+	        		,	'${item.popup_warn_content}'
+        		 )
+			</foreach>
+	</insert>
+	
+	<update id="updateCheckListInfo" parameterType="AnnouncementVO">
+	 	INSERT INTO ANNOUNCEMENT_CHECKLIST
+	 	VALUES
+	 		<foreach collection="ext_check_list" item="item" separator=" , " >
+	        	(	
+	        		${item.check_id}
+	        		,	${item.announcement_id}
+	        		,	'${item.all_use_yn}'
+	        		,	'${item.check_list_use_yn}'
+	        		,	'${item.check_list_content}'
+	        		,	'${item.popup_use_yn}'
+	        		,	'${item.popup_warn_use_yn}'
+	        		,	'${item.popup_warn_content}'
+        		 )
+			</foreach>
+        
+           ON DUPLICATE KEY UPDATE 
+           ANNOUNCEMENT_ID = VALUES(announcement_id)
+           , ALL_USE_YN = VALUES(all_use_yn)
+           , CHECK_LIST_USE_YN = VALUES(check_list_use_yn)
+           , CHECK_LIST_CONTENT = VALUES(check_list_content)
+           , POPUP_USE_YN = VALUES(popup_use_yn)
+           , POPUP_WARN_USE_YN = VALUES(popup_warn_use_yn)
+           , POPUP_WARN_CONTENT = VALUES(popup_warn_content)
+	</update>
+	
+	<select id="selectCheckListInfo" parameterType="AnnouncementVO" resultMap="AnnouncementCheckList">
+		SELECT
+			CHECK_ID
+			,	ANNOUNCEMENT_ID
+			,	ALL_USE_YN
+			,	CHECK_LIST_USE_YN
+			,	CHECK_LIST_CONTENT
+			,	POPUP_USE_YN
+			,	POPUP_WARN_USE_YN
+			,	POPUP_WARN_CONTENT
+		FROM
+			ANNOUNCEMENT_CHECKLIST
+		WHERE
+			ANNOUNCEMENT_ID = #{announcement_id} 
+	</select>
+	
+	
+	<insert id="insertRelativeFileInfo" parameterType="AnnouncementVO">
+		INSERT INTO ANNOUNCEMENT_FILE_RELATIVE ( 
+			ANNOUNCEMENT_ID
+			,	FILE_ID
+		) 
+		VALUES ( 
+			#{announcement_id}
+			,	#{file_id}
+		);
+	</insert>
+	
+	
+	<select id="selectSearchPagingList" parameterType="DataMap"  resultMap="announcement">
+		<include refid="common.pagingPre"/>
+		SELECT
+			ANNOUNCEMENT_ID
+			, TYPE
+			, (SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.TYPE ) AS TYPE_NAME
+			, TITLE
+			, BUSINESS_NAME
+			, DATE
+			, RECEIPT_FROM
+			, RECEIPT_TO
+			, MANAGER
+			, MANAGER_DEPT
+			, MANAGER_JOB_TITLE
+			, MANAGER_PHONE
+			, MANAGER_MAIL
+			, CONTENTS
+			, REGISTER
+			, PROCESS_STATUS
+			, (SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000006' AND B.DETAIL_ID = A.PROCESS_STATUS ) AS STATUS_NAME
+			, HITS
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+		FROM
+			ANNOUNCEMENT A
+		WHERE
+			USE_YN = 'Y'
+			<if test='type != null and type != "" '>
+				<choose>
+				    <when test='type == "D0000005"'>
+				    	AND (TYPE = 'D0000001' OR TYPE = 'D0000002')
+				    </when>
+				    <otherwise>
+				      	AND TYPE = #{type}
+				    </otherwise>
+			  	</choose>
+		  	</if>
+			
+			<if test='process_status != null and process_status != "" '>
+				<choose>
+					<!-- D0000005 : member 에서 공고를 볼때는 개시 / 개시 종료된 건만 보여져야 한다. 임의로 정한 코드이다. -->
+				    <when test='process_status == "D0000005" '>
+				    	AND (PROCESS_STATUS = 'D0000003' OR PROCESS_STATUS = 'D0000004')
+				    </when>
+				    <otherwise>
+				      	AND PROCESS_STATUS = #{process_status}
+				    </otherwise>
+			  	</choose>
+			
+				
+			</if>
+			
+			<if test='manager != null and manager != "" '>
+				AND manager LIKE CONCAT('%',#{manager},'%')
+			</if>
+			
+			<if test='receipt_from != null and receipt_from != "" '>
+				AND  RECEIPT_FROM <![CDATA[ >= ]]>  #{receipt_from}
+			</if>
+			
+			<if test='receipt_to != null and receipt_to != "" '>
+				AND  RECEIPT_TO <![CDATA[ <= ]]> #{receipt_to} 
+			</if>
+			
+			<if test='search_text != null and search_text != "" '>
+				AND ( TITLE LIKE CONCAT('%',#{search_text},'%') OR BUSINESS_NAME LIKE CONCAT('%',#{search_text},'%') )
+			</if>
+			
+			<if test='year != null and year != "" '>
+				AND ( DATE_FORMAT(RECEIPT_FROM,'%Y') = #{year} OR DATE_FORMAT(RECEIPT_TO,'%Y') = #{year} )
+			</if>
+			
+			<if test='search_date_yn != null and search_date_yn != "" and search_date_yn == "Y" '>
+				AND RECEIPT_FROM <![CDATA[ <= ]]> CURDATE()
+				AND CURDATE()  <![CDATA[ <= ]]> RECEIPT_TO
+			</if>
+			
+			
+		<include refid="common.pagingPost"/>
+	</select>
+	
+	<select id="selectDetail" parameterType="AnnouncementVO"  resultMap="announcement">
+		SELECT
+			ANNOUNCEMENT_ID
+			, TYPE
+			, (SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000005' AND B.DETAIL_ID = A.TYPE ) AS TYPE_NAME
+			, TITLE
+			, BUSINESS_NAME
+			, DATE
+			, RECEIPT_FROM
+			, RECEIPT_TO
+			, MANAGER
+			, MANAGER_DEPT
+			, MANAGER_JOB_TITLE
+			, MANAGER_PHONE
+			, MANAGER_MAIL
+			, CONTENTS
+			, REGISTER
+			, PROCESS_STATUS
+			, (SELECT B.NAME FROM COMMON_CODE_DETAIL B WHERE B.MASTER_ID = 'M0000006' AND B.DETAIL_ID = A.PROCESS_STATUS ) AS STATUS_NAME
+			, HITS
+			, DATE_FORMAT(REG_DATE,'%Y-%m-%d') AS REG_DATE
+		FROM
+			ANNOUNCEMENT A
+		WHERE
+			USE_YN = 'Y'
+			AND ANNOUNCEMENT_ID = #{announcement_id} 
+	</select>
+	
+	
+	<select id="selectRelativeFileInfo" parameterType="AnnouncementVO" resultType="int">
+		SELECT
+			FILE_ID
+		FROM
+			ANNOUNCEMENT_FILE_RELATIVE A
+		WHERE
+			ANNOUNCEMENT_ID = #{announcement_id} 
+	</select>
+	
+	
+	<delete id="deleteInfo" parameterType="AnnouncementVO">
+		DELETE FROM ANNOUNCEMENT			
+		WHERE 
+			ANNOUNCEMENT_ID = #{announcement_id}
+	</delete>
+	
+	<delete id="deleteRelativeInfo" parameterType="AnnouncementVO">
+		DELETE FROM ANNOUNCEMENT_FILE_RELATIVE			
+		WHERE 
+			ANNOUNCEMENT_ID = #{announcement_id}
+	</delete>	
+	
+	<delete id="deleteRelativeInfoWithFileId" parameterType="AnnouncementVO">
+		DELETE FROM ANNOUNCEMENT_FILE_RELATIVE			
+		WHERE 
+			FILE_ID IN
+					<foreach collection="delete_file_list" item="file_id" separator="," open="(" close=")" >
+						#{file_id}
+					</foreach>
+	</delete>
+	
+	
+	<update id="updateHits" parameterType="AnnouncementVO">
+		UPDATE ANNOUNCEMENT SET   
+			HITS = HITS+1
+		WHERE 
+			ANNOUNCEMENT_ID = #{announcement_id}
+	</update>
+	
+	<update id="updateProcessStatus" parameterType="AnnouncementVO">
+		UPDATE ANNOUNCEMENT SET   
+			PROCESS_STATUS = #{process_status}
+		WHERE 
+			ANNOUNCEMENT_ID = #{announcement_id}
+	</update>
+	
+	
+	<delete id="deleteExtensionInfo" parameterType="AnnouncementVO">
+		DELETE FROM ANNOUNCEMENT_EXTENSION			
+		WHERE 
+			ANNOUNCEMENT_ID = #{announcement_id}
+	</delete>
+	
+	<delete id="deleteCheckListInfo" parameterType="AnnouncementVO">
+		DELETE FROM ANNOUNCEMENT_CHECKLIST			
+		WHERE 
+			ANNOUNCEMENT_ID = #{announcement_id}
+	</delete>
+		
+		
+	<select id="selectMainState" resultType="map">
+		SELECT 
+			(SELECT COUNT(*) FROM announcement WHERE (TYPE = 'D0000001' OR TYPE ='D0000002') AND PROCESS_STATUS = 'D0000003') AS MATCH_OPEN_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE (TYPE = 'D0000001' OR TYPE ='D0000002') AND PROCESS_STATUS = 'D0000002') AS MATCH_WRITE_FINISH_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE (TYPE = 'D0000001' OR TYPE ='D0000002') AND PROCESS_STATUS = 'D0000001') AS MATCH_WRITE_CONTINUE_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE TYPE = 'D0000003' AND PROCESS_STATUS = 'D0000003') AS CONTEST_OPEN_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE TYPE = 'D0000003' AND PROCESS_STATUS = 'D0000002') AS CONTEST_WRITE_FINISH_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE TYPE = 'D0000003' AND PROCESS_STATUS = 'D0000001') AS CONTEST_WRITE_CONTINUE_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE TYPE = 'D0000004' AND PROCESS_STATUS = 'D0000003') AS PROPOSAL_OPEN_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE TYPE = 'D0000004' AND PROCESS_STATUS = 'D0000002') AS PROPOSAL_WRITE_FINISH_COUNT,
+			(SELECT COUNT(*) FROM announcement WHERE TYPE = 'D0000004' AND PROCESS_STATUS = 'D0000001') AS PROPOSAL_WRITE_CONTINUE_COUNT
+	</select>
+	
+</mapper>
