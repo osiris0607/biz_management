@@ -70,7 +70,7 @@ public class GabiaSmsSender {
 				//	System.out.println("Response : " + body.string());
 				//}
 			//} else {
-				System.out.println("Response : " + body.string());
+				System.out.println("Response 결과 : " + body.string());
 				System.out.println("Error Occurred :: " + response);
 			//}
 			return false;
