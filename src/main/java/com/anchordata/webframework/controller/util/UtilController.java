@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.anchordata.webframework.base.util.GabiaSmsSender;
 import com.anchordata.webframework.base.util.SGISOpenAPI;
+import com.anchordata.webframework.service.emailSMS.emailSMSVO;
+import com.anchordata.webframework.service.reception.ReceptionExpertVO;
+import com.anchordata.webframework.service.reception.ReceptionVO;
 import com.anchordata.webframework.service.uploadFile.UploadFileService;
 import com.anchordata.webframework.service.uploadFile.UploadFileVO;
 import com.anchordata.webframework.service.util.UtilAdministrativeDistrictVO;
@@ -123,16 +127,13 @@ public class UtilController {
 	}
 	
 	
-	@RequestMapping("/admin/api/reception/tech/match/emailSMS/sendSMS")
+	@RequestMapping("/admin/api/reception/tech/match/emailSMS/userAuth")
 	@ResponseBody
     public boolean callSmsAuth() {
-        System.out.println("호출1111");
         JsonObject param = new JsonObject();
         // POST 방식으로 호출.(GET, POST, PUT, DELETE 다 가능 합니다.)
         gabiaSmsSender.userAuth();
-        System.out.println("authhhhhhhhhhhhhhhhh");
         return true;
     }
-	
 	
 }

@@ -106,30 +106,66 @@
 			alert("한명 이상의 전문가를 선택하여야 합니다.");
 			return;
 		}
-		
-		var formData = new FormData();
-		if (confirm('SMS을 전송하시겠습니까?')) {
-			$.ajax({
-			    type : "POST",
-			    url : "/admin/api/reception/tech/match/emailSMS/sendSMS",
-			    data : formData,
-			    processData: false,
-			    contentType: false,
-			    mimeType: 'multipart/form-data',
-			    success : function(data) {
-			    	var jsonData = JSON.parse(data);
-			        if (jsonData.result == true) {
-			        	alert("전문가 정보 변경에 성공했습니다.");
-			        } else {
-			        	alert("전문가 정보 변경에 실패했습니다.");
-			        }
-			    },
-			    error : function(err) {
-			        alert(err.status);
-			    }
+		if (confirm("SMS를 전송하시겠습니까?")) {
+			// 가장 최근의 전송 메일/SMS 내용을 가져온다. 
+			searchMailSMSContents();
+			if ( mailSMSContents == null || mailSMSContents.length <= 0 ) {
+				return;
+			}
+			console.log('mailSMSContents : ', mailSMSContents);
+			// 접수 별로 한번씩 보내야 한다. 각각의 Status가 틀리기 때문에 동시에 처리할 수가 없다.
+			
+				var formData = new FormData();
+				// Expert Progress에서의 Reception Status는 항상 'D0000005' 매칭 신청 시 이다. 
+				formData.append("reception_id", $("#reception_id").val() );
+				formData.append("reception_status", "D0000005" );
+			
+			//전송할 sms 내용
+			$.each(mailSMSContents, function(key, value) {
+						if (value.type == "sms") {
+							formData.append("title", value.title);   //제목
+							formData.append("comment", value.comment);  //내용
+							formData.append("link", value.link);  //링크
+							formData.append("sender", value.sender);  //발송자
+						}
 			});
+			
+			// 전송할 대상 			
+			var memberIdList = new Array();
+			var toSMSList = new Array();
+			
+			// 전체 체크 순회
+			$("input:checkbox[name=prioiry_checkbox]:checked").each(function() {
+				memberIdList.push($(this).attr("member_id"));
+				toSMSList.push($(this).attr("mobile_phone"));
+			});
+			
+			
+			formData.append("expert_member_ids", memberIdList);
+			formData.append("to_phone", toSMSList);
+			
+			//보낼파라미터 : 폰번호, 내용
+				$.ajax({
+				    type : "POST",
+				    url : "/admin/api/reception/tech/match/emailSMS/sendSMS",
+				    data : formData,
+				    processData: false,
+				    contentType: false,
+				    mimeType: 'multipart/form-data',
+				    success : function(data) {
+				    	var jsonData = JSON.parse(data);
+				        if (jsonData.result == true) {
+				        	alert("SMS 전송에 성공하였습니다.");
+				        } else {
+				        	alert("SMS 전송에 실패하였습니다. 다시 시도해 주시기 바랍니다.");
+				        }
+				    },
+				    error : function(err) {
+				        alert(err.status);
+				    }
+				});
 		}
-	}	
+	}
 
 	function savePriority() {
 		var formData = new FormData();
@@ -483,7 +519,7 @@
 									<button type="button" class="blue_btn2 fl mr5 s_h_button" onclick="$('#save_priority_btn').show();">전문가 매칭 우선순위 선정</button>
 									<button type="button" class="blue_btn2 fl mr5" id="save_priority_btn" style="display:none;" onclick="savePriority();">우선순위 저장</button>
 									<button type="button" class="blue_btn fl mr5 expertintention_emailsend_popup_open mail_btn" onclick="sendMail();">E-mail</button>
-									<button type="button" class="blue_btn fl mr5 expertintention_smssend_popup_open sms_btn">SMS</button>
+									<button type="button" class="blue_btn fl mr5 expertintention_smssend_popup_open sms_btn" onclick="sendSMS();">SMS</button>
 									<button type="button" class="gray_btn2 fl" onclick="location.href='/admin/fwd/reception/match/main'">목록</button>
 								</div>
 			   		  		</div>

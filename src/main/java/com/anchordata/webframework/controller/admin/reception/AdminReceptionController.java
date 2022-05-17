@@ -400,6 +400,51 @@ public class AdminReceptionController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	@RequestMapping("/admin/api/reception/tech/match/emailSMS/sendSMS")
+	public ModelAndView sendSMS(@ModelAttribute emailSMSVO vo, ModelAndView mv) throws Exception {
+		System.out.println("VO Mail ---------> " + vo.getTo_phone());
+		boolean result = emailSMSService.sendSMS(vo);
+		if ( result == true) {
+			// D0000004 - 매칭 신청인 경우에만 메일 혹은 문자를 보냈을 경우에 매칭 진행 중 status 로 바뀐다. 나머지 Status에서는 그냥 메일만 보낸다.
+			// 마참가지로 전문가의 Participation status도  D0000004 인 경우에만 바꾼다.
+			// D0000004가 아닌 경우는 이미 한번 이상 메잉 혹은 문자를 전송한 상태이다. D0000004 에서 메일 혹은 문자를 전송해야 다른 Status로 바뀐다.
+			if ( vo.getReception_status().compareToIgnoreCase("D0000004") == 0) {
+				// reception status 변경 (매칭 진행 중)
+				ReceptionVO receptionVO = new ReceptionVO();
+				receptionVO.setReception_id(vo.getReception_id());
+				// D0000005 - 매칭 진행 중으로 변경
+				receptionVO.setReception_status("D0000005");
+				receptionService.updateReceptionStatus(receptionVO);
+				
+				// reception expert 참여여부 status 변경 (메일 발송 중)
+				for (int i=0; i<vo.getExpert_member_ids().size(); i++) {
+					ReceptionExpertVO receptionExpertVO = new ReceptionExpertVO();	
+					receptionExpertVO.setReception_id(vo.getReception_id());
+					receptionExpertVO.setMember_id(vo.getExpert_member_ids().get(i));
+					// D0000001 - 메일을 전송한 상태이므로 미회신으로 변경한다.
+					receptionExpertVO.setParticipation_type("D0000001");
+					receptionService.updateExpertParticipation(receptionExpertVO);
+				}
+			}
+			// 메일 발송 시간만 업데이트 한다.
+			else {
+				// reception status 변경 (매칭 진행 중)
+				ReceptionVO receptionVO = new ReceptionVO();
+				receptionVO.setReception_id(vo.getReception_id());
+				// D0000005 - 매칭 진행 중으로 변경
+				receptionVO.setReception_status(vo.getReception_status());
+				receptionService.updateReceptionStatus(receptionVO);
+			}
+			mv.addObject("result", true);
+		}
+		else {
+			mv.addObject("result", false);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 	/**
 	* reception status 변경
 	*/

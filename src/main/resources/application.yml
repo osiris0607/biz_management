@@ -144,7 +144,7 @@ spring:
       connection-test-query: SELECT 1  
   
 server:
-  port: 8888
+  port: 8080
 
 tomcat:
   ajp:

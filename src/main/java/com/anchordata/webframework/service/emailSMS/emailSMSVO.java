@@ -45,6 +45,7 @@ public class emailSMSVO {
 	
 	private List<String> expert_member_ids;
 	private List<String> to_mail;
+	private List<String> to_phone;
 	
 	
 	
@@ -79,6 +80,14 @@ public class emailSMSVO {
 	public void setTo_mail(List<String> to_mail) {
 		this.to_mail = to_mail;
 	}
+	
+	public List<String> getTo_phone(){
+		return to_phone;
+	}
+	public void setTo_phone(List<String> to_phone) {
+		this.to_phone = to_phone;
+	}
+	
 	public int getMail_sms_id() {
 		return mail_sms_id;
 	}

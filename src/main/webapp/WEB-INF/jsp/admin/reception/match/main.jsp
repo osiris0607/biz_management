@@ -409,13 +409,13 @@
 		}
 
 		if (confirm("메일을 전송하시겠습니까?")) {
-			// 가장 최근의 전송 메일 내용을 가져온다. 
+			// 가장 최근의 전송 메일/SMS 내용을 가져온다. 
 			searchMailSMSContents();
 			if ( mailSMSContents == null || mailSMSContents.length <= 0 ) {
 				return;
 			}
 			console.log('mailSMSContents : ', mailSMSContents);
-			// 접수 별로 한번씩 보내야 한다. 각각의 Status가 틀리기 때문에 동시에 처리할 수가 앖다.
+			// 접수 별로 한번씩 보내야 한다. 각각의 Status가 틀리기 때문에 동시에 처리할 수가 없다.
 			$("input:checkbox[name=reception_checkbox]:checked").each(function() {
 				var reception = receptionList[$(this).val()];
 				console.log('reception :: ', reception);
@@ -474,49 +474,62 @@
 			alert("문자메세지 전송할 접수 항목을 선택하여야 합니다.");
 			return;
 		}
-		searchMailSMSContents();
-		//체크한 리스트 정보_핸드폰번호
-		$("input:checkbox[name=reception_checkbox]:checked").each(function() {
-			var reception = receptionList[$(this).val()];
-			console.log('reception :: ', reception.researcher_mobile_phone);
-		});
-		
-		//보낼 sms 내용
-		$.each(mailSMSContents, function(key, value) {
-					if (value.type == "sms") {
-					console.log(key, value);
-						//formData.append("title", value.title);   //제목
-						//formData.append("comment", value.comment);  //내용
-						//formData.append("link", value.link);  //링크
-						//formData.append("sender", value.sender);  //발송자
-					}
+		if (confirm("SMS를 전송하시겠습니까?")) {
+			// 가장 최근의 전송 메일/SMS 내용을 가져온다. 
+			searchMailSMSContents();
+			if ( mailSMSContents == null || mailSMSContents.length <= 0 ) {
+				return;
+			}
+			console.log('mailSMSContents : ', mailSMSContents);
+			// 접수 별로 한번씩 보내야 한다. 각각의 Status가 틀리기 때문에 동시에 처리할 수가 없다.
+			
+			//체크한 리스트 정보_핸드폰번호
+			$("input:checkbox[name=reception_checkbox]:checked").each(function() {
+				var reception = receptionList[$(this).val()];
+				console.log('reception :: ', reception);
+				
+				var formData = new FormData();
+				// Expert Progress에서의 Reception Status는 항상 'D0000005' 매칭 신청 시 이다. 
+				formData.append("reception_id", reception.reception_id );
+				formData.append("reception_status", reception.reception_status );
+			
+			//전송할 sms 내용
+			$.each(mailSMSContents, function(key, value) {
+						if (value.type == "sms") {
+							formData.append("title", value.title);   //제목
+							formData.append("comment", value.comment);  //내용
+							formData.append("link", value.link);  //링크
+							formData.append("sender", value.sender);  //발송자
+						}
+			});
+			
+			// 전송할 대상 			
+			var memberIdList = new Array();
+			var toSMSList = new Array();
+			$.each(reception.choiced_expert_list, function(key, value2) {
+				memberIdList.push(value2.member_id);
+				toSMSList.push(value2.mobile_phone);
+			});
+	
+			formData.append("expert_member_ids", memberIdList);
+			formData.append("to_phone", toSMSList);
+			
+			//보낼파라미터 : 폰번호, 내용
+				$.ajax({
+				    type : "POST",
+				    url : "/admin/api/reception/tech/match/emailSMS/sendSMS",
+				    data : formData,
+				    processData: false,
+				    contentType: false,
+				    mimeType: 'multipart/form-data',
+				    success : function(data) {
+				    },
+				    error : function(err) {
+				        alert(err.status);
+				    }
 				});
-		//보낼파라미터 : 폰번호, 내용
-		var formData = new FormData();
-		if (confirm('SMS을 전송하시겠습니까?')) {
-			$.ajax({
-			    type : "POST",
-			    url : "/admin/api/reception/tech/match/emailSMS/sendSMS",
-			    //data : formData,
-			    //processData: false,
-			    //contentType: false,
-			    //mimeType: 'multipart/form-data',
-			    success : function(data) {
-			    	var jsonData = JSON.parse(data);
-			        if (jsonData.result == true) {
-			        	alert("성공했습니다.");
-			        } else {
-			        	alert("실패했습니다.");
-			        	console.log('sms data --> ', jsonData.result);
-			        }
-			    },
-			    error : function(err) {
-			        alert(err.status);
-			    }
 			});
 		}
-		
-		console.log('흠.....');
 	}
 
 	function receptionClosedAll() {

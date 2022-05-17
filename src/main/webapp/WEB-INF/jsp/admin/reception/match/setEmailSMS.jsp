@@ -23,6 +23,7 @@
 
 	function getDetailCB(data){
 		$.each(data.result_data, function(key, value) {
+			console.log('key, value setting', value);
 			if (value.type == "email") {
 				$("#email_title").val(value.title);
 				$("#email_comment").val(unescapeHtml(value.comment));
@@ -49,15 +50,18 @@
 		var formData = new FormData();
 		if ( saveType == "email") {
 			formData.append("title", $("#email_title").val());
-			var comment = $("#email_comment").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
-			formData.append("comment", comment);
+			//var comment = $("#email_comment").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
+			
+			//formData.append("comment", comment);
+			formData.append("comment", $("#email_comment").val());
 			formData.append("link", $("#email_link").val());
 			formData.append("sender", $("#email_sender").val());
 			formData.append("type", saveType);
 		} else {
 			formData.append("title", $("#sms_title").val());
-			var comment = $("#sms_comment").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
-			formData.append("comment", comment);
+			//문자메세지는 <br> 적용 X
+			//var comment = $("#sms_comment").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
+			formData.append("comment", $("#sms_comment").val());
 			formData.append("link", $("#sms_link").val());
 			formData.append("sender", $("#sms_sender").val());
 			formData.append("type", saveType);
@@ -201,7 +205,7 @@
 									   </tbody>									   
 							       </table>	
 								   <div class="fr clearfix mt30">
-								       <button type="button" class="gray_btn fl mr5" onclick="location.href='./reception_technologymatching.html'">뒤로</button>
+								       <button type="button" class="gray_btn fl mr5" onclick="history.back();">뒤로</button>
 								       <button type="button" class="blue_btn fl send_save_popup_open" onclick="prepareRegistration('sms');">저장</button>
 							       </div>
 						       </div>

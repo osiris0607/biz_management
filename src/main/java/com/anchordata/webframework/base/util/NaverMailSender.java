@@ -99,7 +99,7 @@ public class NaverMailSender {
         } 
     }
     
-    public static boolean gmailSender(String title, String senderName, List<String> toMail, String contents) throws Exception {
+    public static boolean gmailSender(String title, String senderName, List<String> toMail, String contents, String link) throws Exception {
         // TODO Auto-generated method stub
         String host = "smtp.gmail.com";//smtp 서버
         //String subject = "인사이트랩입니다.";
@@ -134,10 +134,10 @@ public class NaverMailSender {
             	index++;
             }
             
-            System.out.println("=================================" + contents);
-            
-            contents = contents.replace("&amp;amp;lt;", "<");
-            contents = contents.replace("&amp;amp;gt;", ">");
+            //본문 + 링크
+            contents = contents + "\r\n" + link;
+            contents = contents.replace("\r\n", "<br>");
+ //           contents = contents.replace("&amp;gt;", ">");
 
             //날짜 설정
             Calendar cal = Calendar.getInstance();
@@ -149,14 +149,13 @@ public class NaverMailSender {
             contents = contents.replace("sysdate+7", overDate);
             
             
-            msg.setRecipients(Message.RecipientType.TO, address);//받는 사람설정
+          //받는 사람설정
+            msg.setRecipients(Message.RecipientType.TO, address);
             
             msg.setSubject(title);// 제목 설정
             msg.setSentDate(new java.util.Date());// 보내는 날짜 설정
            // msg.setContent(contents, contents); // 내용 설정 (HTML 형식)
             msg.setContent(contents, "text/html;charset=utf-8"); // 내용 설정 (HTML 형식)
-            
-            
             setHTMLContent(msg);
             
             
@@ -175,12 +174,6 @@ public class NaverMailSender {
             return false;
         } 
     }
-    
-    
-    
-    
-    
-    
     
     
     public static String senderWithAttachFile(String title, String email, String contents, MultipartFile multipartFile) throws Exception {

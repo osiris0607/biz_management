@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.anchordata.webframework.base.util.GabiaSmsSender;
 import com.anchordata.webframework.base.util.NaverMailSender;
 import com.nhncorp.lucy.security.xss.XssPreventer;
 
@@ -51,7 +52,30 @@ public class EmailSMSService {
 	@Transactional
 	public boolean sendMail(emailSMSVO vo) throws Exception {
 		System.out.println("메일발송 서비스 ----------------------- >> " + vo.getTitle() +  vo.getSender()+ vo.getTo_mail()+vo.getComment());
-		boolean result = NaverMailSender.gmailSender(vo.getTitle(), vo.getSender(), vo.getTo_mail(), vo.getComment());
+		boolean result = NaverMailSender.gmailSender(vo.getTitle(), vo.getSender(), vo.getTo_mail(), vo.getComment(), vo.getLink());
+		return result;
+	}	
+	
+	/**
+	 * SMS 발송
+	 */
+	@Transactional
+	public boolean sendSMS(emailSMSVO vo) throws Exception {
+		String charset = "euc-kr";
+		
+		//본문 + 링크 byte 계산
+		String message = vo.getComment() + "\r\n" + vo.getLink();
+		int length = message.getBytes(charset).length;
+		
+		boolean result;
+		if(length < 90) {
+			//SMS 발송
+			 result = GabiaSmsSender.sendSMS(vo);
+		}else {
+			//LMS 발송
+			result = GabiaSmsSender.sendLMS(vo);
+		}
+		
 		return result;
 	}	
 	

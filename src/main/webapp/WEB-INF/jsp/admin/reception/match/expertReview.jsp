@@ -392,28 +392,72 @@
 	}
 
 	function sendSMS() {
-		var formData = new FormData();
-		if (confirm('SMS을 전송하시겠습니까?')) {
-			$.ajax({
-			    type : "POST",
-			    url : "/admin/api/reception/tech/match/emailSMS/sendSMS",
-			    data : formData,
-			    processData: false,
-			    contentType: false,
-			    mimeType: 'multipart/form-data',
-			    success : function(data) {
-			    	var jsonData = JSON.parse(data);
-			        if (jsonData.result == true) {
-			        	alert("전문가 정보 변경에 성공했습니다.");
-			        } else {
-			        	alert("전문가 정보 변경에 실패했습니다.");
-			        }
-			    },
-			    error : function(err) {
-			        alert(err.status);
-			    }
-			});
+		$('.expertintention_emailsend_popup_box').fadeOut(350);
+
+		// 전문가를 추가 / 삭제 시 실제 DB에 저장되는 것은 아니다.
+		// 따라서 추가 / 삭제가 있을시에 검토 완료 버튼을 눌러 DB에 저장되도록 한다.
+		if ( isChangeExpertList ) {
+			alert("전문가 리스트가 변경되었습니다. 변경된 정보를 확인하기 위해 검토완료 버튼을 눌러주시기 바랍니다. ");
+			return;
 		}
+		
+			// 가장 최근의 전송 메일/SMS 내용을 가져온다. 
+			searchMailSMSContents();
+			if ( mailSMSContents == null || mailSMSContents.length <= 0 ) {
+				return;
+			}
+			console.log('mailSMSContents : ', mailSMSContents);
+			// 접수 별로 한번씩 보내야 한다. 각각의 Status가 틀리기 때문에 동시에 처리할 수가 없다.
+			
+				var formData = new FormData();
+				// Expert Progress에서의 Reception Status는 항상 'D0000005' 매칭 신청 시 이다. 
+				formData.append("reception_id", $("#reception_id").val() );
+				formData.append("reception_status", "D0000004" );
+			
+			//전송할 sms 내용
+			$.each(mailSMSContents, function(key, value) {
+						if (value.type == "sms") {
+							formData.append("title", value.title);   //제목
+							formData.append("comment", value.comment);  //내용
+							formData.append("link", value.link);  //링크
+							formData.append("sender", value.sender);  //발송자
+						}
+			});
+			
+			// 전송할 대상 			
+			var memberIdList = new Array();
+			var toSMSList = new Array();
+			
+			// 전체 체크 순회
+			$.each(choicedExpertList, function(key, value) {
+			expertIdList.push(value.member_id);
+			toSMSList.push(value.email);
+		});
+			
+			
+			formData.append("expert_member_ids", memberIdList);
+			formData.append("to_phone", toSMSList);
+			
+			//보낼파라미터 : 폰번호, 내용
+				$.ajax({
+				    type : "POST",
+				    url : "/admin/api/reception/tech/match/emailSMS/sendSMS",
+				    data : formData,
+				    processData: false,
+				    contentType: false,
+				    mimeType: 'multipart/form-data',
+				    success : function(data) {
+				    	var jsonData = JSON.parse(data);
+				        if (jsonData.result == true) {
+				        	alert("SMS 전송에 성공하였습니다.");
+				        } else {
+				        	alert("SMS 전송에 실패하였습니다. 다시 시도해 주시기 바랍니다.");
+				        }
+				    },
+				    error : function(err) {
+				        alert(err.status);
+				    }
+				});
 	}
 
 </script>
