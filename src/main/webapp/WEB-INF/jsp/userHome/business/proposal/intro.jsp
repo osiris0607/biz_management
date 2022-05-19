@@ -118,7 +118,7 @@
 							<li><a href="/userHome/fwd/business/contest/intro">수행사업소개</a></li>
 						</ul>
 					</li>
-					<li><a href="/userHome/fwd/business/exemplification/summary">태양광 사업</a></li>
+					<li><a href="/userHome/fwd/business/exemplification/summary">태양광 신기술 실증</a></li>
 				</ul>
 			</div>
 			<!-- //서브 레프트메뉴 -->

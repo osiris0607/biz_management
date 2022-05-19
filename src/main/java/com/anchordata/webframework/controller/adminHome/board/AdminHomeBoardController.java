@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -211,7 +212,8 @@ public class AdminHomeBoardController {
 	*  첨부파일 다운로드
 	*/
 	@RequestMapping(value = "/adminHome/api/board/download/{file_id}")
-	public void downloadFile (@PathVariable("file_id") String fileId, HttpServletResponse response) throws Exception {
+	public void downloadFile (@PathVariable("file_id") String fileId, HttpSession session, HttpServletResponse response) throws Exception {
+		
 		UploadFileVO UploadFileVO = new UploadFileVO();
 		UploadFileVO.setFile_id(Integer.parseInt(fileId));
 		UploadFileVO = uploadFileService.selectUploadFileContent(UploadFileVO);

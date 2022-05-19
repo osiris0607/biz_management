@@ -55,7 +55,7 @@
 											<li><a href="/userHome/fwd/business/contest/intro" title="수행사업 소개 페이지로 이동">수행사업 소개</a></li>
 										</ul>
 									</li>
-									<li><a href="/userHome/fwd/business/exemplification/summary" title="태양광 사업 페이지로 이동">태양광 사업</a></li>
+									<li><a href="/userHome/fwd/business/exemplification/summary" title="태양광 신기술 실증 페이지로 이동">태양광 신기술 실증</a></li>
 								</ul>
 							</li>
 							<li><a href="/userHome/fwd/gallery/main"><h3>선정기술정보</h3></a>

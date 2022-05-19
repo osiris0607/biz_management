@@ -40,7 +40,7 @@
 	    if ( data.result_data.return_upload_attach_file_info != null) 
 	    {
 	    	$.each(data.result_data.return_upload_attach_file_info, function(key, value) {
-				str += "		<a href='/adminHome/api/board/download/" + value.file_id + "' download>";
+				str += "		<a href='/user/api/notice/download/" + value.file_id + "' download>";
 				var extName = value.name.split('.').pop().toLowerCase();
 				if (extName == "hwp" ) {
 					str += "	<img src='/assets/adminHome/images/icon_hwp.png' alt='hwp' />" + value.name;

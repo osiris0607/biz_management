@@ -37,7 +37,7 @@
 							<li><a href="/userHome/fwd/business/contest/intro">수행사업소개</a></li>
 						</ul>
 					</li>
-					<li class="on"><a href="/userHome/fwd/business/exemplification/summary">태양광 사업</a></li>
+					<li class="on"><a href="/userHome/fwd/business/exemplification/summary">태양광 신기술 실증</a></li>
 				</ul>
 			</div>
 			<!-- //서브 레프트메뉴 -->
@@ -300,7 +300,7 @@
 						<li><h4>한축테크 <span class="photo_subtitle">&nbsp;도로 태양광</span></h4><a href="/assets/userHome/images/detail14.jpg" target="_blank" title="한축테크 도로 태양광"><img src="/assets/userHome/images/detail14.jpg" alt="한축테크 도로 태양광" /></a></li>
 						<li><h4>S-Energy <span class="photo_subtitle">&nbsp;외곽 울타리</span></h4><a href="/assets/userHome/images/detail15.jpg" target="_blank" title="S-Energy_외곽 울타리"><img src="/assets/userHome/images/detail15.jpg" alt="S-Energy_외곽 울타리" /></a></li>
 						<li><h4>다스코 <span class="photo_subtitle">&nbsp;자전거 거치대</span></h4><a href="/assets/userHome/images/detail16.jpg" target="_blank" title="다스코 자전거 거치대"><img src="/assets/userHome/images/detail16.jpg" alt="다스코 자전거 거치대" /></a></li>
-						<li><h4>에너지파트너스 <span class="photo_subtitle">&nbsp;별관 난간</span></h4><a href="/assets/userHome/images/detail17.jpg" target="_blank" title="에너지파트너스 별관 난간"><img src="/assets/userHome/images/detail17.jpg" alt="에너지파트너스 별관 난간" /></a></li>
+						<li><h4>에너지파트너즈 <span class="photo_subtitle">&nbsp;별관 난간</span></h4><a href="/assets/userHome/images/detail17.jpg" target="_blank" title="에너지파트너스 별관 난간"><img src="/assets/userHome/images/detail17.jpg" alt="에너지파트너스 별관 난간" /></a></li>
 					</ul>
 				</div>
 			</div>
