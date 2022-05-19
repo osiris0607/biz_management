@@ -284,23 +284,23 @@
 				
 					<h3 class="title">선정 기업별 상세 사진</h3>
 					<ul class="photo main_photo photo_detail clearfix">
-						<li><h4>아반시스코리아 본관 남측, 본관 동측</h4><a href="/assets/userHome/images/detail1.jpg" target="_blank" title="아반시스코리아 본관 남측, 본관 동측"><img src="/assets/userHome/images/detail1.jpg" alt="아반시스코리아 본관 남측, 본관 동측" /></a></li>
-						<li><h4>에코스·디엔에프 본관 동측</h4><a href="/assets/userHome/images/detail2.jpg" target="_blank" title="에코스·디엔에프 본관 동측"><img src="/assets/userHome/images/detail2.jpg" alt="에코스·디엔에프 본관 동측" /></a></li>
-						<li><h4>에스지에너지 방음벽</h4><a href="/assets/userHome/images/detail13.jpg" target="_blank" title="에스지에너지 방음벽"><img src="/assets/userHome/images/detail3.jpg" alt="에스지에너지 방음벽" /></a></li>
-						<li><h4>에스지에너지_발전동 서측</h4><a href="/assets/userHome/images/detail4.jpg" target="_blank" title="에스지에너지 발전동 서측"><img src="/assets/userHome/images/detail4.jpg" alt="에스지에너지_발전동 서측" /></a></li>
-						<li><h4>코에스 본관 남측</h4><a href="/assets/userHome/images/detail15.jpg" target="_blank" title="코에스 본관 남측"><img src="/assets/userHome/images/detail15.jpg" alt="코에스 본관 남측" /></a></li>
-						<li><h4>코에스 미디어폴</h4><a href="/assets/userHome/images/detail6.jpg" target="_blank" title="코에스 미디어폴"><img src="/assets/userHome/images/detail6.jpg" alt="에코에스 미디어폴" /></a></li>
-						<li><h4>중앙강재·옥토끼이미징 경비실 입면</h4><a href="/assets/userHome/images/detail7.jpg" target="_blank" title="중앙강재·옥토끼이미징 경비실 입면"><img src="/assets/userHome/images/detail7.jpg" alt="중앙강재·옥토끼이미징 경비실 입면" /></a></li>
-						<li><h4>중앙강재 별관 지붕</h4><a href="/assets/userHome/images/detail8.jpg" target="_blank" title="중앙강재 별관 지붕"><img src="/assets/userHome/images/detail8.jpg" alt="중앙강재 별관 지붕" /></a></li>
-						<li><h4>LG하우시스 벤치 벽면</h4><a href="/assets/userHome/images/detail9.jpg" target="_blank" title="LG하우시스 벤치 벽면"><img src="/assets/userHome/images/detail9.jpg" alt="LG하우시스 벤치 벽면" /></a></li>
-						<li><h4>한솔테크닉스 벤치 벽면</h4><a href="/assets/userHome/images/detail10.jpg" target="_blank" title="한솔테크닉스 벤치 벽면"><img src="/assets/userHome/images/detail10.jpg" alt="한솔테크닉스 벤치 벽면" /></a></li>
-						<li><h4>에스케이솔라에너지 본관 옥상</h4><a href="/assets/userHome/images/detail11.jpg" target="_blank" title="에스케이솔라에너지 본관 옥상"><img src="/assets/userHome/images/detail11.jpg" alt="에스케이솔라에너지 본관 옥상" /></a></li>
-						<li><h4>에스케이솔라에너지 주차장 캐노피</h4><a href="/assets/userHome/images/detail12.jpg" target="_blank" title="에스케이솔라에너지 주차장 캐노피"><img src="/assets/userHome/images/detail12.jpg" alt="에스케이솔라에너지 주차장 캐노피" /></a></li>
-						<li><h4>선우시스 본관 동측</h4><a href="/assets/userHome/images/detail13.jpg" target="_blank" title="선우시스 본관 동측"><img src="/assets/userHome/images/detail13.jpg" alt="선우시스 본관 동측" /></a></li>
-						<li><h4>한축테크 도로 태양광</h4><a href="/assets/userHome/images/detail14.jpg" target="_blank" title="한축테크 도로 태양광"><img src="/assets/userHome/images/detail4.jpg" alt="한축테크 도로 태양광" /></a></li>
-						<li><h4>S-Energy 외곽 울타리</h4><a href="/assets/userHome/images/detail15.jpg" target="_blank" title="S-Energy_외곽 울타리"><img src="/assets/userHome/images/detail5.jpg" alt="S-Energy_외곽 울타리" /></a></li>
-						<li><h4>다스코 자전거 거치대</h4><a href="/assets/userHome/images/detail16.jpg" target="_blank" title="다스코 자전거 거치대"><img src="/assets/userHome/images/detail6.jpg" alt="다스코 자전거 거치대" /></a></li>
-						<li><h4>에너지파트너스 별관 난간</h4><a href="/assets/userHome/images/detail17.jpg" target="_blank" title="에너지파트너스 별관 난간"><img src="/assets/userHome/images/detail7.jpg" alt="에너지파트너스 별관 난간" /></a></li>
+						<li><h4>아반시스코리아 <span class="photo_subtitle">&nbsp;본관 남측, 본관 동측</span></h4><a href="/assets/userHome/images/detail1.jpg" target="_blank" title="아반시스코리아 본관 남측, 본관 동측"><img src="/assets/userHome/images/detail1.jpg" alt="아반시스코리아 본관 남측, 본관 동측" /></a></li>
+						<li><h4>에코스·디엔에프 <span class="photo_subtitle">&nbsp;본관 동측</span></h4><a href="/assets/userHome/images/detail2.jpg" target="_blank" title="에코스·디엔에프 본관 동측"><img src="/assets/userHome/images/detail2.jpg" alt="에코스·디엔에프 본관 동측" /></a></li>
+						<li><h4>에스지에너지 <span class="photo_subtitle">&nbsp;방음벽</span></h4><a href="/assets/userHome/images/detail3.jpg" target="_blank" title="에스지에너지 방음벽"><img src="/assets/userHome/images/detail3.jpg" alt="에스지에너지 방음벽" /></a></li>
+						<li><h4>에스지에너지 <span class="photo_subtitle">&nbsp;발전동 서측</span></h4><a href="/assets/userHome/images/detail4.jpg" target="_blank" title="에스지에너지 발전동 서측"><img src="/assets/userHome/images/detail4.jpg" alt="에스지에너지_발전동 서측" /></a></li>
+						<li><h4>코에스 <span class="photo_subtitle">&nbsp;본관 남측</span></h4><a href="/assets/userHome/images/detail5.jpg" target="_blank" title="코에스 본관 남측"><img src="/assets/userHome/images/detail5.jpg" alt="코에스 본관 남측" /></a></li>
+						<li><h4>코에스 <span class="photo_subtitle">&nbsp;미디어폴</span></h4><a href="/assets/userHome/images/detail6.jpg" target="_blank" title="코에스 미디어폴"><img src="/assets/userHome/images/detail6.jpg" alt="에코에스 미디어폴" /></a></li>
+						<li><h4>중앙강재·옥토끼이미징 <span class="photo_subtitle">&nbsp;경비실 입면</span></h4><a href="/assets/userHome/images/detail7.jpg" target="_blank" title="중앙강재·옥토끼이미징 경비실 입면"><img src="/assets/userHome/images/detail7.jpg" alt="중앙강재·옥토끼이미징 경비실 입면" /></a></li>
+						<li><h4>중앙강재 <span class="photo_subtitle">&nbsp;별관 지붕</span></h4><a href="/assets/userHome/images/detail8.jpg" target="_blank" title="중앙강재 별관 지붕"><img src="/assets/userHome/images/detail8.jpg" alt="중앙강재 별관 지붕" /></a></li>
+						<li><h4>LG하우시스 <span class="photo_subtitle">&nbsp;벤치 벽면</span></h4><a href="/assets/userHome/images/detail9.jpg" target="_blank" title="LG하우시스 벤치 벽면"><img src="/assets/userHome/images/detail9.jpg" alt="LG하우시스 벤치 벽면" /></a></li>
+						<li><h4>한솔테크닉스 <span class="photo_subtitle">&nbsp;벤치 벽면</span></h4><a href="/assets/userHome/images/detail10.jpg" target="_blank" title="한솔테크닉스 벤치 벽면"><img src="/assets/userHome/images/detail10.jpg" alt="한솔테크닉스 벤치 벽면" /></a></li>
+						<li><h4>에스케이솔라에너지 <span class="photo_subtitle">&nbsp;본관 옥상</span></h4><a href="/assets/userHome/images/detail11.jpg" target="_blank" title="에스케이솔라에너지 본관 옥상"><img src="/assets/userHome/images/detail11.jpg" alt="에스케이솔라에너지 본관 옥상" /></a></li>
+						<li><h4>에스케이솔라에너지 <span class="photo_subtitle">&nbsp;주차장 캐노피</span></h4><a href="/assets/userHome/images/detail12.jpg" target="_blank" title="에스케이솔라에너지 주차장 캐노피"><img src="/assets/userHome/images/detail12.jpg" alt="에스케이솔라에너지 주차장 캐노피" /></a></li>
+						<li><h4>선우시스 <span class="photo_subtitle">&nbsp;본관 동측</span></h4><a href="/assets/userHome/images/detail13.jpg" target="_blank" title="선우시스 본관 동측"><img src="/assets/userHome/images/detail13.jpg" alt="선우시스 본관 동측" /></a></li>
+						<li><h4>한축테크 <span class="photo_subtitle">&nbsp;도로 태양광</span></h4><a href="/assets/userHome/images/detail14.jpg" target="_blank" title="한축테크 도로 태양광"><img src="/assets/userHome/images/detail14.jpg" alt="한축테크 도로 태양광" /></a></li>
+						<li><h4>S-Energy <span class="photo_subtitle">&nbsp;외곽 울타리</span></h4><a href="/assets/userHome/images/detail15.jpg" target="_blank" title="S-Energy_외곽 울타리"><img src="/assets/userHome/images/detail15.jpg" alt="S-Energy_외곽 울타리" /></a></li>
+						<li><h4>다스코 <span class="photo_subtitle">&nbsp;자전거 거치대</span></h4><a href="/assets/userHome/images/detail16.jpg" target="_blank" title="다스코 자전거 거치대"><img src="/assets/userHome/images/detail16.jpg" alt="다스코 자전거 거치대" /></a></li>
+						<li><h4>에너지파트너스 <span class="photo_subtitle">&nbsp;별관 난간</span></h4><a href="/assets/userHome/images/detail17.jpg" target="_blank" title="에너지파트너스 별관 난간"><img src="/assets/userHome/images/detail17.jpg" alt="에너지파트너스 별관 난간" /></a></li>
 					</ul>
 				</div>
 			</div>

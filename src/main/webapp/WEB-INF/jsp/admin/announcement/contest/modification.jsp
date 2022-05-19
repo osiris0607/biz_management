@@ -394,6 +394,15 @@
 				}
 			} 
 			
+			//editor 유효성
+			var content	= oEditors.getById["contents"].getIR();
+			if(content == "" || content == null || content == '&nbsp;' || content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>' || content == '<p><br></p>'){ 
+				alert("공고 내용은(는) 필수입력입니다.");
+				oEditors.getById["smartEditor"].exec("FOCUS");
+				return false;
+				//포커싱 return; 
+			}
+			
 			if ( gfn_isNull($("#email1").val()) == false && gfn_isNull($("#email2").val()) == false){
 				mailAddress = $("#email1").val() + "@" + $("#email2").val();
 			}

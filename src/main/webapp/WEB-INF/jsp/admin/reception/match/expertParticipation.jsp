@@ -96,6 +96,7 @@
 
 	function sendMail() {
 		$('.expertintention_emailsend_popup_box').fadeOut(350);
+		
 		if($("input:checkbox[name=prioiry_checkbox]").is(":checked") == false) {
 			alert("한명 이상의 전문가를 선택하여야 합니다.");
 			
@@ -155,7 +156,7 @@
 	}
 
 	function sendSMS() {
-		$('.expertintention_emailsend_popup_box').fadeOut(350);
+		$('.expertintention_smssend_popup_box').fadeOut(350);
 		if($("input:checkbox[name=prioiry_checkbox]").is(":checked") == false) {
 			alert("한명 이상의 전문가를 선택하여야 합니다.");
 			
@@ -191,7 +192,7 @@
 			// 전체 체크 순회
 			$("input:checkbox[name=prioiry_checkbox]:checked").each(function() {
 				memberIdList.push($(this).attr("member_id"));
-				toSMSList.push($(this).attr("mobile_phone"));
+				toSMSList.push($(this).attr("sms"));
 			});
 			
 			
@@ -523,9 +524,9 @@
 	   </div>
    </div>
 </div>
-  <!--//전문가 참여 의향 조사 팝업 - email-->
+  <!--//전문가 참여 의향 조사 팝업 - email -->
 
-  <!--전문가 참여 의향 조사 팝업-->
+  <!--전문가 참여 의향 조사 팝업 - sms -->
 <div class="expertintention_smssend_popup_box">
    <div class="popup_bg"></div>
    <div class="expertintention_smssend_popup">

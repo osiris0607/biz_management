@@ -767,6 +767,7 @@ a{color: #333;}
 		.photo_detail li{margin-top: 30px;}
 		.photo_detail h4{margin-left: -25px;}
 		.photo_detail li:last-child{margin-bottom: 0;}
+		.photo_subtitle {font-size: 15px;color: #8b8b8b;}
 		.photo {margin-bottom: 60px;}
 		.photo a{display: block;max-width: 100%;}
 		.main_photo li a, .main_photo li a img{max-width: 100%;display: block;}

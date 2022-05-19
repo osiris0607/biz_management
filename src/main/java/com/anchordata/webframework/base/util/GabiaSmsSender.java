@@ -1,7 +1,11 @@
 package com.anchordata.webframework.base.util;
 
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Base64.Encoder;
 
 import javax.mail.internet.InternetAddress;
@@ -84,6 +88,16 @@ public class GabiaSmsSender {
 		String senderName = vo.getSender();
 		
 		String message = comment + "\r\n" + link;
+		
+		//날짜 설정
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        cal.add(Calendar.DATE, +7);
+        String overDate = df.format(cal.getTime());
+        
+        message = message.replace("sysdate+7", overDate);
+		
 		try {
 			//사용자 인증
 			if(userAuth() == true) {
@@ -154,6 +168,15 @@ public class GabiaSmsSender {
 			String senderName = vo.getSender();
 			
 			String message = comment + "\r\n" + link;
+			
+			//날짜 설정
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            cal.add(Calendar.DATE, +7);
+            String overDate = df.format(cal.getTime());
+            
+            message = message.replace("sysdate+7", overDate);
 			System.out.println(message);
 			
 			try {

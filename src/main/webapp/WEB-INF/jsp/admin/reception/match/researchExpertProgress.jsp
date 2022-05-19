@@ -45,6 +45,8 @@
 	}
 
 	function sendMail() {
+		$('.expertintention_emailsend_popup_box').fadeOut(350);
+
 		if($("input:checkbox[name=prioiry_checkbox]").is(":checked") == false) {
 			alert("한명 이상의 전문가를 선택하여야 합니다.");
 			return;
@@ -105,11 +107,12 @@
 	}
 
 	function sendSMS() {
+		$('.expertintention_smssend_popup_box').fadeOut(350);
+
 		if($("input:checkbox[name=prioiry_checkbox]").is(":checked") == false) {
 			alert("한명 이상의 전문가를 선택하여야 합니다.");
 			return;
 		}
-		if (confirm("SMS를 전송하시겠습니까?")) {
 			// 가장 최근의 전송 메일/SMS 내용을 가져온다. 
 			searchMailSMSContents();
 			if ( mailSMSContents == null || mailSMSContents.length <= 0 ) {
@@ -140,7 +143,7 @@
 			// 전체 체크 순회
 			$("input:checkbox[name=prioiry_checkbox]:checked").each(function() {
 				memberIdList.push($(this).attr("member_id"));
-				toSMSList.push($(this).attr("mobile_phone"));
+				toSMSList.push($(this).attr("sms"));
 			});
 			
 			
@@ -167,7 +170,6 @@
 				        alert(err.status);
 				    }
 				});
-		}
 	}
 
 	function savePriority() {
@@ -523,8 +525,8 @@
 								<div class="fr clearfix">
 									<button type="button" class="blue_btn2 fl mr5 s_h_button" onclick="$('#save_priority_btn').show();">전문가 매칭 우선순위 선정</button>
 									<button type="button" class="blue_btn2 fl mr5" id="save_priority_btn" style="display:none;" onclick="savePriority();">우선순위 저장</button>
-									<button type="button" class="blue_btn fl mr5 expertintention_emailsend_popup_open mail_btn" onclick="sendMail();">E-mail</button>
-									<button type="button" class="blue_btn fl mr5 expertintention_smssend_popup_open sms_btn" onclick="sendSMS();">SMS</button>
+									<button type="button" class="blue_btn fl mr5 expertintention_emailsend_popup_open mail_btn">E-mail</button>
+									<button type="button" class="blue_btn fl mr5 expertintention_smssend_popup_open sms_btn">SMS</button>
 									<button type="button" class="gray_btn2 fl" onclick="location.href='/admin/fwd/reception/match/main'">목록</button>
 								</div>	
 			   		  		</div>
@@ -538,3 +540,45 @@
               </div>
               <!--//sub--> 
           </div>
+          <!--전문가 참여 의향 조사 팝업 - email-->
+<div class="expertintention_emailsend_popup_box">
+   <div class="popup_bg"></div>
+   <div class="expertintention_emailsend_popup">
+       <div class="popup_titlebox clearfix">
+	       <h4 class="fl">전문가 참여 의향 조사</h4>
+	       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+	   </div>
+	   <div class="popup_txt_area">
+		   <div class="popup_txt"><span>[알림]</span>
+			   <p class="font_w">전문가 참여 의향 조사 실시</p>
+			   <p><span class="font_blue" style="display:inline-block">[발송하기]</span> 버튼을 클릭 시, 기존에 세팅해 놓은 문구로 전문가에게 <span class="font_blue" style="display:inline-block">email</span>이 발송됩니다.<br />발송하시겠습니까?</p>
+		   </div>
+		   <div class="popup_button_area_center">
+		       <button type="button" class="blue_btn mr5" onclick="sendMail();">발송하기</button>
+			   <button type="button" class="gray_btn popup_close_btn">취소</button>					   
+		   </div>
+	   </div>
+   </div>
+</div>
+  <!--//전문가 참여 의향 조사 팝업 - email -->
+
+  <!--전문가 참여 의향 조사 팝업 - sms -->
+<div class="expertintention_smssend_popup_box">
+   <div class="popup_bg"></div>
+   <div class="expertintention_smssend_popup">
+       <div class="popup_titlebox clearfix">
+	       <h4 class="fl">전문가 참여 의향 조사</h4>
+	       <a href="javascript:void(0)" class="white_font close_btn popup_close_btn fr"><i class="fas fa-times"></i></a>
+	   </div>
+	   <div class="popup_txt_area">
+		   <div class="popup_txt"><span>[알림]</span>
+			   <p class="font_w">전문가 참여 의향 조사 실시</p>
+			   <p><span class="font_blue" style="display:inline-block">[발송하기]</span> 버튼을 클릭 시, 기존에 세팅해 놓은 문구로 전문가에게 <span class="font_blue" style="display:inline-block">SMS</span> 메세지가 발송됩니다.<br />발송하시겠습니까?</p>
+		   </div>
+		   <div class="popup_button_area_center">
+		   		<button type="button" class="blue_btn mr5" onclick="sendSMS();">발송하기</button>
+			    <button type="button" class="gray_btn popup_close_btn">취소</button>					   
+		   </div>
+	   </div>
+   </div>
+</div>

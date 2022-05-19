@@ -392,7 +392,7 @@
 	}
 
 	function sendSMS() {
-		$('.expertintention_emailsend_popup_box').fadeOut(350);
+		$('.expertintention_smssend_popup_box').fadeOut(350);
 
 		// 전문가를 추가 / 삭제 시 실제 DB에 저장되는 것은 아니다.
 		// 따라서 추가 / 삭제가 있을시에 검토 완료 버튼을 눌러 DB에 저장되도록 한다.
@@ -425,17 +425,20 @@
 			});
 			
 			// 전송할 대상 			
-			var memberIdList = new Array();
+			var expertIdList = new Array();
 			var toSMSList = new Array();
 			
 			// 전체 체크 순회
 			$.each(choicedExpertList, function(key, value) {
 			expertIdList.push(value.member_id);
-			toSMSList.push(value.email);
+			toSMSList.push(value.mobile_phone);
 		});
 			
 			
-			formData.append("expert_member_ids", memberIdList);
+			
+			console.log(toSMSList);
+			
+			formData.append("expert_member_ids", expertIdList);
 			formData.append("to_phone", toSMSList);
 			
 			//보낼파라미터 : 폰번호, 내용
