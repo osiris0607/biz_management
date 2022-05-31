@@ -275,7 +275,7 @@ public class MemberReceptionController {
 		return mv;
 	}
 	/**
-	* 검색 나의 접수 혆솽 List
+	* 검색 나의 접수 현황 List
 	*/
 	@RequestMapping("/member/api/reception/search/paging")
 		public ModelAndView search(@ModelAttribute ReceptionSearchVO vo, ModelAndView mv) throws Exception {

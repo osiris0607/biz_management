@@ -470,7 +470,7 @@
 		}
 		formData.append("self_check_list_json", JSON.stringify(selfCheckList));
 		
-	 	/* $.ajax({
+	 	$.ajax({
 		    type : "POST",
 		    url : "/member/api/reception/match/registration",
 		    data : formData,
@@ -489,7 +489,7 @@
 		    error : function(err) {
 		        alert(err.status);
 		    }
-		});  */
+		}); 
 	}
 
 	function selectCampus(){
@@ -613,72 +613,72 @@
 								<tr id="industry_type_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="industry_type">업종</label></span></th> 
-									<td><input type="text" id="industry_type" title="업종" class="form-control w_40" /></td>
+									<td><input disabled type="text" id="industry_type" title="업종" class="form-control w_40" placeholder="" /></td>
 								</tr>
 								<tr id="business_type_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="business_type">업태</label></span></th> 
-									<td><input type="text" id="business_type" title="업태" class="form-control w_40" /></td>
+									<td><input disabled type="text" id="business_type" title="업태" class="form-control w_40" placeholder=""/></td>
 								</tr>
 								<tr id="foundation_date_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="foundation_date">설립일</label></span></th> 
 									<td>
 										<div class="datepicker_area fl mr5">
-											<input type="text" id="foundation_date" title="설립일" class="datepicker form-control w_14 mr5 ls" />
+											<input disabled type="text" id="foundation_date" title="설립일" class="datepicker form-control w_14 mr5 ls" />
 										</div>
 									</td> 
 							   </tr>
 							   <tr id="foundation_type_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="foundation_type">설립 구분</label></span></th> 
-									<td><input type="text" id="foundation_type" title="설립 구분" class="form-control w_40" /></td> 
+									<td><input disabled type="text" id="foundation_type" title="설립 구분" class="form-control w_40" placeholder=""/></td> 
 							   </tr>
 							   <tr id="company_class_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="company_class">기업 분류</label></span></th> 
-									<td><input type="text" id="company_class" title="기업 분류" class="form-control w_40" /></td> 
+									<td><input disabled type="text" id="company_class" title="기업 분류" class="form-control w_40" placeholder=""/></td> 
 							   </tr>
 							   <tr id="company_type_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="company_type">기업 유형</label></span></th> 
-									<td><input type="text" id="company_type" title="기업 유형" class="form-control w_40" /></td> 
+									<td><input disabled type="text" id="company_type" title="기업 유형" class="form-control w_40" placeholder=""/></td> 
 							   </tr>
 							   <tr id="lab_exist_yn_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>기업부설연구소 유무</span></th> 
 									<td>
-										<input type="radio" id="re_member_offerarea_class" name="lab_exist_yn_radio" value="Y" checked /> 
+										<input disabled type="radio" id="re_member_offerarea_class" name="lab_exist_yn_radio" value="Y" checked /> 
 										<label for="re_member_offerarea_class">있음</label>
-										<input type="radio" id="re_member_offerarea_class2" name="lab_exist_yn_radio" value="N" /> 
+										<input disabled type="radio" id="re_member_offerarea_class2" name="lab_exist_yn_radio" value="N" /> 
 										<label for="re_member_offerarea_class2">없음</label>
 									</td>
 							   </tr>
 							   <tr id="employee_no_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="employee_no">종업원수</label></span></th> 
-									<td><input type="text" onkeyup="makeMoneyWithComma(this);" id="employee_no" title="종업원수" class="form-control w_18 fl mr5 ls won_comma" /><span class="fl mt10">(명)</span></td> 
+									<td><input disabled type="text" onkeyup="makeMoneyWithComma(this);" id="employee_no" title="종업원수" class="form-control w_18 fl mr5 ls won_comma" placeholder=""/><span class="fl mt10">(명)</span></td> 
 							   </tr>
 							   <tr id="total_sales_tr">
 									<th scope="row"><span class="icon_box"><span class="necessary_icon">*</span>
 										<label for="total_sales">자본금</label></span></th> 
-									<td><input type="text" onkeyup="makeMoneyWithComma(this);" id="total_sales" title="매출액(최근3년)" class="form-control w_18 fl mr5 ls won_comma"  /><span class="fl mt10">(원)</span></td> 
+									<td><input disabled type="text" onkeyup="makeMoneyWithComma(this);" id="total_sales" title="매출액(최근3년)" class="form-control w_18 fl mr5 ls won_comma" placeholder=""/><span class="fl mt10">(원)</span></td> 
 							   </tr>
 							   <tr id="capital_tr">
 									<th scope="row">매출액(최근3년)</th> 
 									<td>
 										<div class="2018_box fl mr20">
 											<label for="capital_1" class="hidden">2018년</label>
-											<input type="text" onkeyup="makeMoneyWithComma(this);" id="capital_1" class="form-control w_18 fl mr5 ls won_comma" placeholder="입력"  />
+											<input disabled type="text" onkeyup="makeMoneyWithComma(this);" id="capital_1" class="form-control w_18 fl mr5 ls won_comma" placeholder="입력"  />
 											<span class="fl mt10">(원)</span>
 										</div>
 										<div class="2019_box fl mr20">
 											<label for="capital_2" class="hidden">2019년</label>
-											<input type="text" onkeyup="makeMoneyWithComma(this);" id="capital_2" class="form-control w_18 fl mr5 ls won_comma" placeholder="입력"  />
+											<input disabled type="text" onkeyup="makeMoneyWithComma(this);" id="capital_2" class="form-control w_18 fl mr5 ls won_comma" placeholder="입력"  />
 											<span class="fl mt10">(원)</span>
 										</div>
 										<div class="2020_box">
 											<label for="capital_3" class="hidden">2020년</label>
-											<input type="text" onkeyup="makeMoneyWithComma(this);" id="capital_3" class="form-control w_18 fl mr5 ls won_comma" placeholder="입력"  />
+											<input disabled type="text" onkeyup="makeMoneyWithComma(this);" id="capital_3" class="form-control w_18 fl mr5 ls won_comma" placeholder="입력"  />
 											<span class="fl mt10">(원)</span>
 										</div>
 									</td> 

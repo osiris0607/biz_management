@@ -25,6 +25,7 @@ function searchInstitutionDetail(id) {
 	comAjax.ajax();
 }
 function getInstitutionCB(data){
+	console.log('data : ', data);
 	// 기관 정보가 없으면 기관 정보 확인을 하지 않토록 한다.
 	if (data.result == null || data.result.reg_no =="") {
 		// 기술 매칭은 기관만 지원 가능하다.
@@ -42,6 +43,52 @@ function getInstitutionCB(data){
 	$("#company_address").val(data.result.address + " " + data.result.address_detail);
 	$("#company_phone").val(data.result.phone);
 	$("#representative_name").val(data.result.representative_name);
+	$("#industry_type").val(data.result.industry_type);
+	$("#business_type").val(data.result.business_type);
+	$("#foundation_date").val(data.result.foundation_date);
+	
+	//설립구분
+	var foundation_type_name;
+	if(data.result.foundation_type == 'D0000001') {
+		foundation_type_name = '영리';
+	}else if(ata.result.foundation_type == 'D0000002'){
+		foundation_type_name = '비영리';
+	}
+	$("#foundation_type").val(foundation_type_name);
+
+
+	//기업분류
+	var company_class_name;
+	if(data.result.company_class == 'D0000001') {
+		company_class_name = '대기업';
+	}else if(data.result.company_class == 'D0000002'){
+		company_class_name = '중견기업';
+	}else if(data.result.company_class == 'D0000003'){
+		company_class_name = '중소기업';
+	}else if(data.result.company_class == 'D0000004'){
+		company_class_name = '기타';
+	}
+	$("#company_class").val(company_class_name);
+	
+	//기업유형
+	var company_type_name;
+	if(data.result.company_type == 'D0000001') {
+		company_type_name = '여성기업';
+	}else if(data.result.company_type == 'D0000002'){
+		company_type_name = '장애인기업';
+	}else if(data.result.company_type == 'D0000003'){
+		company_type_name = '사회적기업';
+	}else if(data.result.company_type == 'D0000004'){
+		company_type_name = '해당 없음';
+	}
+	$("#company_type").val(company_type_name);
+	
+	$("input:radio[name=lab_exist_yn_radio][value='" + data.result.lab_exist_yn + "']").prop("checked", true);
+	$("#employee_no").val(data.result.total_count);
+	$("#total_sales").val(data.result.total_sales);
+	$("#capital_1").val(data.result.capital_1);
+	$("#capital_2").val(data.result.capital_2);
+	$("#capital_3").val(data.result.capital_3);
 }
 
 // Announcement
@@ -569,7 +616,7 @@ function searchReceptionDetail() {
 var msubmitFileList;
 function getReceptionCB(data){
 	mReceptionDetail = data.result_data;
-	console.log(mReceptionDetail);
+	console.log('mReceptionDetail : ', mReceptionDetail);
 	// 기관 정보
 	$("#reg_no").val(mReceptionDetail.institution_reg_number);
 	$("#company_name").val(mReceptionDetail.institution_name);
