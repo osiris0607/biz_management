@@ -773,7 +773,7 @@
 								</tbody>						 
 							</table>									
 							<!--//기술컨설팅 -제출서류 -->
-						</div>>
+						</div>
 					
 						<div class="button_box clearfix fr pb20">
 							<button type="button" class="purple_btn fl mr5" onclick="createSelfCheckList();">셀프 체크리스트</button>
