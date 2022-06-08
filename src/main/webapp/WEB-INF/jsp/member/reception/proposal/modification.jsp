@@ -136,40 +136,59 @@
 			if ( $("#selector_company").is(":checked") ) {
 				var chkVal = ["reg_no", "company_name", "company_address", "company_phone", "representative_name", "industry_type", "business_type", 
 	  				  		  "foundation_date", "foundation_type", "company_class", "company_type", "employee_no", "total_sales",
-					  		  "research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail", 
-					  		  "tech_info_name", "tech_info_description", "tech_info_feature", "tech_info_area"];
+					  		  "research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail"
+					  		  //, "tech_info_name", "tech_info_description", "tech_info_feature"
+					  		  , "tech_info_area"
+					  		  ];
 			} else {
-				var chkVal = ["research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail", 
-					  		  "tech_info_name", "tech_info_description", "tech_info_feature", "tech_info_area"];
+				var chkVal = ["research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail"
+							  //, "tech_info_name", "tech_info_description", "tech_info_feature", 
+							  ,"tech_info_area"
+					  		  ];
 			}
 		  
 			for (var i = 0; i < chkVal.length; i++) 
 			{
-				if ($("#" + chkVal[i]).val() == "" ) {
-					showPopup($("#" + chkVal[i]).attr("title") + "은(는) 필수입력입니다.", "접수 안내");
-					$("#" + chkVal[i]).focus();
-					return false;
+				if ( $("#" + chkVal[i]+"_tr").attr("use_yn") != "n" ) {
+				 	if ($("#" + chkVal[i]).val() == "" ) {
+						showPopup($("#" + chkVal[i]).attr("title") + "은(는) 필수입력입니다.", "접수 안내");
+						$("#" + chkVal[i]).focus();
+						return false;
+					}
 				}
 			} 
+			
 			if ( $("input:radio[name=lab_exist_yn_radio]").is(":checked") == false ) {
 				showPopup("기업부설연구소 유무 은(는) 필수입력입니다.", "접수 안내");
 				return;
 			}
 			
-			if ( gfn_isNull($("select[name=tech_info_large]").val()) ) {
+			if ( gfn_isNull($("#tech_info_name").val()) && $("#service_name_tr").attr("use_yn") != "n" ) {
+				showPopup("기술명 은(는) 필수입력입니다.", "접수 안내");
+				return;
+			}
+			if ( gfn_isNull($("#tech_info_description").val()) && $("#sevice_description_tr").attr("use_yn") != "n" ) {
+				showPopup("기술 개요 은(는) 필수입력입니다.", "접수 안내");
+				return;
+			}
+			if ( gfn_isNull($("select[name=tech_info_large]").val()) && $("#sevice_national_science_large_tr").attr("use_yn") != "n" ) {
 				showPopup("국가과학기술분류 대분류 은(는) 필수입력입니다.", "접수 안내");
 				return;
 			}
-			if ( gfn_isNull($("select[name=tech_info_middle]").val()) ) {
+			if ( gfn_isNull($("select[name=tech_info_middle]").val()) && $("#sevice_national_science_middle_tr").attr("use_yn") != "n" ) {
 				showPopup("국가과학기술분류 중분류 은(는) 필수입력입니다.", "접수 안내");
 				return;
 			}
-			if ( gfn_isNull($("select[name=tech_info_small]").val()) ) {
+			if ( gfn_isNull($("select[name=tech_info_small]").val()) && $("#sevice_national_science_small_tr").attr("use_yn") != "n" ) {
 				showPopup("국가과학기술분류 소분류 은(는) 필수입력입니다.", "접수 안내");
 				return;
 			}
-			if ( gfn_isNull($("select[name=tech_info_4th_industry]").val()) ) {
+			if ( gfn_isNull($("select[name=tech_info_4th_industry]").val()) && $("#tech_info_4th_industry_tr").attr("use_yn") != "n" ) {
 				showPopup("4차 산업혁명 기술분류 은(는) 필수입력입니다.", "접수 안내");
+				return;
+			}
+			if ( gfn_isNull($("#tech_info_feature").val()) && $("#sevice_feature_tr").attr("use_yn") != "n" ) {
+				showPopup("기술 특징 은(는) 필수입력입니다.", "접수 안내");
 				return;
 			}
 		

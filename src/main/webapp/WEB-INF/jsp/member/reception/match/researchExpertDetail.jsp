@@ -239,7 +239,7 @@
 			var chkVal = ["reg_no", "company_name", "company_address", "company_phone", "representative_name", "industry_type", "business_type", 
   				  "foundation_date", "foundation_type", "company_class", "company_type", "employee_no", "total_sales",
 				  "research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail", 
-				"consulting_campus", "sevice_name", "sevice_description",  "tech_info_market_report", "sevice_content"];
+				"consulting_campus", "sevice_name", "sevice_description",  "sevice_request", "sevice_content"];
 		  
 			for (var i = 0; i < chkVal.length; i++) 
 			{
@@ -258,13 +258,6 @@
 					}
 				}
 				else if  ( chkVal[i].indexOf("research_address") != -1 && $("#research_address_tr").attr("use_yn") != "n" ) {
-					if ($("#" + chkVal[i]).val() == "" ) {
-						showPopup($("#" + chkVal[i]).attr("title") + "은(는) 필수입력입니다.", "접수 안내");
-						$("#" + chkVal[i]).focus();
-						return false;
-					}
-				}
-				else if  ( chkVal[i].indexOf("tech_info_market_report") != -1 && $("#sevice_request_tr").attr("use_yn") != "n" ) {
 					if ($("#" + chkVal[i]).val() == "" ) {
 						showPopup($("#" + chkVal[i]).attr("title") + "은(는) 필수입력입니다.", "접수 안내");
 						$("#" + chkVal[i]).focus();
@@ -396,7 +389,7 @@
 		formData.append("tech_info_name", $("#sevice_name").val() );
 		formData.append("tech_info_description", $("#sevice_description").val() );
 		formData.append("tech_info_rnd_description", $("#sevice_content").val() );
-		formData.append("tech_info_market_report", $("#tech_info_market_report").val() );
+		formData.append("tech_info_market_report", $("#sevice_request").val() );
 		if ( $("#service_upload_file")[0].files[0] != null ) {
 			formData.append("tech_info_upload_file", $("#service_upload_file")[0].files[0]);
 		}
@@ -872,10 +865,10 @@
 								<tr id="sevice_request_tr">
 								    <th scope="row">
 								    	<span class="icon_box"><span class="necessary_icon">*</span>
-								    	<label for="tech_info_market_report">시장/기술 동향</label></span>
+								    	<label for="sevice_request">시장/기술 동향</label></span>
 							    	</th>
 								    <td>
-								    	<input type="text" id="tech_info_market_report" title="시장/기술 동향" class="form-control w100" placeholder="기술의 시장성 및 기술 동향 입력" />
+								    	<input type="text" id="sevice_request" title="시장/기술 동향" class="form-control w100" placeholder="기술의 시장성 및 기술 동향 입력" />
 							    	</td> 										    
 								</tr>	
 								<tr id="sevice_content_tr">
