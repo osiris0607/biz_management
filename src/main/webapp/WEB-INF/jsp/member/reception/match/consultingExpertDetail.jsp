@@ -239,11 +239,13 @@
 		if ( status != "D0000003") {
 			var chkVal = ["reg_no", "company_name", "company_address", "company_phone", "representative_name", "industry_type", "business_type", 
   				  "foundation_date", "foundation_type", "company_class", "company_type", "employee_no", "total_sales",
-				  "research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail", 
+				  "research_name",
+				  //"mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail", 
 				  "consulting_campus", "sevice_name", "sevice_description"];
 		  
 			for (var i = 0; i < chkVal.length; i++) 
 			{
+				/*
 				if ( chkVal[i].indexOf("mobile_phone") != -1 && $("#mobile_phone_tr").attr("use_yn") != "n" ) {
 					if ($("#" + chkVal[i]).val() == "" ) {
 						showPopup($("#" + chkVal[i]).attr("title") + "은(는) 필수입력입니다.", "접수 안내");
@@ -265,7 +267,8 @@
 						return false;
 					}
 				}
-				else if ( $("#" + chkVal[i]+"_tr").attr("use_yn") != "n" ) {
+				*/
+				if ( $("#" + chkVal[i]+"_tr").attr("use_yn") != "n" ) {
 					if ($("#" + chkVal[i]).val() == "" ) {
 						showPopup($("#" + chkVal[i]).attr("title") + "은(는) 필수입력입니다.", "접수 안내");
 						$("#" + chkVal[i]).focus();
@@ -273,6 +276,47 @@
 					}
 				}
 			}
+			
+			/* 연구책임자 정보 */
+			//휴대전화
+			if ( $("#mobile_phone_tr").attr("use_yn") != "n" ) {
+				if ( gfn_isNull($("#mobile_phone_2").val()) ) {
+					showPopup("휴대전화 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+				
+				if ( gfn_isNull($("#mobile_phone_3").val()) ) {
+					showPopup("휴대전화 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+			}
+			
+			//이메일
+			if ( $("#email_tr").attr("use_yn") != "n" ) {
+				if ( gfn_isNull($("#email_1").val()) ) {
+					showPopup("이메일 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+				
+				if ( gfn_isNull($("#email_2").val()) ) {
+					showPopup("이메일 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+			}
+			
+			//주소
+			if ( $("#research_address_tr").attr("use_yn") != "n" ) {
+				if ( gfn_isNull($("#research_address").val()) ) {
+					showPopup("주소 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+				
+				if ( gfn_isNull($("#research_address_detail").val()) ) {
+					showPopup("주소 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+			}
+			
 			if ( $("input:radio[name=lab_exist_yn_radio]").is(":checked") == false && $("#lab_exist_yn_tr").attr("use_yn") != "n"  ) {
 				showPopup("기업부설연구소 유무 은(는) 필수입력입니다.", "접수 안내");
 				return;

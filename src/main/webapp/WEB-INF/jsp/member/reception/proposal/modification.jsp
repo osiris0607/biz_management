@@ -136,14 +136,16 @@
 			if ( $("#selector_company").is(":checked") ) {
 				var chkVal = ["reg_no", "company_name", "company_address", "company_phone", "representative_name", "industry_type", "business_type", 
 	  				  		  "foundation_date", "foundation_type", "company_class", "company_type", "employee_no", "total_sales",
-					  		  "research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail"
+					  		  "research_name",
+					  		  //"mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail"
 					  		  //, "tech_info_name", "tech_info_description", "tech_info_feature"
-					  		  , "tech_info_area"
+					  		   "tech_info_area"
 					  		  ];
 			} else {
-				var chkVal = ["research_name","mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail"
+				var chkVal = ["research_name",
+							  //"mobile_phone_2", "mobile_phone_3", "email_1", "email_2", "research_address", "research_address_detail"
 							  //, "tech_info_name", "tech_info_description", "tech_info_feature", 
-							  ,"tech_info_area"
+							  "tech_info_area"
 					  		  ];
 			}
 		  
@@ -158,6 +160,45 @@
 				}
 			} 
 			
+			/* 연구책임자 정보 */
+			//휴대전화
+			if ( $("#mobile_phone_tr").attr("use_yn") != "n" ) {
+				if ( gfn_isNull($("#mobile_phone_2").val()) ) {
+					showPopup("휴대전화 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+				
+				if ( gfn_isNull($("#mobile_phone_3").val()) ) {
+					showPopup("휴대전화 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+			}
+			
+			//이메일
+			if ( $("#email_tr").attr("use_yn") != "n" ) {
+				if ( gfn_isNull($("#email_1").val()) ) {
+					showPopup("이메일 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+				
+				if ( gfn_isNull($("#email_2").val()) ) {
+					showPopup("이메일 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+			}
+			
+			//주소
+			if ( $("#research_address_tr").attr("use_yn") != "n" ) {
+				if ( gfn_isNull($("#research_address").val()) ) {
+					showPopup("주소 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+				
+				if ( gfn_isNull($("#research_address_detail").val()) ) {
+					showPopup("주소 은(는) 필수입력입니다.", "접수 안내");
+					return;
+				}
+			}
 			if ( $("input:radio[name=lab_exist_yn_radio]").is(":checked") == false ) {
 				showPopup("기업부설연구소 유무 은(는) 필수입력입니다.", "접수 안내");
 				return;
@@ -597,10 +638,10 @@
 								    <tr id="email_tr">
 									    <th scope="row"><span class="icon_box"><span class="necessary_icon">*</span><label for="email_1">이메일</label></span></th>
 									    <td>
-										    <input type="text" name="email_1" id="email_1" class="form-control w_20 fl ls" placeholder="" />
+										    <input type="text" name="email_1" id="email_1" title="이메일" class="form-control w_20 fl ls" placeholder="" />
 										    <span class="fl ml1 mr1 pt10 mail_f">@</span>
 										    <label for="email_2" class="hidden">이메일</label>
-										    <input type="text" name="email_2" id="email_2" class="form-control w_18 fl ls" placeholder="" disabled  />	
+										    <input type="text" name="email_2" id="email_2" title="이메일" class="form-control w_18 fl ls" placeholder="" disabled  />	
 											<label for="selectEmail" class="hidden">이메일</label>
 											<select name="selectEmail" id="selectEmail" class="fl ml5 in_wp200 ace-select d_input"> 
 											   <option value="0">------선택------</option> 
