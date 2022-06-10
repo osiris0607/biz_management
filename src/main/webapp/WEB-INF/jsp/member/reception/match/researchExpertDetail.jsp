@@ -465,6 +465,8 @@
 		});
 		// 사용자가 직접 입력한 전문가
 		$.each(mDirectChoiceExpertList, function(key, value) {
+			
+			console.log('custom expert data : ', key, value);
 			var expert = new Object();
 			expert.member_id = "";
 			expert.national_science = "";
@@ -552,7 +554,7 @@
 
 		
 		var addStaffText = '<tr>' +
-		'<td class="first"><div class="d_n"><input type="checkbox" id="checkbox3_1">&nbsp;<label for="checkbox3_1">&nbsp;</label></div></td>'+
+		'<td class="first"><input type="checkbox" id="checkbox3_1">&nbsp;<label for="checkbox3_1">&nbsp;</label></td>'+
 		'<td><label for="" class="hidden">연구분야</label><textarea name="" id="" cols="30" rows="2" class="w100" ></textarea></td>'+
 		'<td><label for="" class="hidden">성명</label><input type="text" id="" class="form-control w100" /></td>'+
 		'<td><label for="" class="hidden">기관명</label><input type="text" id="" class="form-control w100" /></td>'+
