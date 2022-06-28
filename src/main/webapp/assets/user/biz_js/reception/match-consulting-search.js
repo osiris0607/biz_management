@@ -747,7 +747,7 @@ function getReceptionCB(data){
 			$('#custom_expert_list_body').show();
 			
 			var addStaffText = '<tr>' +
-			'<td class="first"><div class="d_n"><input type="checkbox">&nbsp;<label for="">&nbsp;</label></div></td>'+
+			'<td class="first"><input type="checkbox">&nbsp;<label for="">&nbsp;</label></div></td>'+
 			'<td><label for="" class="hidden">연구분야</label><textarea name="" id="" cols="30" rows="2" class="w100" ></textarea></td>'+
 			'<td><label for="" class="hidden">성명</label><input type="text" id="" class="form-control w100" /></td>'+
 			'<td><label for="" class="hidden">기관명</label><input type="text" id="" class="form-control w100" /></td>'+
